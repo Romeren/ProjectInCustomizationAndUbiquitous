@@ -1,0 +1,4 @@
+//Create empty project
+d:\Python\Scripts\django-admin.exe startproject webserver
+
+
