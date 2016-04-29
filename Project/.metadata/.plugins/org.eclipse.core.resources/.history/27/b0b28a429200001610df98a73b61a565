@@ -1,0 +1,51 @@
+package org.xtext.sdu.iotvizualizerlanguage.generator
+
+class TileColor {
+	
+	def getColor(int i)
+	'''
+	«IF i % 40 == 0»bg-lime
+	«ELSEIF i % 40 == 1»bg-green
+	«ELSEIF i % 40 == 2»bg-emerald
+	«ELSEIF i % 40 == 3»bg-teal
+	«ELSEIF i % 40 == 4»bg-blue
+	«ELSEIF i % 40 == 5»bg-cyan
+	«ELSEIF i % 40 == 6»bg-cobalt
+	«ELSEIF i % 40 == 7»bg-indigo
+	«ELSEIF i % 40 == 8»bg-violet
+	«ELSEIF i % 40 == 9»bg-pink
+	«ELSEIF i % 40 == 10»bg-magenta
+	«ELSEIF i % 40 == 11»bg-crimson
+	«ELSEIF i % 40 == 12»bg-red
+	«ELSEIF i % 40 == 13»bg-orange
+	«ELSEIF i % 40 == 14»bg-amber
+	«ELSEIF i % 40 == 15»bg-yellow
+	«ELSEIF i % 40 == 16»bg-brown
+	«ELSEIF i % 40 == 17»bg-olive
+	«ELSEIF i % 40 == 18»bg-mauve
+	«ELSEIF i % 40 == 19»bg-taupe
+	«ELSEIF i % 40 == 20»bg-darkBrown
+	«ELSEIF i % 40 == 21»bg-darkCrimson
+	«ELSEIF i % 40 == 22»bg-darkMagenta
+	«ELSEIF i % 40 == 23»bg-darkIndigo
+	«ELSEIF i % 40 == 24»bg-darkCyan
+	«ELSEIF i % 40 == 25»bg-darkCobalt
+	«ELSEIF i % 40 == 26»bg-darkTeal
+	«ELSEIF i % 40 == 27»bg-darkEmerald
+	«ELSEIF i % 40 == 28»bg-darkGreen
+	«ELSEIF i % 40 == 29»bg-darkOrange
+	«ELSEIF i % 40 == 30»bg-darkRed
+	«ELSEIF i % 40 == 31»bg-darkPink
+	«ELSEIF i % 40 == 32»bg-darkViolet
+	«ELSEIF i % 40 == 33»bg-darkBlue
+	«ELSEIF i % 40 == 34»bg-lightBlue
+	«ELSEIF i % 40 == 35»bg-lightRed
+	«ELSEIF i % 40 == 36»bg-lightGreen
+	«ELSEIF i % 40 == 37»bg-lighterBlue
+	«ELSEIF i % 40 == 38»bg-lightTeal
+	«ELSEIF i % 40 == 39»bg-lightOlive
+	«ELSEIF i % 40 == 40»bg-lightOrange
+	«ENDIF»
+	'''
+	
+}

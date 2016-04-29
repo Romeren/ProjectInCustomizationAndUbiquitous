@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.xtext.sdu.iotvizualizerlanguage.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.xtext.sdu.iotvizualizerlanguage.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.xtext.sdu.iotvizualizerlanguage,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.xtext.sdu.formularzlanguage
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.xtext.sdu.iotvizualizerlanguage.ide.contentassist.antlr,
+ org.xtext.sdu.iotvizualizerlanguage.ide.contentassist.antlr.internal
+

@@ -1,0 +1,55 @@
+package org.xtext.sdu.iotvizualizerlanguage.generator
+
+import java.util.List
+import org.eclipse.xtext.generator.IFileSystemAccess2
+
+class Postcompile {
+	
+	def postcompile(IFileSystemAccess2 fsa, List<String> pageNames){
+		
+		fsa.generateFile(
+			"pages\\views.py",
+			compileViews(pageNames)
+		)
+		
+		fsa.generateFile(
+			"pages\\urls.py",
+			compileUrls(pageNames)
+		)	
+	}
+	
+	
+	def compileViews(List<String> pageNames)
+	'''
+	from django.shortcuts import render
+	from django.http import HttpResponse
+	from django.template import loader
+	from django.template import Context
+	
+	«FOR f:pageNames»
+	def «f»(request):
+		html = loader.get_template('«f».html');
+		
+		return HttpResponse(html.render(context))
+	
+	«ENDFOR»
+	'''
+	
+	def compileUrls(List<String> pageNames)
+	'''
+	from django.conf.urls import url
+	
+	from . import views
+	
+	urlpatterns = [
+	    «FOR f:pageNames»
+		«f.compile»
+	    «ENDFOR»
+	]
+	'''
+	
+	def compile(String pageName)
+	'''
+	   url(r'^$', views.«pageName», name='«pageName»'),
+	'''
+}

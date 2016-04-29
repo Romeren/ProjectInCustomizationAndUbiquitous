@@ -1,0 +1,5 @@
+package org.xtext.sdu.iotvizualizerlanguage.generator;
+
+public class Postcompile {
+
+}

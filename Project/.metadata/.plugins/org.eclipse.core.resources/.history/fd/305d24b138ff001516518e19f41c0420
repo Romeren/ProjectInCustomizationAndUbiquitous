@@ -1,0 +1,13 @@
+package org.xtext.sdu.iotvizualizerlanguage.generator;
+
+import java.util.List;
+
+public class Postcompile {
+	
+	public void postcompile(List<String> pageNames){
+		
+	}
+	
+	def compile()'''
+	'''
+}
