@@ -1,0 +1,13 @@
+Page index 
+{
+	Link toPageOne to pageOne
+	Graph testGraph
+}
+Page pageOne
+{
+	Link toHomePage to index
+	Graph testGraph
+	Graph testGraph2
+	Graph testGraph3
+	Graph testGraph4
+}

@@ -1,19 +1,39 @@
-grammar org.xtext.sdu.formularzlanguage.Formular with org.eclipse.xtext.common.Terminals
+ grammar org.xtext.sdu.formularzlanguage.Formular with org.eclipse.xtext.common.Terminals
 
 generate formular "http://www.xtext.org/sdu/formularzlanguage/Formular"
 
-Expression :
-  {Expreession}	Number | Variable | Operator Expression
+Math:
+	formulars+=Formula*	
+;
+
+Expression:
+	left=Factor (op=Op1 right=Expression)?
+;
+
+Op1:
+	'+' | '-'
+;
+
+Factor:
+	left=Primitive (op=Op2 right=Factor)?
+;
+
+Op2:
+	'*' | '/'
+;
+
+Primitive:
+	Number | Variable | '(' Expression ')'
 ;
 
 Number:
-	INT
+	val=INT
 ;
 
 Variable:
 	name=ID
 ;
 
-Operator:
-	'+' | '-' | '*' | '/'
+Formula:
+	name=ID '(' (vars+=Variable (',' vars+=Variable)*)? ')' '=' exp=Expression
 ;
