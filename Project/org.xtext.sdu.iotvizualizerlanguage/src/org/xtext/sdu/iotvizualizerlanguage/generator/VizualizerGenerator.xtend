@@ -12,7 +12,6 @@ import javax.inject.Inject
 import java.util.List
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Tile
 import java.util.Random
 
 /**
@@ -54,8 +53,13 @@ class VizualizerGenerator extends AbstractGenerator {
 	<div class="tile-area fg-white tile-area-scheme-dark">
 		<h1 class="tile-area-title">«p.name»</h1>
 		<div class="tile-area-controls">
+			«FOR l:p.getTiles()»
+				«IF l instanceof Link»
+					«compileControlButton(l, colorClass.getColor(random.ints(0,39).findFirst().asInt))»
+				«ENDIF»
+			«ENDFOR»
 		</div>
-		<div class="tile-group double">
+		<div class="tile-group">
 			<span class="tile-group-title">General</span>
 			<div class="tile-container">
 				«FOR t:p.getTiles()»
@@ -63,18 +67,13 @@ class VizualizerGenerator extends AbstractGenerator {
 				«ENDFOR»
 			</div>
 		</div>
-		<div class="tile-group double">
-			<span class="tile-group-title">Links</span>
-			<div class="tile-container">
-				«FOR l:p.getTiles()»
-					«IF l instanceof Link»
-						«l.compile(colorClass.getColor(random.ints(0,39).findFirst().asInt))»
-					«ENDIF»
-				«ENDFOR»
-			</div
-		</div>
 	</div>
 	{% endblock %}
+	'''
+	
+	def compileControlButton(Link link, CharSequence colorClass)
+	'''
+	<a class="image-button «colorClass» fg-white bg-hover-dark no-border" href='/«link.page.name»/'>«link.name»</a>
 	'''
 	
 	def dispatch compile(Link link, CharSequence colorClass)
@@ -89,11 +88,12 @@ class VizualizerGenerator extends AbstractGenerator {
 	def dispatch compile(Graph graph, CharSequence colorClass)
 	'''
 	<div class="tile-large «colorClass» fg-white">
-		<div class="tile-content chart" id="«graph.name»" data-graph-content="{{graph_data}}">
+		<div class="tile-content chart" id="«graph.name»" data-graph-content="{{graph_data}}" onclick="repaint«graph.name»()">
 		</div>
 		<span class="tile-label">«graph.name»<span>
 	</div>
 	<script type="text/javascript">
+				function paint«graph.name»(){
 				console.log("chart script start");
 				var width = $("#«graph.name»").parent().width();
 				var height = $("#«graph.name»").parent().height();
@@ -181,6 +181,22 @@ class VizualizerGenerator extends AbstractGenerator {
 				    .attr("dy", ".71em")
 				    .style("text-anchor", "end")
 				    .text("Price ($)");	
+			}
+			
+			function repaint«graph.name»(){
+				var divObj = $("#«graph.name»").parent()[0];
+				var className = divObj.className;
+				if(className.indexOf("large") > -1){
+					className = className.replace("large", "big");
+				}else{
+					className = className.replace("big", "large");
+				}
+				divObj.className = className;
+				$("#«graph.name»")[0].innerHTML ='';
+				paint«graph.name»();
+			}
+			
+			paint«graph.name»();
 	</script>
 	'''
 }
