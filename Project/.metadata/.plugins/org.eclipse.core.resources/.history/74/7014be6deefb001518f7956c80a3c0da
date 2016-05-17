@@ -1,9 +1,0 @@
-grammar org.xtext.sdu.formular.Formularz with org.eclipse.xtext.common.Terminals
-
-generate formularz "http://www.xtext.org/sdu/formular/Formularz"
-
-Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';
