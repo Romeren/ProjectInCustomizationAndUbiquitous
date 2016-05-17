@@ -224,7 +224,12 @@ class Precompile {
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<title>Informatics</title>
 	</head>
-	<body>
+	<body class="tile-area-scheme-dark">
+	<style>
+		.tile-area {
+			overflow-y: auto ;
+		}
+	</style>
 	{% include "navigationbar.html"%}
 	{% block content %}
 	{% endblock %}
@@ -235,7 +240,8 @@ class Precompile {
 	def compileNavigationBar()
 	'''
 	{% block content %}
-	<nav class="navbar navbar-inverse">
+	{% endblock %}
+	'''/*<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -288,9 +294,7 @@ class Precompile {
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
-	
-	{% endblock %}
-	'''
+	*/
 	
 	def compileTestdata()
 	'''
