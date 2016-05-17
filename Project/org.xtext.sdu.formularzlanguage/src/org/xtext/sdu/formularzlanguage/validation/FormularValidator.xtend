@@ -3,6 +3,16 @@
  */
 package org.xtext.sdu.formularzlanguage.validation
 
+import java.util.ArrayList
+import java.util.List
+import org.eclipse.xtext.validation.Check
+import org.xtext.sdu.formularzlanguage.formular.Expression
+import org.xtext.sdu.formularzlanguage.formular.Factor
+import org.xtext.sdu.formularzlanguage.formular.Formula
+import org.xtext.sdu.formularzlanguage.formular.Variable
+import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.mwe2.language.mwe2.Mwe2Package
 
 /**
  * This class contains custom validation rules. 
@@ -11,15 +21,39 @@ package org.xtext.sdu.formularzlanguage.validation
  */
 class FormularValidator extends AbstractFormularValidator {
 	
-//  public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					FormularPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	@Check
+	def checkVariableIsLeftSide(Formula formula) {
+		var expressionVariables = formula.exp.fetchVariableNames()
+		for (namedVar : expressionVariables) {
+			if (!formula.vars.map[item | item.name].contains(namedVar.name)) {
+				error('Found Variable: "' + namedVar.name + '" in' +
+					' expression not defined on left side of formula',
+					namedVar, namedVar.eClass.getEStructuralFeature(0))
+			}
+		}
+	}
+	
+	def List<Variable> fetchVariableNames(Expression expression) {
+		var set = expression.left.fetchVariableNames();
+		if(expression.right != null) {
+			set.addAll(expression.right.fetchVariableNames())			
+		}
+		
+		return set
+	}
+	
+	def List<Variable> fetchVariableNames(Factor factor) {
+		var list = new ArrayList<Variable>()
+		if (factor.left instanceof Variable) {
+			val variable = factor.left as Variable
+			list.add(variable)
+		}
+		if(factor.right != null) {
+			list.addAll(factor.right.fetchVariableNames())
+		}
+		
+		return list
+	}
+	
 	
 }
