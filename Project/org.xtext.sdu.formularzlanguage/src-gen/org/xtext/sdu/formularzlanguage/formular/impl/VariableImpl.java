@@ -18,14 +18,14 @@ import org.xtext.sdu.formularzlanguage.formular.Variable;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.formularzlanguage.formular.impl.VariableImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class VariableImpl extends ExpressionImpl implements Variable
+public class VariableImpl extends PrimitiveImpl implements Variable
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

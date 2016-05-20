@@ -10,8 +10,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.xtext.sdu.formularzlanguage.services.FormularGrammarAccess;
@@ -20,44 +18,17 @@ import org.xtext.sdu.formularzlanguage.services.FormularGrammarAccess;
 public class FormularSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected FormularGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Expression_OperatorParserRuleCall_2_0_a;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (FormularGrammarAccess) access;
-		match_Expression_OperatorParserRuleCall_2_0_a = new TokenAlias(true, true, grammarAccess.getExpressionAccess().getOperatorParserRuleCall_2_0());
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getNumberRule())
-			return getNumberToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getOperatorRule())
-			return getOperatorToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	/**
-	 * Number:
-	 * 	INT
-	 * ;
-	 */
-	protected String getNumberToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "";
-	}
-	
-	/**
-	 * Operator:
-	 * 	'+' | '-' | '*' | '/'
-	 * ;
-	 */
-	protected String getOperatorToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "+";
-	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -65,22 +36,8 @@ public class FormularSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Expression_OperatorParserRuleCall_2_0_a.equals(syntax))
-				emit_Expression_OperatorParserRuleCall_2_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else acceptNodes(getLastNavigableState(), syntaxNodes);
+			acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
-	/**
-	 * Ambiguous syntax:
-	 *     Operator*
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) Number (rule start)
-	 *     (rule start) (ambiguity) name=ID
-	 */
-	protected void emit_Expression_OperatorParserRuleCall_2_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 }

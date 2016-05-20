@@ -8,10 +8,16 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Tile;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
 
 /**
@@ -55,7 +61,7 @@ public class VizualizerSwitch<T> extends Switch<T>
    * Checks whether this is a switch for the given package.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @parameter ePackage the package in question.
+   * @param ePackage the package in question.
    * @return whether this is a switch for the given package.
    * @generated
    */
@@ -111,6 +117,50 @@ public class VizualizerSwitch<T> extends Switch<T>
         Graph graph = (Graph)theEObject;
         T result = caseGraph(graph);
         if (result == null) result = caseTile(graph);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.DATASOURCE:
+      {
+        Datasource datasource = (Datasource)theEObject;
+        T result = caseDatasource(datasource);
+        if (result == null) result = caseSource(datasource);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.DIMENSIONAL_DATA:
+      {
+        DimensionalData dimensionalData = (DimensionalData)theEObject;
+        T result = caseDimensionalData(dimensionalData);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.SOURCE:
+      {
+        Source source = (Source)theEObject;
+        T result = caseSource(source);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.URI:
+      {
+        URI uri = (URI)theEObject;
+        T result = caseURI(uri);
+        if (result == null) result = caseSource(uri);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.SCHEMA_PARSER:
+      {
+        SchemaParser schemaParser = (SchemaParser)theEObject;
+        T result = caseSchemaParser(schemaParser);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.SELECTOR:
+      {
+        Selector selector = (Selector)theEObject;
+        T result = caseSelector(selector);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -194,6 +244,102 @@ public class VizualizerSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseGraph(Graph object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Datasource</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Datasource</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDatasource(Datasource object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Dimensional Data</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Dimensional Data</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDimensionalData(DimensionalData object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Source</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Source</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSource(Source object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>URI</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>URI</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseURI(URI object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Schema Parser</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Schema Parser</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSchemaParser(SchemaParser object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Selector</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Selector</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSelector(Selector object)
   {
     return null;
   }

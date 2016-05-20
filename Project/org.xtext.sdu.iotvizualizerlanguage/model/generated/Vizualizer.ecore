@@ -5,6 +5,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="System">
     <eStructuralFeatures xsi:type="ecore:EReference" name="pages" upperBound="-1"
         eType="#//Page" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
+        eType="#//Source" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schemas" upperBound="-1"
+        eType="#//SchemaParser" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Page">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -17,5 +21,42 @@
   <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//Tile">
     <eStructuralFeatures xsi:type="ecore:EReference" name="page" eType="#//Page"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Graph" eSuperTypes="#//Tile"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Graph" eSuperTypes="#//Tile">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Datasource"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Datasource" eSuperTypes="#//Source">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" upperBound="-1"
+        eType="#//DimensionalData" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DimensionalData">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dim" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formula" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.xtext.sdu.formularzlanguage/model/generated/Formular.ecore#//Formula"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Source">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="URI" eSuperTypes="#//Source">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parser" eType="#//SchemaParser"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SchemaParser">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaType" eType="#//SchemaType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectors" upperBound="-1"
+        eType="#//Selector" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SchemaType">
+    <eLiterals name="XML" literal="XML"/>
+    <eLiterals name="CSV" value="1" literal="CSV"/>
+    <eLiterals name="JSON" value="2" literal="JSON"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Selector">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="steps" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -1,13 +1,42 @@
 Page index 
 {
 	Link toPageOne to pageOne
-	Graph testGraph
+	Graph testGraph a
 }
+
 Page pageOne
 {
 	Link toHomePage to index
-	Graph testGraph
-	Graph testGraph2
-	Graph testGraph3
-	Graph testGraph4
+	Graph testGraph a
+	Graph testGraph2 a
+	Graph testGraph3 c
+	Graph testGraph4 c
 }
+
+Schema schemaA {
+	SchemaType = JSON
+	Selector as x {
+		"name" -> "dog" -> "age"
+	}
+	Selector as y {
+		"name" -> "dog" -> "weight" -> "values"
+	}
+}
+
+URI lol 
+{
+	url "http://lol.dk"
+	use Schema schemaA
+}
+
+Datasource a {
+	Source lol
+	Dimension y as Formula f(x, y) = x + y
+	Dimension z as Formula f(x) = x + 5
+}
+
+Datasource c {
+	Source a
+	Dimension x as Formula g(j) = j * 6
+}
+

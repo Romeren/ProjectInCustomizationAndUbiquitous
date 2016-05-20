@@ -5,6 +5,7 @@ package org.xtext.sdu.iotvizualizerlanguage.vizualizer;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -77,13 +78,31 @@ public interface VizualizerPackage extends EPackage
   int SYSTEM__PAGES = 0;
 
   /**
+   * The feature id for the '<em><b>Sources</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYSTEM__SOURCES = 1;
+
+  /**
+   * The feature id for the '<em><b>Schemas</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYSTEM__SCHEMAS = 2;
+
+  /**
    * The number of structural features of the '<em>System</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYSTEM_FEATURE_COUNT = 1;
+  int SYSTEM_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.PageImpl <em>Page</em>}' class.
@@ -207,13 +226,272 @@ public interface VizualizerPackage extends EPackage
   int GRAPH__NAME = TILE__NAME;
 
   /**
+   * The feature id for the '<em><b>Source</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GRAPH__SOURCE = TILE_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Graph</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GRAPH_FEATURE_COUNT = TILE_FEATURE_COUNT + 0;
+  int GRAPH_FEATURE_COUNT = TILE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SourceImpl <em>Source</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SourceImpl
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSource()
+   * @generated
+   */
+  int SOURCE = 7;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SOURCE__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Source</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SOURCE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DatasourceImpl <em>Datasource</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DatasourceImpl
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getDatasource()
+   * @generated
+   */
+  int DATASOURCE = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATASOURCE__NAME = SOURCE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Source</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATASOURCE__SOURCE = SOURCE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Dimensions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATASOURCE__DIMENSIONS = SOURCE_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Datasource</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATASOURCE_FEATURE_COUNT = SOURCE_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DimensionalDataImpl <em>Dimensional Data</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DimensionalDataImpl
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getDimensionalData()
+   * @generated
+   */
+  int DIMENSIONAL_DATA = 6;
+
+  /**
+   * The feature id for the '<em><b>Dim</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIMENSIONAL_DATA__DIM = 0;
+
+  /**
+   * The feature id for the '<em><b>Formula</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIMENSIONAL_DATA__FORMULA = 1;
+
+  /**
+   * The number of structural features of the '<em>Dimensional Data</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIMENSIONAL_DATA_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.URIImpl <em>URI</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.URIImpl
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getURI()
+   * @generated
+   */
+  int URI = 8;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int URI__NAME = SOURCE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Uri</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int URI__URI = SOURCE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Parser</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int URI__PARSER = SOURCE_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>URI</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int URI_FEATURE_COUNT = SOURCE_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SchemaParserImpl <em>Schema Parser</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SchemaParserImpl
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSchemaParser()
+   * @generated
+   */
+  int SCHEMA_PARSER = 9;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCHEMA_PARSER__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Schema Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCHEMA_PARSER__SCHEMA_TYPE = 1;
+
+  /**
+   * The feature id for the '<em><b>Selectors</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCHEMA_PARSER__SELECTORS = 2;
+
+  /**
+   * The number of structural features of the '<em>Schema Parser</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCHEMA_PARSER_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SelectorImpl <em>Selector</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SelectorImpl
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSelector()
+   * @generated
+   */
+  int SELECTOR = 10;
+
+  /**
+   * The feature id for the '<em><b>Varname</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECTOR__VARNAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECTOR__STEPS = 1;
+
+  /**
+   * The number of structural features of the '<em>Selector</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECTOR_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaType <em>Schema Type</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaType
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSchemaType()
+   * @generated
+   */
+  int SCHEMA_TYPE = 11;
 
 
   /**
@@ -236,6 +514,28 @@ public interface VizualizerPackage extends EPackage
    * @generated
    */
   EReference getSystem_Pages();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getSources <em>Sources</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Sources</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getSources()
+   * @see #getSystem()
+   * @generated
+   */
+  EReference getSystem_Sources();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getSchemas <em>Schemas</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Schemas</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getSchemas()
+   * @see #getSystem()
+   * @generated
+   */
+  EReference getSystem_Schemas();
 
   /**
    * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page <em>Page</em>}'.
@@ -322,6 +622,219 @@ public interface VizualizerPackage extends EPackage
   EClass getGraph();
 
   /**
+   * Returns the meta object for the reference '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getSource <em>Source</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Source</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getSource()
+   * @see #getGraph()
+   * @generated
+   */
+  EReference getGraph_Source();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource <em>Datasource</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Datasource</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource
+   * @generated
+   */
+  EClass getDatasource();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource#getSource <em>Source</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Source</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource#getSource()
+   * @see #getDatasource()
+   * @generated
+   */
+  EReference getDatasource_Source();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource#getDimensions <em>Dimensions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Dimensions</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource#getDimensions()
+   * @see #getDatasource()
+   * @generated
+   */
+  EReference getDatasource_Dimensions();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData <em>Dimensional Data</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Dimensional Data</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData
+   * @generated
+   */
+  EClass getDimensionalData();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData#getDim <em>Dim</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Dim</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData#getDim()
+   * @see #getDimensionalData()
+   * @generated
+   */
+  EAttribute getDimensionalData_Dim();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData#getFormula <em>Formula</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Formula</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData#getFormula()
+   * @see #getDimensionalData()
+   * @generated
+   */
+  EReference getDimensionalData_Formula();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source <em>Source</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Source</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source
+   * @generated
+   */
+  EClass getSource();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source#getName()
+   * @see #getSource()
+   * @generated
+   */
+  EAttribute getSource_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI <em>URI</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>URI</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI
+   * @generated
+   */
+  EClass getURI();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI#getUri <em>Uri</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Uri</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI#getUri()
+   * @see #getURI()
+   * @generated
+   */
+  EAttribute getURI_Uri();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI#getParser <em>Parser</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Parser</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI#getParser()
+   * @see #getURI()
+   * @generated
+   */
+  EReference getURI_Parser();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser <em>Schema Parser</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Schema Parser</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser
+   * @generated
+   */
+  EClass getSchemaParser();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser#getName()
+   * @see #getSchemaParser()
+   * @generated
+   */
+  EAttribute getSchemaParser_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser#getSchemaType <em>Schema Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Schema Type</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser#getSchemaType()
+   * @see #getSchemaParser()
+   * @generated
+   */
+  EAttribute getSchemaParser_SchemaType();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser#getSelectors <em>Selectors</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Selectors</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser#getSelectors()
+   * @see #getSchemaParser()
+   * @generated
+   */
+  EReference getSchemaParser_Selectors();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector <em>Selector</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Selector</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector
+   * @generated
+   */
+  EClass getSelector();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector#getVarname <em>Varname</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Varname</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector#getVarname()
+   * @see #getSelector()
+   * @generated
+   */
+  EAttribute getSelector_Varname();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector#getSteps <em>Steps</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Steps</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector#getSteps()
+   * @see #getSelector()
+   * @generated
+   */
+  EAttribute getSelector_Steps();
+
+  /**
+   * Returns the meta object for enum '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaType <em>Schema Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Schema Type</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaType
+   * @generated
+   */
+  EEnum getSchemaType();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -361,6 +874,22 @@ public interface VizualizerPackage extends EPackage
      * @generated
      */
     EReference SYSTEM__PAGES = eINSTANCE.getSystem_Pages();
+
+    /**
+     * The meta object literal for the '<em><b>Sources</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYSTEM__SOURCES = eINSTANCE.getSystem_Sources();
+
+    /**
+     * The meta object literal for the '<em><b>Schemas</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYSTEM__SCHEMAS = eINSTANCE.getSystem_Schemas();
 
     /**
      * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.PageImpl <em>Page</em>}' class.
@@ -433,6 +962,180 @@ public interface VizualizerPackage extends EPackage
      * @generated
      */
     EClass GRAPH = eINSTANCE.getGraph();
+
+    /**
+     * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GRAPH__SOURCE = eINSTANCE.getGraph_Source();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DatasourceImpl <em>Datasource</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DatasourceImpl
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getDatasource()
+     * @generated
+     */
+    EClass DATASOURCE = eINSTANCE.getDatasource();
+
+    /**
+     * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DATASOURCE__SOURCE = eINSTANCE.getDatasource_Source();
+
+    /**
+     * The meta object literal for the '<em><b>Dimensions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DATASOURCE__DIMENSIONS = eINSTANCE.getDatasource_Dimensions();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DimensionalDataImpl <em>Dimensional Data</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DimensionalDataImpl
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getDimensionalData()
+     * @generated
+     */
+    EClass DIMENSIONAL_DATA = eINSTANCE.getDimensionalData();
+
+    /**
+     * The meta object literal for the '<em><b>Dim</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DIMENSIONAL_DATA__DIM = eINSTANCE.getDimensionalData_Dim();
+
+    /**
+     * The meta object literal for the '<em><b>Formula</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DIMENSIONAL_DATA__FORMULA = eINSTANCE.getDimensionalData_Formula();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SourceImpl <em>Source</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SourceImpl
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSource()
+     * @generated
+     */
+    EClass SOURCE = eINSTANCE.getSource();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SOURCE__NAME = eINSTANCE.getSource_Name();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.URIImpl <em>URI</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.URIImpl
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getURI()
+     * @generated
+     */
+    EClass URI = eINSTANCE.getURI();
+
+    /**
+     * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute URI__URI = eINSTANCE.getURI_Uri();
+
+    /**
+     * The meta object literal for the '<em><b>Parser</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference URI__PARSER = eINSTANCE.getURI_Parser();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SchemaParserImpl <em>Schema Parser</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SchemaParserImpl
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSchemaParser()
+     * @generated
+     */
+    EClass SCHEMA_PARSER = eINSTANCE.getSchemaParser();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SCHEMA_PARSER__NAME = eINSTANCE.getSchemaParser_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Schema Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SCHEMA_PARSER__SCHEMA_TYPE = eINSTANCE.getSchemaParser_SchemaType();
+
+    /**
+     * The meta object literal for the '<em><b>Selectors</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SCHEMA_PARSER__SELECTORS = eINSTANCE.getSchemaParser_Selectors();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SelectorImpl <em>Selector</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SelectorImpl
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSelector()
+     * @generated
+     */
+    EClass SELECTOR = eINSTANCE.getSelector();
+
+    /**
+     * The meta object literal for the '<em><b>Varname</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SELECTOR__VARNAME = eINSTANCE.getSelector_Varname();
+
+    /**
+     * The meta object literal for the '<em><b>Steps</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SELECTOR__STEPS = eINSTANCE.getSelector_Steps();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaType <em>Schema Type</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaType
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSchemaType()
+     * @generated
+     */
+    EEnum SCHEMA_TYPE = eINSTANCE.getSchemaType();
 
   }
 

@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
 
 /**
@@ -26,10 +28,12 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SystemImpl#getPages <em>Pages</em>}</li>
+ *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SystemImpl#getSources <em>Sources</em>}</li>
+ *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SystemImpl#getSchemas <em>Schemas</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -44,6 +48,26 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
    * @ordered
    */
   protected EList<Page> pages;
+
+  /**
+   * The cached value of the '{@link #getSources() <em>Sources</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSources()
+   * @generated
+   * @ordered
+   */
+  protected EList<Source> sources;
+
+  /**
+   * The cached value of the '{@link #getSchemas() <em>Schemas</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSchemas()
+   * @generated
+   * @ordered
+   */
+  protected EList<SchemaParser> schemas;
 
   /**
    * <!-- begin-user-doc -->
@@ -85,6 +109,34 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Source> getSources()
+  {
+    if (sources == null)
+    {
+      sources = new EObjectContainmentEList<Source>(Source.class, this, VizualizerPackage.SYSTEM__SOURCES);
+    }
+    return sources;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<SchemaParser> getSchemas()
+  {
+    if (schemas == null)
+    {
+      schemas = new EObjectContainmentEList<SchemaParser>(SchemaParser.class, this, VizualizerPackage.SYSTEM__SCHEMAS);
+    }
+    return schemas;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -92,6 +144,10 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     {
       case VizualizerPackage.SYSTEM__PAGES:
         return ((InternalEList<?>)getPages()).basicRemove(otherEnd, msgs);
+      case VizualizerPackage.SYSTEM__SOURCES:
+        return ((InternalEList<?>)getSources()).basicRemove(otherEnd, msgs);
+      case VizualizerPackage.SYSTEM__SCHEMAS:
+        return ((InternalEList<?>)getSchemas()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,6 +164,10 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     {
       case VizualizerPackage.SYSTEM__PAGES:
         return getPages();
+      case VizualizerPackage.SYSTEM__SOURCES:
+        return getSources();
+      case VizualizerPackage.SYSTEM__SCHEMAS:
+        return getSchemas();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -127,6 +187,14 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
         getPages().clear();
         getPages().addAll((Collection<? extends Page>)newValue);
         return;
+      case VizualizerPackage.SYSTEM__SOURCES:
+        getSources().clear();
+        getSources().addAll((Collection<? extends Source>)newValue);
+        return;
+      case VizualizerPackage.SYSTEM__SCHEMAS:
+        getSchemas().clear();
+        getSchemas().addAll((Collection<? extends SchemaParser>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -144,6 +212,12 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
       case VizualizerPackage.SYSTEM__PAGES:
         getPages().clear();
         return;
+      case VizualizerPackage.SYSTEM__SOURCES:
+        getSources().clear();
+        return;
+      case VizualizerPackage.SYSTEM__SCHEMAS:
+        getSchemas().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -160,6 +234,10 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     {
       case VizualizerPackage.SYSTEM__PAGES:
         return pages != null && !pages.isEmpty();
+      case VizualizerPackage.SYSTEM__SOURCES:
+        return sources != null && !sources.isEmpty();
+      case VizualizerPackage.SYSTEM__SCHEMAS:
+        return schemas != null && !schemas.isEmpty();
     }
     return super.eIsSet(featureID);
   }

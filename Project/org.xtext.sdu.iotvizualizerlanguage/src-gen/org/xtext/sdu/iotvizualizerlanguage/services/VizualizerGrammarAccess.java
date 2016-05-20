@@ -9,6 +9,8 @@ import java.util.List;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -17,6 +19,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.xtext.sdu.formularzlanguage.services.FormularGrammarAccess;
@@ -26,18 +29,38 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public class SystemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.System");
-		private final Assignment cPagesAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cPagesPageParserRuleCall_0 = (RuleCall)cPagesAssignment.eContents().get(0);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cPagesAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cPagesPageParserRuleCall_0_0 = (RuleCall)cPagesAssignment_0.eContents().get(0);
+		private final Assignment cSourcesAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cSourcesSourceParserRuleCall_1_0 = (RuleCall)cSourcesAssignment_1.eContents().get(0);
+		private final Assignment cSchemasAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cSchemasSchemaParserParserRuleCall_2_0 = (RuleCall)cSchemasAssignment_2.eContents().get(0);
 		
 		//System:
-		//	pages+=Page*;
+		//	(pages+=Page | sources+=Source | schemas+=SchemaParser)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//pages+=Page*
-		public Assignment getPagesAssignment() { return cPagesAssignment; }
+		//(pages+=Page | sources+=Source | schemas+=SchemaParser)*
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//pages+=Page
+		public Assignment getPagesAssignment_0() { return cPagesAssignment_0; }
 		
 		//Page
-		public RuleCall getPagesPageParserRuleCall_0() { return cPagesPageParserRuleCall_0; }
+		public RuleCall getPagesPageParserRuleCall_0_0() { return cPagesPageParserRuleCall_0_0; }
+		
+		//sources+=Source
+		public Assignment getSourcesAssignment_1() { return cSourcesAssignment_1; }
+		
+		//Source
+		public RuleCall getSourcesSourceParserRuleCall_1_0() { return cSourcesSourceParserRuleCall_1_0; }
+		
+		//schemas+=SchemaParser
+		public Assignment getSchemasAssignment_2() { return cSchemasAssignment_2; }
+		
+		//SchemaParser
+		public RuleCall getSchemasSchemaParserParserRuleCall_2_0() { return cSchemasSchemaParserParserRuleCall_2_0; }
 	}
 	public class PageElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Page");
@@ -145,12 +168,16 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGraphKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cSourceAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cSourceDatasourceCrossReference_2_0 = (CrossReference)cSourceAssignment_2.eContents().get(0);
+		private final RuleCall cSourceDatasourceIDTerminalRuleCall_2_0_1 = (RuleCall)cSourceDatasourceCrossReference_2_0.eContents().get(1);
 		
 		//Graph:
-		//	'Graph' name=ID;
+		//	'Graph' name=ID
+		//	source=[Datasource];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Graph' name=ID
+		//'Graph' name=ID source=[Datasource]
 		public Group getGroup() { return cGroup; }
 		
 		//'Graph'
@@ -161,14 +188,358 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//source=[Datasource]
+		public Assignment getSourceAssignment_2() { return cSourceAssignment_2; }
+		
+		//[Datasource]
+		public CrossReference getSourceDatasourceCrossReference_2_0() { return cSourceDatasourceCrossReference_2_0; }
+		
+		//ID
+		public RuleCall getSourceDatasourceIDTerminalRuleCall_2_0_1() { return cSourceDatasourceIDTerminalRuleCall_2_0_1; }
+	}
+	public class DatasourceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Datasource");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDatasourceKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cSourceKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cSourceAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cSourceSourceCrossReference_4_0 = (CrossReference)cSourceAssignment_4.eContents().get(0);
+		private final RuleCall cSourceSourceIDTerminalRuleCall_4_0_1 = (RuleCall)cSourceSourceCrossReference_4_0.eContents().get(1);
+		private final Assignment cDimensionsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cDimensionsDimensionalDataParserRuleCall_5_0 = (RuleCall)cDimensionsAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		//Datasource:
+		//	'Datasource' name=ID
+		//	'{'
+		//	'Source' source=[Source] dimensions+=DimensionalData+
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Datasource' name=ID '{' 'Source' source=[Source] dimensions+=DimensionalData+ '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'Datasource'
+		public Keyword getDatasourceKeyword_0() { return cDatasourceKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//'Source'
+		public Keyword getSourceKeyword_3() { return cSourceKeyword_3; }
+		
+		//source=[Source]
+		public Assignment getSourceAssignment_4() { return cSourceAssignment_4; }
+		
+		//[Source]
+		public CrossReference getSourceSourceCrossReference_4_0() { return cSourceSourceCrossReference_4_0; }
+		
+		//ID
+		public RuleCall getSourceSourceIDTerminalRuleCall_4_0_1() { return cSourceSourceIDTerminalRuleCall_4_0_1; }
+		
+		//dimensions+=DimensionalData+
+		public Assignment getDimensionsAssignment_5() { return cDimensionsAssignment_5; }
+		
+		//DimensionalData
+		public RuleCall getDimensionsDimensionalDataParserRuleCall_5_0() { return cDimensionsDimensionalDataParserRuleCall_5_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+	}
+	public class DimensionalDataElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.DimensionalData");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDimensionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDimAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDimIDTerminalRuleCall_1_0 = (RuleCall)cDimAssignment_1.eContents().get(0);
+		private final Keyword cAsKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cFormulaKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cFormulaAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cFormulaFormulaParserRuleCall_4_0 = (RuleCall)cFormulaAssignment_4.eContents().get(0);
+		
+		//DimensionalData:
+		//	'Dimension' dim+=ID 'as' 'Formula' formula+=Formula;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Dimension' dim+=ID 'as' 'Formula' formula+=Formula
+		public Group getGroup() { return cGroup; }
+		
+		//'Dimension'
+		public Keyword getDimensionKeyword_0() { return cDimensionKeyword_0; }
+		
+		//dim+=ID
+		public Assignment getDimAssignment_1() { return cDimAssignment_1; }
+		
+		//ID
+		public RuleCall getDimIDTerminalRuleCall_1_0() { return cDimIDTerminalRuleCall_1_0; }
+		
+		//'as'
+		public Keyword getAsKeyword_2() { return cAsKeyword_2; }
+		
+		//'Formula'
+		public Keyword getFormulaKeyword_3() { return cFormulaKeyword_3; }
+		
+		//formula+=Formula
+		public Assignment getFormulaAssignment_4() { return cFormulaAssignment_4; }
+		
+		//Formula
+		public RuleCall getFormulaFormulaParserRuleCall_4_0() { return cFormulaFormulaParserRuleCall_4_0; }
+	}
+	public class SourceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Source");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cURIParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDatasourceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Source:
+		//	URI | Datasource;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//URI | Datasource
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//URI
+		public RuleCall getURIParserRuleCall_0() { return cURIParserRuleCall_0; }
+		
+		//Datasource
+		public RuleCall getDatasourceParserRuleCall_1() { return cDatasourceParserRuleCall_1; }
+	}
+	public class URIElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.URI");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cURIKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cUrlKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cUriAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cUriSTRINGTerminalRuleCall_4_0 = (RuleCall)cUriAssignment_4.eContents().get(0);
+		private final Keyword cUseSchemaKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cParserAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final CrossReference cParserSchemaParserCrossReference_6_0 = (CrossReference)cParserAssignment_6.eContents().get(0);
+		private final RuleCall cParserSchemaParserIDTerminalRuleCall_6_0_1 = (RuleCall)cParserSchemaParserCrossReference_6_0.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//URI:
+		//	'URI' name=ID
+		//	'{'
+		//	'url' uri=STRING
+		//	'use Schema' parser=[SchemaParser]
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'URI' name=ID '{' 'url' uri=STRING 'use Schema' parser=[SchemaParser] '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'URI'
+		public Keyword getURIKeyword_0() { return cURIKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//'url'
+		public Keyword getUrlKeyword_3() { return cUrlKeyword_3; }
+		
+		//uri=STRING
+		public Assignment getUriAssignment_4() { return cUriAssignment_4; }
+		
+		//STRING
+		public RuleCall getUriSTRINGTerminalRuleCall_4_0() { return cUriSTRINGTerminalRuleCall_4_0; }
+		
+		//'use Schema'
+		public Keyword getUseSchemaKeyword_5() { return cUseSchemaKeyword_5; }
+		
+		//parser=[SchemaParser]
+		public Assignment getParserAssignment_6() { return cParserAssignment_6; }
+		
+		//[SchemaParser]
+		public CrossReference getParserSchemaParserCrossReference_6_0() { return cParserSchemaParserCrossReference_6_0; }
+		
+		//ID
+		public RuleCall getParserSchemaParserIDTerminalRuleCall_6_0_1() { return cParserSchemaParserIDTerminalRuleCall_6_0_1; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+	}
+	public class SchemaParserElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.SchemaParser");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSchemaKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cSchemaTypeKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cSchemaTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cSchemaTypeSchemaTypeEnumRuleCall_4_0 = (RuleCall)cSchemaTypeAssignment_4.eContents().get(0);
+		private final Assignment cSelectorsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cSelectorsSelectorParserRuleCall_5_0 = (RuleCall)cSelectorsAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		//// A SchemaParser is used to parse a schema(data structure) into a time series
+		//SchemaParser:
+		//	'Schema' name=ID
+		//	'{'
+		//	'SchemaType = ' schemaType=SchemaType
+		//	selectors+=Selector+
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Schema' name=ID '{' 'SchemaType = ' schemaType=SchemaType selectors+=Selector+ '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'Schema'
+		public Keyword getSchemaKeyword_0() { return cSchemaKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//'SchemaType = '
+		public Keyword getSchemaTypeKeyword_3() { return cSchemaTypeKeyword_3; }
+		
+		//schemaType=SchemaType
+		public Assignment getSchemaTypeAssignment_4() { return cSchemaTypeAssignment_4; }
+		
+		//SchemaType
+		public RuleCall getSchemaTypeSchemaTypeEnumRuleCall_4_0() { return cSchemaTypeSchemaTypeEnumRuleCall_4_0; }
+		
+		//selectors+=Selector+
+		public Assignment getSelectorsAssignment_5() { return cSelectorsAssignment_5; }
+		
+		//Selector
+		public RuleCall getSelectorsSelectorParserRuleCall_5_0() { return cSelectorsSelectorParserRuleCall_5_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+	}
+	public class SelectorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Selector");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSelectorAsKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cVarnameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cVarnameIDTerminalRuleCall_1_0 = (RuleCall)cVarnameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cStepsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cStepsSTRINGTerminalRuleCall_3_0 = (RuleCall)cStepsAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cSpaceHyphenMinusGreaterThanSignSpaceKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cStepsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cStepsSTRINGTerminalRuleCall_4_1_0 = (RuleCall)cStepsAssignment_4_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//// Select the path to a specific dimension of the data
+		//Selector:
+		//	'Selector as ' varname=ID '{'
+		//	steps+=STRING (' -> ' steps+=STRING)+
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Selector as ' varname=ID '{' steps+=STRING (' -> ' steps+=STRING)+ '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'Selector as '
+		public Keyword getSelectorAsKeyword_0() { return cSelectorAsKeyword_0; }
+		
+		//varname=ID
+		public Assignment getVarnameAssignment_1() { return cVarnameAssignment_1; }
+		
+		//ID
+		public RuleCall getVarnameIDTerminalRuleCall_1_0() { return cVarnameIDTerminalRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//steps+=STRING
+		public Assignment getStepsAssignment_3() { return cStepsAssignment_3; }
+		
+		//STRING
+		public RuleCall getStepsSTRINGTerminalRuleCall_3_0() { return cStepsSTRINGTerminalRuleCall_3_0; }
+		
+		//(' -> ' steps+=STRING)+
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//' -> '
+		public Keyword getSpaceHyphenMinusGreaterThanSignSpaceKeyword_4_0() { return cSpaceHyphenMinusGreaterThanSignSpaceKeyword_4_0; }
+		
+		//steps+=STRING
+		public Assignment getStepsAssignment_4_1() { return cStepsAssignment_4_1; }
+		
+		//STRING
+		public RuleCall getStepsSTRINGTerminalRuleCall_4_1_0() { return cStepsSTRINGTerminalRuleCall_4_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 	
+	public class SchemaTypeElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.SchemaType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cXMLEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cXMLXMLKeyword_0_0 = (Keyword)cXMLEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cCSVEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cCSVCSVKeyword_1_0 = (Keyword)cCSVEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cJSONEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cJSONJSONKeyword_2_0 = (Keyword)cJSONEnumLiteralDeclaration_2.eContents().get(0);
+		
+		//enum SchemaType:
+		//	XML | CSV | JSON;
+		public EnumRule getRule() { return rule; }
+		
+		//XML | CSV | JSON
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//XML
+		public EnumLiteralDeclaration getXMLEnumLiteralDeclaration_0() { return cXMLEnumLiteralDeclaration_0; }
+		
+		//'XML'
+		public Keyword getXMLXMLKeyword_0_0() { return cXMLXMLKeyword_0_0; }
+		
+		//CSV
+		public EnumLiteralDeclaration getCSVEnumLiteralDeclaration_1() { return cCSVEnumLiteralDeclaration_1; }
+		
+		//'CSV'
+		public Keyword getCSVCSVKeyword_1_0() { return cCSVCSVKeyword_1_0; }
+		
+		//JSON
+		public EnumLiteralDeclaration getJSONEnumLiteralDeclaration_2() { return cJSONEnumLiteralDeclaration_2; }
+		
+		//'JSON'
+		public Keyword getJSONJSONKeyword_2_0() { return cJSONJSONKeyword_2_0; }
+	}
 	
 	private final SystemElements pSystem;
 	private final PageElements pPage;
 	private final TileElements pTile;
 	private final LinkElements pLink;
 	private final GraphElements pGraph;
+	private final DatasourceElements pDatasource;
+	private final DimensionalDataElements pDimensionalData;
+	private final SourceElements pSource;
+	private final URIElements pURI;
+	private final SchemaParserElements pSchemaParser;
+	private final SchemaTypeElements eSchemaType;
+	private final SelectorElements pSelector;
 	
 	private final Grammar grammar;
 	
@@ -188,6 +559,13 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		this.pTile = new TileElements();
 		this.pLink = new LinkElements();
 		this.pGraph = new GraphElements();
+		this.pDatasource = new DatasourceElements();
+		this.pDimensionalData = new DimensionalDataElements();
+		this.pSource = new SourceElements();
+		this.pURI = new URIElements();
+		this.pSchemaParser = new SchemaParserElements();
+		this.eSchemaType = new SchemaTypeElements();
+		this.pSelector = new SelectorElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -222,7 +600,7 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//System:
-	//	pages+=Page*;
+	//	(pages+=Page | sources+=Source | schemas+=SchemaParser)*;
 	public SystemElements getSystemAccess() {
 		return pSystem;
 	}
@@ -265,7 +643,8 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Graph:
-	//	'Graph' name=ID;
+	//	'Graph' name=ID
+	//	source=[Datasource];
 	public GraphElements getGraphAccess() {
 		return pGraph;
 	}
@@ -274,8 +653,103 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		return getGraphAccess().getRule();
 	}
 	
+	//Datasource:
+	//	'Datasource' name=ID
+	//	'{'
+	//	'Source' source=[Source] dimensions+=DimensionalData+
+	//	'}';
+	public DatasourceElements getDatasourceAccess() {
+		return pDatasource;
+	}
+	
+	public ParserRule getDatasourceRule() {
+		return getDatasourceAccess().getRule();
+	}
+	
+	//DimensionalData:
+	//	'Dimension' dim+=ID 'as' 'Formula' formula+=Formula;
+	public DimensionalDataElements getDimensionalDataAccess() {
+		return pDimensionalData;
+	}
+	
+	public ParserRule getDimensionalDataRule() {
+		return getDimensionalDataAccess().getRule();
+	}
+	
+	//Source:
+	//	URI | Datasource;
+	public SourceElements getSourceAccess() {
+		return pSource;
+	}
+	
+	public ParserRule getSourceRule() {
+		return getSourceAccess().getRule();
+	}
+	
+	//URI:
+	//	'URI' name=ID
+	//	'{'
+	//	'url' uri=STRING
+	//	'use Schema' parser=[SchemaParser]
+	//	'}';
+	public URIElements getURIAccess() {
+		return pURI;
+	}
+	
+	public ParserRule getURIRule() {
+		return getURIAccess().getRule();
+	}
+	
+	//// A SchemaParser is used to parse a schema(data structure) into a time series
+	//SchemaParser:
+	//	'Schema' name=ID
+	//	'{'
+	//	'SchemaType = ' schemaType=SchemaType
+	//	selectors+=Selector+
+	//	'}';
+	public SchemaParserElements getSchemaParserAccess() {
+		return pSchemaParser;
+	}
+	
+	public ParserRule getSchemaParserRule() {
+		return getSchemaParserAccess().getRule();
+	}
+	
+	//enum SchemaType:
+	//	XML | CSV | JSON;
+	public SchemaTypeElements getSchemaTypeAccess() {
+		return eSchemaType;
+	}
+	
+	public EnumRule getSchemaTypeRule() {
+		return getSchemaTypeAccess().getRule();
+	}
+	
+	//// Select the path to a specific dimension of the data
+	//Selector:
+	//	'Selector as ' varname=ID '{'
+	//	steps+=STRING (' -> ' steps+=STRING)+
+	//	'}';
+	public SelectorElements getSelectorAccess() {
+		return pSelector;
+	}
+	
+	public ParserRule getSelectorRule() {
+		return getSelectorAccess().getRule();
+	}
+	
+	//Formula:
+	//	name=ID '(' (vars+=Variable (',' vars+=Variable)*)? ')' '=' exp=Expression;
+	public FormularGrammarAccess.FormulaElements getFormulaAccess() {
+		return gaFormular.getFormulaAccess();
+	}
+	
+	public ParserRule getFormulaRule() {
+		return getFormulaAccess().getRule();
+	}
+	
 	//Expression:
-	//	{Expreession} Number | Variable | Operator Expression;
+	//	left=Factor (op=Op1 right=Expression)?;
 	public FormularGrammarAccess.ExpressionElements getExpressionAccess() {
 		return gaFormular.getExpressionAccess();
 	}
@@ -284,8 +758,48 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		return getExpressionAccess().getRule();
 	}
 	
+	//Op1:
+	//	'+' | '-';
+	public FormularGrammarAccess.Op1Elements getOp1Access() {
+		return gaFormular.getOp1Access();
+	}
+	
+	public ParserRule getOp1Rule() {
+		return getOp1Access().getRule();
+	}
+	
+	//Factor:
+	//	left=Primitive (op=Op2 right=Factor)?;
+	public FormularGrammarAccess.FactorElements getFactorAccess() {
+		return gaFormular.getFactorAccess();
+	}
+	
+	public ParserRule getFactorRule() {
+		return getFactorAccess().getRule();
+	}
+	
+	//Op2:
+	//	'*' | '/';
+	public FormularGrammarAccess.Op2Elements getOp2Access() {
+		return gaFormular.getOp2Access();
+	}
+	
+	public ParserRule getOp2Rule() {
+		return getOp2Access().getRule();
+	}
+	
+	//Primitive:
+	//	Number | Variable | '(' Expression ')';
+	public FormularGrammarAccess.PrimitiveElements getPrimitiveAccess() {
+		return gaFormular.getPrimitiveAccess();
+	}
+	
+	public ParserRule getPrimitiveRule() {
+		return getPrimitiveAccess().getRule();
+	}
+	
 	//Number:
-	//	INT;
+	//	val=INT;
 	public FormularGrammarAccess.NumberElements getNumberAccess() {
 		return gaFormular.getNumberAccess();
 	}
@@ -304,16 +818,6 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		return getVariableAccess().getRule();
 	}
 	
-	//Operator:
-	//	'+' | '-' | '*' | '/';
-	public FormularGrammarAccess.OperatorElements getOperatorAccess() {
-		return gaFormular.getOperatorAccess();
-	}
-	
-	public ParserRule getOperatorRule() {
-		return getOperatorAccess().getRule();
-	}
-	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
@@ -327,7 +831,8 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}

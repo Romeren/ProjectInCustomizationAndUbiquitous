@@ -59,7 +59,7 @@ public class VizualizerGenerator extends AbstractGenerator {
         String _name = p.getName();
         pageNames.add(_name);
         String _name_1 = p.getName();
-        String _plus = ("templates\\" + _name_1);
+        String _plus = ("templates/" + _name_1);
         String _plus_1 = (_plus + ".html");
         CharSequence _compileTemplateHTML = this.compileTemplateHTML(p);
         fsa.generateFile(_plus_1, _compileTemplateHTML);

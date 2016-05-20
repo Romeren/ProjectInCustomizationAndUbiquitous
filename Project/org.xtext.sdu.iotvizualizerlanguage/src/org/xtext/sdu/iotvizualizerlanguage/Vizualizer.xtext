@@ -3,7 +3,7 @@ grammar org.xtext.sdu.iotvizualizerlanguage.Vizualizer with org.xtext.sdu.formul
 generate vizualizer "http://www.xtext.org/sdu/iotvizualizerlanguage/Vizualizer"
 
 System:
-	pages += Page*
+	(pages += Page | sources += Source | schemas += SchemaParser)*
 ;
 
 Page:
@@ -23,4 +23,50 @@ Link:
 
 Graph:
 	'Graph' name=ID
+	source=[Datasource]
 ;
+
+Datasource:
+	'Datasource' name=ID
+	'{'
+	'Source' source=[Source]
+	dimensions+=DimensionalData+
+	'}'
+;
+
+DimensionalData:
+	'Dimension' dim+=ID 'as' 'Formula' formula+=Formula
+;
+
+Source:
+	URI | Datasource
+;
+
+URI:
+	'URI' name=ID
+	'{'
+	'url' uri=STRING
+	'use Schema' parser=[SchemaParser]
+	'}'
+;
+
+// A SchemaParser is used to parse a schema(data structure) into a time series
+SchemaParser:
+	'Schema' name=ID
+	'{'
+	'SchemaType = ' schemaType=SchemaType
+	selectors+=Selector+
+	'}'
+;
+
+enum SchemaType:
+	XML='XML' | CSV='CSV' | JSON='JSON'
+;
+
+// Select the path to a specific dimension of the data
+Selector:
+	'Selector as ' varname=ID '{'
+	steps+=STRING (' -> ' steps+=STRING)+
+	'}'
+;
+

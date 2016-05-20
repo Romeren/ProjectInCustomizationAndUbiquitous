@@ -10,9 +10,6 @@ import org.xtext.sdu.formularzlanguage.formular.Expression
 import org.xtext.sdu.formularzlanguage.formular.Factor
 import org.xtext.sdu.formularzlanguage.formular.Formula
 import org.xtext.sdu.formularzlanguage.formular.Variable
-import org.eclipse.emf.ecore.EStructuralFeature
-import org.eclipse.emf.ecore.EPackage
-import org.eclipse.emf.mwe2.language.mwe2.Mwe2Package
 
 /**
  * This class contains custom validation rules. 

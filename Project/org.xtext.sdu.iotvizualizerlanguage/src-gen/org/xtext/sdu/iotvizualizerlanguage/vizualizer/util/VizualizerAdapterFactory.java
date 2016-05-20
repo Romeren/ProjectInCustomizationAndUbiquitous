@@ -10,10 +10,16 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Tile;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
 
 /**
@@ -103,6 +109,36 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
       public Adapter caseGraph(Graph object)
       {
         return createGraphAdapter();
+      }
+      @Override
+      public Adapter caseDatasource(Datasource object)
+      {
+        return createDatasourceAdapter();
+      }
+      @Override
+      public Adapter caseDimensionalData(DimensionalData object)
+      {
+        return createDimensionalDataAdapter();
+      }
+      @Override
+      public Adapter caseSource(Source object)
+      {
+        return createSourceAdapter();
+      }
+      @Override
+      public Adapter caseURI(URI object)
+      {
+        return createURIAdapter();
+      }
+      @Override
+      public Adapter caseSchemaParser(SchemaParser object)
+      {
+        return createSchemaParserAdapter();
+      }
+      @Override
+      public Adapter caseSelector(Selector object)
+      {
+        return createSelectorAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -197,6 +233,96 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createGraphAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource <em>Datasource</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource
+   * @generated
+   */
+  public Adapter createDatasourceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData <em>Dimensional Data</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData
+   * @generated
+   */
+  public Adapter createDimensionalDataAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source <em>Source</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source
+   * @generated
+   */
+  public Adapter createSourceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI <em>URI</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI
+   * @generated
+   */
+  public Adapter createURIAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser <em>Schema Parser</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser
+   * @generated
+   */
+  public Adapter createSchemaParserAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector <em>Selector</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector
+   * @generated
+   */
+  public Adapter createSelectorAdapter()
   {
     return null;
   }

@@ -6,7 +6,6 @@ package org.xtext.sdu.formularzlanguage.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
@@ -23,55 +22,238 @@ import org.eclipse.xtext.service.GrammarProvider;
 @Singleton
 public class FormularGrammarAccess extends AbstractGrammarElementFinder {
 	
-	public class ExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Expression");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cExpreessionAction_0_0 = (Action)cGroup_0.eContents().get(0);
-		private final RuleCall cNumberParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
-		private final RuleCall cVariableParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final RuleCall cOperatorParserRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
-		private final RuleCall cExpressionParserRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
+	public class FormulaElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Formula");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cVarsAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cVarsVariableParserRuleCall_2_0_0 = (RuleCall)cVarsAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cVarsAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cVarsVariableParserRuleCall_2_1_1_0 = (RuleCall)cVarsAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cEqualsSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cExpAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cExpExpressionParserRuleCall_5_0 = (RuleCall)cExpAssignment_5.eContents().get(0);
 		
-		//Expression:
-		//	{Expreession} Number | Variable | Operator Expression;
+		//Formula:
+		//	name=ID '(' (vars+=Variable (',' vars+=Variable)*)? ')' '=' exp=Expression;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Expreession} Number | Variable | Operator Expression
+		//name=ID '(' (vars+=Variable (',' vars+=Variable)*)? ')' '=' exp=Expression
+		public Group getGroup() { return cGroup; }
+		
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		
+		//(vars+=Variable (',' vars+=Variable)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//vars+=Variable
+		public Assignment getVarsAssignment_2_0() { return cVarsAssignment_2_0; }
+		
+		//Variable
+		public RuleCall getVarsVariableParserRuleCall_2_0_0() { return cVarsVariableParserRuleCall_2_0_0; }
+		
+		//(',' vars+=Variable)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//','
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+		
+		//vars+=Variable
+		public Assignment getVarsAssignment_2_1_1() { return cVarsAssignment_2_1_1; }
+		
+		//Variable
+		public RuleCall getVarsVariableParserRuleCall_2_1_1_0() { return cVarsVariableParserRuleCall_2_1_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_4() { return cEqualsSignKeyword_4; }
+		
+		//exp=Expression
+		public Assignment getExpAssignment_5() { return cExpAssignment_5; }
+		
+		//Expression
+		public RuleCall getExpExpressionParserRuleCall_5_0() { return cExpExpressionParserRuleCall_5_0; }
+	}
+	public class ExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Expression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cLeftAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cLeftFactorParserRuleCall_0_0 = (RuleCall)cLeftAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cOpAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cOpOp1ParserRuleCall_1_0_0 = (RuleCall)cOpAssignment_1_0.eContents().get(0);
+		private final Assignment cRightAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cRightExpressionParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
+		
+		//Expression:
+		//	left=Factor (op=Op1 right=Expression)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//left=Factor (op=Op1 right=Expression)?
+		public Group getGroup() { return cGroup; }
+		
+		//left=Factor
+		public Assignment getLeftAssignment_0() { return cLeftAssignment_0; }
+		
+		//Factor
+		public RuleCall getLeftFactorParserRuleCall_0_0() { return cLeftFactorParserRuleCall_0_0; }
+		
+		//(op=Op1 right=Expression)?
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//op=Op1
+		public Assignment getOpAssignment_1_0() { return cOpAssignment_1_0; }
+		
+		//Op1
+		public RuleCall getOpOp1ParserRuleCall_1_0_0() { return cOpOp1ParserRuleCall_1_0_0; }
+		
+		//right=Expression
+		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
+		
+		//Expression
+		public RuleCall getRightExpressionParserRuleCall_1_1_0() { return cRightExpressionParserRuleCall_1_1_0; }
+	}
+	public class Op1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Op1");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cPlusSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		
+		//Op1:
+		//	'+' | '-';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'+' | '-'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//{Expreession} Number
-		public Group getGroup_0() { return cGroup_0; }
+		//'+'
+		public Keyword getPlusSignKeyword_0() { return cPlusSignKeyword_0; }
 		
-		//{Expreession}
-		public Action getExpreessionAction_0_0() { return cExpreessionAction_0_0; }
+		//'-'
+		public Keyword getHyphenMinusKeyword_1() { return cHyphenMinusKeyword_1; }
+	}
+	public class FactorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Factor");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cLeftAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cLeftPrimitiveParserRuleCall_0_0 = (RuleCall)cLeftAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cOpAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cOpOp2ParserRuleCall_1_0_0 = (RuleCall)cOpAssignment_1_0.eContents().get(0);
+		private final Assignment cRightAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cRightFactorParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
+		
+		//Factor:
+		//	left=Primitive (op=Op2 right=Factor)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//left=Primitive (op=Op2 right=Factor)?
+		public Group getGroup() { return cGroup; }
+		
+		//left=Primitive
+		public Assignment getLeftAssignment_0() { return cLeftAssignment_0; }
+		
+		//Primitive
+		public RuleCall getLeftPrimitiveParserRuleCall_0_0() { return cLeftPrimitiveParserRuleCall_0_0; }
+		
+		//(op=Op2 right=Factor)?
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//op=Op2
+		public Assignment getOpAssignment_1_0() { return cOpAssignment_1_0; }
+		
+		//Op2
+		public RuleCall getOpOp2ParserRuleCall_1_0_0() { return cOpOp2ParserRuleCall_1_0_0; }
+		
+		//right=Factor
+		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
+		
+		//Factor
+		public RuleCall getRightFactorParserRuleCall_1_1_0() { return cRightFactorParserRuleCall_1_1_0; }
+	}
+	public class Op2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Op2");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cAsteriskKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cSolidusKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		
+		//Op2:
+		//	'*' | '/';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'*' | '/'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//'*'
+		public Keyword getAsteriskKeyword_0() { return cAsteriskKeyword_0; }
+		
+		//'/'
+		public Keyword getSolidusKeyword_1() { return cSolidusKeyword_1; }
+	}
+	public class PrimitiveElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Primitive");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cNumberParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cVariableParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final RuleCall cExpressionParserRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		
+		//Primitive:
+		//	Number | Variable | '(' Expression ')';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Number | Variable | '(' Expression ')'
+		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Number
-		public RuleCall getNumberParserRuleCall_0_1() { return cNumberParserRuleCall_0_1; }
+		public RuleCall getNumberParserRuleCall_0() { return cNumberParserRuleCall_0; }
 		
 		//Variable
 		public RuleCall getVariableParserRuleCall_1() { return cVariableParserRuleCall_1; }
 		
-		//Operator Expression
+		//'(' Expression ')'
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//Operator
-		public RuleCall getOperatorParserRuleCall_2_0() { return cOperatorParserRuleCall_2_0; }
+		//'('
+		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
 		
 		//Expression
 		public RuleCall getExpressionParserRuleCall_2_1() { return cExpressionParserRuleCall_2_1; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
 	}
 	public class NumberElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Number");
-		private final RuleCall cINTTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Assignment cValAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValINTTerminalRuleCall_0 = (RuleCall)cValAssignment.eContents().get(0);
 		
 		//Number:
-		//	INT;
+		//	val=INT;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//val=INT
+		public Assignment getValAssignment() { return cValAssignment; }
+		
 		//INT
-		public RuleCall getINTTerminalRuleCall() { return cINTTerminalRuleCall; }
+		public RuleCall getValINTTerminalRuleCall_0() { return cValINTTerminalRuleCall_0; }
 	}
 	public class VariableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Variable");
@@ -88,39 +270,16 @@ public class FormularGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
-	public class OperatorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.formularzlanguage.Formular.Operator");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cPlusSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cAsteriskKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cSolidusKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		
-		//Operator:
-		//	'+' | '-' | '*' | '/';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'+' | '-' | '*' | '/'
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//'+'
-		public Keyword getPlusSignKeyword_0() { return cPlusSignKeyword_0; }
-		
-		//'-'
-		public Keyword getHyphenMinusKeyword_1() { return cHyphenMinusKeyword_1; }
-		
-		//'*'
-		public Keyword getAsteriskKeyword_2() { return cAsteriskKeyword_2; }
-		
-		//'/'
-		public Keyword getSolidusKeyword_3() { return cSolidusKeyword_3; }
-	}
 	
 	
+	private final FormulaElements pFormula;
 	private final ExpressionElements pExpression;
+	private final Op1Elements pOp1;
+	private final FactorElements pFactor;
+	private final Op2Elements pOp2;
+	private final PrimitiveElements pPrimitive;
 	private final NumberElements pNumber;
 	private final VariableElements pVariable;
-	private final OperatorElements pOperator;
 	
 	private final Grammar grammar;
 	
@@ -131,10 +290,14 @@ public class FormularGrammarAccess extends AbstractGrammarElementFinder {
 			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pFormula = new FormulaElements();
 		this.pExpression = new ExpressionElements();
+		this.pOp1 = new Op1Elements();
+		this.pFactor = new FactorElements();
+		this.pOp2 = new Op2Elements();
+		this.pPrimitive = new PrimitiveElements();
 		this.pNumber = new NumberElements();
 		this.pVariable = new VariableElements();
-		this.pOperator = new OperatorElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -164,8 +327,18 @@ public class FormularGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
+	//Formula:
+	//	name=ID '(' (vars+=Variable (',' vars+=Variable)*)? ')' '=' exp=Expression;
+	public FormulaElements getFormulaAccess() {
+		return pFormula;
+	}
+	
+	public ParserRule getFormulaRule() {
+		return getFormulaAccess().getRule();
+	}
+	
 	//Expression:
-	//	{Expreession} Number | Variable | Operator Expression;
+	//	left=Factor (op=Op1 right=Expression)?;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -174,8 +347,48 @@ public class FormularGrammarAccess extends AbstractGrammarElementFinder {
 		return getExpressionAccess().getRule();
 	}
 	
+	//Op1:
+	//	'+' | '-';
+	public Op1Elements getOp1Access() {
+		return pOp1;
+	}
+	
+	public ParserRule getOp1Rule() {
+		return getOp1Access().getRule();
+	}
+	
+	//Factor:
+	//	left=Primitive (op=Op2 right=Factor)?;
+	public FactorElements getFactorAccess() {
+		return pFactor;
+	}
+	
+	public ParserRule getFactorRule() {
+		return getFactorAccess().getRule();
+	}
+	
+	//Op2:
+	//	'*' | '/';
+	public Op2Elements getOp2Access() {
+		return pOp2;
+	}
+	
+	public ParserRule getOp2Rule() {
+		return getOp2Access().getRule();
+	}
+	
+	//Primitive:
+	//	Number | Variable | '(' Expression ')';
+	public PrimitiveElements getPrimitiveAccess() {
+		return pPrimitive;
+	}
+	
+	public ParserRule getPrimitiveRule() {
+		return getPrimitiveAccess().getRule();
+	}
+	
 	//Number:
-	//	INT;
+	//	val=INT;
 	public NumberElements getNumberAccess() {
 		return pNumber;
 	}
@@ -194,16 +407,6 @@ public class FormularGrammarAccess extends AbstractGrammarElementFinder {
 		return getVariableAccess().getRule();
 	}
 	
-	//Operator:
-	//	'+' | '-' | '*' | '/';
-	public OperatorElements getOperatorAccess() {
-		return pOperator;
-	}
-	
-	public ParserRule getOperatorRule() {
-		return getOperatorAccess().getRule();
-	}
-	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
@@ -217,7 +420,8 @@ public class FormularGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}

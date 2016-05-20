@@ -5,14 +5,23 @@ package org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.xtext.sdu.formularzlanguage.formular.FormularPackage;
+
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaType;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Tile;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerFactory;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
@@ -59,6 +68,55 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * @generated
    */
   private EClass graphEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass datasourceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass dimensionalDataEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass sourceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass uriEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass schemaParserEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass selectorEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum schemaTypeEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -108,6 +166,9 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
 
     isInited = true;
 
+    // Initialize simple dependencies
+    FormularPackage.eINSTANCE.eClass();
+
     // Create package meta-data objects
     theVizualizerPackage.createPackageContents();
 
@@ -141,6 +202,26 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
   public EReference getSystem_Pages()
   {
     return (EReference)systemEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSystem_Sources()
+  {
+    return (EReference)systemEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSystem_Schemas()
+  {
+    return (EReference)systemEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -228,6 +309,206 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getGraph_Source()
+  {
+    return (EReference)graphEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDatasource()
+  {
+    return datasourceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDatasource_Source()
+  {
+    return (EReference)datasourceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDatasource_Dimensions()
+  {
+    return (EReference)datasourceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDimensionalData()
+  {
+    return dimensionalDataEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDimensionalData_Dim()
+  {
+    return (EAttribute)dimensionalDataEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDimensionalData_Formula()
+  {
+    return (EReference)dimensionalDataEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSource()
+  {
+    return sourceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSource_Name()
+  {
+    return (EAttribute)sourceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getURI()
+  {
+    return uriEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getURI_Uri()
+  {
+    return (EAttribute)uriEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getURI_Parser()
+  {
+    return (EReference)uriEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSchemaParser()
+  {
+    return schemaParserEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSchemaParser_Name()
+  {
+    return (EAttribute)schemaParserEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSchemaParser_SchemaType()
+  {
+    return (EAttribute)schemaParserEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSchemaParser_Selectors()
+  {
+    return (EReference)schemaParserEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSelector()
+  {
+    return selectorEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSelector_Varname()
+  {
+    return (EAttribute)selectorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSelector_Steps()
+  {
+    return (EAttribute)selectorEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getSchemaType()
+  {
+    return schemaTypeEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public VizualizerFactory getVizualizerFactory()
   {
     return (VizualizerFactory)getEFactoryInstance();
@@ -255,6 +536,8 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     // Create classes and their features
     systemEClass = createEClass(SYSTEM);
     createEReference(systemEClass, SYSTEM__PAGES);
+    createEReference(systemEClass, SYSTEM__SOURCES);
+    createEReference(systemEClass, SYSTEM__SCHEMAS);
 
     pageEClass = createEClass(PAGE);
     createEAttribute(pageEClass, PAGE__NAME);
@@ -267,6 +550,34 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     createEReference(linkEClass, LINK__PAGE);
 
     graphEClass = createEClass(GRAPH);
+    createEReference(graphEClass, GRAPH__SOURCE);
+
+    datasourceEClass = createEClass(DATASOURCE);
+    createEReference(datasourceEClass, DATASOURCE__SOURCE);
+    createEReference(datasourceEClass, DATASOURCE__DIMENSIONS);
+
+    dimensionalDataEClass = createEClass(DIMENSIONAL_DATA);
+    createEAttribute(dimensionalDataEClass, DIMENSIONAL_DATA__DIM);
+    createEReference(dimensionalDataEClass, DIMENSIONAL_DATA__FORMULA);
+
+    sourceEClass = createEClass(SOURCE);
+    createEAttribute(sourceEClass, SOURCE__NAME);
+
+    uriEClass = createEClass(URI);
+    createEAttribute(uriEClass, URI__URI);
+    createEReference(uriEClass, URI__PARSER);
+
+    schemaParserEClass = createEClass(SCHEMA_PARSER);
+    createEAttribute(schemaParserEClass, SCHEMA_PARSER__NAME);
+    createEAttribute(schemaParserEClass, SCHEMA_PARSER__SCHEMA_TYPE);
+    createEReference(schemaParserEClass, SCHEMA_PARSER__SELECTORS);
+
+    selectorEClass = createEClass(SELECTOR);
+    createEAttribute(selectorEClass, SELECTOR__VARNAME);
+    createEAttribute(selectorEClass, SELECTOR__STEPS);
+
+    // Create enums
+    schemaTypeEEnum = createEEnum(SCHEMA_TYPE);
   }
 
   /**
@@ -293,6 +604,9 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    FormularPackage theFormularPackage = (FormularPackage)EPackage.Registry.INSTANCE.getEPackage(FormularPackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -300,10 +614,14 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     // Add supertypes to classes
     linkEClass.getESuperTypes().add(this.getTile());
     graphEClass.getESuperTypes().add(this.getTile());
+    datasourceEClass.getESuperTypes().add(this.getSource());
+    uriEClass.getESuperTypes().add(this.getSource());
 
     // Initialize classes and features; add operations and parameters
     initEClass(systemEClass, org.xtext.sdu.iotvizualizerlanguage.vizualizer.System.class, "System", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSystem_Pages(), this.getPage(), null, "pages", null, 0, -1, org.xtext.sdu.iotvizualizerlanguage.vizualizer.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSystem_Sources(), this.getSource(), null, "sources", null, 0, -1, org.xtext.sdu.iotvizualizerlanguage.vizualizer.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSystem_Schemas(), this.getSchemaParser(), null, "schemas", null, 0, -1, org.xtext.sdu.iotvizualizerlanguage.vizualizer.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(pageEClass, Page.class, "Page", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPage_Name(), ecorePackage.getEString(), "name", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -316,6 +634,37 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     initEReference(getLink_Page(), this.getPage(), null, "page", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(graphEClass, Graph.class, "Graph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGraph_Source(), this.getDatasource(), null, "source", null, 0, 1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(datasourceEClass, Datasource.class, "Datasource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDatasource_Source(), this.getSource(), null, "source", null, 0, 1, Datasource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDatasource_Dimensions(), this.getDimensionalData(), null, "dimensions", null, 0, -1, Datasource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dimensionalDataEClass, DimensionalData.class, "DimensionalData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDimensionalData_Dim(), ecorePackage.getEString(), "dim", null, 0, -1, DimensionalData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDimensionalData_Formula(), theFormularPackage.getFormula(), null, "formula", null, 0, -1, DimensionalData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(sourceEClass, Source.class, "Source", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSource_Name(), ecorePackage.getEString(), "name", null, 0, 1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(uriEClass, org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI.class, "URI", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getURI_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getURI_Parser(), this.getSchemaParser(), null, "parser", null, 0, 1, org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(schemaParserEClass, SchemaParser.class, "SchemaParser", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSchemaParser_Name(), ecorePackage.getEString(), "name", null, 0, 1, SchemaParser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSchemaParser_SchemaType(), this.getSchemaType(), "schemaType", null, 0, 1, SchemaParser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSchemaParser_Selectors(), this.getSelector(), null, "selectors", null, 0, -1, SchemaParser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(selectorEClass, Selector.class, "Selector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSelector_Varname(), ecorePackage.getEString(), "varname", null, 0, 1, Selector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSelector_Steps(), ecorePackage.getEString(), "steps", null, 0, -1, Selector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    // Initialize enums and add enum literals
+    initEEnum(schemaTypeEEnum, SchemaType.class, "SchemaType");
+    addEEnumLiteral(schemaTypeEEnum, SchemaType.XML);
+    addEEnumLiteral(schemaTypeEEnum, SchemaType.CSV);
+    addEEnumLiteral(schemaTypeEEnum, SchemaType.JSON);
 
     // Create resource
     createResource(eNS_URI);

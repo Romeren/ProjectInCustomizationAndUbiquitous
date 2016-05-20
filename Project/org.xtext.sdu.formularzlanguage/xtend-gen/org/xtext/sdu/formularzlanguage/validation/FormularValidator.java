@@ -3,6 +3,20 @@
  */
 package org.xtext.sdu.formularzlanguage.validation;
 
+import com.google.common.base.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.xtext.sdu.formularzlanguage.formular.Expression;
+import org.xtext.sdu.formularzlanguage.formular.Factor;
+import org.xtext.sdu.formularzlanguage.formular.Formula;
+import org.xtext.sdu.formularzlanguage.formular.Primitive;
+import org.xtext.sdu.formularzlanguage.formular.Variable;
 import org.xtext.sdu.formularzlanguage.validation.AbstractFormularValidator;
 
 /**
@@ -12,4 +26,60 @@ import org.xtext.sdu.formularzlanguage.validation.AbstractFormularValidator;
  */
 @SuppressWarnings("all")
 public class FormularValidator extends AbstractFormularValidator {
+  @Check
+  public void checkVariableIsLeftSide(final Formula formula) {
+    Expression _exp = formula.getExp();
+    List<Variable> expressionVariables = this.fetchVariableNames(_exp);
+    for (final Variable namedVar : expressionVariables) {
+      EList<Variable> _vars = formula.getVars();
+      final Function1<Variable, String> _function = (Variable item) -> {
+        return item.getName();
+      };
+      List<String> _map = ListExtensions.<Variable, String>map(_vars, _function);
+      String _name = namedVar.getName();
+      boolean _contains = _map.contains(_name);
+      boolean _not = (!_contains);
+      if (_not) {
+        String _name_1 = namedVar.getName();
+        String _plus = ("Found Variable: \"" + _name_1);
+        String _plus_1 = (_plus + "\" in");
+        String _plus_2 = (_plus_1 + 
+          " expression not defined on left side of formula");
+        EClass _eClass = namedVar.eClass();
+        EStructuralFeature _eStructuralFeature = _eClass.getEStructuralFeature(0);
+        this.error(_plus_2, namedVar, _eStructuralFeature);
+      }
+    }
+  }
+  
+  public List<Variable> fetchVariableNames(final Expression expression) {
+    Factor _left = expression.getLeft();
+    List<Variable> set = this.fetchVariableNames(_left);
+    Expression _right = expression.getRight();
+    boolean _notEquals = (!Objects.equal(_right, null));
+    if (_notEquals) {
+      Expression _right_1 = expression.getRight();
+      List<Variable> _fetchVariableNames = this.fetchVariableNames(_right_1);
+      set.addAll(_fetchVariableNames);
+    }
+    return set;
+  }
+  
+  public List<Variable> fetchVariableNames(final Factor factor) {
+    ArrayList<Variable> list = new ArrayList<Variable>();
+    Primitive _left = factor.getLeft();
+    if ((_left instanceof Variable)) {
+      Primitive _left_1 = factor.getLeft();
+      final Variable variable = ((Variable) _left_1);
+      list.add(variable);
+    }
+    Factor _right = factor.getRight();
+    boolean _notEquals = (!Objects.equal(_right, null));
+    if (_notEquals) {
+      Factor _right_1 = factor.getRight();
+      List<Variable> _fetchVariableNames = this.fetchVariableNames(_right_1);
+      list.addAll(_fetchVariableNames);
+    }
+    return list;
+  }
 }

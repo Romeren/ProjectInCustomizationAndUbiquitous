@@ -35,10 +35,28 @@ public class FormularParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
-					put(grammarAccess.getOperatorAccess().getAlternatives(), "rule__Operator__Alternatives");
-					put(grammarAccess.getExpressionAccess().getGroup_0(), "rule__Expression__Group_0__0");
-					put(grammarAccess.getExpressionAccess().getGroup_2(), "rule__Expression__Group_2__0");
+					put(grammarAccess.getOp1Access().getAlternatives(), "rule__Op1__Alternatives");
+					put(grammarAccess.getOp2Access().getAlternatives(), "rule__Op2__Alternatives");
+					put(grammarAccess.getPrimitiveAccess().getAlternatives(), "rule__Primitive__Alternatives");
+					put(grammarAccess.getFormulaAccess().getGroup(), "rule__Formula__Group__0");
+					put(grammarAccess.getFormulaAccess().getGroup_2(), "rule__Formula__Group_2__0");
+					put(grammarAccess.getFormulaAccess().getGroup_2_1(), "rule__Formula__Group_2_1__0");
+					put(grammarAccess.getExpressionAccess().getGroup(), "rule__Expression__Group__0");
+					put(grammarAccess.getExpressionAccess().getGroup_1(), "rule__Expression__Group_1__0");
+					put(grammarAccess.getFactorAccess().getGroup(), "rule__Factor__Group__0");
+					put(grammarAccess.getFactorAccess().getGroup_1(), "rule__Factor__Group_1__0");
+					put(grammarAccess.getPrimitiveAccess().getGroup_2(), "rule__Primitive__Group_2__0");
+					put(grammarAccess.getFormulaAccess().getNameAssignment_0(), "rule__Formula__NameAssignment_0");
+					put(grammarAccess.getFormulaAccess().getVarsAssignment_2_0(), "rule__Formula__VarsAssignment_2_0");
+					put(grammarAccess.getFormulaAccess().getVarsAssignment_2_1_1(), "rule__Formula__VarsAssignment_2_1_1");
+					put(grammarAccess.getFormulaAccess().getExpAssignment_5(), "rule__Formula__ExpAssignment_5");
+					put(grammarAccess.getExpressionAccess().getLeftAssignment_0(), "rule__Expression__LeftAssignment_0");
+					put(grammarAccess.getExpressionAccess().getOpAssignment_1_0(), "rule__Expression__OpAssignment_1_0");
+					put(grammarAccess.getExpressionAccess().getRightAssignment_1_1(), "rule__Expression__RightAssignment_1_1");
+					put(grammarAccess.getFactorAccess().getLeftAssignment_0(), "rule__Factor__LeftAssignment_0");
+					put(grammarAccess.getFactorAccess().getOpAssignment_1_0(), "rule__Factor__OpAssignment_1_0");
+					put(grammarAccess.getFactorAccess().getRightAssignment_1_1(), "rule__Factor__RightAssignment_1_1");
+					put(grammarAccess.getNumberAccess().getValAssignment(), "rule__Number__ValAssignment");
 					put(grammarAccess.getVariableAccess().getNameAssignment(), "rule__Variable__NameAssignment");
 				}
 			};
@@ -50,7 +68,7 @@ public class FormularParser extends AbstractContentAssistParser {
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
 			InternalFormularParser typedParser = (InternalFormularParser) parser;
-			typedParser.entryRuleExpression();
+			typedParser.entryRuleFormula();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);
