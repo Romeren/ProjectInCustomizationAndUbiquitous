@@ -1,5 +1,6 @@
 package org.xtext.sdu.iotvizualizerlanguage.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
@@ -13,7 +14,11 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.xtext.sdu.formularzlanguage.formular.Expression;
+import org.xtext.sdu.formularzlanguage.formular.Factor;
 import org.xtext.sdu.formularzlanguage.formular.Formula;
+import org.xtext.sdu.formularzlanguage.formular.Primitive;
+import org.xtext.sdu.formularzlanguage.formular.Variable;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector;
@@ -180,7 +185,51 @@ public class DataHandleGenerator extends AbstractGenerator {
   }
   
   public String getPythonFormula(final Formula formula) {
-    return "x + x";
+    Expression _exp = formula.getExp();
+    return this.leftResursiveTraversal(_exp, "");
+  }
+  
+  protected String _leftResursiveTraversal(final Expression expression, final String string) {
+    Factor _left = expression.getLeft();
+    String result = this.leftResursiveTraversal(_left, string);
+    Expression _right = expression.getRight();
+    boolean _notEquals = (!Objects.equal(_right, null));
+    if (_notEquals) {
+      String _result = result;
+      String _op = expression.getOp();
+      result = (_result + _op);
+      Expression _right_1 = expression.getRight();
+      String _leftResursiveTraversal = this.leftResursiveTraversal(_right_1, result);
+      result = _leftResursiveTraversal;
+    }
+    return result;
+  }
+  
+  protected String _leftResursiveTraversal(final Factor factor, final String string) {
+    Primitive _left = factor.getLeft();
+    String result = this.leftResursiveTraversal(_left, string);
+    Factor _right = factor.getRight();
+    boolean _notEquals = (!Objects.equal(_right, null));
+    if (_notEquals) {
+      String _result = result;
+      String _op = factor.getOp();
+      result = (_result + _op);
+      Factor _right_1 = factor.getRight();
+      String _leftResursiveTraversal = this.leftResursiveTraversal(_right_1, result);
+      result = _leftResursiveTraversal;
+    }
+    return result;
+  }
+  
+  protected String _leftResursiveTraversal(final Variable variable, final String string) {
+    String _name = variable.getName();
+    String _plus = ((string + "input_") + _name);
+    return (_plus + "[1, ]");
+  }
+  
+  protected String _leftResursiveTraversal(final org.xtext.sdu.formularzlanguage.formular.Number number, final String string) {
+    int _val = number.getVal();
+    return (string + Integer.valueOf(_val));
   }
   
   public CharSequence compileAbstractEndpoint() {
@@ -417,6 +466,21 @@ public class DataHandleGenerator extends AbstractGenerator {
   protected CharSequence _compile(final PostEndPoint endpoint) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder;
+  }
+  
+  public String leftResursiveTraversal(final EObject expression, final String string) {
+    if (expression instanceof Expression) {
+      return _leftResursiveTraversal((Expression)expression, string);
+    } else if (expression instanceof org.xtext.sdu.formularzlanguage.formular.Number) {
+      return _leftResursiveTraversal((org.xtext.sdu.formularzlanguage.formular.Number)expression, string);
+    } else if (expression instanceof Variable) {
+      return _leftResursiveTraversal((Variable)expression, string);
+    } else if (expression instanceof Factor) {
+      return _leftResursiveTraversal((Factor)expression, string);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(expression, string).toString());
+    }
   }
   
   public CharSequence compile(final EndPoint endpoint) {

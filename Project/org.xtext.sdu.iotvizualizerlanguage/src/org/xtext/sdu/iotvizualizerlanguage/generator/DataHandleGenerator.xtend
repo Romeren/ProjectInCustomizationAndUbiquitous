@@ -1,10 +1,11 @@
 package org.xtext.sdu.iotvizualizerlanguage.generator
 
-import javax.xml.ws.Endpoint
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import org.xtext.sdu.formularzlanguage.formular.Expression
+import org.xtext.sdu.formularzlanguage.formular.Factor
 import org.xtext.sdu.formularzlanguage.formular.Formula
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint
@@ -13,6 +14,8 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source
+import org.xtext.sdu.formularzlanguage.formular.Variable
+import org.xtext.sdu.formularzlanguage.formular.Number
 
 class DataHandleGenerator extends AbstractGenerator {
 	
@@ -66,9 +69,34 @@ class DataHandleGenerator extends AbstractGenerator {
 	}
 	
 	def getPythonFormula(Formula formula) {
-		return "x + x"
+		return formula.exp.leftResursiveTraversal("");
 	}
-
+	
+	def dispatch String leftResursiveTraversal(Expression expression, String string) {
+		var String result = expression.left.leftResursiveTraversal(string)
+		if(expression.right != null) {
+			result += expression.op
+			result = expression.right.leftResursiveTraversal(result)
+		}
+		return result
+	}
+	
+	def dispatch String leftResursiveTraversal(Factor factor, String string) {
+		var String result = factor.left.leftResursiveTraversal(string)
+		if(factor.right != null) {
+			result += factor.op
+			result = factor.right.leftResursiveTraversal(result)
+		}
+		return result
+	}
+	
+	def dispatch String leftResursiveTraversal(Variable variable, String string) {
+		return string + "input_" + variable.name + "[1, ]"
+	}
+	
+	def dispatch String leftResursiveTraversal(Number number, String string) {
+		return string + number.^val
+	}
 	
 	def compileAbstractEndpoint()
 	'''
