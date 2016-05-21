@@ -52,7 +52,7 @@ class DataHandleGenerator extends AbstractGenerator {
 			input_«selector.name» = np.array(«selector.source.getDimensionFromSource(selector.selectVar.name)»)
 			«ENDFOR»
 			input_«dimension.sourceSelectors.get(0).name»[1, ] = «dimension.name.getPythonFormula»
-			result.put("dimension_«dimension.name.name»" : input_«dimension.sourceSelectors.get(0).name»)
+			result['dimension_«dimension.name.name»'] = input_«dimension.sourceSelectors.get(0).name»
 			«ENDFOR»
 			return result
 			
