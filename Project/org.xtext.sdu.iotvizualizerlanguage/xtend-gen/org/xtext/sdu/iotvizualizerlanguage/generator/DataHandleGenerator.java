@@ -52,22 +52,23 @@ public class DataHandleGenerator extends AbstractGenerator {
         String _name = _parser.getName();
         String _plus = ("DataHandle/SchemaParsers/SchemaParser" + _name);
         String _plus_1 = (_plus + ".py");
-        CharSequence _compile = this.compile(p);
-        fsa.generateFile(_plus_1, _compile);
         SchemaParser _parser_1 = p.getParser();
-        EList<Selector> _selectors = _parser_1.getSelectors();
+        CharSequence _compileParser = this.compileParser(_parser_1);
+        fsa.generateFile(_plus_1, _compileParser);
+        SchemaParser _parser_2 = p.getParser();
+        EList<Selector> _selectors = _parser_2.getSelectors();
         for (final Selector s : _selectors) {
           String _name_1 = s.getName();
           String _plus_2 = ("DataHandle/Selectors/Selector" + _name_1);
           String _plus_3 = (_plus_2 + ".py");
-          CharSequence _compile_1 = this.compile(s);
-          fsa.generateFile(_plus_3, _compile_1);
+          CharSequence _compileSelector = this.compileSelector(s);
+          fsa.generateFile(_plus_3, _compileSelector);
         }
         String _name_2 = p.getName();
         String _plus_4 = ("DataHandle/EndPoints/EndPoint" + _name_2);
         String _plus_5 = (_plus_4 + ".py");
-        CharSequence _compile_2 = this.compile(p);
-        fsa.generateFile(_plus_5, _compile_2);
+        CharSequence _compile = this.compile(p);
+        fsa.generateFile(_plus_5, _compile);
       }
     }
   }
@@ -76,7 +77,7 @@ public class DataHandleGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import numpy as np");
     _builder.newLine();
-    _builder.append("import DataHandle.Endpoints as endpoint");
+    _builder.append("import DataHandle.EndPoints as endpoint");
     _builder.newLine();
     _builder.newLine();
     _builder.append("class DatasourceController():");
@@ -326,7 +327,7 @@ public class DataHandleGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compile(final Selector select) {
+  public CharSequence compileSelector(final Selector select) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("from DataHandle.Selectors.AbstractSelector import AbstractSelector");
     _builder.newLine();
@@ -380,7 +381,7 @@ public class DataHandleGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compile(final SchemaParser parser) {
+  public CharSequence compileParser(final SchemaParser parser) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("from DataHendle.Schemaparsers.AbstractSchemaParser import AbstractSchemaParser ");
     _builder.newLine();
@@ -424,9 +425,9 @@ public class DataHandleGenerator extends AbstractGenerator {
   
   protected CharSequence _compile(final GetEndPoint endpoint) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("from DataHandle.Endpoints.AbstractEndpoint import AbstractEndpoint");
+    _builder.append("from DataHandle.EndPoints.AbstractEndpoint import AbstractEndpoint");
     _builder.newLine();
-    _builder.append("from DataHandle.SchemaParsers.");
+    _builder.append("from DataHandle.SchemaParsers.SchemaParsers");
     SchemaParser _parser = endpoint.getParser();
     String _name = _parser.getName();
     _builder.append(_name, "");
@@ -445,10 +446,11 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("def __init__(self):");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("self.schemaParser = ");
+    _builder.append("self.schemaParser = SchemaParsers");
     SchemaParser _parser_2 = endpoint.getParser();
     String _name_3 = _parser_2.getName();
     _builder.append(_name_3, "\t\t");
+    _builder.append("()");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("self.url = \"");

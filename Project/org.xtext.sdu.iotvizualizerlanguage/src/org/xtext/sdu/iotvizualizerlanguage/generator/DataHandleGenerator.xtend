@@ -28,9 +28,9 @@ class DataHandleGenerator extends AbstractGenerator {
 		fsa.generateFile("DataHandle/Datasources/Controller.py", compileDatasourceController(input))
 		
 		for(p: input.allContents.toIterable.filter(EndPoint)) {
-			fsa.generateFile("DataHandle/SchemaParsers/SchemaParser" + p.parser.name + ".py", p.compile);
+			fsa.generateFile("DataHandle/SchemaParsers/SchemaParser" + p.parser.name + ".py", p.parser.compileParser);
 			for(s : p.parser.selectors){
-				fsa.generateFile("DataHandle/Selectors/Selector" + s.name + ".py", s.compile);
+				fsa.generateFile("DataHandle/Selectors/Selector" + s.name + ".py", s.compileSelector);
 			}
 			fsa.generateFile("DataHandle/EndPoints/EndPoint" + p.name + ".py", p.compile);
 		}
@@ -40,7 +40,7 @@ class DataHandleGenerator extends AbstractGenerator {
 	def compileDatasourceController(Resource resource)
 	'''
 	import numpy as np
-	import DataHandle.Endpoints as endpoint
+	import DataHandle.EndPoints as endpoint
 	
 	class DatasourceController():
 		
@@ -140,7 +140,7 @@ class DataHandleGenerator extends AbstractGenerator {
 			self.steps = []
 	'''
 	
-	def compile(Selector select)
+	def compileSelector(Selector select)
 	'''
 	from DataHandle.Selectors.AbstractSelector import AbstractSelector
 	class Selector«select.name»(AbstractSelector»):
@@ -166,7 +166,7 @@ class DataHandleGenerator extends AbstractGenerator {
 			self.selectors = []
 	'''
 	
-	def compile(SchemaParser parser)
+	def compileParser(SchemaParser parser)
 	'''
 	from DataHendle.Schemaparsers.AbstractSchemaParser import AbstractSchemaParser 
 	«FOR s : parser.selectors»
@@ -183,12 +183,12 @@ class DataHandleGenerator extends AbstractGenerator {
 	
 	def dispatch compile(GetEndPoint endpoint)
 	'''
-	from DataHandle.Endpoints.AbstractEndpoint import AbstractEndpoint
-	from DataHandle.SchemaParsers.«endpoint.parser.name» import SchemaParser«endpoint.parser.name»
+	from DataHandle.EndPoints.AbstractEndpoint import AbstractEndpoint
+	from DataHandle.SchemaParsers.SchemaParsers«endpoint.parser.name» import SchemaParser«endpoint.parser.name»
 	
 	class EndPoint«endpoint.name»(AbstractEndpoint):
 		def __init__(self):
-			self.schemaParser = «endpoint.parser.name»
+			self.schemaParser = SchemaParsers«endpoint.parser.name»()
 			self.url = "«endpoint.url»"
 			self.data = None
 	'''

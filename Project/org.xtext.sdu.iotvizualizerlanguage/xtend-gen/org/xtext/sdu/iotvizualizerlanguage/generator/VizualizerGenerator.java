@@ -58,7 +58,6 @@ public class VizualizerGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.precompile.precompile(resource, fsa);
-    this.apigen.doGenerate(resource, fsa, context);
     this.dataHandleGenerator.doGenerate(resource, fsa, context);
     List<String> pageNames = CollectionLiterals.<String>newArrayList();
     TreeIterator<EObject> _allContents = resource.getAllContents();

@@ -31,7 +31,9 @@ class Postcompile{
 	from django.http import HttpResponse
 	from django.template import loader
 	from django.template import Context
-	from DataHandle.Datasources.controller import DatasourceController
+	from DataHandle.Datasources.Controller import DatasourceController
+	
+	
 	«FOR page : input.allContents.toIterable.filter(Page)»
 	def «page.name»(request):
 		template = loader.get_template('«page.name».html');

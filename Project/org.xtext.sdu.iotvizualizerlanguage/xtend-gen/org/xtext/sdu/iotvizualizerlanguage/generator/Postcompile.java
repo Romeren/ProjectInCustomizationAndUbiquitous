@@ -34,7 +34,9 @@ public class Postcompile {
     _builder.newLine();
     _builder.append("from django.template import Context");
     _builder.newLine();
-    _builder.append("from DataHandle.Datasources.controller import DatasourceController");
+    _builder.append("from DataHandle.Datasources.Controller import DatasourceController");
+    _builder.newLine();
+    _builder.newLine();
     _builder.newLine();
     {
       TreeIterator<EObject> _allContents = input.getAllContents();
