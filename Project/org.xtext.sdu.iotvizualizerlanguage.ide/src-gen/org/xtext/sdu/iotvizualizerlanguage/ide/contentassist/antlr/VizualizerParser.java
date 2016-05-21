@@ -36,20 +36,43 @@ public class VizualizerParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getTileAccess().getAlternatives(), "rule__Tile__Alternatives");
-					put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
-					put(grammarAccess.getOperatorAccess().getAlternatives(), "rule__Operator__Alternatives");
+					put(grammarAccess.getOp1Access().getAlternatives(), "rule__Op1__Alternatives");
+					put(grammarAccess.getOp2Access().getAlternatives(), "rule__Op2__Alternatives");
+					put(grammarAccess.getPrimitiveAccess().getAlternatives(), "rule__Primitive__Alternatives");
+					put(grammarAccess.getSystemAccess().getGroup(), "rule__System__Group__0");
 					put(grammarAccess.getPageAccess().getGroup(), "rule__Page__Group__0");
 					put(grammarAccess.getLinkAccess().getGroup(), "rule__Link__Group__0");
 					put(grammarAccess.getGraphAccess().getGroup(), "rule__Graph__Group__0");
-					put(grammarAccess.getExpressionAccess().getGroup_0(), "rule__Expression__Group_0__0");
-					put(grammarAccess.getExpressionAccess().getGroup_2(), "rule__Expression__Group_2__0");
-					put(grammarAccess.getSystemAccess().getPagesAssignment(), "rule__System__PagesAssignment");
+					put(grammarAccess.getApiAccess().getGroup(), "rule__Api__Group__0");
+					put(grammarAccess.getExpressionAccess().getGroup(), "rule__Expression__Group__0");
+					put(grammarAccess.getExpressionAccess().getGroup_1(), "rule__Expression__Group_1__0");
+					put(grammarAccess.getFactorAccess().getGroup(), "rule__Factor__Group__0");
+					put(grammarAccess.getFactorAccess().getGroup_1(), "rule__Factor__Group_1__0");
+					put(grammarAccess.getPrimitiveAccess().getGroup_2(), "rule__Primitive__Group_2__0");
+					put(grammarAccess.getFormulaAccess().getGroup(), "rule__Formula__Group__0");
+					put(grammarAccess.getFormulaAccess().getGroup_2(), "rule__Formula__Group_2__0");
+					put(grammarAccess.getFormulaAccess().getGroup_2_1(), "rule__Formula__Group_2_1__0");
+					put(grammarAccess.getSystemAccess().getPagesAssignment_0(), "rule__System__PagesAssignment_0");
+					put(grammarAccess.getSystemAccess().getApisAssignment_1(), "rule__System__ApisAssignment_1");
 					put(grammarAccess.getPageAccess().getNameAssignment_1(), "rule__Page__NameAssignment_1");
 					put(grammarAccess.getPageAccess().getTilesAssignment_3(), "rule__Page__TilesAssignment_3");
 					put(grammarAccess.getLinkAccess().getNameAssignment_1(), "rule__Link__NameAssignment_1");
 					put(grammarAccess.getLinkAccess().getPageAssignment_3(), "rule__Link__PageAssignment_3");
 					put(grammarAccess.getGraphAccess().getNameAssignment_1(), "rule__Graph__NameAssignment_1");
+					put(grammarAccess.getApiAccess().getNameAssignment_1(), "rule__Api__NameAssignment_1");
+					put(grammarAccess.getMathAccess().getFormularsAssignment(), "rule__Math__FormularsAssignment");
+					put(grammarAccess.getExpressionAccess().getLeftAssignment_0(), "rule__Expression__LeftAssignment_0");
+					put(grammarAccess.getExpressionAccess().getOpAssignment_1_0(), "rule__Expression__OpAssignment_1_0");
+					put(grammarAccess.getExpressionAccess().getRightAssignment_1_1(), "rule__Expression__RightAssignment_1_1");
+					put(grammarAccess.getFactorAccess().getLeftAssignment_0(), "rule__Factor__LeftAssignment_0");
+					put(grammarAccess.getFactorAccess().getOpAssignment_1_0(), "rule__Factor__OpAssignment_1_0");
+					put(grammarAccess.getFactorAccess().getRightAssignment_1_1(), "rule__Factor__RightAssignment_1_1");
+					put(grammarAccess.getNumberAccess().getValAssignment(), "rule__Number__ValAssignment");
 					put(grammarAccess.getVariableAccess().getNameAssignment(), "rule__Variable__NameAssignment");
+					put(grammarAccess.getFormulaAccess().getNameAssignment_0(), "rule__Formula__NameAssignment_0");
+					put(grammarAccess.getFormulaAccess().getVarsAssignment_2_0(), "rule__Formula__VarsAssignment_2_0");
+					put(grammarAccess.getFormulaAccess().getVarsAssignment_2_1_1(), "rule__Formula__VarsAssignment_2_1_1");
+					put(grammarAccess.getFormulaAccess().getExpAssignment_5(), "rule__Formula__ExpAssignment_5");
 				}
 			};
 		}

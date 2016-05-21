@@ -77,13 +77,22 @@ public interface VizualizerPackage extends EPackage
   int SYSTEM__PAGES = 0;
 
   /**
+   * The feature id for the '<em><b>Apis</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYSTEM__APIS = 1;
+
+  /**
    * The number of structural features of the '<em>System</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYSTEM_FEATURE_COUNT = 1;
+  int SYSTEM_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.PageImpl <em>Page</em>}' class.
@@ -215,6 +224,34 @@ public interface VizualizerPackage extends EPackage
    */
   int GRAPH_FEATURE_COUNT = TILE_FEATURE_COUNT + 0;
 
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.ApiImpl <em>Api</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.ApiImpl
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getApi()
+   * @generated
+   */
+  int API = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int API__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Api</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int API_FEATURE_COUNT = 1;
+
 
   /**
    * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System <em>System</em>}'.
@@ -236,6 +273,17 @@ public interface VizualizerPackage extends EPackage
    * @generated
    */
   EReference getSystem_Pages();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getApis <em>Apis</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Apis</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getApis()
+   * @see #getSystem()
+   * @generated
+   */
+  EReference getSystem_Apis();
 
   /**
    * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page <em>Page</em>}'.
@@ -322,6 +370,27 @@ public interface VizualizerPackage extends EPackage
   EClass getGraph();
 
   /**
+   * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api <em>Api</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Api</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api
+   * @generated
+   */
+  EClass getApi();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api#getName()
+   * @see #getApi()
+   * @generated
+   */
+  EAttribute getApi_Name();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -361,6 +430,14 @@ public interface VizualizerPackage extends EPackage
      * @generated
      */
     EReference SYSTEM__PAGES = eINSTANCE.getSystem_Pages();
+
+    /**
+     * The meta object literal for the '<em><b>Apis</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYSTEM__APIS = eINSTANCE.getSystem_Apis();
 
     /**
      * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.PageImpl <em>Page</em>}' class.
@@ -433,6 +510,24 @@ public interface VizualizerPackage extends EPackage
      * @generated
      */
     EClass GRAPH = eINSTANCE.getGraph();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.ApiImpl <em>Api</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.ApiImpl
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getApi()
+     * @generated
+     */
+    EClass API = eINSTANCE.getApi();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute API__NAME = eINSTANCE.getApi_Name();
 
   }
 

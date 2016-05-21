@@ -4,6 +4,7 @@ generate vizualizer "http://www.xtext.org/sdu/iotvizualizerlanguage/Vizualizer"
 
 System:
 	pages += Page*
+	apis += Api* 
 ;
 
 Page:
@@ -24,3 +25,24 @@ Link:
 Graph:
 	'Graph' name=ID
 ;
+
+
+Api:
+	'Api' name=ID
+	'{'
+		(fields += Field)*
+	'}'
+;
+
+Field:
+	'Field' name=ID 'type' type=[ApiType]
+;
+
+ApiType:
+	value=STRING
+;
+
+
+
+
+

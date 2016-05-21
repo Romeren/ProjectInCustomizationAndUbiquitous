@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
@@ -114,6 +115,13 @@ public class VizualizerSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case VizualizerPackage.API:
+      {
+        Api api = (Api)theEObject;
+        T result = caseApi(api);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -194,6 +202,22 @@ public class VizualizerSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseGraph(Graph object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Api</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Api</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseApi(Api object)
   {
     return null;
   }

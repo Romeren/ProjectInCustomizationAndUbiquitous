@@ -20,7 +20,7 @@ package org.xtext.sdu.formularzlanguage.formular;
  * @model
  * @generated
  */
-public interface Variable extends Expression
+public interface Variable extends Primitive
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

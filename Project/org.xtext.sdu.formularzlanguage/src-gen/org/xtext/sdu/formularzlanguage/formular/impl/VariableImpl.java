@@ -25,7 +25,7 @@ import org.xtext.sdu.formularzlanguage.formular.Variable;
  *
  * @generated
  */
-public class VariableImpl extends ExpressionImpl implements Variable
+public class VariableImpl extends PrimitiveImpl implements Variable
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

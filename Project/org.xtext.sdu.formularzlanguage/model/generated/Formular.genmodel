@@ -6,10 +6,30 @@
     complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.10">
   <genPackages prefix="Formular" basePackage="org.xtext.sdu.formularzlanguage" disposableProviderFactory="true"
       fileExtensions="func" ecorePackage="Formular.ecore#/">
-    <genClasses ecoreClass="Formular.ecore#//Expression"/>
+    <genClasses ecoreClass="Formular.ecore#//Math">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Formular.ecore#//Math/formulars"/>
+    </genClasses>
+    <genClasses ecoreClass="Formular.ecore#//Expression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Formular.ecore#//Expression/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Formular.ecore#//Expression/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Formular.ecore#//Expression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Formular.ecore#//Factor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Formular.ecore#//Factor/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Formular.ecore#//Factor/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Formular.ecore#//Factor/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Formular.ecore#//Primitive"/>
+    <genClasses ecoreClass="Formular.ecore#//Number">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Formular.ecore#//Number/val"/>
+    </genClasses>
     <genClasses ecoreClass="Formular.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Formular.ecore#//Variable/name"/>
     </genClasses>
-    <genClasses ecoreClass="Formular.ecore#//Expreession"/>
+    <genClasses ecoreClass="Formular.ecore#//Formula">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Formular.ecore#//Formula/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Formular.ecore#//Formula/vars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Formular.ecore#//Formula/exp"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

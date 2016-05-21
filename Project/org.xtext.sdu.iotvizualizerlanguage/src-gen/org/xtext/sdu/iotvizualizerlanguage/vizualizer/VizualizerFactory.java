@@ -69,6 +69,15 @@ public interface VizualizerFactory extends EFactory
   Graph createGraph();
 
   /**
+   * Returns a new object of class '<em>Api</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Api</em>'.
+   * @generated
+   */
+  Api createApi();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

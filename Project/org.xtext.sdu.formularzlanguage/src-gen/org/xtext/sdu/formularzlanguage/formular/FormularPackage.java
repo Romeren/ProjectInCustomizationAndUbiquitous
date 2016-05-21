@@ -6,6 +6,7 @@ package org.xtext.sdu.formularzlanguage.formular;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -57,6 +58,53 @@ public interface FormularPackage extends EPackage
   FormularPackage eINSTANCE = org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl.init();
 
   /**
+   * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.MathImpl <em>Math</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.MathImpl
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getMath()
+   * @generated
+   */
+  int MATH = 0;
+
+  /**
+   * The feature id for the '<em><b>Formulars</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MATH__FORMULARS = 0;
+
+  /**
+   * The number of structural features of the '<em>Math</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MATH_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.PrimitiveImpl <em>Primitive</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.PrimitiveImpl
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getPrimitive()
+   * @generated
+   */
+  int PRIMITIVE = 3;
+
+  /**
+   * The number of structural features of the '<em>Primitive</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRIMITIVE_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.ExpressionImpl <em>Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -64,7 +112,34 @@ public interface FormularPackage extends EPackage
    * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 0;
+  int EXPRESSION = 1;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__LEFT = PRIMITIVE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Op</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__OP = PRIMITIVE_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__RIGHT = PRIMITIVE_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -73,7 +148,81 @@ public interface FormularPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EXPRESSION_FEATURE_COUNT = 0;
+  int EXPRESSION_FEATURE_COUNT = PRIMITIVE_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.FactorImpl <em>Factor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.FactorImpl
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getFactor()
+   * @generated
+   */
+  int FACTOR = 2;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FACTOR__LEFT = 0;
+
+  /**
+   * The feature id for the '<em><b>Op</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FACTOR__OP = 1;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FACTOR__RIGHT = 2;
+
+  /**
+   * The number of structural features of the '<em>Factor</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FACTOR_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.NumberImpl <em>Number</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.NumberImpl
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getNumber()
+   * @generated
+   */
+  int NUMBER = 4;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER__VAL = PRIMITIVE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Number</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER_FEATURE_COUNT = PRIMITIVE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.VariableImpl <em>Variable</em>}' class.
@@ -83,7 +232,7 @@ public interface FormularPackage extends EPackage
    * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getVariable()
    * @generated
    */
-  int VARIABLE = 1;
+  int VARIABLE = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -92,7 +241,7 @@ public interface FormularPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VARIABLE__NAME = EXPRESSION_FEATURE_COUNT + 0;
+  int VARIABLE__NAME = PRIMITIVE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Variable</em>' class.
@@ -101,27 +250,75 @@ public interface FormularPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VARIABLE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+  int VARIABLE_FEATURE_COUNT = PRIMITIVE_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.ExpreessionImpl <em>Expreession</em>}' class.
+   * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl <em>Formula</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.sdu.formularzlanguage.formular.impl.ExpreessionImpl
-   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getExpreession()
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getFormula()
    * @generated
    */
-  int EXPREESSION = 2;
+  int FORMULA = 6;
 
   /**
-   * The number of structural features of the '<em>Expreession</em>' class.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EXPREESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+  int FORMULA__NAME = 0;
 
+  /**
+   * The feature id for the '<em><b>Vars</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FORMULA__VARS = 1;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FORMULA__EXP = 2;
+
+  /**
+   * The number of structural features of the '<em>Formula</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FORMULA_FEATURE_COUNT = 3;
+
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Math <em>Math</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Math</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Math
+   * @generated
+   */
+  EClass getMath();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.formularzlanguage.formular.Math#getFormulars <em>Formulars</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Formulars</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Math#getFormulars()
+   * @see #getMath()
+   * @generated
+   */
+  EReference getMath_Formulars();
 
   /**
    * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Expression <em>Expression</em>}'.
@@ -132,6 +329,113 @@ public interface FormularPackage extends EPackage
    * @generated
    */
   EClass getExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.formularzlanguage.formular.Expression#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Expression#getLeft()
+   * @see #getExpression()
+   * @generated
+   */
+  EReference getExpression_Left();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.formularzlanguage.formular.Expression#getOp <em>Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Op</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Expression#getOp()
+   * @see #getExpression()
+   * @generated
+   */
+  EAttribute getExpression_Op();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.formularzlanguage.formular.Expression#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Expression#getRight()
+   * @see #getExpression()
+   * @generated
+   */
+  EReference getExpression_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Factor <em>Factor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Factor</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Factor
+   * @generated
+   */
+  EClass getFactor();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.formularzlanguage.formular.Factor#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Factor#getLeft()
+   * @see #getFactor()
+   * @generated
+   */
+  EReference getFactor_Left();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.formularzlanguage.formular.Factor#getOp <em>Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Op</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Factor#getOp()
+   * @see #getFactor()
+   * @generated
+   */
+  EAttribute getFactor_Op();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.formularzlanguage.formular.Factor#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Factor#getRight()
+   * @see #getFactor()
+   * @generated
+   */
+  EReference getFactor_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Primitive <em>Primitive</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Primitive</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Primitive
+   * @generated
+   */
+  EClass getPrimitive();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Number <em>Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Number</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Number
+   * @generated
+   */
+  EClass getNumber();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.formularzlanguage.formular.Number#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Number#getVal()
+   * @see #getNumber()
+   * @generated
+   */
+  EAttribute getNumber_Val();
 
   /**
    * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Variable <em>Variable</em>}'.
@@ -155,14 +459,47 @@ public interface FormularPackage extends EPackage
   EAttribute getVariable_Name();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Expreession <em>Expreession</em>}'.
+   * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Formula <em>Formula</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expreession</em>'.
-   * @see org.xtext.sdu.formularzlanguage.formular.Expreession
+   * @return the meta object for class '<em>Formula</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Formula
    * @generated
    */
-  EClass getExpreession();
+  EClass getFormula();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.formularzlanguage.formular.Formula#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Formula#getName()
+   * @see #getFormula()
+   * @generated
+   */
+  EAttribute getFormula_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.formularzlanguage.formular.Formula#getVars <em>Vars</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Vars</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Formula#getVars()
+   * @see #getFormula()
+   * @generated
+   */
+  EReference getFormula_Vars();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.formularzlanguage.formular.Formula#getExp <em>Exp</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Exp</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Formula#getExp()
+   * @see #getFormula()
+   * @generated
+   */
+  EReference getFormula_Exp();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -188,6 +525,24 @@ public interface FormularPackage extends EPackage
   interface Literals
   {
     /**
+     * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.MathImpl <em>Math</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.MathImpl
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getMath()
+     * @generated
+     */
+    EClass MATH = eINSTANCE.getMath();
+
+    /**
+     * The meta object literal for the '<em><b>Formulars</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MATH__FORMULARS = eINSTANCE.getMath_Formulars();
+
+    /**
      * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.ExpressionImpl <em>Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -196,6 +551,92 @@ public interface FormularPackage extends EPackage
      * @generated
      */
     EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXPRESSION__LEFT = eINSTANCE.getExpression_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXPRESSION__OP = eINSTANCE.getExpression_Op();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXPRESSION__RIGHT = eINSTANCE.getExpression_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.FactorImpl <em>Factor</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.FactorImpl
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getFactor()
+     * @generated
+     */
+    EClass FACTOR = eINSTANCE.getFactor();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FACTOR__LEFT = eINSTANCE.getFactor_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FACTOR__OP = eINSTANCE.getFactor_Op();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FACTOR__RIGHT = eINSTANCE.getFactor_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.PrimitiveImpl <em>Primitive</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.PrimitiveImpl
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getPrimitive()
+     * @generated
+     */
+    EClass PRIMITIVE = eINSTANCE.getPrimitive();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.NumberImpl <em>Number</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.NumberImpl
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getNumber()
+     * @generated
+     */
+    EClass NUMBER = eINSTANCE.getNumber();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NUMBER__VAL = eINSTANCE.getNumber_Val();
 
     /**
      * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.VariableImpl <em>Variable</em>}' class.
@@ -216,14 +657,38 @@ public interface FormularPackage extends EPackage
     EAttribute VARIABLE__NAME = eINSTANCE.getVariable_Name();
 
     /**
-     * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.ExpreessionImpl <em>Expreession</em>}' class.
+     * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl <em>Formula</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.sdu.formularzlanguage.formular.impl.ExpreessionImpl
-     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getExpreession()
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getFormula()
      * @generated
      */
-    EClass EXPREESSION = eINSTANCE.getExpreession();
+    EClass FORMULA = eINSTANCE.getFormula();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FORMULA__NAME = eINSTANCE.getFormula_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Vars</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FORMULA__VARS = eINSTANCE.getFormula_Vars();
+
+    /**
+     * The meta object literal for the '<em><b>Exp</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FORMULA__EXP = eINSTANCE.getFormula_Exp();
 
   }
 

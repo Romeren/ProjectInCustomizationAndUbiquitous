@@ -25,9 +25,12 @@ class VizualizerGenerator extends AbstractGenerator {
 	@Inject Postcompile postcompile
 	@Inject TileColor colorClass;
 	@Inject Random random;
+	@Inject ApiGenerator apigen;
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		precompile.precompile(resource, fsa);
+		
+		apigen.doGenerate(resource, fsa, context);
 		
 		var List<String> pageNames = newArrayList	
 		

@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
@@ -105,6 +106,11 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
         return createGraphAdapter();
       }
       @Override
+      public Adapter caseApi(Api object)
+      {
+        return createApiAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -197,6 +203,21 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createGraphAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api <em>Api</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api
+   * @generated
+   */
+  public Adapter createApiAdapter()
   {
     return null;
   }

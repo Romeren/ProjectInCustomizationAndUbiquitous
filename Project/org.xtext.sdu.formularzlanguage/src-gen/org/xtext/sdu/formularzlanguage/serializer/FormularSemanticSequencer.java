@@ -14,7 +14,9 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import org.xtext.sdu.formularzlanguage.formular.Expreession;
+import org.xtext.sdu.formularzlanguage.formular.Expression;
+import org.xtext.sdu.formularzlanguage.formular.Factor;
+import org.xtext.sdu.formularzlanguage.formular.Formula;
 import org.xtext.sdu.formularzlanguage.formular.FormularPackage;
 import org.xtext.sdu.formularzlanguage.formular.Variable;
 import org.xtext.sdu.formularzlanguage.services.FormularGrammarAccess;
@@ -33,8 +35,20 @@ public class FormularSemanticSequencer extends AbstractDelegatingSemanticSequenc
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == FormularPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case FormularPackage.EXPREESSION:
-				sequence_Expression(context, (Expreession) semanticObject); 
+			case FormularPackage.EXPRESSION:
+				sequence_Expression(context, (Expression) semanticObject); 
+				return; 
+			case FormularPackage.FACTOR:
+				sequence_Factor(context, (Factor) semanticObject); 
+				return; 
+			case FormularPackage.FORMULA:
+				sequence_Formula(context, (Formula) semanticObject); 
+				return; 
+			case FormularPackage.MATH:
+				sequence_Math(context, (org.xtext.sdu.formularzlanguage.formular.Math) semanticObject); 
+				return; 
+			case FormularPackage.NUMBER:
+				sequence_Number(context, (org.xtext.sdu.formularzlanguage.formular.Number) semanticObject); 
 				return; 
 			case FormularPackage.VARIABLE:
 				sequence_Variable(context, (Variable) semanticObject); 
@@ -46,19 +60,75 @@ public class FormularSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	
 	/**
 	 * Contexts:
-	 *     Expression returns Expreession
+	 *     Expression returns Expression
+	 *     Primitive returns Expression
 	 *
 	 * Constraint:
-	 *     {Expreession}
+	 *     (left=Factor (op=Op1 right=Expression)?)
 	 */
-	protected void sequence_Expression(ISerializationContext context, Expreession semanticObject) {
+	protected void sequence_Expression(ISerializationContext context, Expression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     Expression returns Variable
+	 *     Factor returns Factor
+	 *
+	 * Constraint:
+	 *     (left=Primitive (op=Op2 right=Factor)?)
+	 */
+	protected void sequence_Factor(ISerializationContext context, Factor semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Formula returns Formula
+	 *
+	 * Constraint:
+	 *     (name=ID (vars+=Variable vars+=Variable*)? exp=Expression)
+	 */
+	protected void sequence_Formula(ISerializationContext context, Formula semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Math returns Math
+	 *
+	 * Constraint:
+	 *     formulars+=Formula+
+	 */
+	protected void sequence_Math(ISerializationContext context, org.xtext.sdu.formularzlanguage.formular.Math semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Primitive returns Number
+	 *     Number returns Number
+	 *
+	 * Constraint:
+	 *     val=INT
+	 */
+	protected void sequence_Number(ISerializationContext context, org.xtext.sdu.formularzlanguage.formular.Number semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FormularPackage.Literals.NUMBER__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FormularPackage.Literals.NUMBER__VAL));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getNumberAccess().getValINTTerminalRuleCall_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Primitive returns Variable
 	 *     Variable returns Variable
 	 *
 	 * Constraint:

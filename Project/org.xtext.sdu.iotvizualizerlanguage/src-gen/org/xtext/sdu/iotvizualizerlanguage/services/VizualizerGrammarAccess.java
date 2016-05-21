@@ -26,18 +26,31 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public class SystemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.System");
-		private final Assignment cPagesAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cPagesPageParserRuleCall_0 = (RuleCall)cPagesAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cPagesAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cPagesPageParserRuleCall_0_0 = (RuleCall)cPagesAssignment_0.eContents().get(0);
+		private final Assignment cApisAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cApisApiParserRuleCall_1_0 = (RuleCall)cApisAssignment_1.eContents().get(0);
 		
 		//System:
-		//	pages+=Page*;
+		//	pages+=Page*
+		//	apis+=Api*;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//pages+=Page* apis+=Api*
+		public Group getGroup() { return cGroup; }
+		
 		//pages+=Page*
-		public Assignment getPagesAssignment() { return cPagesAssignment; }
+		public Assignment getPagesAssignment_0() { return cPagesAssignment_0; }
 		
 		//Page
-		public RuleCall getPagesPageParserRuleCall_0() { return cPagesPageParserRuleCall_0; }
+		public RuleCall getPagesPageParserRuleCall_0_0() { return cPagesPageParserRuleCall_0_0; }
+		
+		//apis+=Api*
+		public Assignment getApisAssignment_1() { return cApisAssignment_1; }
+		
+		//Api
+		public RuleCall getApisApiParserRuleCall_1_0() { return cApisApiParserRuleCall_1_0; }
 	}
 	public class PageElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Page");
@@ -162,6 +175,29 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
+	public class ApiElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Api");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cApiKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//Api:
+		//	'Api' name=ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Api' name=ID
+		public Group getGroup() { return cGroup; }
+		
+		//'Api'
+		public Keyword getApiKeyword_0() { return cApiKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
 	
 	
 	private final SystemElements pSystem;
@@ -169,6 +205,7 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 	private final TileElements pTile;
 	private final LinkElements pLink;
 	private final GraphElements pGraph;
+	private final ApiElements pApi;
 	
 	private final Grammar grammar;
 	
@@ -188,6 +225,7 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		this.pTile = new TileElements();
 		this.pLink = new LinkElements();
 		this.pGraph = new GraphElements();
+		this.pApi = new ApiElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -222,7 +260,8 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//System:
-	//	pages+=Page*;
+	//	pages+=Page*
+	//	apis+=Api*;
 	public SystemElements getSystemAccess() {
 		return pSystem;
 	}
@@ -274,8 +313,28 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		return getGraphAccess().getRule();
 	}
 	
+	//Api:
+	//	'Api' name=ID;
+	public ApiElements getApiAccess() {
+		return pApi;
+	}
+	
+	public ParserRule getApiRule() {
+		return getApiAccess().getRule();
+	}
+	
+	//Math:
+	//	formulars+=Formula*;
+	public FormularGrammarAccess.MathElements getMathAccess() {
+		return gaFormular.getMathAccess();
+	}
+	
+	public ParserRule getMathRule() {
+		return getMathAccess().getRule();
+	}
+	
 	//Expression:
-	//	{Expreession} Number | Variable | Operator Expression;
+	//	left=Factor (op=Op1 right=Expression)?;
 	public FormularGrammarAccess.ExpressionElements getExpressionAccess() {
 		return gaFormular.getExpressionAccess();
 	}
@@ -284,8 +343,48 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		return getExpressionAccess().getRule();
 	}
 	
+	//Op1:
+	//	'+' | '-';
+	public FormularGrammarAccess.Op1Elements getOp1Access() {
+		return gaFormular.getOp1Access();
+	}
+	
+	public ParserRule getOp1Rule() {
+		return getOp1Access().getRule();
+	}
+	
+	//Factor:
+	//	left=Primitive (op=Op2 right=Factor)?;
+	public FormularGrammarAccess.FactorElements getFactorAccess() {
+		return gaFormular.getFactorAccess();
+	}
+	
+	public ParserRule getFactorRule() {
+		return getFactorAccess().getRule();
+	}
+	
+	//Op2:
+	//	'*' | '/';
+	public FormularGrammarAccess.Op2Elements getOp2Access() {
+		return gaFormular.getOp2Access();
+	}
+	
+	public ParserRule getOp2Rule() {
+		return getOp2Access().getRule();
+	}
+	
+	//Primitive:
+	//	Number | Variable | '(' Expression ')';
+	public FormularGrammarAccess.PrimitiveElements getPrimitiveAccess() {
+		return gaFormular.getPrimitiveAccess();
+	}
+	
+	public ParserRule getPrimitiveRule() {
+		return getPrimitiveAccess().getRule();
+	}
+	
 	//Number:
-	//	INT;
+	//	val=INT;
 	public FormularGrammarAccess.NumberElements getNumberAccess() {
 		return gaFormular.getNumberAccess();
 	}
@@ -304,14 +403,14 @@ public class VizualizerGrammarAccess extends AbstractGrammarElementFinder {
 		return getVariableAccess().getRule();
 	}
 	
-	//Operator:
-	//	'+' | '-' | '*' | '/';
-	public FormularGrammarAccess.OperatorElements getOperatorAccess() {
-		return gaFormular.getOperatorAccess();
+	//Formula:
+	//	name=ID '(' (vars+=Variable (',' vars+=Variable)*)? ')' '=' exp=Expression;
+	public FormularGrammarAccess.FormulaElements getFormulaAccess() {
+		return gaFormular.getFormulaAccess();
 	}
 	
-	public ParserRule getOperatorRule() {
-		return getOperatorAccess().getRule();
+	public ParserRule getFormulaRule() {
+		return getFormulaAccess().getRule();
 	}
 	
 	//terminal ID:

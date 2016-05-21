@@ -9,5 +9,4 @@ Page pageOne
 	Graph testGraph
 	Graph testGraph2
 	Graph testGraph3
-	Graph testGraph4
 }

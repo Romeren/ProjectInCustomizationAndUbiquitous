@@ -27,7 +27,7 @@ public class FormularParser extends AbstractAntlrParser {
 
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Expression";
+		return "Math";
 	}
 
 	public FormularGrammarAccess getGrammarAccess() {

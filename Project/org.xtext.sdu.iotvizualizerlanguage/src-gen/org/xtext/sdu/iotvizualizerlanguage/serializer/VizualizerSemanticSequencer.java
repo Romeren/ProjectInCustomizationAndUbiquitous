@@ -13,11 +13,14 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import org.xtext.sdu.formularzlanguage.formular.Expreession;
+import org.xtext.sdu.formularzlanguage.formular.Expression;
+import org.xtext.sdu.formularzlanguage.formular.Factor;
+import org.xtext.sdu.formularzlanguage.formular.Formula;
 import org.xtext.sdu.formularzlanguage.formular.FormularPackage;
 import org.xtext.sdu.formularzlanguage.formular.Variable;
 import org.xtext.sdu.formularzlanguage.serializer.FormularSemanticSequencer;
 import org.xtext.sdu.iotvizualizerlanguage.services.VizualizerGrammarAccess;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
@@ -37,8 +40,20 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == FormularPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case FormularPackage.EXPREESSION:
-				sequence_Expression(context, (Expreession) semanticObject); 
+			case FormularPackage.EXPRESSION:
+				sequence_Expression(context, (Expression) semanticObject); 
+				return; 
+			case FormularPackage.FACTOR:
+				sequence_Factor(context, (Factor) semanticObject); 
+				return; 
+			case FormularPackage.FORMULA:
+				sequence_Formula(context, (Formula) semanticObject); 
+				return; 
+			case FormularPackage.MATH:
+				sequence_Math(context, (org.xtext.sdu.formularzlanguage.formular.Math) semanticObject); 
+				return; 
+			case FormularPackage.NUMBER:
+				sequence_Number(context, (org.xtext.sdu.formularzlanguage.formular.Number) semanticObject); 
 				return; 
 			case FormularPackage.VARIABLE:
 				sequence_Variable(context, (Variable) semanticObject); 
@@ -46,6 +61,9 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 			}
 		else if (epackage == VizualizerPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case VizualizerPackage.API:
+				sequence_Api(context, (Api) semanticObject); 
+				return; 
 			case VizualizerPackage.GRAPH:
 				sequence_Graph(context, (Graph) semanticObject); 
 				return; 
@@ -62,6 +80,24 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     Api returns Api
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_Api(ISerializationContext context, Api semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.API__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.API__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getApiAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -121,7 +157,7 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	 *     System returns System
 	 *
 	 * Constraint:
-	 *     pages+=Page+
+	 *     ((pages+=Page+ apis+=Api+) | apis+=Api+)?
 	 */
 	protected void sequence_System(ISerializationContext context, org.xtext.sdu.iotvizualizerlanguage.vizualizer.System semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
@@ -59,6 +60,13 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * @generated
    */
   private EClass graphEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass apiEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -148,6 +156,16 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getSystem_Apis()
+  {
+    return (EReference)systemEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getPage()
   {
     return pageEClass;
@@ -228,6 +246,26 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getApi()
+  {
+    return apiEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getApi_Name()
+  {
+    return (EAttribute)apiEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public VizualizerFactory getVizualizerFactory()
   {
     return (VizualizerFactory)getEFactoryInstance();
@@ -255,6 +293,7 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     // Create classes and their features
     systemEClass = createEClass(SYSTEM);
     createEReference(systemEClass, SYSTEM__PAGES);
+    createEReference(systemEClass, SYSTEM__APIS);
 
     pageEClass = createEClass(PAGE);
     createEAttribute(pageEClass, PAGE__NAME);
@@ -267,6 +306,9 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     createEReference(linkEClass, LINK__PAGE);
 
     graphEClass = createEClass(GRAPH);
+
+    apiEClass = createEClass(API);
+    createEAttribute(apiEClass, API__NAME);
   }
 
   /**
@@ -304,6 +346,7 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     // Initialize classes and features; add operations and parameters
     initEClass(systemEClass, org.xtext.sdu.iotvizualizerlanguage.vizualizer.System.class, "System", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSystem_Pages(), this.getPage(), null, "pages", null, 0, -1, org.xtext.sdu.iotvizualizerlanguage.vizualizer.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSystem_Apis(), this.getApi(), null, "apis", null, 0, -1, org.xtext.sdu.iotvizualizerlanguage.vizualizer.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(pageEClass, Page.class, "Page", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPage_Name(), ecorePackage.getEString(), "name", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -316,6 +359,9 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     initEReference(getLink_Page(), this.getPage(), null, "page", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(graphEClass, Graph.class, "Graph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(apiEClass, Api.class, "Api", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getApi_Name(), ecorePackage.getEString(), "name", null, 0, 1, Api.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

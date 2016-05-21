@@ -8,7 +8,12 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.xtext.sdu.formularzlanguage.formular.*;
+import org.xtext.sdu.formularzlanguage.formular.Expression;
+import org.xtext.sdu.formularzlanguage.formular.Factor;
+import org.xtext.sdu.formularzlanguage.formular.Formula;
+import org.xtext.sdu.formularzlanguage.formular.FormularPackage;
+import org.xtext.sdu.formularzlanguage.formular.Primitive;
+import org.xtext.sdu.formularzlanguage.formular.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -73,10 +78,40 @@ public class FormularSwitch<T> extends Switch<T>
   {
     switch (classifierID)
     {
+      case FormularPackage.MATH:
+      {
+        org.xtext.sdu.formularzlanguage.formular.Math math = (org.xtext.sdu.formularzlanguage.formular.Math)theEObject;
+        T result = caseMath(math);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FormularPackage.EXPRESSION:
       {
         Expression expression = (Expression)theEObject;
         T result = caseExpression(expression);
+        if (result == null) result = casePrimitive(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormularPackage.FACTOR:
+      {
+        Factor factor = (Factor)theEObject;
+        T result = caseFactor(factor);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormularPackage.PRIMITIVE:
+      {
+        Primitive primitive = (Primitive)theEObject;
+        T result = casePrimitive(primitive);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormularPackage.NUMBER:
+      {
+        org.xtext.sdu.formularzlanguage.formular.Number number = (org.xtext.sdu.formularzlanguage.formular.Number)theEObject;
+        T result = caseNumber(number);
+        if (result == null) result = casePrimitive(number);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -84,20 +119,35 @@ public class FormularSwitch<T> extends Switch<T>
       {
         Variable variable = (Variable)theEObject;
         T result = caseVariable(variable);
-        if (result == null) result = caseExpression(variable);
+        if (result == null) result = casePrimitive(variable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FormularPackage.EXPREESSION:
+      case FormularPackage.FORMULA:
       {
-        Expreession expreession = (Expreession)theEObject;
-        T result = caseExpreession(expreession);
-        if (result == null) result = caseExpression(expreession);
+        Formula formula = (Formula)theEObject;
+        T result = caseFormula(formula);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
       default: return defaultCase(theEObject);
     }
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Math</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Math</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMath(org.xtext.sdu.formularzlanguage.formular.Math object)
+  {
+    return null;
   }
 
   /**
@@ -112,6 +162,54 @@ public class FormularSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Factor</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Factor</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFactor(Factor object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Primitive</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Primitive</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePrimitive(Primitive object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Number</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Number</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNumber(org.xtext.sdu.formularzlanguage.formular.Number object)
   {
     return null;
   }
@@ -133,17 +231,17 @@ public class FormularSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Expreession</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Formula</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Expreession</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Formula</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseExpreession(Expreession object)
+  public T caseFormula(Formula object)
   {
     return null;
   }

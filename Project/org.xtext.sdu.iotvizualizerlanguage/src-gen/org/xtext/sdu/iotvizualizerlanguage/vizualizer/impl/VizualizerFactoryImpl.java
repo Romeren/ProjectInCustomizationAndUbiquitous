@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
@@ -75,6 +76,7 @@ public class VizualizerFactoryImpl extends EFactoryImpl implements VizualizerFac
       case VizualizerPackage.TILE: return createTile();
       case VizualizerPackage.LINK: return createLink();
       case VizualizerPackage.GRAPH: return createGraph();
+      case VizualizerPackage.API: return createApi();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -133,6 +135,17 @@ public class VizualizerFactoryImpl extends EFactoryImpl implements VizualizerFac
   {
     GraphImpl graph = new GraphImpl();
     return graph;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Api createApi()
+  {
+    ApiImpl api = new ApiImpl();
+    return api;
   }
 
   /**

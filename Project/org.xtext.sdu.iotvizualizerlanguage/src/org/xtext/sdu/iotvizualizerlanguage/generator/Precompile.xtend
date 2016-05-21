@@ -70,6 +70,8 @@ class Precompile {
 	    'django.contrib.sessions',
 	    'django.contrib.messages',
 	    'django.contrib.staticfiles',
+	    'rest_framework',
+	    'api',
 	]
 	
 	MIDDLEWARE_CLASSES = [
@@ -132,6 +134,17 @@ class Precompile {
 	        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
 	    },
 	]
+	
+	# Rest Api framework:
+	REST_FRAMEWORK = {
+	    # Use Django's standard `django.contrib.auth` permissions,
+	    # or allow read-only access for unauthenticated users.
+	    'DEFAULT_PERMISSION_CLASSES': [
+	        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+	    ]
+	#    'DEFAULT_AUTHENTICATION_CLASSES': [],
+	#    'DEFAULT_PERMISSION_CLASSES': [],
+	}
 	
 	
 	# Internationalization
@@ -201,6 +214,8 @@ class Precompile {
 	urlpatterns = [
 	    url(r'^', include('pages.urls')),
 	    url(r'^admin/', admin.site.urls),
+	    url(r'^',include('api.urls')),
+	    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')) #AND here
 	]
 	'''
 	

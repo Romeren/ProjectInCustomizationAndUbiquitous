@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getPages <em>Pages</em>}</li>
+ *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getApis <em>Apis</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,5 +41,21 @@ public interface System extends EObject
    * @generated
    */
   EList<Page> getPages();
+
+  /**
+   * Returns the value of the '<em><b>Apis</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Apis</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Apis</em>' containment reference list.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getSystem_Apis()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Api> getApis();
 
 } // System
