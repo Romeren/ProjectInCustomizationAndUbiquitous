@@ -263,6 +263,7 @@ class Precompile {
 	@celery.decorators.periodic_task(run_every=datetime.timedelta(minutes=5))
 	def fetchFromUrl(): 
 		print("Running Task")
+		
 	'''
 	
 	def compileModels()

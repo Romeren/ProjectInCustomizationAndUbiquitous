@@ -7,6 +7,7 @@ import org.eclipse.xtext.generator.IGeneratorContext
 
 class ApiGenerator extends AbstractGenerator {
 	
+	
 	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		fsa.generateFile("api/urls.py",compileUrls);
 		fsa.generateFile("api/views.py", compileViews);

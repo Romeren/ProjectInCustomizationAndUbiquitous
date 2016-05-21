@@ -13,3 +13,4 @@ package org.xtext.sdu.iotvizualizerlanguage.scoping
 class VizualizerScopeProvider extends AbstractVizualizerScopeProvider {
 
 }
+

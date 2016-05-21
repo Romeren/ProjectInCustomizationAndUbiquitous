@@ -1,5 +1,6 @@
 package org.xtext.sdu.iotvizualizerlanguage.generator
 
+
 class TileColor {
 	
 	val String[] colors = #[

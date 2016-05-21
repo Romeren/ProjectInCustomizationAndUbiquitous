@@ -5,8 +5,8 @@ from django.template import Context
 #API
 from rest_framework import viewsets
 from django.contrib.auth.models import User
-from api.serializers import UserSerializer, TestDataSerializer
-from api.model import TestDataModel
+from api.serializers import UserSerializer
+
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This endpoint presents the users in the system.
@@ -15,10 +15,3 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-class TestDataViewSet(viewsets.ModelViewSet):
-	"""docstring for TestDataViewSet"""
-	queryset = TestDataModel.objects.all()
-	serializer_class = TestDataSerializer
-	
-	

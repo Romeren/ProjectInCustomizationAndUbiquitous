@@ -7,12 +7,6 @@ Page index
 Page pageOne
 {
 	Link toHomePage to index
-<<<<<<< HEAD
-	Graph testGraph
-	Graph testGraph2
-	Graph testGraph3
-}
-=======
 	Graph testGraph a
 	Graph testGraph2 a
 	Graph testGraph3 c
@@ -49,4 +43,3 @@ GetPoint lol {
 	}
 	use Schema schemaA
 }
->>>>>>> 6dd6845649db23a9b572932e1d32c0424dae2133

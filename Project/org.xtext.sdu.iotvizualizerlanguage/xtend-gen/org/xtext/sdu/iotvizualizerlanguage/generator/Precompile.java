@@ -516,6 +516,8 @@ public class Precompile {
     _builder.append("\t");
     _builder.append("print(\"Running Task\")");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
     return _builder;
   }
   

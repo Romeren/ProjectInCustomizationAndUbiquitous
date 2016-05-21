@@ -24,5 +24,4 @@ class FormularGenerator extends AbstractGenerator {
 	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 	}
-	
 }
