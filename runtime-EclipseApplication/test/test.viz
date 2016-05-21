@@ -13,6 +13,19 @@ Page pageOne
 	Graph testGraph4 c
 }
 
+Datasource a {
+	Source lol
+	Dimensions:
+		Dimension y as Formula f(x, y) = x + y,
+		Dimension z as Formula f(x) = x + 5		
+}
+
+Datasource c {
+	Source a
+	Dimensions:
+		Dimension x as Formula g(z) = z * 6
+}
+
 Schema schemaA {
 	SchemaType = JSON
 	Selector as x {
@@ -23,20 +36,10 @@ Schema schemaA {
 	}
 }
 
-URI lol 
-{
-	url "http://lol.dk"
+GetPoint lol {
+	url "http://example.com/lol"
+	Headers {
+		"type" : "Best"
+	}
 	use Schema schemaA
 }
-
-Datasource a {
-	Source lol
-	Dimension y as Formula f(x, y) = x + y
-	Dimension z as Formula f(x) = x + 5
-}
-
-Datasource c {
-	Source a
-	Dimension x as Formula g(j) = j * 6
-}
-

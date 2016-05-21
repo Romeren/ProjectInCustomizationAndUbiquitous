@@ -30,24 +30,44 @@ Datasource:
 	'Datasource' name=ID
 	'{'
 	'Source' source=[Source]
-	dimensions+=DimensionalData+
+	'Dimensions' ':'
+	dimensions+=Dimension (',' dimensions+=Dimension)*
 	'}'
 ;
 
-DimensionalData:
-	'Dimension' dim+=ID 'as' 'Formula' formula+=Formula
+Dimension:
+	'Dimension' name=ID 'as' 'Formula' formula=Formula
 ;
 
 Source:
-	URI | Datasource
+	EndPoint | Datasource
 ;
 
-URI:
-	'URI' name=ID
+EndPoint:
+	GetEndPoint | PostEndPoint
+;
+
+PostEndPoint:
+	'PostPoint' name=ID
 	'{'
-	'url' uri=STRING
+	'url' url=STRING
 	'use Schema' parser=[SchemaParser]
 	'}'
+;
+
+GetEndPoint:
+	'GetPoint' name=ID
+	'{'
+	'url' url=STRING
+	'Headers' '{'
+		headers+=Header (',' headers+=Header)*
+	'}'
+	'use Schema' parser=[SchemaParser]
+	'}'
+;
+
+Header:
+	keyword=STRING ':' value=STRING
 ;
 
 // A SchemaParser is used to parse a schema(data structure) into a time series
@@ -65,7 +85,7 @@ enum SchemaType:
 
 // Select the path to a specific dimension of the data
 Selector:
-	'Selector as ' varname=ID '{'
+	'Selector as ' name=ID '{'
 	steps+=STRING (' -> ' steps+=STRING)+
 	'}'
 ;

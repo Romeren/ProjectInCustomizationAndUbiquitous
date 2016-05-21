@@ -78,13 +78,13 @@ public interface VizualizerFactory extends EFactory
   Datasource createDatasource();
 
   /**
-   * Returns a new object of class '<em>Dimensional Data</em>'.
+   * Returns a new object of class '<em>Dimension</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Dimensional Data</em>'.
+   * @return a new object of class '<em>Dimension</em>'.
    * @generated
    */
-  DimensionalData createDimensionalData();
+  Dimension createDimension();
 
   /**
    * Returns a new object of class '<em>Source</em>'.
@@ -96,13 +96,40 @@ public interface VizualizerFactory extends EFactory
   Source createSource();
 
   /**
-   * Returns a new object of class '<em>URI</em>'.
+   * Returns a new object of class '<em>End Point</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>URI</em>'.
+   * @return a new object of class '<em>End Point</em>'.
    * @generated
    */
-  URI createURI();
+  EndPoint createEndPoint();
+
+  /**
+   * Returns a new object of class '<em>Post End Point</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Post End Point</em>'.
+   * @generated
+   */
+  PostEndPoint createPostEndPoint();
+
+  /**
+   * Returns a new object of class '<em>Get End Point</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Get End Point</em>'.
+   * @generated
+   */
+  GetEndPoint createGetEndPoint();
+
+  /**
+   * Returns a new object of class '<em>Header</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Header</em>'.
+   * @generated
+   */
+  Header createHeader();
 
   /**
    * Returns a new object of class '<em>Schema Parser</em>'.

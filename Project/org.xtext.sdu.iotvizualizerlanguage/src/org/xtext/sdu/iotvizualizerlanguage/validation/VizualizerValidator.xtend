@@ -3,6 +3,11 @@
  */
 package org.xtext.sdu.iotvizualizerlanguage.validation
 
+import java.util.HashSet
+import java.util.Set
+import org.eclipse.xtext.validation.Check
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint
 
 /**
  * This class contains custom validation rules. 
@@ -21,5 +26,60 @@ class VizualizerValidator extends AbstractVizualizerValidator {
 //					INVALID_NAME)
 //		}
 //	}
+
+//	@Check
+//	def checkDimensionScope(Datasource source) {
+//		for (dimension : source.dimensions) {
+//			parentHasVariable(source, dimension)
+//		}
+//	}
+//	
+//	def dispatch parentHasVariable(Datasource source, Dimension checkedDimension) {
+//		var collection = source.dimensions.map[dimension | dimension.name]
+//		for (variable : checkedDimension.formula.vars) {
+//			if(!collection.contains(variable.name)) {
+//				error("Variable not present in source",
+//					variable,
+//					variable.eClass.getEStructuralFeature(0)
+//				)
+//				println('''Source: «source.name» Variable «variable.name» Not found in «FOR item : collection» ,«item»«ENDFOR»''')
+//			}
+//		}
+//	}
+//	
+//	def dispatch parentHasVariable(EndPoint endpoint, Dimension checkedDimension) {
+//		var collection = endpoint.parser.selectors.map[selector | selector.name]
+//		for (variable : checkedDimension.formula.vars) {
+//			if(!collection.contains(variable.name)) {
+//				error("Variable not present in source",
+//					variable,
+//					variable.eClass.getEStructuralFeature(0)
+//				)
+//			}
+//		}
+//	}
+
+	@Check
+	def checkCyclicSource(Datasource source) {
+		val Set<Datasource> set = new HashSet<Datasource>()
+		var Datasource current = source
+		set.add(current)
+		var boolean cyclic = false
+		while(current.source instanceof Datasource && !cyclic) {
+			current = source.source as Datasource;
+			if(set.contains(current)) {
+				error('Cyclic Source Connection Detected!',
+					source,
+					source.eClass.getEStructuralFeature(0))
+				return
+			} else {
+				set.add(current)
+			}
+		}
+		if(!(current.source instanceof EndPoint)) {
+			error('No Data Connection!, All datasources should be transitive linked to Endpoint',
+				source, source.eClass.getEStructuralFeature(0))
+		}
+	}
 	
 }

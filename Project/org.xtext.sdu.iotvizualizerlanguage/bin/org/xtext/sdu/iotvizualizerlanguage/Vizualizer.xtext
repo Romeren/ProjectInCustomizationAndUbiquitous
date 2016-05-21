@@ -3,7 +3,7 @@ grammar org.xtext.sdu.iotvizualizerlanguage.Vizualizer with org.xtext.sdu.formul
 generate vizualizer "http://www.xtext.org/sdu/iotvizualizerlanguage/Vizualizer"
 
 System:
-	pages += Page*
+	(pages += Page | sources += Source | schemas += SchemaParser)*
 ;
 
 Page:
@@ -23,4 +23,70 @@ Link:
 
 Graph:
 	'Graph' name=ID
+	source=[Datasource]
 ;
+
+Datasource:
+	'Datasource' name=ID
+	'{'
+	'Source' source=[Source]
+	'Dimensions' ':'
+	dimensions+=Dimension (',' dimensions+=Dimension)*
+	'}'
+;
+
+Dimension:
+	'Dimension' name=ID 'as' 'Formula' formula=Formula
+;
+
+Source:
+	EndPoint | Datasource
+;
+
+EndPoint:
+	GetEndPoint | PostEndPoint
+;
+
+PostEndPoint:
+	'PostPoint' name=ID
+	'{'
+	'url' url=STRING
+	'use Schema' parser=[SchemaParser]
+	'}'
+;
+
+GetEndPoint:
+	'GetPoint' name=ID
+	'{'
+	'url' url=STRING
+	'Headers' '{'
+		headers+=Header (',' headers+=Header)*
+	'}'
+	'use Schema' parser=[SchemaParser]
+	'}'
+;
+
+Header:
+	keyword=STRING ':' value=STRING
+;
+
+// A SchemaParser is used to parse a schema(data structure) into a time series
+SchemaParser:
+	'Schema' name=ID
+	'{'
+	'SchemaType = ' schemaType=SchemaType
+	selectors+=Selector+
+	'}'
+;
+
+enum SchemaType:
+	XML='XML' | CSV='CSV' | JSON='JSON'
+;
+
+// Select the path to a specific dimension of the data
+Selector:
+	'Selector as ' name=ID '{'
+	steps+=STRING (' -> ' steps+=STRING)+
+	'}'
+;
+

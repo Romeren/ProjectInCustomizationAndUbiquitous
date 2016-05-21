@@ -11,15 +11,18 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Tile;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
 
 /**
@@ -116,9 +119,9 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
         return createDatasourceAdapter();
       }
       @Override
-      public Adapter caseDimensionalData(DimensionalData object)
+      public Adapter caseDimension(Dimension object)
       {
-        return createDimensionalDataAdapter();
+        return createDimensionAdapter();
       }
       @Override
       public Adapter caseSource(Source object)
@@ -126,9 +129,24 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
         return createSourceAdapter();
       }
       @Override
-      public Adapter caseURI(URI object)
+      public Adapter caseEndPoint(EndPoint object)
       {
-        return createURIAdapter();
+        return createEndPointAdapter();
+      }
+      @Override
+      public Adapter casePostEndPoint(PostEndPoint object)
+      {
+        return createPostEndPointAdapter();
+      }
+      @Override
+      public Adapter caseGetEndPoint(GetEndPoint object)
+      {
+        return createGetEndPointAdapter();
+      }
+      @Override
+      public Adapter caseHeader(Header object)
+      {
+        return createHeaderAdapter();
       }
       @Override
       public Adapter caseSchemaParser(SchemaParser object)
@@ -253,16 +271,16 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData <em>Dimensional Data</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension <em>Dimension</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension
    * @generated
    */
-  public Adapter createDimensionalDataAdapter()
+  public Adapter createDimensionAdapter()
   {
     return null;
   }
@@ -283,16 +301,61 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI <em>URI</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint <em>End Point</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint
    * @generated
    */
-  public Adapter createURIAdapter()
+  public Adapter createEndPointAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint <em>Post End Point</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint
+   * @generated
+   */
+  public Adapter createPostEndPointAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint <em>Get End Point</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint
+   * @generated
+   */
+  public Adapter createGetEndPointAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header <em>Header</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header
+   * @generated
+   */
+  public Adapter createHeaderAdapter()
   {
     return null;
   }

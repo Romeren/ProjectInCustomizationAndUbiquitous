@@ -21,13 +21,15 @@ import org.xtext.sdu.formularzlanguage.formular.Variable;
 import org.xtext.sdu.formularzlanguage.serializer.FormularSemanticSequencer;
 import org.xtext.sdu.iotvizualizerlanguage.services.VizualizerGrammarAccess;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
 
 @SuppressWarnings("all")
@@ -65,17 +67,26 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 			case VizualizerPackage.DATASOURCE:
 				sequence_Datasource(context, (Datasource) semanticObject); 
 				return; 
-			case VizualizerPackage.DIMENSIONAL_DATA:
-				sequence_DimensionalData(context, (DimensionalData) semanticObject); 
+			case VizualizerPackage.DIMENSION:
+				sequence_Dimension(context, (Dimension) semanticObject); 
+				return; 
+			case VizualizerPackage.GET_END_POINT:
+				sequence_GetEndPoint(context, (GetEndPoint) semanticObject); 
 				return; 
 			case VizualizerPackage.GRAPH:
 				sequence_Graph(context, (Graph) semanticObject); 
+				return; 
+			case VizualizerPackage.HEADER:
+				sequence_Header(context, (Header) semanticObject); 
 				return; 
 			case VizualizerPackage.LINK:
 				sequence_Link(context, (Link) semanticObject); 
 				return; 
 			case VizualizerPackage.PAGE:
 				sequence_Page(context, (Page) semanticObject); 
+				return; 
+			case VizualizerPackage.POST_END_POINT:
+				sequence_PostEndPoint(context, (PostEndPoint) semanticObject); 
 				return; 
 			case VizualizerPackage.SCHEMA_PARSER:
 				sequence_SchemaParser(context, (SchemaParser) semanticObject); 
@@ -85,9 +96,6 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 				return; 
 			case VizualizerPackage.SYSTEM:
 				sequence_System(context, (org.xtext.sdu.iotvizualizerlanguage.vizualizer.System) semanticObject); 
-				return; 
-			case VizualizerPackage.URI:
-				sequence_URI(context, (URI) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -100,7 +108,7 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	 *     Source returns Datasource
 	 *
 	 * Constraint:
-	 *     (name=ID source=[Source|ID] dimensions+=DimensionalData+)
+	 *     (name=ID source=[Source|ID] dimensions+=Dimension dimensions+=Dimension*)
 	 */
 	protected void sequence_Datasource(ISerializationContext context, Datasource semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -109,12 +117,35 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     DimensionalData returns DimensionalData
+	 *     Dimension returns Dimension
 	 *
 	 * Constraint:
-	 *     (dim+=ID formula+=Formula)
+	 *     (name=ID formula=Formula)
 	 */
-	protected void sequence_DimensionalData(ISerializationContext context, DimensionalData semanticObject) {
+	protected void sequence_Dimension(ISerializationContext context, Dimension semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.DIMENSION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.DIMENSION__NAME));
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.DIMENSION__FORMULA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.DIMENSION__FORMULA));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDimensionAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getDimensionAccess().getFormulaFormulaParserRuleCall_4_0(), semanticObject.getFormula());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Source returns GetEndPoint
+	 *     EndPoint returns GetEndPoint
+	 *     GetEndPoint returns GetEndPoint
+	 *
+	 * Constraint:
+	 *     (name=ID url=STRING headers+=Header headers+=Header* parser=[SchemaParser|ID])
+	 */
+	protected void sequence_GetEndPoint(ISerializationContext context, GetEndPoint semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -137,6 +168,27 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getGraphAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getGraphAccess().getSourceDatasourceIDTerminalRuleCall_2_0_1(), semanticObject.getSource());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Header returns Header
+	 *
+	 * Constraint:
+	 *     (keyword=STRING value=STRING)
+	 */
+	protected void sequence_Header(ISerializationContext context, Header semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.HEADER__KEYWORD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.HEADER__KEYWORD));
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.HEADER__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.HEADER__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getHeaderAccess().getKeywordSTRINGTerminalRuleCall_0_0(), semanticObject.getKeyword());
+		feeder.accept(grammarAccess.getHeaderAccess().getValueSTRINGTerminalRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -177,6 +229,32 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     Source returns PostEndPoint
+	 *     EndPoint returns PostEndPoint
+	 *     PostEndPoint returns PostEndPoint
+	 *
+	 * Constraint:
+	 *     (name=ID url=STRING parser=[SchemaParser|ID])
+	 */
+	protected void sequence_PostEndPoint(ISerializationContext context, PostEndPoint semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.SOURCE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.SOURCE__NAME));
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.END_POINT__URL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.END_POINT__URL));
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.END_POINT__PARSER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.END_POINT__PARSER));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPostEndPointAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getPostEndPointAccess().getUrlSTRINGTerminalRuleCall_4_0(), semanticObject.getUrl());
+		feeder.accept(grammarAccess.getPostEndPointAccess().getParserSchemaParserIDTerminalRuleCall_6_0_1(), semanticObject.getParser());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     SchemaParser returns SchemaParser
 	 *
 	 * Constraint:
@@ -192,7 +270,7 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	 *     Selector returns Selector
 	 *
 	 * Constraint:
-	 *     (varname=ID steps+=STRING steps+=STRING+)
+	 *     (name=ID steps+=STRING steps+=STRING+)
 	 */
 	protected void sequence_Selector(ISerializationContext context, Selector semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -208,31 +286,6 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	 */
 	protected void sequence_System(ISerializationContext context, org.xtext.sdu.iotvizualizerlanguage.vizualizer.System semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Source returns URI
-	 *     URI returns URI
-	 *
-	 * Constraint:
-	 *     (name=ID uri=STRING parser=[SchemaParser|ID])
-	 */
-	protected void sequence_URI(ISerializationContext context, URI semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.SOURCE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.SOURCE__NAME));
-			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.URI__URI) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.URI__URI));
-			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.URI__PARSER) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.URI__PARSER));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getURIAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getURIAccess().getUriSTRINGTerminalRuleCall_4_0(), semanticObject.getUri());
-		feeder.accept(grammarAccess.getURIAccess().getParserSchemaParserIDTerminalRuleCall_6_0_1(), semanticObject.getParser());
-		feeder.finish();
 	}
 	
 	

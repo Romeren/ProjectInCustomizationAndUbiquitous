@@ -13,16 +13,19 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionalData;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaType;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Tile;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.URI;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerFactory;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
 
@@ -84,9 +87,12 @@ public class VizualizerFactoryImpl extends EFactoryImpl implements VizualizerFac
       case VizualizerPackage.LINK: return createLink();
       case VizualizerPackage.GRAPH: return createGraph();
       case VizualizerPackage.DATASOURCE: return createDatasource();
-      case VizualizerPackage.DIMENSIONAL_DATA: return createDimensionalData();
+      case VizualizerPackage.DIMENSION: return createDimension();
       case VizualizerPackage.SOURCE: return createSource();
-      case VizualizerPackage.URI: return createURI();
+      case VizualizerPackage.END_POINT: return createEndPoint();
+      case VizualizerPackage.POST_END_POINT: return createPostEndPoint();
+      case VizualizerPackage.GET_END_POINT: return createGetEndPoint();
+      case VizualizerPackage.HEADER: return createHeader();
       case VizualizerPackage.SCHEMA_PARSER: return createSchemaParser();
       case VizualizerPackage.SELECTOR: return createSelector();
       default:
@@ -199,10 +205,10 @@ public class VizualizerFactoryImpl extends EFactoryImpl implements VizualizerFac
    * <!-- end-user-doc -->
    * @generated
    */
-  public DimensionalData createDimensionalData()
+  public Dimension createDimension()
   {
-    DimensionalDataImpl dimensionalData = new DimensionalDataImpl();
-    return dimensionalData;
+    DimensionImpl dimension = new DimensionImpl();
+    return dimension;
   }
 
   /**
@@ -221,10 +227,43 @@ public class VizualizerFactoryImpl extends EFactoryImpl implements VizualizerFac
    * <!-- end-user-doc -->
    * @generated
    */
-  public URI createURI()
+  public EndPoint createEndPoint()
   {
-    URIImpl uri = new URIImpl();
-    return uri;
+    EndPointImpl endPoint = new EndPointImpl();
+    return endPoint;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PostEndPoint createPostEndPoint()
+  {
+    PostEndPointImpl postEndPoint = new PostEndPointImpl();
+    return postEndPoint;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GetEndPoint createGetEndPoint()
+  {
+    GetEndPointImpl getEndPoint = new GetEndPointImpl();
+    return getEndPoint;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Header createHeader()
+  {
+    HeaderImpl header = new HeaderImpl();
+    return header;
   }
 
   /**

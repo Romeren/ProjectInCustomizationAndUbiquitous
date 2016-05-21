@@ -33,16 +33,24 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//Datasource/source"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//Datasource/dimensions"/>
     </genClasses>
-    <genClasses ecoreClass="Vizualizer.ecore#//DimensionalData">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//DimensionalData/dim"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//DimensionalData/formula"/>
+    <genClasses ecoreClass="Vizualizer.ecore#//Dimension">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//Dimension/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//Dimension/formula"/>
     </genClasses>
     <genClasses ecoreClass="Vizualizer.ecore#//Source">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//Source/name"/>
     </genClasses>
-    <genClasses ecoreClass="Vizualizer.ecore#//URI">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//URI/uri"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//URI/parser"/>
+    <genClasses ecoreClass="Vizualizer.ecore#//EndPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//EndPoint/url"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//EndPoint/parser"/>
+    </genClasses>
+    <genClasses ecoreClass="Vizualizer.ecore#//PostEndPoint"/>
+    <genClasses ecoreClass="Vizualizer.ecore#//GetEndPoint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//GetEndPoint/headers"/>
+    </genClasses>
+    <genClasses ecoreClass="Vizualizer.ecore#//Header">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//Header/keyword"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//Header/value"/>
     </genClasses>
     <genClasses ecoreClass="Vizualizer.ecore#//SchemaParser">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//SchemaParser/name"/>
@@ -50,7 +58,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//SchemaParser/selectors"/>
     </genClasses>
     <genClasses ecoreClass="Vizualizer.ecore#//Selector">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//Selector/varname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//Selector/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//Selector/steps"/>
     </genClasses>
   </genPackages>
