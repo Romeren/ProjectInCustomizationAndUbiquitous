@@ -3,7 +3,6 @@
  */
 package org.xtext.sdu.iotvizualizerlanguage.validation;
 
-import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -14,12 +13,8 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.xtext.sdu.formularzlanguage.formular.Formula;
 import org.xtext.sdu.formularzlanguage.formular.Variable;
 import org.xtext.sdu.iotvizualizerlanguage.validation.AbstractVizualizerValidator;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString;
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 
 /**
  * This class contains custom validation rules.
@@ -46,47 +41,6 @@ public class VizualizerValidator extends AbstractVizualizerValidator {
         EStructuralFeature _eStructuralFeature = _eClass.getEStructuralFeature(0);
         this.error("You should not Have done that. You will get in trouble!", param, _eStructuralFeature);
       }
-    }
-  }
-  
-  @Check
-  public void checkSourceHasDimension(final DimensionSelector dimensionSelector) {
-    Source _source = dimensionSelector.getSource();
-    NoQuotesString _selectVar = dimensionSelector.getSelectVar();
-    String _name = _selectVar.getName();
-    boolean _hasDimension = this.hasDimension(_source, _name);
-    boolean _not = (!_hasDimension);
-    if (_not) {
-      NoQuotesString _selectVar_1 = dimensionSelector.getSelectVar();
-      NoQuotesString _selectVar_2 = dimensionSelector.getSelectVar();
-      EClass _eClass = _selectVar_2.eClass();
-      EStructuralFeature _eStructuralFeature = _eClass.getEStructuralFeature(0);
-      this.error("Source does not contain the dimensional Variable you are referring to", _selectVar_1, _eStructuralFeature);
-    }
-  }
-  
-  protected boolean _hasDimension(final GetEndPoint endpoint, final String id) {
-    return true;
-  }
-  
-  protected boolean _hasDimension(final Datasource datasource, final String id) {
-    EList<Dimension> _dimensions = datasource.getDimensions();
-    final Function1<Dimension, String> _function = (Dimension dimension) -> {
-      Formula _name = dimension.getName();
-      return _name.getName();
-    };
-    List<String> _map = ListExtensions.<Dimension, String>map(_dimensions, _function);
-    return _map.contains(id);
-  }
-  
-  public boolean hasDimension(final Source endpoint, final String id) {
-    if (endpoint instanceof GetEndPoint) {
-      return _hasDimension((GetEndPoint)endpoint, id);
-    } else if (endpoint instanceof Datasource) {
-      return _hasDimension((Datasource)endpoint, id);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(endpoint, id).toString());
     }
   }
 }

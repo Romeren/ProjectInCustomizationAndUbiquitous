@@ -2,6 +2,7 @@ Page index
 {
 	Link toPageOne to pageOne
 	Graph testGraph a
+	
 }
 
 Page pageOne
@@ -15,7 +16,7 @@ Page pageOne
 
 Datasource a {
 	Dimensions:
-		Formula x(x, n) = x + 8 * n using lol[x] as x and using lol[k] as n,
+		Formula x(x, n) = x + 3 * n using lol[x] as x and using lol[k] as n,
 		Formula y(x, y) = x + y * 5 using lol[y] as x and using lol[x] as y
 }
 

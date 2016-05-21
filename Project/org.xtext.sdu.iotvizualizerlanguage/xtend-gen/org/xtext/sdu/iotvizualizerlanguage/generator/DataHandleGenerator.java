@@ -10,6 +10,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.xtext.sdu.formularzlanguage.formular.Formula;
@@ -154,7 +155,9 @@ public class DataHandleGenerator extends AbstractGenerator {
       return _builder.toString();
     } else {
       if ((source instanceof GetEndPoint)) {
-        return "Are you American/Insane";
+        String _name_1 = ((GetEndPoint)source).getName();
+        String _plus = ((("[row[" + dimension) + "]  for row in endpoint.EndPoint") + _name_1);
+        return (_plus + "().getData()]");
       }
     }
     return null;
@@ -276,13 +279,26 @@ public class DataHandleGenerator extends AbstractGenerator {
       EList<String> _steps = select.getSteps();
       for(final String step : _steps) {
         _builder.append("\t\t");
-        _builder.append("self.steps.append(");
-        _builder.append(step, "\t\t");
-        _builder.append(")");
+        String _appendStep = this.appendStep(step);
+        _builder.append(_appendStep, "\t\t");
         _builder.newLineIfNotEmpty();
       }
     }
     return _builder;
+  }
+  
+  public String appendStep(final String step) {
+    try {
+      Integer.parseInt(step);
+      return (("self.steps.append(" + step) + ")");
+    } catch (final Throwable _t) {
+      if (_t instanceof NumberFormatException) {
+        final NumberFormatException e = (NumberFormatException)_t;
+        return (("self.steps.append(\"" + step) + "\")");
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
   
   public CharSequence compileAbstractSchemaParser() {
