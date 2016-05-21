@@ -75,7 +75,7 @@ public class VizualizerGenerator extends AbstractGenerator {
         fsa.generateFile(_plus_1, _compileTemplateHTML);
       }
     }
-    this.postcompile.postcompile(fsa, pageNames);
+    this.postcompile.doGenerate(resource, fsa, context, pageNames);
   }
   
   public CharSequence compileTemplateHTML(final Page p) {
@@ -204,9 +204,12 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.append("<div class=\"tile-content chart\" id=\"");
     String _name = graph.getName();
     _builder.append(_name, "\t");
-    _builder.append("\" data-graph-content=\"{{graph_data}}\" onclick=\"repaint");
+    _builder.append("\" data-graph-content=\"{{graph_data_");
     String _name_1 = graph.getName();
     _builder.append(_name_1, "\t");
+    _builder.append("}}\" onclick=\"repaint");
+    String _name_2 = graph.getName();
+    _builder.append(_name_2, "\t");
     _builder.append("()\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -214,8 +217,8 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<span class=\"tile-label\">");
-    String _name_2 = graph.getName();
-    _builder.append(_name_2, "\t");
+    String _name_3 = graph.getName();
+    _builder.append(_name_3, "\t");
     _builder.append("<span>");
     _builder.newLineIfNotEmpty();
     _builder.append("</div>");
@@ -224,8 +227,8 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("function paint");
-    String _name_3 = graph.getName();
-    _builder.append(_name_3, "\t\t\t");
+    String _name_4 = graph.getName();
+    _builder.append(_name_4, "\t\t\t");
     _builder.append("(){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -233,14 +236,14 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("var width = $(\"#");
-    String _name_4 = graph.getName();
-    _builder.append(_name_4, "\t\t\t");
+    String _name_5 = graph.getName();
+    _builder.append(_name_5, "\t\t\t");
     _builder.append("\").parent().width();");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("var height = $(\"#");
-    String _name_5 = graph.getName();
-    _builder.append(_name_5, "\t\t\t");
+    String _name_6 = graph.getName();
+    _builder.append(_name_6, "\t\t\t");
     _builder.append("\").parent().height();");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -318,8 +321,8 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("var svg = d3.select(\"#");
-    String _name_6 = graph.getName();
-    _builder.append(_name_6, "\t\t\t");
+    String _name_7 = graph.getName();
+    _builder.append(_name_7, "\t\t\t");
     _builder.append("\").append(\"svg\")");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t    ");
@@ -340,8 +343,8 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("csv = $(\"#");
-    String _name_7 = graph.getName();
-    _builder.append(_name_7, "\t\t\t");
+    String _name_8 = graph.getName();
+    _builder.append(_name_8, "\t\t\t");
     _builder.append("\").data().graphContent.split(\"\'\").join(\"\").split(\", \").join(\"\\n\").replace(\'[\', \'\').replace(\']\',\'\').split(\"\\\\n\").join(\"\");");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -480,14 +483,14 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("function repaint");
-    String _name_8 = graph.getName();
-    _builder.append(_name_8, "\t\t");
+    String _name_9 = graph.getName();
+    _builder.append(_name_9, "\t\t");
     _builder.append("(){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("var divObj = $(\"#");
-    String _name_9 = graph.getName();
-    _builder.append(_name_9, "\t\t\t");
+    String _name_10 = graph.getName();
+    _builder.append(_name_10, "\t\t\t");
     _builder.append("\").parent()[0];");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -513,14 +516,14 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("$(\"#");
-    String _name_10 = graph.getName();
-    _builder.append(_name_10, "\t\t\t");
+    String _name_11 = graph.getName();
+    _builder.append(_name_11, "\t\t\t");
     _builder.append("\")[0].innerHTML =\'\';");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("paint");
-    String _name_11 = graph.getName();
-    _builder.append(_name_11, "\t\t\t");
+    String _name_12 = graph.getName();
+    _builder.append(_name_12, "\t\t\t");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -530,8 +533,8 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("paint");
-    String _name_12 = graph.getName();
-    _builder.append(_name_12, "\t\t");
+    String _name_13 = graph.getName();
+    _builder.append(_name_13, "\t\t");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
     _builder.append("</script>");

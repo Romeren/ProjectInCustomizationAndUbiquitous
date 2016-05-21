@@ -47,7 +47,7 @@ class VizualizerGenerator extends AbstractGenerator {
 			
     	}
     	
-    	postcompile.postcompile(fsa, pageNames)
+    	postcompile.doGenerate(resource, fsa, context, pageNames)
 	}
 	
 	
@@ -93,7 +93,7 @@ class VizualizerGenerator extends AbstractGenerator {
 	def dispatch compile(Graph graph, CharSequence colorClass)
 	'''
 	<div class="tile-large «colorClass» fg-white">
-		<div class="tile-content chart" id="«graph.name»" data-graph-content="{{graph_data}}" onclick="repaint«graph.name»()">
+		<div class="tile-content chart" id="«graph.name»" data-graph-content="{{graph_data_«graph.name»}}" onclick="repaint«graph.name»()">
 		</div>
 		<span class="tile-label">«graph.name»<span>
 	</div>

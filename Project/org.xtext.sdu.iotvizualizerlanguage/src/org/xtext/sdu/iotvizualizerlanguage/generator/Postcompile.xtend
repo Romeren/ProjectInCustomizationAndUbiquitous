@@ -2,14 +2,19 @@ package org.xtext.sdu.iotvizualizerlanguage.generator
 
 import java.util.List
 import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.generator.IGeneratorContext
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph
 
-class Postcompile {
+class Postcompile{
 	
-	def postcompile(IFileSystemAccess2 fsa, List<String> pageNames){
-		
+	def doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context, List<String> pageNames) {
+
+
 		fsa.generateFile(
 			"pages\\views.py",
-			compileViews(pageNames)
+			compileViews(input)
 		)
 		
 		fsa.generateFile(
@@ -20,21 +25,23 @@ class Postcompile {
 	}
 	
 	
-	def compileViews(List<String> pageNames)
+	def compileViews(Resource input)
 	'''
 	from django.shortcuts import render
 	from django.http import HttpResponse
 	from django.template import loader
 	from django.template import Context
-	
-	«FOR f:pageNames»
-	def «f»(request):
-		template = loader.get_template('«f».html');
+	from DataHandle.Datasources.controller import DatasourceController
+	«FOR page : input.allContents.toIterable.filter(Page)»
+	def «page.name»(request):
+		template = loader.get_template('«page.name».html');
 		
-		with open('templates/data.csv') as f:
-			content = f.readlines()
+		contentMap = {}
+		«FOR graph : page.eAllContents.toIterable.filter(Graph)»
+		contentMap['graph_data_«graph.name»'] = DatasourceController().datasource_«graph.source.name»()
+		«ENDFOR»
 	
-		context = Context({'graph_data' : content})
+		context = Context(contentMap)
 		return HttpResponse(template.render(context))
 	
 	«ENDFOR»
@@ -88,5 +95,6 @@ class Postcompile {
 	   url(r'^«pageName»', views.«pageName», name='«pageName»'),
 	'''
 	
+
 	
 }

@@ -1,13 +1,22 @@
 package org.xtext.sdu.iotvizualizerlanguage.generator;
 
+import com.google.common.collect.Iterables;
 import java.util.List;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
 
 @SuppressWarnings("all")
 public class Postcompile {
-  public void postcompile(final IFileSystemAccess2 fsa, final List<String> pageNames) {
-    CharSequence _compileViews = this.compileViews(pageNames);
+  public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context, final List<String> pageNames) {
+    CharSequence _compileViews = this.compileViews(input);
     fsa.generateFile(
       "pages\\views.py", _compileViews);
     CharSequence _compileUrls = this.compileUrls(pageNames);
@@ -15,7 +24,7 @@ public class Postcompile {
       "pages\\urls.py", _compileUrls);
   }
   
-  public CharSequence compileViews(final List<String> pageNames) {
+  public CharSequence compileViews(final Resource input) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("from django.shortcuts import render");
     _builder.newLine();
@@ -25,29 +34,49 @@ public class Postcompile {
     _builder.newLine();
     _builder.append("from django.template import Context");
     _builder.newLine();
+    _builder.append("from DataHandle.Datasources.controller import DatasourceController");
     _builder.newLine();
     {
-      for(final String f : pageNames) {
+      TreeIterator<EObject> _allContents = input.getAllContents();
+      Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_allContents);
+      Iterable<Page> _filter = Iterables.<Page>filter(_iterable, Page.class);
+      for(final Page page : _filter) {
         _builder.append("def ");
-        _builder.append(f, "");
+        String _name = page.getName();
+        _builder.append(_name, "");
         _builder.append("(request):");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("template = loader.get_template(\'");
-        _builder.append(f, "\t");
+        String _name_1 = page.getName();
+        _builder.append(_name_1, "\t");
         _builder.append(".html\');");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("with open(\'templates/data.csv\') as f:");
+        _builder.append("contentMap = {}");
         _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("content = f.readlines()");
-        _builder.newLine();
+        {
+          TreeIterator<EObject> _eAllContents = page.eAllContents();
+          Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(_eAllContents);
+          Iterable<Graph> _filter_1 = Iterables.<Graph>filter(_iterable_1, Graph.class);
+          for(final Graph graph : _filter_1) {
+            _builder.append("\t");
+            _builder.append("contentMap[\'graph_data_");
+            String _name_2 = graph.getName();
+            _builder.append(_name_2, "\t");
+            _builder.append("\'] = DatasourceController().datasource_");
+            Datasource _source = graph.getSource();
+            String _name_3 = _source.getName();
+            _builder.append(_name_3, "\t");
+            _builder.append("()");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("context = Context({\'graph_data\' : content})");
+        _builder.append("context = Context(contentMap)");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("return HttpResponse(template.render(context))");
