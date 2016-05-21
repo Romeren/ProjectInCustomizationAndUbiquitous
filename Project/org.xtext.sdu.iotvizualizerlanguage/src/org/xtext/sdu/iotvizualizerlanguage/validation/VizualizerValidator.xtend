@@ -3,11 +3,11 @@
  */
 package org.xtext.sdu.iotvizualizerlanguage.validation
 
-import javax.xml.ws.Endpoint
 import org.eclipse.xtext.validation.Check
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint
 
 /**
  * This class contains custom validation rules. 
@@ -31,19 +31,17 @@ class VizualizerValidator extends AbstractVizualizerValidator {
 	@Check
 	def checkSourceHasDimension(DimensionSelector dimensionSelector) {
 		if(!hasDimension(dimensionSelector.source, dimensionSelector.selectVar.name)) {
-			error("Source does not contain the dimensional Variable you are refering to",
+			error("Source does not contain the dimensional Variable you are referring to",
 				dimensionSelector.selectVar,
 				dimensionSelector.selectVar.eClass.getEStructuralFeature(0)
 			)
 		}
 	}
 	
-	@Check
-	def dispatch hasDimension(Endpoint endpoint, String id) {
+	def dispatch hasDimension(GetEndPoint endpoint, String id) {
 		return true;
 	}
 	
-	@Check
 	def dispatch hasDimension(Datasource datasource, String id) {
 		return datasource.dimensions.map[dimension | dimension.name.name].contains(id)	
 	}

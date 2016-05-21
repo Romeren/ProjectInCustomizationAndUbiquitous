@@ -5,7 +5,6 @@ package org.xtext.sdu.iotvizualizerlanguage.validation;
 
 import java.util.Arrays;
 import java.util.List;
-import javax.xml.ws.Endpoint;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -18,6 +17,7 @@ import org.xtext.sdu.iotvizualizerlanguage.validation.AbstractVizualizerValidato
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 
@@ -61,16 +61,14 @@ public class VizualizerValidator extends AbstractVizualizerValidator {
       NoQuotesString _selectVar_2 = dimensionSelector.getSelectVar();
       EClass _eClass = _selectVar_2.eClass();
       EStructuralFeature _eStructuralFeature = _eClass.getEStructuralFeature(0);
-      this.error("Source does not contain the dimensional Variable you are refering to", _selectVar_1, _eStructuralFeature);
+      this.error("Source does not contain the dimensional Variable you are referring to", _selectVar_1, _eStructuralFeature);
     }
   }
   
-  @Check
-  protected boolean _hasDimension(final Endpoint endpoint, final String id) {
+  protected boolean _hasDimension(final GetEndPoint endpoint, final String id) {
     return true;
   }
   
-  @Check
   protected boolean _hasDimension(final Datasource datasource, final String id) {
     EList<Dimension> _dimensions = datasource.getDimensions();
     final Function1<Dimension, String> _function = (Dimension dimension) -> {
@@ -81,14 +79,14 @@ public class VizualizerValidator extends AbstractVizualizerValidator {
     return _map.contains(id);
   }
   
-  public boolean hasDimension(final Object datasource, final String id) {
-    if (datasource instanceof Datasource) {
-      return _hasDimension((Datasource)datasource, id);
-    } else if (datasource instanceof Endpoint) {
-      return _hasDimension((Endpoint)datasource, id);
+  public boolean hasDimension(final Source endpoint, final String id) {
+    if (endpoint instanceof GetEndPoint) {
+      return _hasDimension((GetEndPoint)endpoint, id);
+    } else if (endpoint instanceof Datasource) {
+      return _hasDimension((Datasource)endpoint, id);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(datasource, id).toString());
+        Arrays.<Object>asList(endpoint, id).toString());
     }
   }
 }

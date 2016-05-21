@@ -15,13 +15,13 @@ Page pageOne
 
 Datasource a {
 	Dimensions:
-		Formula x(x, n) = x + n using lol[x] as x and using lol[x] as n,
-		Formula y(x, y) = x + y * 6 using lol[y] as x and using lol[x] as y
+		Formula x(x, n) = x + 7 * n using lol[x] as x and using lol[k] as n,
+		Formula y(x, y) = x + y * 5 using lol[y] as x and using lol[x] as y
 }
 
 Datasource c {
 	Dimensions:
-		Formula g(z) = z * 6 using a[x] as z
+		Formula g(z) = z * 6 / 8 using a[y] as z
 }
 
 

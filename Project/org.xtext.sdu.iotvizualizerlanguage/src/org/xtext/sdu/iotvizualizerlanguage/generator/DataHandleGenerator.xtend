@@ -1,31 +1,72 @@
 package org.xtext.sdu.iotvizualizerlanguage.generator
 
-import org.eclipse.xtext.generator.AbstractGenerator
+import javax.xml.ws.Endpoint
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import org.xtext.sdu.formularzlanguage.formular.Formula
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source
 
-class EndpointGenerator extends AbstractGenerator {
+class DataHandleGenerator extends AbstractGenerator {
 	
 	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		fsa.generateFile("DataHandle/Selectors/AbstractSelector", compileAbstractSelector);
-		fsa.generateFile("DataHandle/SchemaParsers/AbstractSchemaParser", compileAbstractSchemaParser);
-		fsa.generateFile("DataHandle/EndPoints/AbstractEndpoint",compileAbstractEndpoint);
+		println("I MAKE FILES!")
 		
+		fsa.generateFile("DataHandle/Selectors/AbstractSelector.py", compileAbstractSelector);
+		fsa.generateFile("DataHandle/SchemaParsers/AbstractSchemaParser.py", compileAbstractSchemaParser);
+		fsa.generateFile("DataHandle/EndPoints/AbstractEndpoint.py",compileAbstractEndpoint);
+		fsa.generateFile("DataHandle/Datasources/Controller.py", compileDatasourceController(input))
 		
 		for(p: input.allContents.toIterable.filter(EndPoint)) {
-			fsa.generateFile("DataHandle/SchemaParsers/SchemaParser"+p.parser.name, p.compile);
+			fsa.generateFile("DataHandle/SchemaParsers/SchemaParser" + p.parser.name + ".py", p.compile);
 			for(s : p.parser.selectors){
-				fsa.generateFile("DataHandle/Selectors/Selector" + s.name, s.compile);
+				fsa.generateFile("DataHandle/Selectors/Selector" + s.name + ".py", s.compile);
 			}
-			fsa.generateFile("DataHandle/EndPoints/EndPoint" + p.name, p.compile);
+			fsa.generateFile("DataHandle/EndPoints/EndPoint" + p.name + ".py", p.compile);
 		}
 	}
+	
+	// 
+	def compileDatasourceController(Resource resource)
+	'''
+	import numpy as np
+	import DataHandle.Endpoints as endpoint
+	
+	class DatasourceController():
+		
+		«FOR datasource : resource.allContents.toIterable.filter(Datasource)»
+		def datasource_«datasource.name»(self):
+			result = {}
+			«FOR dimension : datasource.dimensions»
+			«FOR selector : dimension.sourceSelectors»
+			input_«selector.name» = «selector.source.getDimensionFromSource(selector.selectVar.name)»
+			«ENDFOR»
+			result.put("dimension_«dimension.name.name»" : «dimension.name.pythonFormula»)
+			«ENDFOR»
+			return result
+			
+		«ENDFOR»	
+	'''
+	
+	def getDimensionFromSource(Source source, String dimension) {
+		if(source instanceof Datasource) {
+			return "nonsense"
+		} else if(source instanceof GetEndPoint) {
+			return "Are you American/Insane"
+		}
+	}
+	
+	def getPythonFormula(Formula formula) {
+		return "x + x"
+	}
+
 	
 	def compileAbstractEndpoint()
 	'''
