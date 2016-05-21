@@ -59,7 +59,7 @@ class DataHandleGenerator extends AbstractGenerator {
 		if(source instanceof Datasource) {
 			return "nonsense"
 		} else if(source instanceof GetEndPoint) {
-			return "Are you American/Insane"
+			return "[row[" + dimension + "]  for row in endpoint.EndPoint" + source.name + "().getData()]"
 		}
 	}
 	
@@ -116,9 +116,17 @@ class DataHandleGenerator extends AbstractGenerator {
 		def __init__(self):
 			self.steps = []
 			«FOR step: select.steps»
-			self.steps.append(«step»)
+			«step.appendStep()»
 			«ENDFOR»
 	'''
+	def appendStep(String step){
+		try{
+			Integer.parseInt(step)
+			return "self.steps.append("+step+")";
+		} catch (NumberFormatException e) {  
+	         return 'self.steps.append("'+step+'")';  
+        }
+	}
 	
 	def compileAbstractSchemaParser()
 	'''
