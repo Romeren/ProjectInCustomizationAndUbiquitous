@@ -31,7 +31,7 @@ class VizualizerGenerator extends AbstractGenerator {
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		precompile.precompile(resource, fsa);
 		
-		apigen.doGenerate(resource, fsa, context);
+		//apigen.doGenerate(resource, fsa, context);
 		dataHandleGenerator.doGenerate(resource, fsa, context);
 		
 		var List<String> pageNames = newArrayList	

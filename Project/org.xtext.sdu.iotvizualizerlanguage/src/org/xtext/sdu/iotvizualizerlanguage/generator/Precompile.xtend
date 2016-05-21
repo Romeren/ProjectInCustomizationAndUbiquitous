@@ -227,7 +227,7 @@ class Precompile {
 	    url(r'^', include('pages.urls')),
 	    url(r'^admin/', admin.site.urls),
 	    url(r'^',include('api.urls')),
-	    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')) #AND here
+	#    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')) #AND here
 	]
 	'''
 	
