@@ -13,13 +13,13 @@ class Postcompile{
 
 
 		fsa.generateFile(
-			"pages\\views.py",
+			"pages/views.py",
 			compileViews(input)
 		)
 		
 		fsa.generateFile(
 //			"webserver\\urls.py",
-			"pages\\urls.py",
+			"pages/urls.py",
 			compileUrls(pageNames)
 		)	
 	}

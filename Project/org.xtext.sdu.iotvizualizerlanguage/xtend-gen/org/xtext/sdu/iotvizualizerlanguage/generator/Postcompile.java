@@ -18,10 +18,10 @@ public class Postcompile {
   public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context, final List<String> pageNames) {
     CharSequence _compileViews = this.compileViews(input);
     fsa.generateFile(
-      "pages\\views.py", _compileViews);
+      "pages/views.py", _compileViews);
     CharSequence _compileUrls = this.compileUrls(pageNames);
     fsa.generateFile(
-      "pages\\urls.py", _compileUrls);
+      "pages/urls.py", _compileUrls);
   }
   
   public CharSequence compileViews(final Resource input) {
