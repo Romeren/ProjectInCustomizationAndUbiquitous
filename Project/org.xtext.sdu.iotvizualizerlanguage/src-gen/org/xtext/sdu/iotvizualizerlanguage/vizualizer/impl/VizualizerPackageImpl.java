@@ -15,11 +15,13 @@ import org.xtext.sdu.formularzlanguage.formular.FormularPackage;
 
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
@@ -86,6 +88,20 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * @generated
    */
   private EClass dimensionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass dimensionSelectorEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass noQuotesStringEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -354,19 +370,9 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDatasource_Source()
-  {
-    return (EReference)datasourceEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getDatasource_Dimensions()
   {
-    return (EReference)datasourceEClass.getEStructuralFeatures().get(1);
+    return (EReference)datasourceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -384,9 +390,9 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDimension_Name()
+  public EReference getDimension_Name()
   {
-    return (EAttribute)dimensionEClass.getEStructuralFeatures().get(0);
+    return (EReference)dimensionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -394,9 +400,69 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDimension_Formula()
+  public EReference getDimension_SourceSelectors()
   {
     return (EReference)dimensionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDimensionSelector()
+  {
+    return dimensionSelectorEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDimensionSelector_Source()
+  {
+    return (EReference)dimensionSelectorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDimensionSelector_SelectVar()
+  {
+    return (EReference)dimensionSelectorEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDimensionSelector_Name()
+  {
+    return (EAttribute)dimensionSelectorEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNoQuotesString()
+  {
+    return noQuotesStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNoQuotesString_Name()
+  {
+    return (EAttribute)noQuotesStringEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -638,12 +704,19 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     createEReference(graphEClass, GRAPH__SOURCE);
 
     datasourceEClass = createEClass(DATASOURCE);
-    createEReference(datasourceEClass, DATASOURCE__SOURCE);
     createEReference(datasourceEClass, DATASOURCE__DIMENSIONS);
 
     dimensionEClass = createEClass(DIMENSION);
-    createEAttribute(dimensionEClass, DIMENSION__NAME);
-    createEReference(dimensionEClass, DIMENSION__FORMULA);
+    createEReference(dimensionEClass, DIMENSION__NAME);
+    createEReference(dimensionEClass, DIMENSION__SOURCE_SELECTORS);
+
+    dimensionSelectorEClass = createEClass(DIMENSION_SELECTOR);
+    createEReference(dimensionSelectorEClass, DIMENSION_SELECTOR__SOURCE);
+    createEReference(dimensionSelectorEClass, DIMENSION_SELECTOR__SELECT_VAR);
+    createEAttribute(dimensionSelectorEClass, DIMENSION_SELECTOR__NAME);
+
+    noQuotesStringEClass = createEClass(NO_QUOTES_STRING);
+    createEAttribute(noQuotesStringEClass, NO_QUOTES_STRING__NAME);
 
     sourceEClass = createEClass(SOURCE);
     createEAttribute(sourceEClass, SOURCE__NAME);
@@ -733,12 +806,19 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     initEReference(getGraph_Source(), this.getDatasource(), null, "source", null, 0, 1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(datasourceEClass, Datasource.class, "Datasource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDatasource_Source(), this.getSource(), null, "source", null, 0, 1, Datasource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDatasource_Dimensions(), this.getDimension(), null, "dimensions", null, 0, -1, Datasource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dimensionEClass, Dimension.class, "Dimension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDimension_Name(), ecorePackage.getEString(), "name", null, 0, 1, Dimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getDimension_Formula(), theFormularPackage.getFormula(), null, "formula", null, 0, 1, Dimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDimension_Name(), theFormularPackage.getFormula(), null, "name", null, 0, 1, Dimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDimension_SourceSelectors(), this.getDimensionSelector(), null, "sourceSelectors", null, 0, -1, Dimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dimensionSelectorEClass, DimensionSelector.class, "DimensionSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDimensionSelector_Source(), this.getSource(), null, "source", null, 0, 1, DimensionSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDimensionSelector_SelectVar(), this.getNoQuotesString(), null, "selectVar", null, 0, 1, DimensionSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDimensionSelector_Name(), ecorePackage.getEString(), "name", null, 0, 1, DimensionSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(noQuotesStringEClass, NoQuotesString.class, "NoQuotesString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNoQuotesString_Name(), ecorePackage.getEString(), "name", null, 0, 1, NoQuotesString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(sourceEClass, Source.class, "Source", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSource_Name(), ecorePackage.getEString(), "name", null, 0, 1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -22,10 +22,12 @@ import org.xtext.sdu.formularzlanguage.serializer.FormularSemanticSequencer;
 import org.xtext.sdu.iotvizualizerlanguage.services.VizualizerGrammarAccess;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
@@ -70,6 +72,9 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 			case VizualizerPackage.DIMENSION:
 				sequence_Dimension(context, (Dimension) semanticObject); 
 				return; 
+			case VizualizerPackage.DIMENSION_SELECTOR:
+				sequence_DimensionSelector(context, (DimensionSelector) semanticObject); 
+				return; 
 			case VizualizerPackage.GET_END_POINT:
 				sequence_GetEndPoint(context, (GetEndPoint) semanticObject); 
 				return; 
@@ -81,6 +86,9 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 				return; 
 			case VizualizerPackage.LINK:
 				sequence_Link(context, (Link) semanticObject); 
+				return; 
+			case VizualizerPackage.NO_QUOTES_STRING:
+				sequence_NoQuotesString(context, (NoQuotesString) semanticObject); 
 				return; 
 			case VizualizerPackage.PAGE:
 				sequence_Page(context, (Page) semanticObject); 
@@ -108,7 +116,7 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	 *     Source returns Datasource
 	 *
 	 * Constraint:
-	 *     (name=ID source=[Source|ID] dimensions+=Dimension dimensions+=Dimension*)
+	 *     (name=ID dimensions+=Dimension dimensions+=Dimension*)
 	 */
 	protected void sequence_Datasource(ISerializationContext context, Datasource semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -117,22 +125,37 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     DimensionSelector returns DimensionSelector
+	 *
+	 * Constraint:
+	 *     (source=[Source|ID] selectVar=NoQuotesString name=ID)
+	 */
+	protected void sequence_DimensionSelector(ISerializationContext context, DimensionSelector semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.DIMENSION_SELECTOR__SOURCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.DIMENSION_SELECTOR__SOURCE));
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.DIMENSION_SELECTOR__SELECT_VAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.DIMENSION_SELECTOR__SELECT_VAR));
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.DIMENSION_SELECTOR__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.DIMENSION_SELECTOR__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDimensionSelectorAccess().getSourceSourceIDTerminalRuleCall_1_0_1(), semanticObject.getSource());
+		feeder.accept(grammarAccess.getDimensionSelectorAccess().getSelectVarNoQuotesStringParserRuleCall_3_0(), semanticObject.getSelectVar());
+		feeder.accept(grammarAccess.getDimensionSelectorAccess().getNameIDTerminalRuleCall_6_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Dimension returns Dimension
 	 *
 	 * Constraint:
-	 *     (name=ID formula=Formula)
+	 *     (name=Formula sourceSelectors+=DimensionSelector sourceSelectors+=DimensionSelector*)
 	 */
 	protected void sequence_Dimension(ISerializationContext context, Dimension semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.DIMENSION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.DIMENSION__NAME));
-			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.DIMENSION__FORMULA) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.DIMENSION__FORMULA));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDimensionAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getDimensionAccess().getFormulaFormulaParserRuleCall_4_0(), semanticObject.getFormula());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -211,6 +234,24 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLinkAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getLinkAccess().getPagePageIDTerminalRuleCall_3_0_1(), semanticObject.getPage());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     NoQuotesString returns NoQuotesString
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_NoQuotesString(ISerializationContext context, NoQuotesString semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.NO_QUOTES_STRING__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.NO_QUOTES_STRING__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getNoQuotesStringAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

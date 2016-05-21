@@ -87,6 +87,24 @@ public interface VizualizerFactory extends EFactory
   Dimension createDimension();
 
   /**
+   * Returns a new object of class '<em>Dimension Selector</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dimension Selector</em>'.
+   * @generated
+   */
+  DimensionSelector createDimensionSelector();
+
+  /**
+   * Returns a new object of class '<em>No Quotes String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>No Quotes String</em>'.
+   * @generated
+   */
+  NoQuotesString createNoQuotesString();
+
+  /**
    * Returns a new object of class '<em>Source</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

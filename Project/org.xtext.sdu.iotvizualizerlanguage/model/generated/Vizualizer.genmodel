@@ -30,12 +30,19 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//Graph/source"/>
     </genClasses>
     <genClasses ecoreClass="Vizualizer.ecore#//Datasource">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//Datasource/source"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//Datasource/dimensions"/>
     </genClasses>
     <genClasses ecoreClass="Vizualizer.ecore#//Dimension">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//Dimension/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//Dimension/formula"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//Dimension/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//Dimension/sourceSelectors"/>
+    </genClasses>
+    <genClasses ecoreClass="Vizualizer.ecore#//DimensionSelector">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//DimensionSelector/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vizualizer.ecore#//DimensionSelector/selectVar"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//DimensionSelector/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Vizualizer.ecore#//NoQuotesString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//NoQuotesString/name"/>
     </genClasses>
     <genClasses ecoreClass="Vizualizer.ecore#//Source">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vizualizer.ecore#//Source/name"/>

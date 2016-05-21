@@ -397,37 +397,20 @@ ruleDatasource returns [EObject current=null]
 		{
 			newLeafNode(otherlv_2, grammarAccess.getDatasourceAccess().getLeftCurlyBracketKeyword_2());
 		}
-		otherlv_3='Source'
+		otherlv_3='Dimensions'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getDatasourceAccess().getSourceKeyword_3());
+			newLeafNode(otherlv_3, grammarAccess.getDatasourceAccess().getDimensionsKeyword_3());
+		}
+		otherlv_4=':'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getDatasourceAccess().getColonKeyword_4());
 		}
 		(
 			(
 				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getDatasourceRule());
-					}
+					newCompositeNode(grammarAccess.getDatasourceAccess().getDimensionsDimensionParserRuleCall_5_0());
 				}
-				otherlv_4=RULE_ID
-				{
-					newLeafNode(otherlv_4, grammarAccess.getDatasourceAccess().getSourceSourceCrossReference_4_0());
-				}
-			)
-		)
-		otherlv_5='Dimensions'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getDatasourceAccess().getDimensionsKeyword_5());
-		}
-		otherlv_6=':'
-		{
-			newLeafNode(otherlv_6, grammarAccess.getDatasourceAccess().getColonKeyword_6());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getDatasourceAccess().getDimensionsDimensionParserRuleCall_7_0());
-				}
-				lv_dimensions_7_0=ruleDimension
+				lv_dimensions_5_0=ruleDimension
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getDatasourceRule());
@@ -435,23 +418,23 @@ ruleDatasource returns [EObject current=null]
 					add(
 						$current,
 						"dimensions",
-						lv_dimensions_7_0,
+						lv_dimensions_5_0,
 						"org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Dimension");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
-			otherlv_8=','
+			otherlv_6=','
 			{
-				newLeafNode(otherlv_8, grammarAccess.getDatasourceAccess().getCommaKeyword_8_0());
+				newLeafNode(otherlv_6, grammarAccess.getDatasourceAccess().getCommaKeyword_6_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getDatasourceAccess().getDimensionsDimensionParserRuleCall_8_1_0());
+						newCompositeNode(grammarAccess.getDatasourceAccess().getDimensionsDimensionParserRuleCall_6_1_0());
 					}
-					lv_dimensions_9_0=ruleDimension
+					lv_dimensions_7_0=ruleDimension
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getDatasourceRule());
@@ -459,16 +442,16 @@ ruleDatasource returns [EObject current=null]
 						add(
 							$current,
 							"dimensions",
-							lv_dimensions_9_0,
+							lv_dimensions_7_0,
 							"org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Dimension");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)*
-		otherlv_10='}'
+		otherlv_8='}'
 		{
-			newLeafNode(otherlv_10, grammarAccess.getDatasourceAccess().getRightCurlyBracketKeyword_9());
+			newLeafNode(otherlv_8, grammarAccess.getDatasourceAccess().getRightCurlyBracketKeyword_7());
 		}
 	)
 ;
@@ -489,54 +472,192 @@ ruleDimension returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='Dimension'
+		otherlv_0='Formula'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getDimensionAccess().getDimensionKeyword_0());
-		}
-		(
-			(
-				lv_name_1_0=RULE_ID
-				{
-					newLeafNode(lv_name_1_0, grammarAccess.getDimensionAccess().getNameIDTerminalRuleCall_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getDimensionRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_1_0,
-						"org.eclipse.xtext.common.Terminals.ID");
-				}
-			)
-		)
-		otherlv_2='as'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getDimensionAccess().getAsKeyword_2());
-		}
-		otherlv_3='Formula'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getDimensionAccess().getFormulaKeyword_3());
+			newLeafNode(otherlv_0, grammarAccess.getDimensionAccess().getFormulaKeyword_0());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getDimensionAccess().getFormulaFormulaParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getDimensionAccess().getNameFormulaParserRuleCall_1_0());
 				}
-				lv_formula_4_0=ruleFormula
+				lv_name_1_0=ruleFormula
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getDimensionRule());
 					}
 					set(
 						$current,
-						"formula",
-						lv_formula_4_0,
+						"name",
+						lv_name_1_0,
 						"org.xtext.sdu.formularzlanguage.Formular.Formula");
 					afterParserOrEnumRuleCall();
 				}
 			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDimensionAccess().getSourceSelectorsDimensionSelectorParserRuleCall_2_0());
+				}
+				lv_sourceSelectors_2_0=ruleDimensionSelector
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDimensionRule());
+					}
+					add(
+						$current,
+						"sourceSelectors",
+						lv_sourceSelectors_2_0,
+						"org.xtext.sdu.iotvizualizerlanguage.Vizualizer.DimensionSelector");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_3='and'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getDimensionAccess().getAndKeyword_3_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getDimensionAccess().getSourceSelectorsDimensionSelectorParserRuleCall_3_1_0());
+					}
+					lv_sourceSelectors_4_0=ruleDimensionSelector
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getDimensionRule());
+						}
+						add(
+							$current,
+							"sourceSelectors",
+							lv_sourceSelectors_4_0,
+							"org.xtext.sdu.iotvizualizerlanguage.Vizualizer.DimensionSelector");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+	)
+;
+
+// Entry rule entryRuleDimensionSelector
+entryRuleDimensionSelector returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getDimensionSelectorRule()); }
+	iv_ruleDimensionSelector=ruleDimensionSelector
+	{ $current=$iv_ruleDimensionSelector.current; }
+	EOF;
+
+// Rule DimensionSelector
+ruleDimensionSelector returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='using'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getDimensionSelectorAccess().getUsingKeyword_0());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getDimensionSelectorRule());
+					}
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getDimensionSelectorAccess().getSourceSourceCrossReference_1_0());
+				}
+			)
+		)
+		otherlv_2='['
+		{
+			newLeafNode(otherlv_2, grammarAccess.getDimensionSelectorAccess().getLeftSquareBracketKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDimensionSelectorAccess().getSelectVarNoQuotesStringParserRuleCall_3_0());
+				}
+				lv_selectVar_3_0=ruleNoQuotesString
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDimensionSelectorRule());
+					}
+					set(
+						$current,
+						"selectVar",
+						lv_selectVar_3_0,
+						"org.xtext.sdu.iotvizualizerlanguage.Vizualizer.NoQuotesString");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_4=']'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getDimensionSelectorAccess().getRightSquareBracketKeyword_4());
+		}
+		otherlv_5='as'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getDimensionSelectorAccess().getAsKeyword_5());
+		}
+		(
+			(
+				lv_name_6_0=RULE_ID
+				{
+					newLeafNode(lv_name_6_0, grammarAccess.getDimensionSelectorAccess().getNameIDTerminalRuleCall_6_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getDimensionSelectorRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_6_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleNoQuotesString
+entryRuleNoQuotesString returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getNoQuotesStringRule()); }
+	iv_ruleNoQuotesString=ruleNoQuotesString
+	{ $current=$iv_ruleNoQuotesString.current; }
+	EOF;
+
+// Rule NoQuotesString
+ruleNoQuotesString returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_name_0_0=RULE_ID
+			{
+				newLeafNode(lv_name_0_0, grammarAccess.getNoQuotesStringAccess().getNameIDTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getNoQuotesStringRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"name",
+					lv_name_0_0,
+					"org.eclipse.xtext.common.Terminals.ID");
+			}
 		)
 	)
 ;
@@ -946,16 +1067,20 @@ ruleSchemaParser returns [EObject current=null]
 		{
 			newLeafNode(otherlv_2, grammarAccess.getSchemaParserAccess().getLeftCurlyBracketKeyword_2());
 		}
-		otherlv_3='SchemaType = '
+		otherlv_3='SchemaType'
 		{
 			newLeafNode(otherlv_3, grammarAccess.getSchemaParserAccess().getSchemaTypeKeyword_3());
+		}
+		otherlv_4='='
+		{
+			newLeafNode(otherlv_4, grammarAccess.getSchemaParserAccess().getEqualsSignKeyword_4());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getSchemaParserAccess().getSchemaTypeSchemaTypeEnumRuleCall_4_0());
+					newCompositeNode(grammarAccess.getSchemaParserAccess().getSchemaTypeSchemaTypeEnumRuleCall_5_0());
 				}
-				lv_schemaType_4_0=ruleSchemaType
+				lv_schemaType_5_0=ruleSchemaType
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getSchemaParserRule());
@@ -963,7 +1088,7 @@ ruleSchemaParser returns [EObject current=null]
 					set(
 						$current,
 						"schemaType",
-						lv_schemaType_4_0,
+						lv_schemaType_5_0,
 						"org.xtext.sdu.iotvizualizerlanguage.Vizualizer.SchemaType");
 					afterParserOrEnumRuleCall();
 				}
@@ -972,9 +1097,9 @@ ruleSchemaParser returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getSchemaParserAccess().getSelectorsSelectorParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getSchemaParserAccess().getSelectorsSelectorParserRuleCall_6_0());
 				}
-				lv_selectors_5_0=ruleSelector
+				lv_selectors_6_0=ruleSelector
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getSchemaParserRule());
@@ -982,15 +1107,15 @@ ruleSchemaParser returns [EObject current=null]
 					add(
 						$current,
 						"selectors",
-						lv_selectors_5_0,
+						lv_selectors_6_0,
 						"org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Selector");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)+
-		otherlv_6='}'
+		otherlv_7='}'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getSchemaParserAccess().getRightCurlyBracketKeyword_6());
+			newLeafNode(otherlv_7, grammarAccess.getSchemaParserAccess().getRightCurlyBracketKeyword_7());
 		}
 	)
 ;

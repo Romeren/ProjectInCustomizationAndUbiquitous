@@ -251,7 +251,7 @@ public interface VizualizerPackage extends EPackage
    * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSource()
    * @generated
    */
-  int SOURCE = 7;
+  int SOURCE = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -291,22 +291,13 @@ public interface VizualizerPackage extends EPackage
   int DATASOURCE__NAME = SOURCE__NAME;
 
   /**
-   * The feature id for the '<em><b>Source</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DATASOURCE__SOURCE = SOURCE_FEATURE_COUNT + 0;
-
-  /**
    * The feature id for the '<em><b>Dimensions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DATASOURCE__DIMENSIONS = SOURCE_FEATURE_COUNT + 1;
+  int DATASOURCE__DIMENSIONS = SOURCE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Datasource</em>' class.
@@ -315,7 +306,7 @@ public interface VizualizerPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATASOURCE_FEATURE_COUNT = SOURCE_FEATURE_COUNT + 2;
+  int DATASOURCE_FEATURE_COUNT = SOURCE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DimensionImpl <em>Dimension</em>}' class.
@@ -328,7 +319,7 @@ public interface VizualizerPackage extends EPackage
   int DIMENSION = 6;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Name</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -337,13 +328,13 @@ public interface VizualizerPackage extends EPackage
   int DIMENSION__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Formula</b></em>' containment reference.
+   * The feature id for the '<em><b>Source Selectors</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DIMENSION__FORMULA = 1;
+  int DIMENSION__SOURCE_SELECTORS = 1;
 
   /**
    * The number of structural features of the '<em>Dimension</em>' class.
@@ -355,6 +346,80 @@ public interface VizualizerPackage extends EPackage
   int DIMENSION_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DimensionSelectorImpl <em>Dimension Selector</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DimensionSelectorImpl
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getDimensionSelector()
+   * @generated
+   */
+  int DIMENSION_SELECTOR = 7;
+
+  /**
+   * The feature id for the '<em><b>Source</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIMENSION_SELECTOR__SOURCE = 0;
+
+  /**
+   * The feature id for the '<em><b>Select Var</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIMENSION_SELECTOR__SELECT_VAR = 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIMENSION_SELECTOR__NAME = 2;
+
+  /**
+   * The number of structural features of the '<em>Dimension Selector</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIMENSION_SELECTOR_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.NoQuotesStringImpl <em>No Quotes String</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.NoQuotesStringImpl
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getNoQuotesString()
+   * @generated
+   */
+  int NO_QUOTES_STRING = 8;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NO_QUOTES_STRING__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>No Quotes String</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NO_QUOTES_STRING_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.EndPointImpl <em>End Point</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -362,7 +427,7 @@ public interface VizualizerPackage extends EPackage
    * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getEndPoint()
    * @generated
    */
-  int END_POINT = 8;
+  int END_POINT = 10;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -408,7 +473,7 @@ public interface VizualizerPackage extends EPackage
    * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getPostEndPoint()
    * @generated
    */
-  int POST_END_POINT = 9;
+  int POST_END_POINT = 11;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -454,7 +519,7 @@ public interface VizualizerPackage extends EPackage
    * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getGetEndPoint()
    * @generated
    */
-  int GET_END_POINT = 10;
+  int GET_END_POINT = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -509,7 +574,7 @@ public interface VizualizerPackage extends EPackage
    * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getHeader()
    * @generated
    */
-  int HEADER = 11;
+  int HEADER = 13;
 
   /**
    * The feature id for the '<em><b>Keyword</b></em>' attribute.
@@ -546,7 +611,7 @@ public interface VizualizerPackage extends EPackage
    * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSchemaParser()
    * @generated
    */
-  int SCHEMA_PARSER = 12;
+  int SCHEMA_PARSER = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -592,7 +657,7 @@ public interface VizualizerPackage extends EPackage
    * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSelector()
    * @generated
    */
-  int SELECTOR = 13;
+  int SELECTOR = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -629,7 +694,7 @@ public interface VizualizerPackage extends EPackage
    * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getSchemaType()
    * @generated
    */
-  int SCHEMA_TYPE = 14;
+  int SCHEMA_TYPE = 16;
 
 
   /**
@@ -781,17 +846,6 @@ public interface VizualizerPackage extends EPackage
   EClass getDatasource();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource#getSource <em>Source</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Source</em>'.
-   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource#getSource()
-   * @see #getDatasource()
-   * @generated
-   */
-  EReference getDatasource_Source();
-
-  /**
    * Returns the meta object for the containment reference list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource#getDimensions <em>Dimensions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -813,26 +867,90 @@ public interface VizualizerPackage extends EPackage
   EClass getDimension();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension#getName <em>Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
+   * @return the meta object for the containment reference '<em>Name</em>'.
    * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension#getName()
    * @see #getDimension()
    * @generated
    */
-  EAttribute getDimension_Name();
+  EReference getDimension_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension#getFormula <em>Formula</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension#getSourceSelectors <em>Source Selectors</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Formula</em>'.
-   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension#getFormula()
+   * @return the meta object for the containment reference list '<em>Source Selectors</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension#getSourceSelectors()
    * @see #getDimension()
    * @generated
    */
-  EReference getDimension_Formula();
+  EReference getDimension_SourceSelectors();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector <em>Dimension Selector</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Dimension Selector</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector
+   * @generated
+   */
+  EClass getDimensionSelector();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector#getSource <em>Source</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Source</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector#getSource()
+   * @see #getDimensionSelector()
+   * @generated
+   */
+  EReference getDimensionSelector_Source();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector#getSelectVar <em>Select Var</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Select Var</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector#getSelectVar()
+   * @see #getDimensionSelector()
+   * @generated
+   */
+  EReference getDimensionSelector_SelectVar();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector#getName()
+   * @see #getDimensionSelector()
+   * @generated
+   */
+  EAttribute getDimensionSelector_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString <em>No Quotes String</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>No Quotes String</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString
+   * @generated
+   */
+  EClass getNoQuotesString();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString#getName()
+   * @see #getNoQuotesString()
+   * @generated
+   */
+  EAttribute getNoQuotesString_Name();
 
   /**
    * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source <em>Source</em>}'.
@@ -1183,14 +1301,6 @@ public interface VizualizerPackage extends EPackage
     EClass DATASOURCE = eINSTANCE.getDatasource();
 
     /**
-     * The meta object literal for the '<em><b>Source</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference DATASOURCE__SOURCE = eINSTANCE.getDatasource_Source();
-
-    /**
      * The meta object literal for the '<em><b>Dimensions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1209,20 +1319,72 @@ public interface VizualizerPackage extends EPackage
     EClass DIMENSION = eINSTANCE.getDimension();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DIMENSION__NAME = eINSTANCE.getDimension_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Source Selectors</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DIMENSION__SOURCE_SELECTORS = eINSTANCE.getDimension_SourceSelectors();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DimensionSelectorImpl <em>Dimension Selector</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DimensionSelectorImpl
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getDimensionSelector()
+     * @generated
+     */
+    EClass DIMENSION_SELECTOR = eINSTANCE.getDimensionSelector();
+
+    /**
+     * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DIMENSION_SELECTOR__SOURCE = eINSTANCE.getDimensionSelector_Source();
+
+    /**
+     * The meta object literal for the '<em><b>Select Var</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DIMENSION_SELECTOR__SELECT_VAR = eINSTANCE.getDimensionSelector_SelectVar();
+
+    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute DIMENSION__NAME = eINSTANCE.getDimension_Name();
+    EAttribute DIMENSION_SELECTOR__NAME = eINSTANCE.getDimensionSelector_Name();
 
     /**
-     * The meta object literal for the '<em><b>Formula</b></em>' containment reference feature.
+     * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.NoQuotesStringImpl <em>No Quotes String</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.NoQuotesStringImpl
+     * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.VizualizerPackageImpl#getNoQuotesString()
+     * @generated
+     */
+    EClass NO_QUOTES_STRING = eINSTANCE.getNoQuotesString();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference DIMENSION__FORMULA = eINSTANCE.getDimension_Formula();
+    EAttribute NO_QUOTES_STRING__NAME = eINSTANCE.getNoQuotesString_Name();
 
     /**
      * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SourceImpl <em>Source</em>}' class.

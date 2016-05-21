@@ -14,17 +14,16 @@ Page pageOne
 }
 
 Datasource a {
-	Source lol
 	Dimensions:
-		Dimension y as Formula f(x, y) = x + y,
-		Dimension z as Formula f(x) = x + 5		
+		Formula x(x, n) = x + n using lol[x] as x and using lol[x] as n,
+		Formula y(x, y) = x + y * 6 using lol[y] as x and using lol[x] as y
 }
 
 Datasource c {
-	Source a
 	Dimensions:
-		Dimension x as Formula g(z) = z * 6
+		Formula g(z) = z * 6 using a[x] as z
 }
+
 
 Schema schemaA {
 	SchemaType = JSON

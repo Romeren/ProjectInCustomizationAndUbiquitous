@@ -14,11 +14,13 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
@@ -88,6 +90,8 @@ public class VizualizerFactoryImpl extends EFactoryImpl implements VizualizerFac
       case VizualizerPackage.GRAPH: return createGraph();
       case VizualizerPackage.DATASOURCE: return createDatasource();
       case VizualizerPackage.DIMENSION: return createDimension();
+      case VizualizerPackage.DIMENSION_SELECTOR: return createDimensionSelector();
+      case VizualizerPackage.NO_QUOTES_STRING: return createNoQuotesString();
       case VizualizerPackage.SOURCE: return createSource();
       case VizualizerPackage.END_POINT: return createEndPoint();
       case VizualizerPackage.POST_END_POINT: return createPostEndPoint();
@@ -209,6 +213,28 @@ public class VizualizerFactoryImpl extends EFactoryImpl implements VizualizerFac
   {
     DimensionImpl dimension = new DimensionImpl();
     return dimension;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DimensionSelector createDimensionSelector()
+  {
+    DimensionSelectorImpl dimensionSelector = new DimensionSelectorImpl();
+    return dimensionSelector;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NoQuotesString createNoQuotesString()
+  {
+    NoQuotesStringImpl noQuotesString = new NoQuotesStringImpl();
+    return noQuotesString;
   }
 
   /**

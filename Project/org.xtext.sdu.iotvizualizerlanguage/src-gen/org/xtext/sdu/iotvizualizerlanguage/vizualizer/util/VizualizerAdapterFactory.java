@@ -12,11 +12,13 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
@@ -122,6 +124,16 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
       public Adapter caseDimension(Dimension object)
       {
         return createDimensionAdapter();
+      }
+      @Override
+      public Adapter caseDimensionSelector(DimensionSelector object)
+      {
+        return createDimensionSelectorAdapter();
+      }
+      @Override
+      public Adapter caseNoQuotesString(NoQuotesString object)
+      {
+        return createNoQuotesStringAdapter();
       }
       @Override
       public Adapter caseSource(Source object)
@@ -281,6 +293,36 @@ public class VizualizerAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDimensionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector <em>Dimension Selector</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector
+   * @generated
+   */
+  public Adapter createDimensionSelectorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString <em>No Quotes String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString
+   * @generated
+   */
+  public Adapter createNoQuotesStringAdapter()
   {
     return null;
   }

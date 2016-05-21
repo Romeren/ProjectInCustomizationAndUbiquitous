@@ -10,11 +10,13 @@ import org.eclipse.emf.ecore.util.Switch;
 
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
@@ -135,6 +137,20 @@ public class VizualizerSwitch<T> extends Switch<T>
       {
         Dimension dimension = (Dimension)theEObject;
         T result = caseDimension(dimension);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.DIMENSION_SELECTOR:
+      {
+        DimensionSelector dimensionSelector = (DimensionSelector)theEObject;
+        T result = caseDimensionSelector(dimensionSelector);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.NO_QUOTES_STRING:
+      {
+        NoQuotesString noQuotesString = (NoQuotesString)theEObject;
+        T result = caseNoQuotesString(noQuotesString);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -304,6 +320,38 @@ public class VizualizerSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseDimension(Dimension object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Dimension Selector</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Dimension Selector</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDimensionSelector(DimensionSelector object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>No Quotes String</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>No Quotes String</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNoQuotesString(NoQuotesString object)
   {
     return null;
   }

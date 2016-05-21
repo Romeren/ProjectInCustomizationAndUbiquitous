@@ -3,11 +3,11 @@
  */
 package org.xtext.sdu.iotvizualizerlanguage.validation
 
-import java.util.HashSet
-import java.util.Set
+import javax.xml.ws.Endpoint
 import org.eclipse.xtext.validation.Check
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector
 
 /**
  * This class contains custom validation rules. 
@@ -16,70 +16,36 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint
  */
 class VizualizerValidator extends AbstractVizualizerValidator {
 	
-//  public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					VizualizerPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
-
-//	@Check
-//	def checkDimensionScope(Datasource source) {
-//		for (dimension : source.dimensions) {
-//			parentHasVariable(source, dimension)
-//		}
-//	}
-//	
-//	def dispatch parentHasVariable(Datasource source, Dimension checkedDimension) {
-//		var collection = source.dimensions.map[dimension | dimension.name]
-//		for (variable : checkedDimension.formula.vars) {
-//			if(!collection.contains(variable.name)) {
-//				error("Variable not present in source",
-//					variable,
-//					variable.eClass.getEStructuralFeature(0)
-//				)
-//				println('''Source: «source.name» Variable «variable.name» Not found in «FOR item : collection» ,«item»«ENDFOR»''')
-//			}
-//		}
-//	}
-//	
-//	def dispatch parentHasVariable(EndPoint endpoint, Dimension checkedDimension) {
-//		var collection = endpoint.parser.selectors.map[selector | selector.name]
-//		for (variable : checkedDimension.formula.vars) {
-//			if(!collection.contains(variable.name)) {
-//				error("Variable not present in source",
-//					variable,
-//					variable.eClass.getEStructuralFeature(0)
-//				)
-//			}
-//		}
-//	}
-
 	@Check
-	def checkCyclicSource(Datasource source) {
-		val Set<Datasource> set = new HashSet<Datasource>()
-		var Datasource current = source
-		set.add(current)
-		var boolean cyclic = false
-		while(current.source instanceof Datasource && !cyclic) {
-			current = source.source as Datasource;
-			if(set.contains(current)) {
-				error('Cyclic Source Connection Detected!',
-					source,
-					source.eClass.getEStructuralFeature(0))
-				return
-			} else {
-				set.add(current)
+	def checkFormulaForSourceVariable(Dimension checkedDimension) {
+		for (param : checkedDimension.name.vars) {
+			if(!checkedDimension.sourceSelectors.map[selector | selector.name].contains(param.name)) {
+				error("You should not Have done that. You will get in trouble!",
+					param,
+					param.eClass.getEStructuralFeature(0)
+				)
 			}
 		}
-		if(!(current.source instanceof EndPoint)) {
-			error('No Data Connection!, All datasources should be transitive linked to Endpoint',
-				source, source.eClass.getEStructuralFeature(0))
+	}
+	
+	@Check
+	def checkSourceHasDimension(DimensionSelector dimensionSelector) {
+		if(!hasDimension(dimensionSelector.source, dimensionSelector.selectVar.name)) {
+			error("Source does not contain the dimensional Variable you are refering to",
+				dimensionSelector.selectVar,
+				dimensionSelector.selectVar.eClass.getEStructuralFeature(0)
+			)
 		}
+	}
+	
+	@Check
+	def dispatch hasDimension(Endpoint endpoint, String id) {
+		return true;
+	}
+	
+	@Check
+	def dispatch hasDimension(Datasource datasource, String id) {
+		return datasource.dimensions.map[dimension | dimension.name.name].contains(id)	
 	}
 	
 }

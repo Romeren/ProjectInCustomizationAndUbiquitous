@@ -25,14 +25,23 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Datasource"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Datasource" eSuperTypes="#//Source">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" upperBound="-1"
         eType="#//Dimension" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dimension">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="formula" eType="ecore:EClass platform:/resource/org.xtext.sdu.formularzlanguage/model/generated/Formular.ecore#//Formula"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass platform:/resource/org.xtext.sdu.formularzlanguage/model/generated/Formular.ecore#//Formula"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceSelectors" upperBound="-1"
+        eType="#//DimensionSelector" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DimensionSelector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectVar" eType="#//NoQuotesString"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoQuotesString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Source">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

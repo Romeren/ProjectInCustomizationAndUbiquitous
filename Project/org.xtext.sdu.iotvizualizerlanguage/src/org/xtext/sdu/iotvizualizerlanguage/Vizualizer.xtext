@@ -29,14 +29,21 @@ Graph:
 Datasource:
 	'Datasource' name=ID
 	'{'
-	'Source' source=[Source]
 	'Dimensions' ':'
 	dimensions+=Dimension (',' dimensions+=Dimension)*
 	'}'
 ;
 
 Dimension:
-	'Dimension' name=ID 'as' 'Formula' formula=Formula
+	'Formula' name=Formula sourceSelectors+=DimensionSelector ('and' sourceSelectors+=DimensionSelector)*
+;
+
+DimensionSelector:
+	'using' source=[Source]'[' selectVar=NoQuotesString ']' 'as' name=ID
+;
+
+NoQuotesString:
+	name=ID
 ;
 
 Source:
@@ -74,7 +81,7 @@ Header:
 SchemaParser:
 	'Schema' name=ID
 	'{'
-	'SchemaType = ' schemaType=SchemaType
+	'SchemaType' '=' schemaType=SchemaType
 	selectors+=Selector+
 	'}'
 ;
