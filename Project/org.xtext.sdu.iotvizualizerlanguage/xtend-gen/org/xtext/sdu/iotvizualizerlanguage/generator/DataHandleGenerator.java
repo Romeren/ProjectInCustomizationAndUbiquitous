@@ -116,14 +116,27 @@ public class DataHandleGenerator extends AbstractGenerator {
             }
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("result.put(\"dimension_");
-            Formula _name_3 = dimension.getName();
-            String _name_4 = _name_3.getName();
-            _builder.append(_name_4, "\t\t");
-            _builder.append("\" : ");
-            Formula _name_5 = dimension.getName();
-            String _pythonFormula = this.getPythonFormula(_name_5);
+            _builder.append("input_");
+            EList<DimensionSelector> _sourceSelectors_1 = dimension.getSourceSelectors();
+            DimensionSelector _get = _sourceSelectors_1.get(0);
+            String _name_3 = _get.getName();
+            _builder.append(_name_3, "\t\t");
+            _builder.append("[1, ] = ");
+            Formula _name_4 = dimension.getName();
+            String _pythonFormula = this.getPythonFormula(_name_4);
             _builder.append(_pythonFormula, "\t\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("result.put(\"dimension_");
+            Formula _name_5 = dimension.getName();
+            String _name_6 = _name_5.getName();
+            _builder.append(_name_6, "\t\t");
+            _builder.append("\" : input_");
+            EList<DimensionSelector> _sourceSelectors_2 = dimension.getSourceSelectors();
+            DimensionSelector _get_1 = _sourceSelectors_2.get(0);
+            String _name_7 = _get_1.getName();
+            _builder.append(_name_7, "\t\t");
             _builder.append(")");
             _builder.newLineIfNotEmpty();
           }
@@ -155,9 +168,12 @@ public class DataHandleGenerator extends AbstractGenerator {
       return _builder.toString();
     } else {
       if ((source instanceof GetEndPoint)) {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("endpoint.EndPoint");
         String _name_1 = ((GetEndPoint)source).getName();
-        String _plus = ((("[row[" + dimension) + "]  for row in endpoint.EndPoint") + _name_1);
-        return (_plus + "().getData()]");
+        _builder_1.append(_name_1, "");
+        _builder_1.append("().getData()");
+        return _builder_1.toString();
       }
     }
     return null;
