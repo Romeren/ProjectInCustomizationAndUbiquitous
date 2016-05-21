@@ -74,6 +74,7 @@ class DataHandleGenerator extends AbstractGenerator {
 	'''
 	import requests
 	import time
+	import numpy as np
 	
 	class AbstractEndpoint():
 		def fetchData(self, url):
@@ -100,7 +101,7 @@ class DataHandleGenerator extends AbstractGenerator {
 				response = self.getJson(response)
 				#TODO: handle multiple selectors
 				response = self.getElement(response, self.schemaParser.selectors[0])
-				self.data = response
+				self.data = np.array(response)
 			return self.data
 	'''
 	
