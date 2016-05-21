@@ -21,7 +21,7 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.xtext.sdu.iotvizualizerlanguage.generator.ApiGenerator;
-import org.xtext.sdu.iotvizualizerlanguage.generator.EndpointGenerator;
+import org.xtext.sdu.iotvizualizerlanguage.generator.DataHandleGenerator;
 import org.xtext.sdu.iotvizualizerlanguage.generator.Postcompile;
 import org.xtext.sdu.iotvizualizerlanguage.generator.Precompile;
 import org.xtext.sdu.iotvizualizerlanguage.generator.TileColor;
@@ -53,13 +53,13 @@ public class VizualizerGenerator extends AbstractGenerator {
   private ApiGenerator apigen;
   
   @Inject
-  private EndpointGenerator endpointgen;
+  private DataHandleGenerator dataHandleGenerator;
   
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.precompile.precompile(resource, fsa);
     this.apigen.doGenerate(resource, fsa, context);
-    this.endpointgen.doGenerate(resource, fsa, context);
+    this.dataHandleGenerator.doGenerate(resource, fsa, context);
     List<String> pageNames = CollectionLiterals.<String>newArrayList();
     TreeIterator<EObject> _allContents = resource.getAllContents();
     Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_allContents);

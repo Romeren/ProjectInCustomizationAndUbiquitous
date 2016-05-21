@@ -24,3 +24,6 @@
 /.EndpointGenerator.xtendbin
 /ApiGenerator.java
 /EndpointGenerator.java
+/.DataHandleGenerator.java._trace
+/.DataHandleGenerator.xtendbin
+/DataHandleGenerator.java

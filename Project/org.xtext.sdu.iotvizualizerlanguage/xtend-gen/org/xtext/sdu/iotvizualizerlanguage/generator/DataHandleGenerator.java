@@ -10,23 +10,33 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.xtext.sdu.formularzlanguage.formular.Formula;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 
 @SuppressWarnings("all")
-public class EndpointGenerator extends AbstractGenerator {
+public class DataHandleGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    InputOutput.<String>println("I MAKE FILES!");
     CharSequence _compileAbstractSelector = this.compileAbstractSelector();
-    fsa.generateFile("DataHandle/Selectors/AbstractSelector", _compileAbstractSelector);
+    fsa.generateFile("DataHandle/Selectors/AbstractSelector.py", _compileAbstractSelector);
     CharSequence _compileAbstractSchemaParser = this.compileAbstractSchemaParser();
-    fsa.generateFile("DataHandle/SchemaParsers/AbstractSchemaParser", _compileAbstractSchemaParser);
+    fsa.generateFile("DataHandle/SchemaParsers/AbstractSchemaParser.py", _compileAbstractSchemaParser);
     CharSequence _compileAbstractEndpoint = this.compileAbstractEndpoint();
-    fsa.generateFile("DataHandle/EndPoints/AbstractEndpoint", _compileAbstractEndpoint);
+    fsa.generateFile("DataHandle/EndPoints/AbstractEndpoint.py", _compileAbstractEndpoint);
+    CharSequence _compileDatasourceController = this.compileDatasourceController(input);
+    fsa.generateFile("DataHandle/Datasources/Controller.py", _compileDatasourceController);
     TreeIterator<EObject> _allContents = input.getAllContents();
     Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_allContents);
     Iterable<EndPoint> _filter = Iterables.<EndPoint>filter(_iterable, EndPoint.class);
@@ -35,22 +45,112 @@ public class EndpointGenerator extends AbstractGenerator {
         SchemaParser _parser = p.getParser();
         String _name = _parser.getName();
         String _plus = ("DataHandle/SchemaParsers/SchemaParser" + _name);
+        String _plus_1 = (_plus + ".py");
         CharSequence _compile = this.compile(p);
-        fsa.generateFile(_plus, _compile);
+        fsa.generateFile(_plus_1, _compile);
         SchemaParser _parser_1 = p.getParser();
         EList<Selector> _selectors = _parser_1.getSelectors();
         for (final Selector s : _selectors) {
           String _name_1 = s.getName();
-          String _plus_1 = ("DataHandle/Selectors/Selector" + _name_1);
+          String _plus_2 = ("DataHandle/Selectors/Selector" + _name_1);
+          String _plus_3 = (_plus_2 + ".py");
           CharSequence _compile_1 = this.compile(s);
-          fsa.generateFile(_plus_1, _compile_1);
+          fsa.generateFile(_plus_3, _compile_1);
         }
         String _name_2 = p.getName();
-        String _plus_2 = ("DataHandle/EndPoints/EndPoint" + _name_2);
+        String _plus_4 = ("DataHandle/EndPoints/EndPoint" + _name_2);
+        String _plus_5 = (_plus_4 + ".py");
         CharSequence _compile_2 = this.compile(p);
-        fsa.generateFile(_plus_2, _compile_2);
+        fsa.generateFile(_plus_5, _compile_2);
       }
     }
+  }
+  
+  public CharSequence compileDatasourceController(final Resource resource) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import numpy as np");
+    _builder.newLine();
+    _builder.append("import DataHandle.Endpoints as endpoint");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class DatasourceController():");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    {
+      TreeIterator<EObject> _allContents = resource.getAllContents();
+      Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_allContents);
+      Iterable<Datasource> _filter = Iterables.<Datasource>filter(_iterable, Datasource.class);
+      for(final Datasource datasource : _filter) {
+        _builder.append("\t");
+        _builder.append("def datasource_");
+        String _name = datasource.getName();
+        _builder.append(_name, "\t");
+        _builder.append("(self):");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("result = {}");
+        _builder.newLine();
+        {
+          EList<Dimension> _dimensions = datasource.getDimensions();
+          for(final Dimension dimension : _dimensions) {
+            {
+              EList<DimensionSelector> _sourceSelectors = dimension.getSourceSelectors();
+              for(final DimensionSelector selector : _sourceSelectors) {
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("input_");
+                String _name_1 = selector.getName();
+                _builder.append(_name_1, "\t\t");
+                _builder.append(" = ");
+                Source _source = selector.getSource();
+                NoQuotesString _selectVar = selector.getSelectVar();
+                String _name_2 = _selectVar.getName();
+                String _dimensionFromSource = this.getDimensionFromSource(_source, _name_2);
+                _builder.append(_dimensionFromSource, "\t\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("result.put(\"dimension_");
+            Formula _name_3 = dimension.getName();
+            String _name_4 = _name_3.getName();
+            _builder.append(_name_4, "\t\t");
+            _builder.append("\" : ");
+            Formula _name_5 = dimension.getName();
+            String _pythonFormula = this.getPythonFormula(_name_5);
+            _builder.append(_pythonFormula, "\t\t");
+            _builder.append(")");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("return result");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.newLine();
+      }
+    }
+    return _builder;
+  }
+  
+  public String getDimensionFromSource(final Source source, final String dimension) {
+    if ((source instanceof Datasource)) {
+      return "nonsense";
+    } else {
+      if ((source instanceof GetEndPoint)) {
+        return "Are you American/Insane";
+      }
+    }
+    return null;
+  }
+  
+  public String getPythonFormula(final Formula formula) {
+    return "x + x";
   }
   
   public CharSequence compileAbstractEndpoint() {
