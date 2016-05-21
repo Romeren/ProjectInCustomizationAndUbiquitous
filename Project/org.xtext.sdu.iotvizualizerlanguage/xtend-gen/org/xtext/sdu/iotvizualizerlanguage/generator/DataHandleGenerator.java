@@ -103,12 +103,13 @@ public class DataHandleGenerator extends AbstractGenerator {
                 _builder.append("input_");
                 String _name_1 = selector.getName();
                 _builder.append(_name_1, "\t\t");
-                _builder.append(" = ");
+                _builder.append(" = np.array(");
                 Source _source = selector.getSource();
                 NoQuotesString _selectVar = selector.getSelectVar();
                 String _name_2 = _selectVar.getName();
                 String _dimensionFromSource = this.getDimensionFromSource(_source, _name_2);
                 _builder.append(_dimensionFromSource, "\t\t");
+                _builder.append(")");
                 _builder.newLineIfNotEmpty();
               }
             }
@@ -133,6 +134,9 @@ public class DataHandleGenerator extends AbstractGenerator {
         _builder.append("\t");
         _builder.append("\t");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.newLine();
       }
     }
     return _builder;
@@ -140,7 +144,14 @@ public class DataHandleGenerator extends AbstractGenerator {
   
   public String getDimensionFromSource(final Source source, final String dimension) {
     if ((source instanceof Datasource)) {
-      return "nonsense";
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("datasource_");
+      String _name = ((Datasource)source).getName();
+      _builder.append(_name, "");
+      _builder.append("().get(\"dimension_");
+      _builder.append(dimension, "");
+      _builder.append("\")");
+      return _builder.toString();
     } else {
       if ((source instanceof GetEndPoint)) {
         return "Are you American/Insane";

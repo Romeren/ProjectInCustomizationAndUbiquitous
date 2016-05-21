@@ -46,18 +46,19 @@ class DataHandleGenerator extends AbstractGenerator {
 			result = {}
 			«FOR dimension : datasource.dimensions»
 			«FOR selector : dimension.sourceSelectors»
-			input_«selector.name» = «selector.source.getDimensionFromSource(selector.selectVar.name)»
+			input_«selector.name» = np.array(«selector.source.getDimensionFromSource(selector.selectVar.name)»)
 			«ENDFOR»
 			result.put("dimension_«dimension.name.name»" : «dimension.name.pythonFormula»)
 			«ENDFOR»
 			return result
 			
-		«ENDFOR»	
+			
+		«ENDFOR»
 	'''
 	
 	def getDimensionFromSource(Source source, String dimension) {
 		if(source instanceof Datasource) {
-			return "nonsense"
+			return '''datasource_«source.name»().get("dimension_«dimension»")'''
 		} else if(source instanceof GetEndPoint) {
 			return "Are you American/Insane"
 		}
