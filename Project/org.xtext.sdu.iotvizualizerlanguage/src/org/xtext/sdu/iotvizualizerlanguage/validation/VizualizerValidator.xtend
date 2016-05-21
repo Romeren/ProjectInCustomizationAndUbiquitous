@@ -16,18 +16,19 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.DimensionSelector
  */
 class VizualizerValidator extends AbstractVizualizerValidator {
 	
-	@Check
+	@Check 
 	def checkFormulaForSourceVariable(Dimension checkedDimension) {
 		for (param : checkedDimension.name.vars) {
 			if(!checkedDimension.sourceSelectors.map[selector | selector.name].contains(param.name)) {
 				error("You should not Have done that. You will get in trouble!",
 					param,
 					param.eClass.getEStructuralFeature(0)
-				)
+				) 
 			}
-		}
+		} 
 	}
 	
+	/*
 	@Check
 	def checkSourceHasDimension(DimensionSelector dimensionSelector) {
 		if(!hasDimension(dimensionSelector.source, dimensionSelector.selectVar.name)) {
@@ -47,5 +48,5 @@ class VizualizerValidator extends AbstractVizualizerValidator {
 	def dispatch hasDimension(Datasource datasource, String id) {
 		return datasource.dimensions.map[dimension | dimension.name.name].contains(id)	
 	}
-	
+	*/
 }

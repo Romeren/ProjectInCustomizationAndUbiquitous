@@ -14,12 +14,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getPages <em>Pages</em>}</li>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getSources <em>Sources</em>}</li>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getSchemas <em>Schemas</em>}</li>
  * </ul>
+ * </p>
  *
  * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getSystem()
  * @model

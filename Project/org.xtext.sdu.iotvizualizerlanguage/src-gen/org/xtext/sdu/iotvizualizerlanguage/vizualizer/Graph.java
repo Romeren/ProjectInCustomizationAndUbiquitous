@@ -11,10 +11,10 @@ package org.xtext.sdu.iotvizualizerlanguage.vizualizer;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getSource <em>Source</em>}</li>
  * </ul>
+ * </p>
  *
  * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getGraph()
  * @model
