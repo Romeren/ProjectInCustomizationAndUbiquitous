@@ -12,4 +12,5 @@ class VizualizerStandaloneSetup extends VizualizerStandaloneSetupGenerated {
 	def static void doSetup() {
 		new VizualizerStandaloneSetup().createInjectorAndDoEMFRegistration()
 	}
+	
 }

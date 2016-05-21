@@ -11,12 +11,12 @@ package org.xtext.sdu.formularzlanguage.formular;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.formularzlanguage.formular.Expression#getLeft <em>Left</em>}</li>
  *   <li>{@link org.xtext.sdu.formularzlanguage.formular.Expression#getOp <em>Op</em>}</li>
  *   <li>{@link org.xtext.sdu.formularzlanguage.formular.Expression#getRight <em>Right</em>}</li>
  * </ul>
+ * </p>
  *
  * @see org.xtext.sdu.formularzlanguage.formular.FormularPackage#getExpression()
  * @model

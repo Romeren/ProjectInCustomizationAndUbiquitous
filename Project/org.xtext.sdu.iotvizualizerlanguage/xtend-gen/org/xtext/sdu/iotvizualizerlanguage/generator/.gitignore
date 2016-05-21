@@ -10,4 +10,17 @@
 /Precompile.java
 /TileColor.java
 /VizualizerGenerator.java
+<<<<<<< HEAD
+/.ApiGenerator.java._trace
+=======
 /.ModelGenerator.java._trace
+>>>>>>> 6dd6845649db23a9b572932e1d32c0424dae2133
+/.SourceTaskResolver.java._trace
+/.SourceTaskResolver.xtendbin
+/ModelGenerator.java
+/SourceTaskResolver.java
+/.EndpointGenerator.java._trace
+/.ApiGenerator.xtendbin
+/.EndpointGenerator.xtendbin
+/ApiGenerator.java
+/EndpointGenerator.java

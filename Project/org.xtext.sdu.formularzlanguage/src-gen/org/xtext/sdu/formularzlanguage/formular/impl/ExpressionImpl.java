@@ -21,12 +21,12 @@ import org.xtext.sdu.formularzlanguage.formular.FormularPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.formularzlanguage.formular.impl.ExpressionImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.xtext.sdu.formularzlanguage.formular.impl.ExpressionImpl#getOp <em>Op</em>}</li>
  *   <li>{@link org.xtext.sdu.formularzlanguage.formular.impl.ExpressionImpl#getRight <em>Right</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */

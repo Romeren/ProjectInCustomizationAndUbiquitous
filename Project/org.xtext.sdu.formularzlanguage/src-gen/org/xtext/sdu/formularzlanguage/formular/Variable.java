@@ -11,10 +11,10 @@ package org.xtext.sdu.formularzlanguage.formular;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.formularzlanguage.formular.Variable#getName <em>Name</em>}</li>
  * </ul>
+ * </p>
  *
  * @see org.xtext.sdu.formularzlanguage.formular.FormularPackage#getVariable()
  * @model

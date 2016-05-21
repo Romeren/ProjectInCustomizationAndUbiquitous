@@ -5,9 +5,6 @@ package org.xtext.sdu.formularzlanguage;
 
 import org.xtext.sdu.formularzlanguage.AbstractFormularRuntimeModule;
 
-/**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
- */
 @SuppressWarnings("all")
 public class FormularRuntimeModule extends AbstractFormularRuntimeModule {
 }

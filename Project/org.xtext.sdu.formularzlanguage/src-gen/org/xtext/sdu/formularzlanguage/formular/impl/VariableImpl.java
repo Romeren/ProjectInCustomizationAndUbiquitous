@@ -18,10 +18,10 @@ import org.xtext.sdu.formularzlanguage.formular.Variable;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.formularzlanguage.formular.impl.VariableImpl#getName <em>Name</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */

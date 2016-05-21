@@ -4,12 +4,10 @@
 package org.xtext.sdu.formularzlanguage
 
 
-/**
- * Initialization support for running Xtext languages without Equinox extension registry.
- */
 class FormularStandaloneSetup extends FormularStandaloneSetupGenerated {
 
 	def static void doSetup() {
 		new FormularStandaloneSetup().createInjectorAndDoEMFRegistration()
 	}
+
 }

@@ -5,9 +5,6 @@ package org.xtext.sdu.formularzlanguage;
 
 import org.xtext.sdu.formularzlanguage.FormularStandaloneSetupGenerated;
 
-/**
- * Initialization support for running Xtext languages without Equinox extension registry.
- */
 @SuppressWarnings("all")
 public class FormularStandaloneSetup extends FormularStandaloneSetupGenerated {
   public static void doSetup() {
