@@ -69,13 +69,85 @@ public interface VizualizerFactory extends EFactory
   Graph createGraph();
 
   /**
-   * Returns a new object of class '<em>Api</em>'.
+   * Returns a new object of class '<em>Datasource</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Api</em>'.
+   * @return a new object of class '<em>Datasource</em>'.
    * @generated
    */
-  Api createApi();
+  Datasource createDatasource();
+
+  /**
+   * Returns a new object of class '<em>Dimension</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dimension</em>'.
+   * @generated
+   */
+  Dimension createDimension();
+
+  /**
+   * Returns a new object of class '<em>Source</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Source</em>'.
+   * @generated
+   */
+  Source createSource();
+
+  /**
+   * Returns a new object of class '<em>End Point</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>End Point</em>'.
+   * @generated
+   */
+  EndPoint createEndPoint();
+
+  /**
+   * Returns a new object of class '<em>Post End Point</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Post End Point</em>'.
+   * @generated
+   */
+  PostEndPoint createPostEndPoint();
+
+  /**
+   * Returns a new object of class '<em>Get End Point</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Get End Point</em>'.
+   * @generated
+   */
+  GetEndPoint createGetEndPoint();
+
+  /**
+   * Returns a new object of class '<em>Header</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Header</em>'.
+   * @generated
+   */
+  Header createHeader();
+
+  /**
+   * Returns a new object of class '<em>Schema Parser</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Schema Parser</em>'.
+   * @generated
+   */
+  SchemaParser createSchemaParser();
+
+  /**
+   * Returns a new object of class '<em>Selector</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Selector</em>'.
+   * @generated
+   */
+  Selector createSelector();
 
   /**
    * Returns the package supported by this factory.

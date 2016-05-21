@@ -24,13 +24,13 @@ public interface FormularFactory extends EFactory
   FormularFactory eINSTANCE = org.xtext.sdu.formularzlanguage.formular.impl.FormularFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Math</em>'.
+   * Returns a new object of class '<em>Formula</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Math</em>'.
+   * @return a new object of class '<em>Formula</em>'.
    * @generated
    */
-  Math createMath();
+  Formula createFormula();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.
@@ -76,15 +76,6 @@ public interface FormularFactory extends EFactory
    * @generated
    */
   Variable createVariable();
-
-  /**
-   * Returns a new object of class '<em>Formula</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Formula</em>'.
-   * @generated
-   */
-  Formula createFormula();
 
   /**
    * Returns the package supported by this factory.

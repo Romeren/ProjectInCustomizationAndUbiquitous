@@ -31,7 +31,7 @@ public class FormularPackageImpl extends EPackageImpl implements FormularPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass mathEClass = null;
+  private EClass formulaEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,13 +67,6 @@ public class FormularPackageImpl extends EPackageImpl implements FormularPackage
    * @generated
    */
   private EClass variableEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass formulaEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -143,9 +136,9 @@ public class FormularPackageImpl extends EPackageImpl implements FormularPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMath()
+  public EClass getFormula()
   {
-    return mathEClass;
+    return formulaEClass;
   }
 
   /**
@@ -153,9 +146,29 @@ public class FormularPackageImpl extends EPackageImpl implements FormularPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMath_Formulars()
+  public EAttribute getFormula_Name()
   {
-    return (EReference)mathEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)formulaEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFormula_Vars()
+  {
+    return (EReference)formulaEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFormula_Exp()
+  {
+    return (EReference)formulaEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -293,46 +306,6 @@ public class FormularPackageImpl extends EPackageImpl implements FormularPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFormula()
-  {
-    return formulaEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getFormula_Name()
-  {
-    return (EAttribute)formulaEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getFormula_Vars()
-  {
-    return (EReference)formulaEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getFormula_Exp()
-  {
-    return (EReference)formulaEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public FormularFactory getFormularFactory()
   {
     return (FormularFactory)getEFactoryInstance();
@@ -358,8 +331,10 @@ public class FormularPackageImpl extends EPackageImpl implements FormularPackage
     isCreated = true;
 
     // Create classes and their features
-    mathEClass = createEClass(MATH);
-    createEReference(mathEClass, MATH__FORMULARS);
+    formulaEClass = createEClass(FORMULA);
+    createEAttribute(formulaEClass, FORMULA__NAME);
+    createEReference(formulaEClass, FORMULA__VARS);
+    createEReference(formulaEClass, FORMULA__EXP);
 
     expressionEClass = createEClass(EXPRESSION);
     createEReference(expressionEClass, EXPRESSION__LEFT);
@@ -378,11 +353,6 @@ public class FormularPackageImpl extends EPackageImpl implements FormularPackage
 
     variableEClass = createEClass(VARIABLE);
     createEAttribute(variableEClass, VARIABLE__NAME);
-
-    formulaEClass = createEClass(FORMULA);
-    createEAttribute(formulaEClass, FORMULA__NAME);
-    createEReference(formulaEClass, FORMULA__VARS);
-    createEReference(formulaEClass, FORMULA__EXP);
   }
 
   /**
@@ -419,8 +389,10 @@ public class FormularPackageImpl extends EPackageImpl implements FormularPackage
     variableEClass.getESuperTypes().add(this.getPrimitive());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(mathEClass, org.xtext.sdu.formularzlanguage.formular.Math.class, "Math", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMath_Formulars(), this.getFormula(), null, "formulars", null, 0, -1, org.xtext.sdu.formularzlanguage.formular.Math.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(formulaEClass, Formula.class, "Formula", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFormula_Name(), ecorePackage.getEString(), "name", null, 0, 1, Formula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFormula_Vars(), this.getVariable(), null, "vars", null, 0, -1, Formula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFormula_Exp(), this.getExpression(), null, "exp", null, 0, 1, Formula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpression_Left(), this.getFactor(), null, "left", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -439,11 +411,6 @@ public class FormularPackageImpl extends EPackageImpl implements FormularPackage
 
     initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(formulaEClass, Formula.class, "Formula", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFormula_Name(), ecorePackage.getEString(), "name", null, 0, 1, Formula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFormula_Vars(), this.getVariable(), null, "vars", null, 0, -1, Formula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFormula_Exp(), this.getExpression(), null, "exp", null, 0, 1, Formula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -78,10 +78,10 @@ public class FormularSwitch<T> extends Switch<T>
   {
     switch (classifierID)
     {
-      case FormularPackage.MATH:
+      case FormularPackage.FORMULA:
       {
-        org.xtext.sdu.formularzlanguage.formular.Math math = (org.xtext.sdu.formularzlanguage.formular.Math)theEObject;
-        T result = caseMath(math);
+        Formula formula = (Formula)theEObject;
+        T result = caseFormula(formula);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -123,29 +123,22 @@ public class FormularSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FormularPackage.FORMULA:
-      {
-        Formula formula = (Formula)theEObject;
-        T result = caseFormula(formula);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       default: return defaultCase(theEObject);
     }
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Math</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Formula</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Math</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Formula</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseMath(org.xtext.sdu.formularzlanguage.formular.Math object)
+  public T caseFormula(Formula object)
   {
     return null;
   }
@@ -226,22 +219,6 @@ public class FormularSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVariable(Variable object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Formula</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Formula</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFormula(Formula object)
   {
     return null;
   }

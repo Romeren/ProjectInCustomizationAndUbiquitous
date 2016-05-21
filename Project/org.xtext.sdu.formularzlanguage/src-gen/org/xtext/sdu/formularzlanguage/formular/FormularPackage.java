@@ -58,32 +58,50 @@ public interface FormularPackage extends EPackage
   FormularPackage eINSTANCE = org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl.init();
 
   /**
-   * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.MathImpl <em>Math</em>}' class.
+   * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl <em>Formula</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.sdu.formularzlanguage.formular.impl.MathImpl
-   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getMath()
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl
+   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getFormula()
    * @generated
    */
-  int MATH = 0;
+  int FORMULA = 0;
 
   /**
-   * The feature id for the '<em><b>Formulars</b></em>' containment reference list.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MATH__FORMULARS = 0;
+  int FORMULA__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Math</em>' class.
+   * The feature id for the '<em><b>Vars</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MATH_FEATURE_COUNT = 1;
+  int FORMULA__VARS = 1;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FORMULA__EXP = 2;
+
+  /**
+   * The number of structural features of the '<em>Formula</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FORMULA_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.PrimitiveImpl <em>Primitive</em>}' class.
@@ -252,73 +270,49 @@ public interface FormularPackage extends EPackage
    */
   int VARIABLE_FEATURE_COUNT = PRIMITIVE_FEATURE_COUNT + 1;
 
-  /**
-   * The meta object id for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl <em>Formula</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl
-   * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getFormula()
-   * @generated
-   */
-  int FORMULA = 6;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Formula <em>Formula</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Formula</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Formula
    * @generated
-   * @ordered
    */
-  int FORMULA__NAME = 0;
+  EClass getFormula();
 
   /**
-   * The feature id for the '<em><b>Vars</b></em>' containment reference list.
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.formularzlanguage.formular.Formula#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Formula#getName()
+   * @see #getFormula()
    * @generated
-   * @ordered
    */
-  int FORMULA__VARS = 1;
+  EAttribute getFormula_Name();
 
   /**
-   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.formularzlanguage.formular.Formula#getVars <em>Vars</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Vars</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Formula#getVars()
+   * @see #getFormula()
    * @generated
-   * @ordered
    */
-  int FORMULA__EXP = 2;
+  EReference getFormula_Vars();
 
   /**
-   * The number of structural features of the '<em>Formula</em>' class.
+   * Returns the meta object for the containment reference '{@link org.xtext.sdu.formularzlanguage.formular.Formula#getExp <em>Exp</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FORMULA_FEATURE_COUNT = 3;
-
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Math <em>Math</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Math</em>'.
-   * @see org.xtext.sdu.formularzlanguage.formular.Math
+   * @return the meta object for the containment reference '<em>Exp</em>'.
+   * @see org.xtext.sdu.formularzlanguage.formular.Formula#getExp()
+   * @see #getFormula()
    * @generated
    */
-  EClass getMath();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.formularzlanguage.formular.Math#getFormulars <em>Formulars</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Formulars</em>'.
-   * @see org.xtext.sdu.formularzlanguage.formular.Math#getFormulars()
-   * @see #getMath()
-   * @generated
-   */
-  EReference getMath_Formulars();
+  EReference getFormula_Exp();
 
   /**
    * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Expression <em>Expression</em>}'.
@@ -459,49 +453,6 @@ public interface FormularPackage extends EPackage
   EAttribute getVariable_Name();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.sdu.formularzlanguage.formular.Formula <em>Formula</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Formula</em>'.
-   * @see org.xtext.sdu.formularzlanguage.formular.Formula
-   * @generated
-   */
-  EClass getFormula();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.sdu.formularzlanguage.formular.Formula#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.sdu.formularzlanguage.formular.Formula#getName()
-   * @see #getFormula()
-   * @generated
-   */
-  EAttribute getFormula_Name();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.sdu.formularzlanguage.formular.Formula#getVars <em>Vars</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Vars</em>'.
-   * @see org.xtext.sdu.formularzlanguage.formular.Formula#getVars()
-   * @see #getFormula()
-   * @generated
-   */
-  EReference getFormula_Vars();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.xtext.sdu.formularzlanguage.formular.Formula#getExp <em>Exp</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Exp</em>'.
-   * @see org.xtext.sdu.formularzlanguage.formular.Formula#getExp()
-   * @see #getFormula()
-   * @generated
-   */
-  EReference getFormula_Exp();
-
-  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -525,22 +476,38 @@ public interface FormularPackage extends EPackage
   interface Literals
   {
     /**
-     * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.MathImpl <em>Math</em>}' class.
+     * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl <em>Formula</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.sdu.formularzlanguage.formular.impl.MathImpl
-     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getMath()
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl
+     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getFormula()
      * @generated
      */
-    EClass MATH = eINSTANCE.getMath();
+    EClass FORMULA = eINSTANCE.getFormula();
 
     /**
-     * The meta object literal for the '<em><b>Formulars</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MATH__FORMULARS = eINSTANCE.getMath_Formulars();
+    EAttribute FORMULA__NAME = eINSTANCE.getFormula_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Vars</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FORMULA__VARS = eINSTANCE.getFormula_Vars();
+
+    /**
+     * The meta object literal for the '<em><b>Exp</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FORMULA__EXP = eINSTANCE.getFormula_Exp();
 
     /**
      * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -655,40 +622,6 @@ public interface FormularPackage extends EPackage
      * @generated
      */
     EAttribute VARIABLE__NAME = eINSTANCE.getVariable_Name();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl <em>Formula</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormulaImpl
-     * @see org.xtext.sdu.formularzlanguage.formular.impl.FormularPackageImpl#getFormula()
-     * @generated
-     */
-    EClass FORMULA = eINSTANCE.getFormula();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FORMULA__NAME = eINSTANCE.getFormula_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Vars</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FORMULA__VARS = eINSTANCE.getFormula_Vars();
-
-    /**
-     * The meta object literal for the '<em><b>Exp</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FORMULA__EXP = eINSTANCE.getFormula_Exp();
 
   }
 

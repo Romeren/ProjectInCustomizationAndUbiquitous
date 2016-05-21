@@ -1,28 +1,35 @@
 package org.xtext.sdu.iotvizualizerlanguage.generator;
 
+import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.xtext.sdu.iotvizualizerlanguage.generator.SourceTaskResolver;
 
 @SuppressWarnings("all")
 public class Precompile {
   public void precompile(final Resource resource, final IFileSystemAccess2 fsa) {
+    SourceTaskResolver taskResolver = new SourceTaskResolver(resource);
     CharSequence _compileManager = this.compileManager();
     fsa.generateFile("manage.py", _compileManager);
-    CharSequence _compileSettings = this.compileSettings();
-    fsa.generateFile("webserver\\settings.py", _compileSettings);
+    CharSequence _compileSettings = this.compileSettings(taskResolver);
+    fsa.generateFile("webserver/settings.py", _compileSettings);
     CharSequence _compileInit = this.compileInit();
-    fsa.generateFile("webserver\\__init__.py", _compileInit);
+    fsa.generateFile("webserver/__init__.py", _compileInit);
     CharSequence _compileWsgi = this.compileWsgi();
-    fsa.generateFile("webserver\\wsgi.py", _compileWsgi);
+    fsa.generateFile("webserver/wsgi.py", _compileWsgi);
     CharSequence _compileUrls = this.compileUrls();
-    fsa.generateFile("webserver\\urls.py", _compileUrls);
+    fsa.generateFile("webserver/urls.py", _compileUrls);
+    CharSequence _compileCeleryTasks = this.compileCeleryTasks(taskResolver);
+    fsa.generateFile("webserver/celery.py", _compileCeleryTasks);
+    CharSequence _compileModels = this.compileModels();
+    fsa.generateFile("webserver/models.py", _compileModels);
     CharSequence _compileBaseHtml = this.compileBaseHtml();
-    fsa.generateFile("templates\\base.html", _compileBaseHtml);
+    fsa.generateFile("templates/base.html", _compileBaseHtml);
     CharSequence _compileNavigationBar = this.compileNavigationBar();
-    fsa.generateFile("templates\\navigationbar.html", _compileNavigationBar);
+    fsa.generateFile("templates/navigationbar.html", _compileNavigationBar);
     CharSequence _compileTestdata = this.compileTestdata();
-    fsa.generateFile("templates\\data.csv", _compileTestdata);
+    fsa.generateFile("templates/data.csv", _compileTestdata);
   }
   
   public CharSequence compileManager() {
@@ -50,7 +57,7 @@ public class Precompile {
     return _builder;
   }
   
-  public CharSequence compileSettings() {
+  public CharSequence compileSettings(final SourceTaskResolver resolver) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"\"\"");
     _builder.newLine();
@@ -128,6 +135,9 @@ public class Precompile {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("\'api\',");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\'djcelery\',");
     _builder.newLine();
     _builder.append("]");
     _builder.newLine();
@@ -341,6 +351,13 @@ public class Precompile {
     return _builder;
   }
   
+  /**
+   * TODO Add Celery Background Tasks here
+   */
+  public String fetchURITasks() {
+    return "";
+  }
+  
   public CharSequence compileInit() {
     StringConcatenation _builder = new StringConcatenation();
     return _builder;
@@ -435,6 +452,84 @@ public class Precompile {
     _builder.append("url(r\'^api-auth/\', include(\'rest_framework.urls\', namespace=\'rest_framework\')) #AND here");
     _builder.newLine();
     _builder.append("]");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileCeleryTasks(final SourceTaskResolver resolver) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("from __future__ import absolute_import");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import os");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("from celery import Celery");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("# Set the default Django settings module for the celery app");
+    _builder.newLine();
+    _builder.append("os.environ.setdefault(\'DJANGO_SETTINGS_MODULE\', \'webserver.settings\')");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("from django.conf import settings");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("app = Celery(\'webserver\')");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("# Using a string here means the worker will not have to");
+    _builder.newLine();
+    _builder.append("# prickle the object when using windows");
+    _builder.newLine();
+    _builder.append("app.config_from_object(\'django.conf:settings\')");
+    _builder.newLine();
+    _builder.append("app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("# List Size ");
+    List<String> _schedules = resolver.getSchedules();
+    int _size = _schedules.size();
+    _builder.append(_size, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("uri_list = {");
+    _builder.newLine();
+    {
+      List<String> _schedules_1 = resolver.getSchedules();
+      for(final String entry : _schedules_1) {
+        _builder.append("\t");
+        _builder.append(entry, "\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("import datatime");
+    _builder.newLine();
+    _builder.append("import celery");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@celery.decorators.periodic_task(run_every=datetime.timedelta(minutes=5))");
+    _builder.newLine();
+    _builder.append("def fetchFromUrl(): ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("print(\"Running Task\")");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileModels() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("from django.db import models");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Datasource(models.Model):");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("name = models.CharField(max_length=50)");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.newLine();
     return _builder;
   }

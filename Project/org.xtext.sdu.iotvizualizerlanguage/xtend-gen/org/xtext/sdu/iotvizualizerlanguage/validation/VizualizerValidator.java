@@ -3,7 +3,15 @@
  */
 package org.xtext.sdu.iotvizualizerlanguage.validation;
 
+import java.util.HashSet;
+import java.util.Set;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.validation.Check;
 import org.xtext.sdu.iotvizualizerlanguage.validation.AbstractVizualizerValidator;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 
 /**
  * This class contains custom validation rules.
@@ -12,4 +20,33 @@ import org.xtext.sdu.iotvizualizerlanguage.validation.AbstractVizualizerValidato
  */
 @SuppressWarnings("all")
 public class VizualizerValidator extends AbstractVizualizerValidator {
+  @Check
+  public void checkCyclicSource(final Datasource source) {
+    final Set<Datasource> set = new HashSet<Datasource>();
+    Datasource current = source;
+    set.add(current);
+    boolean cyclic = false;
+    while (((current.getSource() instanceof Datasource) && (!cyclic))) {
+      {
+        Source _source = source.getSource();
+        current = ((Datasource) _source);
+        boolean _contains = set.contains(current);
+        if (_contains) {
+          EClass _eClass = source.eClass();
+          EStructuralFeature _eStructuralFeature = _eClass.getEStructuralFeature(0);
+          this.error("Cyclic Source Connection Detected!", source, _eStructuralFeature);
+          return;
+        } else {
+          set.add(current);
+        }
+      }
+    }
+    Source _source = current.getSource();
+    boolean _not = (!(_source instanceof EndPoint));
+    if (_not) {
+      EClass _eClass = source.eClass();
+      EStructuralFeature _eStructuralFeature = _eClass.getEStructuralFeature(0);
+      this.error("No Data Connection!, All datasources should be transitive linked to Endpoint", source, _eStructuralFeature);
+    }
+  }
 }

@@ -81,9 +81,9 @@ public class FormularAdapterFactory extends AdapterFactoryImpl
     new FormularSwitch<Adapter>()
     {
       @Override
-      public Adapter caseMath(org.xtext.sdu.formularzlanguage.formular.Math object)
+      public Adapter caseFormula(Formula object)
       {
-        return createMathAdapter();
+        return createFormulaAdapter();
       }
       @Override
       public Adapter caseExpression(Expression object)
@@ -111,11 +111,6 @@ public class FormularAdapterFactory extends AdapterFactoryImpl
         return createVariableAdapter();
       }
       @Override
-      public Adapter caseFormula(Formula object)
-      {
-        return createFormulaAdapter();
-      }
-      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -138,16 +133,16 @@ public class FormularAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.sdu.formularzlanguage.formular.Math <em>Math</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.sdu.formularzlanguage.formular.Formula <em>Formula</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.sdu.formularzlanguage.formular.Math
+   * @see org.xtext.sdu.formularzlanguage.formular.Formula
    * @generated
    */
-  public Adapter createMathAdapter()
+  public Adapter createFormulaAdapter()
   {
     return null;
   }
@@ -223,21 +218,6 @@ public class FormularAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVariableAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.sdu.formularzlanguage.formular.Formula <em>Formula</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.sdu.formularzlanguage.formular.Formula
-   * @generated
-   */
-  public Adapter createFormulaAdapter()
   {
     return null;
   }

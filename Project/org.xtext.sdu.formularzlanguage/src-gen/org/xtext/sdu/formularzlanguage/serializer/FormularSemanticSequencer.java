@@ -44,9 +44,6 @@ public class FormularSemanticSequencer extends AbstractDelegatingSemanticSequenc
 			case FormularPackage.FORMULA:
 				sequence_Formula(context, (Formula) semanticObject); 
 				return; 
-			case FormularPackage.MATH:
-				sequence_Math(context, (org.xtext.sdu.formularzlanguage.formular.Math) semanticObject); 
-				return; 
 			case FormularPackage.NUMBER:
 				sequence_Number(context, (org.xtext.sdu.formularzlanguage.formular.Number) semanticObject); 
 				return; 
@@ -91,18 +88,6 @@ public class FormularSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     (name=ID (vars+=Variable vars+=Variable*)? exp=Expression)
 	 */
 	protected void sequence_Formula(ISerializationContext context, Formula semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Math returns Math
-	 *
-	 * Constraint:
-	 *     formulars+=Formula+
-	 */
-	protected void sequence_Math(ISerializationContext context, org.xtext.sdu.formularzlanguage.formular.Math semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

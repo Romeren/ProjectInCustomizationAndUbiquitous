@@ -71,13 +71,12 @@ public class FormularFactoryImpl extends EFactoryImpl implements FormularFactory
   {
     switch (eClass.getClassifierID())
     {
-      case FormularPackage.MATH: return createMath();
+      case FormularPackage.FORMULA: return createFormula();
       case FormularPackage.EXPRESSION: return createExpression();
       case FormularPackage.FACTOR: return createFactor();
       case FormularPackage.PRIMITIVE: return createPrimitive();
       case FormularPackage.NUMBER: return createNumber();
       case FormularPackage.VARIABLE: return createVariable();
-      case FormularPackage.FORMULA: return createFormula();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -88,10 +87,10 @@ public class FormularFactoryImpl extends EFactoryImpl implements FormularFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.xtext.sdu.formularzlanguage.formular.Math createMath()
+  public Formula createFormula()
   {
-    MathImpl math = new MathImpl();
-    return math;
+    FormulaImpl formula = new FormulaImpl();
+    return formula;
   }
 
   /**
@@ -147,17 +146,6 @@ public class FormularFactoryImpl extends EFactoryImpl implements FormularFactory
   {
     VariableImpl variable = new VariableImpl();
     return variable;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Formula createFormula()
-  {
-    FormulaImpl formula = new FormulaImpl();
-    return formula;
   }
 
   /**

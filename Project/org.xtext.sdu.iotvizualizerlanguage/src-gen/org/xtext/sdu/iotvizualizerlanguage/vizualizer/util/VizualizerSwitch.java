@@ -8,10 +8,18 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Dimension;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Header;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Page;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Tile;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
 
@@ -115,10 +123,72 @@ public class VizualizerSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VizualizerPackage.API:
+      case VizualizerPackage.DATASOURCE:
       {
-        Api api = (Api)theEObject;
-        T result = caseApi(api);
+        Datasource datasource = (Datasource)theEObject;
+        T result = caseDatasource(datasource);
+        if (result == null) result = caseSource(datasource);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.DIMENSION:
+      {
+        Dimension dimension = (Dimension)theEObject;
+        T result = caseDimension(dimension);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.SOURCE:
+      {
+        Source source = (Source)theEObject;
+        T result = caseSource(source);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.END_POINT:
+      {
+        EndPoint endPoint = (EndPoint)theEObject;
+        T result = caseEndPoint(endPoint);
+        if (result == null) result = caseSource(endPoint);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.POST_END_POINT:
+      {
+        PostEndPoint postEndPoint = (PostEndPoint)theEObject;
+        T result = casePostEndPoint(postEndPoint);
+        if (result == null) result = caseEndPoint(postEndPoint);
+        if (result == null) result = caseSource(postEndPoint);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.GET_END_POINT:
+      {
+        GetEndPoint getEndPoint = (GetEndPoint)theEObject;
+        T result = caseGetEndPoint(getEndPoint);
+        if (result == null) result = caseEndPoint(getEndPoint);
+        if (result == null) result = caseSource(getEndPoint);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.HEADER:
+      {
+        Header header = (Header)theEObject;
+        T result = caseHeader(header);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.SCHEMA_PARSER:
+      {
+        SchemaParser schemaParser = (SchemaParser)theEObject;
+        T result = caseSchemaParser(schemaParser);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VizualizerPackage.SELECTOR:
+      {
+        Selector selector = (Selector)theEObject;
+        T result = caseSelector(selector);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -207,17 +277,145 @@ public class VizualizerSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Api</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Datasource</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Api</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Datasource</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseApi(Api object)
+  public T caseDatasource(Datasource object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Dimension</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Dimension</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDimension(Dimension object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Source</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Source</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSource(Source object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>End Point</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>End Point</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEndPoint(EndPoint object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Post End Point</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Post End Point</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePostEndPoint(PostEndPoint object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Get End Point</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Get End Point</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGetEndPoint(GetEndPoint object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Header</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Header</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseHeader(Header object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Schema Parser</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Schema Parser</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSchemaParser(SchemaParser object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Selector</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Selector</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSelector(Selector object)
   {
     return null;
   }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalFormularLexer extends Lexer {
-    public static final int RULE_ID=5;
+    public static final int RULE_ID=4;
     public static final int RULE_WS=9;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
@@ -20,7 +20,7 @@ public class InternalFormularLexer extends Lexer {
     public static final int T__15=15;
     public static final int T__16=16;
     public static final int T__17=17;
-    public static final int RULE_INT=4;
+    public static final int RULE_INT=5;
     public static final int T__18=18;
     public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
@@ -207,10 +207,10 @@ public class InternalFormularLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFormular.g:1108:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalFormular.g:1108:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFormular.g:1068:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalFormular.g:1068:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalFormular.g:1108:11: ( '^' )?
+            // InternalFormular.g:1068:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -219,7 +219,7 @@ public class InternalFormularLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalFormular.g:1108:11: '^'
+                    // InternalFormular.g:1068:11: '^'
                     {
                     match('^'); 
 
@@ -237,7 +237,7 @@ public class InternalFormularLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalFormular.g:1108:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFormular.g:1068:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -286,10 +286,10 @@ public class InternalFormularLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFormular.g:1110:10: ( ( '0' .. '9' )+ )
-            // InternalFormular.g:1110:12: ( '0' .. '9' )+
+            // InternalFormular.g:1070:10: ( ( '0' .. '9' )+ )
+            // InternalFormular.g:1070:12: ( '0' .. '9' )+
             {
-            // InternalFormular.g:1110:12: ( '0' .. '9' )+
+            // InternalFormular.g:1070:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -303,7 +303,7 @@ public class InternalFormularLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalFormular.g:1110:13: '0' .. '9'
+            	    // InternalFormular.g:1070:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -335,10 +335,10 @@ public class InternalFormularLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFormular.g:1112:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalFormular.g:1112:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFormular.g:1072:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalFormular.g:1072:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalFormular.g:1112:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFormular.g:1072:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -356,10 +356,10 @@ public class InternalFormularLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalFormular.g:1112:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalFormular.g:1072:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalFormular.g:1112:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalFormular.g:1072:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -375,7 +375,7 @@ public class InternalFormularLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalFormular.g:1112:21: '\\\\' .
+                    	    // InternalFormular.g:1072:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -383,7 +383,7 @@ public class InternalFormularLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFormular.g:1112:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalFormular.g:1072:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -408,10 +408,10 @@ public class InternalFormularLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalFormular.g:1112:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalFormular.g:1072:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalFormular.g:1112:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalFormular.g:1072:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -427,7 +427,7 @@ public class InternalFormularLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalFormular.g:1112:54: '\\\\' .
+                    	    // InternalFormular.g:1072:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -435,7 +435,7 @@ public class InternalFormularLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFormular.g:1112:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalFormular.g:1072:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -478,12 +478,12 @@ public class InternalFormularLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFormular.g:1114:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalFormular.g:1114:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalFormular.g:1074:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalFormular.g:1074:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalFormular.g:1114:24: ( options {greedy=false; } : . )*
+            // InternalFormular.g:1074:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -508,7 +508,7 @@ public class InternalFormularLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalFormular.g:1114:52: .
+            	    // InternalFormular.g:1074:52: .
             	    {
             	    matchAny(); 
 
@@ -538,12 +538,12 @@ public class InternalFormularLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFormular.g:1116:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalFormular.g:1116:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalFormular.g:1076:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalFormular.g:1076:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalFormular.g:1116:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalFormular.g:1076:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -556,7 +556,7 @@ public class InternalFormularLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalFormular.g:1116:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalFormular.g:1076:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -576,7 +576,7 @@ public class InternalFormularLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalFormular.g:1116:40: ( ( '\\r' )? '\\n' )?
+            // InternalFormular.g:1076:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -585,9 +585,9 @@ public class InternalFormularLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalFormular.g:1116:41: ( '\\r' )? '\\n'
+                    // InternalFormular.g:1076:41: ( '\\r' )? '\\n'
                     {
-                    // InternalFormular.g:1116:41: ( '\\r' )?
+                    // InternalFormular.g:1076:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -596,7 +596,7 @@ public class InternalFormularLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalFormular.g:1116:41: '\\r'
+                            // InternalFormular.g:1076:41: '\\r'
                             {
                             match('\r'); 
 
@@ -628,10 +628,10 @@ public class InternalFormularLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFormular.g:1118:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalFormular.g:1118:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFormular.g:1078:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalFormular.g:1078:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalFormular.g:1118:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFormular.g:1078:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -685,8 +685,8 @@ public class InternalFormularLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFormular.g:1120:16: ( . )
-            // InternalFormular.g:1120:18: .
+            // InternalFormular.g:1080:16: ( . )
+            // InternalFormular.g:1080:18: .
             {
             matchAny(); 
 

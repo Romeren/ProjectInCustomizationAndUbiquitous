@@ -5,14 +5,18 @@ import org.eclipse.emf.ecore.resource.Resource
 
 class Precompile {
 	def precompile(Resource resource, IFileSystemAccess2 fsa) {
+		var SourceTaskResolver taskResolver = new SourceTaskResolver(resource)
+		
 		fsa.generateFile("manage.py", compileManager)
-		fsa.generateFile("webserver\\settings.py", compileSettings)
-		fsa.generateFile("webserver\\__init__.py", compileInit)
-		fsa.generateFile("webserver\\wsgi.py", compileWsgi)
-		fsa.generateFile("webserver\\urls.py", compileUrls)
-		fsa.generateFile("templates\\base.html", compileBaseHtml);
-		fsa.generateFile("templates\\navigationbar.html",compileNavigationBar);
-		fsa.generateFile("templates\\data.csv",compileTestdata);
+		fsa.generateFile("webserver/settings.py", compileSettings(taskResolver))
+		fsa.generateFile("webserver/__init__.py", compileInit)
+		fsa.generateFile("webserver/wsgi.py", compileWsgi)
+		fsa.generateFile("webserver/urls.py", compileUrls)
+		fsa.generateFile("webserver/celery.py", compileCeleryTasks(taskResolver))
+		fsa.generateFile("webserver/models.py", compileModels)
+		fsa.generateFile("templates/base.html", compileBaseHtml);
+		fsa.generateFile("templates/navigationbar.html",compileNavigationBar);
+		fsa.generateFile("templates/data.csv",compileTestdata);
 	}
 	
 	def compileManager()
@@ -29,7 +33,7 @@ class Precompile {
 	    execute_from_command_line(sys.argv)
 	'''
 	
-	def compileSettings()
+	def compileSettings(SourceTaskResolver resolver)
 	'''
 	"""
 	Django settings for webserver project.
@@ -72,6 +76,7 @@ class Precompile {
 	    'django.contrib.staticfiles',
 	    'rest_framework',
 	    'api',
+	    'djcelery',
 	]
 	
 	MIDDLEWARE_CLASSES = [
@@ -168,6 +173,13 @@ class Precompile {
 	STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 	'''
 	
+	/**
+	 * TODO Add Celery Background Tasks here
+	 */
+	def fetchURITasks() {
+		return ""
+	}
+	
 	def compileInit()
 	''''''
 	
@@ -217,6 +229,49 @@ class Precompile {
 	    url(r'^',include('api.urls')),
 	    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')) #AND here
 	]
+	'''
+	
+	def compileCeleryTasks(SourceTaskResolver resolver)
+	'''
+	from __future__ import absolute_import
+	
+	import os
+	
+	from celery import Celery
+	
+	# Set the default Django settings module for the celery app
+	os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'webserver.settings')
+	
+	from django.conf import settings
+	
+	app = Celery('webserver')
+	
+	# Using a string here means the worker will not have to
+	# prickle the object when using windows
+	app.config_from_object('django.conf:settings')
+	app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
+	
+	# List Size «resolver.schedules.size»
+	uri_list = {
+		«FOR entry: resolver.schedules»
+			«entry»
+		«ENDFOR»
+	}
+	import datatime
+	import celery
+	
+	@celery.decorators.periodic_task(run_every=datetime.timedelta(minutes=5))
+	def fetchFromUrl(): 
+		print("Running Task")
+	'''
+	
+	def compileModels()
+	'''
+	from django.db import models
+	
+	class Datasource(models.Model):
+		name = models.CharField(max_length=50)
+		
 	'''
 	
 	def compileBaseHtml()

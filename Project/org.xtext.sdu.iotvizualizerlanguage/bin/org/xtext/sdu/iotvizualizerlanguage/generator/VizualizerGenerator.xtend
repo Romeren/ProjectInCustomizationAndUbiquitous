@@ -39,7 +39,7 @@ class VizualizerGenerator extends AbstractGenerator {
 			
 			//generate HTML template:
 			fsa.generateFile(
-				"templates\\" + p.name + ".html",
+				"templates/" + p.name + ".html",
 				p.compileTemplateHTML
 			)
 			

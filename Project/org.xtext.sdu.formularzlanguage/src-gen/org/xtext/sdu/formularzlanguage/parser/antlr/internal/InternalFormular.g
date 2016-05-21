@@ -43,7 +43,7 @@ import org.xtext.sdu.formularzlanguage.services.FormularGrammarAccess;
 
     @Override
     protected String getFirstRuleName() {
-    	return "Math";
+    	return "Formula";
    	}
 
    	@Override
@@ -60,15 +60,15 @@ import org.xtext.sdu.formularzlanguage.services.FormularGrammarAccess;
     }
 }
 
-// Entry rule entryRuleMath
-entryRuleMath returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getMathRule()); }
-	iv_ruleMath=ruleMath
-	{ $current=$iv_ruleMath.current; }
+// Entry rule entryRuleFormula
+entryRuleFormula returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getFormulaRule()); }
+	iv_ruleFormula=ruleFormula
+	{ $current=$iv_ruleFormula.current; }
 	EOF;
 
-// Rule Math
-ruleMath returns [EObject current=null]
+// Rule Formula
+ruleFormula returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -77,23 +77,101 @@ ruleMath returns [EObject current=null]
 }:
 	(
 		(
-			{
-				newCompositeNode(grammarAccess.getMathAccess().getFormularsFormulaParserRuleCall_0());
-			}
-			lv_formulars_0_0=ruleFormula
-			{
-				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getMathRule());
+			(
+				lv_name_0_0=RULE_ID
+				{
+					newLeafNode(lv_name_0_0, grammarAccess.getFormulaAccess().getNameIDTerminalRuleCall_0_0());
 				}
-				add(
-					$current,
-					"formulars",
-					lv_formulars_0_0,
-					"org.xtext.sdu.formularzlanguage.Formular.Formula");
-				afterParserOrEnumRuleCall();
-			}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getFormulaRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
 		)
-	)*
+		otherlv_1='('
+		{
+			newLeafNode(otherlv_1, grammarAccess.getFormulaAccess().getLeftParenthesisKeyword_1());
+		}
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getFormulaAccess().getVarsVariableParserRuleCall_2_0_0());
+					}
+					lv_vars_2_0=ruleVariable
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getFormulaRule());
+						}
+						add(
+							$current,
+							"vars",
+							lv_vars_2_0,
+							"org.xtext.sdu.formularzlanguage.Formular.Variable");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_3=','
+				{
+					newLeafNode(otherlv_3, grammarAccess.getFormulaAccess().getCommaKeyword_2_1_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getFormulaAccess().getVarsVariableParserRuleCall_2_1_1_0());
+						}
+						lv_vars_4_0=ruleVariable
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getFormulaRule());
+							}
+							add(
+								$current,
+								"vars",
+								lv_vars_4_0,
+								"org.xtext.sdu.formularzlanguage.Formular.Variable");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+		)?
+		otherlv_5=')'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getFormulaAccess().getRightParenthesisKeyword_3());
+		}
+		otherlv_6='='
+		{
+			newLeafNode(otherlv_6, grammarAccess.getFormulaAccess().getEqualsSignKeyword_4());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getFormulaAccess().getExpExpressionParserRuleCall_5_0());
+				}
+				lv_exp_7_0=ruleExpression
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getFormulaRule());
+					}
+					set(
+						$current,
+						"exp",
+						lv_exp_7_0,
+						"org.xtext.sdu.formularzlanguage.Formular.Expression");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
 ;
 
 // Entry rule entryRuleExpression
@@ -433,120 +511,6 @@ ruleVariable returns [EObject current=null]
 					lv_name_0_0,
 					"org.eclipse.xtext.common.Terminals.ID");
 			}
-		)
-	)
-;
-
-// Entry rule entryRuleFormula
-entryRuleFormula returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getFormulaRule()); }
-	iv_ruleFormula=ruleFormula
-	{ $current=$iv_ruleFormula.current; }
-	EOF;
-
-// Rule Formula
-ruleFormula returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				lv_name_0_0=RULE_ID
-				{
-					newLeafNode(lv_name_0_0, grammarAccess.getFormulaAccess().getNameIDTerminalRuleCall_0_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getFormulaRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_0_0,
-						"org.eclipse.xtext.common.Terminals.ID");
-				}
-			)
-		)
-		otherlv_1='('
-		{
-			newLeafNode(otherlv_1, grammarAccess.getFormulaAccess().getLeftParenthesisKeyword_1());
-		}
-		(
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getFormulaAccess().getVarsVariableParserRuleCall_2_0_0());
-					}
-					lv_vars_2_0=ruleVariable
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getFormulaRule());
-						}
-						add(
-							$current,
-							"vars",
-							lv_vars_2_0,
-							"org.xtext.sdu.formularzlanguage.Formular.Variable");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-			(
-				otherlv_3=','
-				{
-					newLeafNode(otherlv_3, grammarAccess.getFormulaAccess().getCommaKeyword_2_1_0());
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getFormulaAccess().getVarsVariableParserRuleCall_2_1_1_0());
-						}
-						lv_vars_4_0=ruleVariable
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getFormulaRule());
-							}
-							add(
-								$current,
-								"vars",
-								lv_vars_4_0,
-								"org.xtext.sdu.formularzlanguage.Formular.Variable");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)*
-		)?
-		otherlv_5=')'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getFormulaAccess().getRightParenthesisKeyword_3());
-		}
-		otherlv_6='='
-		{
-			newLeafNode(otherlv_6, grammarAccess.getFormulaAccess().getEqualsSignKeyword_4());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getFormulaAccess().getExpExpressionParserRuleCall_5_0());
-				}
-				lv_exp_7_0=ruleExpression
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getFormulaRule());
-					}
-					set(
-						$current,
-						"exp",
-						lv_exp_7_0,
-						"org.xtext.sdu.formularzlanguage.Formular.Expression");
-					afterParserOrEnumRuleCall();
-				}
-			)
 		)
 	)
 ;

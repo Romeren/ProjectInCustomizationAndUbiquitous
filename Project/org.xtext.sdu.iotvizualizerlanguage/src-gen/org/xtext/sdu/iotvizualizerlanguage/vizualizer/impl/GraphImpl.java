@@ -3,8 +3,14 @@
  */
 package org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl;
 
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
 
@@ -13,12 +19,26 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
  * An implementation of the model object '<em><b>Graph</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.GraphImpl#getSource <em>Source</em>}</li>
+ * </ul>
  * </p>
  *
  * @generated
  */
 public class GraphImpl extends TileImpl implements Graph
 {
+  /**
+   * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSource()
+   * @generated
+   * @ordered
+   */
+  protected Datasource source;
+
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -38,6 +58,116 @@ public class GraphImpl extends TileImpl implements Graph
   protected EClass eStaticClass()
   {
     return VizualizerPackage.Literals.GRAPH;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Datasource getSource()
+  {
+    if (source != null && source.eIsProxy())
+    {
+      InternalEObject oldSource = (InternalEObject)source;
+      source = (Datasource)eResolveProxy(oldSource);
+      if (source != oldSource)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, VizualizerPackage.GRAPH__SOURCE, oldSource, source));
+      }
+    }
+    return source;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Datasource basicGetSource()
+  {
+    return source;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSource(Datasource newSource)
+  {
+    Datasource oldSource = source;
+    source = newSource;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, VizualizerPackage.GRAPH__SOURCE, oldSource, source));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType)
+  {
+    switch (featureID)
+    {
+      case VizualizerPackage.GRAPH__SOURCE:
+        if (resolve) return getSource();
+        return basicGetSource();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void eSet(int featureID, Object newValue)
+  {
+    switch (featureID)
+    {
+      case VizualizerPackage.GRAPH__SOURCE:
+        setSource((Datasource)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID)
+  {
+    switch (featureID)
+    {
+      case VizualizerPackage.GRAPH__SOURCE:
+        setSource((Datasource)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID)
+  {
+    switch (featureID)
+    {
+      case VizualizerPackage.GRAPH__SOURCE:
+        return source != null;
+    }
+    return super.eIsSet(featureID);
   }
 
 } //GraphImpl

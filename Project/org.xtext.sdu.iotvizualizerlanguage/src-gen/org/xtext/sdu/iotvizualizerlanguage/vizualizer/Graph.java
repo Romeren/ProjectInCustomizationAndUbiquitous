@@ -9,6 +9,12 @@ package org.xtext.sdu.iotvizualizerlanguage.vizualizer;
  * A representation of the model object '<em><b>Graph</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getSource <em>Source</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getGraph()
  * @model
@@ -16,4 +22,30 @@ package org.xtext.sdu.iotvizualizerlanguage.vizualizer;
  */
 public interface Graph extends Tile
 {
+  /**
+   * Returns the value of the '<em><b>Source</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Source</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Source</em>' reference.
+   * @see #setSource(Datasource)
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getGraph_Source()
+   * @model
+   * @generated
+   */
+  Datasource getSource();
+
+  /**
+   * Sets the value of the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getSource <em>Source</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Source</em>' reference.
+   * @see #getSource()
+   * @generated
+   */
+  void setSource(Datasource value);
+
 } // Graph

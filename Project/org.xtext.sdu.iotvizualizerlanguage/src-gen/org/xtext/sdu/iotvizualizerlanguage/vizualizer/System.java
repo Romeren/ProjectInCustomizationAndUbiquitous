@@ -16,7 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getPages <em>Pages</em>}</li>
- *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getApis <em>Apis</em>}</li>
+ *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getSources <em>Sources</em>}</li>
+ *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.System#getSchemas <em>Schemas</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,19 +44,35 @@ public interface System extends EObject
   EList<Page> getPages();
 
   /**
-   * Returns the value of the '<em><b>Apis</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Api}.
+   * Returns the value of the '<em><b>Sources</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Apis</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Sources</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Apis</em>' containment reference list.
-   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getSystem_Apis()
+   * @return the value of the '<em>Sources</em>' containment reference list.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getSystem_Sources()
    * @model containment="true"
    * @generated
    */
-  EList<Api> getApis();
+  EList<Source> getSources();
+
+  /**
+   * Returns the value of the '<em><b>Schemas</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Schemas</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Schemas</em>' containment reference list.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getSystem_Schemas()
+   * @model containment="true"
+   * @generated
+   */
+  EList<SchemaParser> getSchemas();
 
 } // System

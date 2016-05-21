@@ -1,3 +1,4 @@
 .metadata/
 **/plugin.xml_gen
 RemoteSystemsTempFiles/
+runtime-EclipseApplication/test/src-gen/

@@ -2,8 +2,8 @@
 
 generate formular "http://www.xtext.org/sdu/formularzlanguage/Formular"
 
-Math:
-	formulars+=Formula*	
+Formula:
+	name=ID '(' (vars+=Variable (',' vars+=Variable)*)? ')' '=' exp=Expression
 ;
 
 Expression:
@@ -32,8 +32,4 @@ Number:
 
 Variable:
 	name=ID
-;
-
-Formula:
-	name=ID '(' (vars+=Variable (',' vars+=Variable)*)? ')' '=' exp=Expression
 ;
