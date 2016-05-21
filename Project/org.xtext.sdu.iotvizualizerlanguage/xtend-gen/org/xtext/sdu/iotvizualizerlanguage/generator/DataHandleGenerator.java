@@ -162,6 +162,8 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("import time");
     _builder.newLine();
+    _builder.append("import numpy as np");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("class AbstractEndpoint():");
     _builder.newLine();
@@ -228,7 +230,7 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("response = self.getElement(response, self.schemaParser.selectors[0])");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("self.data = response");
+    _builder.append("self.data = np.array(response)");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return self.data");
