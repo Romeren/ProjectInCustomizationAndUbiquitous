@@ -77,22 +77,31 @@ public class DataHandleGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import numpy as np");
     _builder.newLine();
-    _builder.append("import DataHandle.EndPoints as endpoint");
-    _builder.newLine();
+    {
+      TreeIterator<EObject> _allContents = resource.getAllContents();
+      Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_allContents);
+      Iterable<EndPoint> _filter = Iterables.<EndPoint>filter(_iterable, EndPoint.class);
+      for(final EndPoint endPoint : _filter) {
+        _builder.append("import DataHandle.EndPoints.EndPoint");
+        String _name = endPoint.getName();
+        _builder.append(_name, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.newLine();
     _builder.append("class DatasourceController():");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
     {
-      TreeIterator<EObject> _allContents = resource.getAllContents();
-      Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_allContents);
-      Iterable<Datasource> _filter = Iterables.<Datasource>filter(_iterable, Datasource.class);
-      for(final Datasource datasource : _filter) {
+      TreeIterator<EObject> _allContents_1 = resource.getAllContents();
+      Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(_allContents_1);
+      Iterable<Datasource> _filter_1 = Iterables.<Datasource>filter(_iterable_1, Datasource.class);
+      for(final Datasource datasource : _filter_1) {
         _builder.append("\t");
         _builder.append("def datasource_");
-        String _name = datasource.getName();
-        _builder.append(_name, "\t");
+        String _name_1 = datasource.getName();
+        _builder.append(_name_1, "\t");
         _builder.append("(self):");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -108,13 +117,13 @@ public class DataHandleGenerator extends AbstractGenerator {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("input_");
-                String _name_1 = selector.getName();
-                _builder.append(_name_1, "\t\t");
+                String _name_2 = selector.getName();
+                _builder.append(_name_2, "\t\t");
                 _builder.append(" = np.array(");
                 Source _source = selector.getSource();
                 NoQuotesString _selectVar = selector.getSelectVar();
-                String _name_2 = _selectVar.getName();
-                String _dimensionFromSource = this.getDimensionFromSource(_source, _name_2);
+                String _name_3 = _selectVar.getName();
+                String _dimensionFromSource = this.getDimensionFromSource(_source, _name_3);
                 _builder.append(_dimensionFromSource, "\t\t");
                 _builder.append(")");
                 _builder.newLineIfNotEmpty();
@@ -125,24 +134,24 @@ public class DataHandleGenerator extends AbstractGenerator {
             _builder.append("input_");
             EList<DimensionSelector> _sourceSelectors_1 = dimension.getSourceSelectors();
             DimensionSelector _get = _sourceSelectors_1.get(0);
-            String _name_3 = _get.getName();
-            _builder.append(_name_3, "\t\t");
+            String _name_4 = _get.getName();
+            _builder.append(_name_4, "\t\t");
             _builder.append("[1, ] = ");
-            Formula _name_4 = dimension.getName();
-            String _pythonFormula = this.getPythonFormula(_name_4);
+            Formula _name_5 = dimension.getName();
+            String _pythonFormula = this.getPythonFormula(_name_5);
             _builder.append(_pythonFormula, "\t\t");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("result[\'dimension_");
-            Formula _name_5 = dimension.getName();
-            String _name_6 = _name_5.getName();
-            _builder.append(_name_6, "\t\t");
+            Formula _name_6 = dimension.getName();
+            String _name_7 = _name_6.getName();
+            _builder.append(_name_7, "\t\t");
             _builder.append("\'] = input_");
             EList<DimensionSelector> _sourceSelectors_2 = dimension.getSourceSelectors();
             DimensionSelector _get_1 = _sourceSelectors_2.get(0);
-            String _name_7 = _get_1.getName();
-            _builder.append(_name_7, "\t\t");
+            String _name_8 = _get_1.getName();
+            _builder.append(_name_8, "\t\t");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -174,9 +183,12 @@ public class DataHandleGenerator extends AbstractGenerator {
     } else {
       if ((source instanceof GetEndPoint)) {
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("endpoint.EndPoint");
+        _builder_1.append("EndPoint");
         String _name_1 = ((GetEndPoint)source).getName();
         _builder_1.append(_name_1, "");
+        _builder_1.append(".EndPoint");
+        String _name_2 = ((GetEndPoint)source).getName();
+        _builder_1.append(_name_2, "");
         _builder_1.append("().getData()");
         return _builder_1.toString();
       }

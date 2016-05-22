@@ -445,8 +445,7 @@ public class Precompile {
     _builder.append("    ");
     _builder.append("url(r\'^admin/\', admin.site.urls),");
     _builder.newLine();
-    _builder.append("    ");
-    _builder.append("url(r\'^\',include(\'api.urls\')),");
+    _builder.append("#    url(r\'^\',include(\'api.urls\')),");
     _builder.newLine();
     _builder.append("#    url(r\'^api-auth/\', include(\'rest_framework.urls\', namespace=\'rest_framework\')) #AND here");
     _builder.newLine();

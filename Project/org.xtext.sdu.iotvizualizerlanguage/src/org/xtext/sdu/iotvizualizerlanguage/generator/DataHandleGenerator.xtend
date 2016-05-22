@@ -40,7 +40,9 @@ class DataHandleGenerator extends AbstractGenerator {
 	def compileDatasourceController(Resource resource)
 	'''
 	import numpy as np
-	import DataHandle.EndPoints as endpoint
+	«FOR endPoint : resource.allContents.toIterable.filter(EndPoint)»
+	import DataHandle.EndPoints.EndPoint«endPoint.name»
+	«ENDFOR»
 	
 	class DatasourceController():
 		
@@ -64,7 +66,7 @@ class DataHandleGenerator extends AbstractGenerator {
 		if(source instanceof Datasource) {
 			return '''datasource_«source.name»().get("dimension_«dimension»")'''
 		} else if(source instanceof GetEndPoint) {
-			return '''endpoint.EndPoint«source.name»().getData()'''
+			return '''EndPoint«source.name».EndPoint«source.name»().getData()'''
 		}
 	}
 	
