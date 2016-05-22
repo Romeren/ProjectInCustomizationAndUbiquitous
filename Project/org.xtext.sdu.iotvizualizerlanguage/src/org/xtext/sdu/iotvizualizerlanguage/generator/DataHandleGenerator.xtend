@@ -64,7 +64,7 @@ class DataHandleGenerator extends AbstractGenerator {
 	
 	def getDimensionFromSource(Source source, String dimension) {
 		if(source instanceof Datasource) {
-			return '''datasource_«source.name»().get("dimension_«dimension»")'''
+			return '''self.datasource_«source.name»()['dimension_«dimension»'])'''
 		} else if(source instanceof GetEndPoint) {
 			return '''e_«source.name».EndPoint«source.name»().getData()'''
 		}

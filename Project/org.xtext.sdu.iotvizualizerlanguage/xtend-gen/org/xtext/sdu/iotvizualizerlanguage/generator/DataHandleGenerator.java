@@ -177,12 +177,12 @@ public class DataHandleGenerator extends AbstractGenerator {
   public String getDimensionFromSource(final Source source, final String dimension) {
     if ((source instanceof Datasource)) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("datasource_");
+      _builder.append("self.datasource_");
       String _name = ((Datasource)source).getName();
       _builder.append(_name, "");
-      _builder.append("().get(\"dimension_");
+      _builder.append("()[\'dimension_");
       _builder.append(dimension, "");
-      _builder.append("\")");
+      _builder.append("\'])");
       return _builder.toString();
     } else {
       if ((source instanceof GetEndPoint)) {
