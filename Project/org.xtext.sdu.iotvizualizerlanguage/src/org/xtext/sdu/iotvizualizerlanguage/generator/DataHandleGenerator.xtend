@@ -117,20 +117,29 @@ class DataHandleGenerator extends AbstractGenerator {
 		def getText(self, request):
 			return request.text
 	
-		def getJsonElement(self, jSon, selectorStep):
-			return jSon[selectorStep]
+		def getJsonElement(self, json, selectorStep):
+			return json[selectorStep]
+			
+		def getTextElement(self, text, selectorStep):
+			return text
 	
-		def getElement(self, data, selector):
+		def getElement(self, data, selector, type):
 			for selc in selector.steps:
-				data = self.getJsonElement(data,selc)
+				if type == 'JSON':
+					data = self.getJsonElement(data,selc)
+				else:
+					data = self.getTextElement(data,selc)
 			return data
 	
 		def getData(self):
 			if(not self.data):
 				response = self.fetchData(self.url)
-				response = self.getJson(response)
+				if self.schemaParser.contentType is 'JSON':
+					response = self.getJson(response)
+				else: #TODO: HANDLE CSV AND XML
+					response = self.getText() 
 				#TODO: handle multiple selectors
-				response = self.getElement(response, self.schemaParser.selectors[0])
+				response = self.getElement(response, self.schemaParser.selectors[0], self.schemaParser.contentType)
 				self.data = np.array(response)
 			return self.data
 	'''
@@ -145,7 +154,7 @@ class DataHandleGenerator extends AbstractGenerator {
 	def compileSelector(Selector select)
 	'''
 	from DataHandle.Selectors.AbstractSelector import AbstractSelector
-	class Selector«select.name»(AbstractSelector»):
+	class Selector«select.name»(AbstractSelector):
 		def __init__(self):
 			self.steps = []
 			«FOR step: select.steps»
@@ -170,27 +179,28 @@ class DataHandleGenerator extends AbstractGenerator {
 	
 	def compileParser(SchemaParser parser)
 	'''
-	from DataHendle.Schemaparsers.AbstractSchemaParser import AbstractSchemaParser 
+	from DataHandle.SchemaParsers.AbstractSchemaParser import AbstractSchemaParser 
 	«FOR s : parser.selectors»
-	from DataHendle.Selectors.Selector«s.name» import Selector«s.name»
+	from DataHandle.Selectors.Selector«s.name» import Selector«s.name»
 	«ENDFOR»
 	
 	class SchemaParser«parser.name»(AbstractSchemaParser):
 		def __init__(self):
 			self.selectors = []
 			«FOR select : parser.selectors»
-			self.selectors.append(Selector«select.name»)		
+			self.selectors.append(Selector«select.name»())		
 			«ENDFOR»
+			self.contentType = «parser.schemaType»
 	'''
 	
 	def dispatch compile(GetEndPoint endpoint)
 	'''
 	from DataHandle.EndPoints.AbstractEndpoint import AbstractEndpoint
-	from DataHandle.SchemaParsers.SchemaParsers«endpoint.parser.name» import SchemaParser«endpoint.parser.name»
+	import DataHandle.SchemaParsers.SchemaParser«endpoint.parser.name»  as s
 	
 	class EndPoint«endpoint.name»(AbstractEndpoint):
 		def __init__(self):
-			self.schemaParser = SchemaParsers«endpoint.parser.name»()
+			self.schemaParser = s.SchemaParser«endpoint.parser.name»()
 			self.url = "«endpoint.url»"
 			self.data = None
 	'''

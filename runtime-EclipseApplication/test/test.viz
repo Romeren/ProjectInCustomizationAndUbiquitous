@@ -22,12 +22,12 @@ Datasource a {
 
 Datasource c {
 	Dimensions:
-		Formula g(z) = z * 6 / 8 using a[y] as z
+		Formula g(z) = z * 6 / 9 using a[y] as z
 }
 
 
 Schema schemaA {
-	SchemaType = JSON
+	SchemaType = CSV
 	Selector as x {
 		"name" -> "dog" -> "age"
 	}

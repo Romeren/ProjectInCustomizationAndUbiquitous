@@ -27,6 +27,7 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.NoQuotesString;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser;
+import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaType;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector;
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source;
 
@@ -280,20 +281,37 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def getJsonElement(self, jSon, selectorStep):");
+    _builder.append("def getJsonElement(self, json, selectorStep):");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("return jSon[selectorStep]");
+    _builder.append("return json[selectorStep]");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def getTextElement(self, text, selectorStep):");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return text");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def getElement(self, data, selector):");
+    _builder.append("def getElement(self, data, selector, type):");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("for selc in selector.steps:");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("if type == \'JSON\':");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
     _builder.append("data = self.getJsonElement(data,selc)");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("else:");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("data = self.getTextElement(data,selc)");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return data");
@@ -309,13 +327,22 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("response = self.fetchData(self.url)");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("if self.schemaParser.contentType is \'JSON\':");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
     _builder.append("response = self.getJson(response)");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("else: #TODO: HANDLE CSV AND XML");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("response = self.getText() ");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("#TODO: handle multiple selectors");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("response = self.getElement(response, self.schemaParser.selectors[0])");
+    _builder.append("response = self.getElement(response, self.schemaParser.selectors[0], self.schemaParser.contentType)");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("self.data = np.array(response)");
@@ -346,7 +373,7 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("class Selector");
     String _name = select.getName();
     _builder.append(_name, "");
-    _builder.append("(AbstractSelector»):");
+    _builder.append("(AbstractSelector):");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("def __init__(self):");
@@ -395,12 +422,12 @@ public class DataHandleGenerator extends AbstractGenerator {
   
   public CharSequence compileParser(final SchemaParser parser) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("from DataHendle.Schemaparsers.AbstractSchemaParser import AbstractSchemaParser ");
+    _builder.append("from DataHandle.SchemaParsers.AbstractSchemaParser import AbstractSchemaParser ");
     _builder.newLine();
     {
       EList<Selector> _selectors = parser.getSelectors();
       for(final Selector s : _selectors) {
-        _builder.append("from DataHendle.Selectors.Selector");
+        _builder.append("from DataHandle.Selectors.Selector");
         String _name = s.getName();
         _builder.append(_name, "");
         _builder.append(" import Selector");
@@ -428,10 +455,15 @@ public class DataHandleGenerator extends AbstractGenerator {
         _builder.append("self.selectors.append(Selector");
         String _name_3 = select.getName();
         _builder.append(_name_3, "\t\t");
-        _builder.append(")\t\t");
+        _builder.append("())\t\t");
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("\t\t");
+    _builder.append("self.contentType = ");
+    SchemaType _schemaType = parser.getSchemaType();
+    _builder.append(_schemaType, "\t\t");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
@@ -439,29 +471,26 @@ public class DataHandleGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("from DataHandle.EndPoints.AbstractEndpoint import AbstractEndpoint");
     _builder.newLine();
-    _builder.append("from DataHandle.SchemaParsers.SchemaParsers");
+    _builder.append("import DataHandle.SchemaParsers.SchemaParser");
     SchemaParser _parser = endpoint.getParser();
     String _name = _parser.getName();
     _builder.append(_name, "");
-    _builder.append(" import SchemaParser");
-    SchemaParser _parser_1 = endpoint.getParser();
-    String _name_1 = _parser_1.getName();
-    _builder.append(_name_1, "");
+    _builder.append("  as s");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("class EndPoint");
-    String _name_2 = endpoint.getName();
-    _builder.append(_name_2, "");
+    String _name_1 = endpoint.getName();
+    _builder.append(_name_1, "");
     _builder.append("(AbstractEndpoint):");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("def __init__(self):");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("self.schemaParser = SchemaParsers");
-    SchemaParser _parser_2 = endpoint.getParser();
-    String _name_3 = _parser_2.getName();
-    _builder.append(_name_3, "\t\t");
+    _builder.append("self.schemaParser = s.SchemaParser");
+    SchemaParser _parser_1 = endpoint.getParser();
+    String _name_2 = _parser_1.getName();
+    _builder.append(_name_2, "\t\t");
     _builder.append("()");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
