@@ -33,6 +33,15 @@ class Postcompile{
 	from django.template import Context
 	from DataHandle.Datasources.Controller import DatasourceController
 	
+	import json
+	import numpy as np
+	class NumpyToJson(json.JSONEncoder):
+		def default(self, obj):
+			if isinstance(obj, np.ndarray):
+				return obj.tolist()
+			return json.JSONEncoder.default(self, obj)
+	
+	converter = NumpyToJson()
 	
 	«FOR page : input.allContents.toIterable.filter(Page)»
 	def «page.name»(request):
@@ -40,7 +49,7 @@ class Postcompile{
 		
 		contentMap = {}
 		«FOR graph : page.eAllContents.toIterable.filter(Graph)»
-		contentMap['graph_data_«graph.name»'] = DatasourceController().datasource_«graph.source.name»()
+		contentMap['graph_data_«graph.name»'] = {key : converter.default(value) for key, value in DatasourceController().datasource_«graph.source.name»().items()}
 		«ENDFOR»
 	
 		context = Context(contentMap)

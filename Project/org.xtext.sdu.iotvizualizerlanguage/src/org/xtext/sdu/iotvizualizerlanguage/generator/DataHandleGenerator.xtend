@@ -53,7 +53,8 @@ class DataHandleGenerator extends AbstractGenerator {
 			«FOR selector : dimension.sourceSelectors»
 			input_«selector.name» = np.array(«selector.source.getDimensionFromSource(selector.selectVar.name)»)
 			«ENDFOR»
-			input_«dimension.sourceSelectors.get(0).name»[1, ] = «dimension.name.getPythonFormula»
+
+			input_«dimension.sourceSelectors.get(0).name»[::, 1] = «dimension.name.getPythonFormula»
 			result['dimension_«dimension.name.name»'] = input_«dimension.sourceSelectors.get(0).name»
 			«ENDFOR»
 			return result
@@ -93,7 +94,7 @@ class DataHandleGenerator extends AbstractGenerator {
 	}
 	
 	def dispatch String leftResursiveTraversal(Variable variable, String string) {
-		return string + "input_" + variable.name + "[1, ]"
+		return string + "input_" + variable.name + "[::, 1]"
 	}
 	
 	def dispatch String leftResursiveTraversal(Number number, String string) {
@@ -137,7 +138,7 @@ class DataHandleGenerator extends AbstractGenerator {
 				if self.schemaParser.contentType is 'JSON':
 					response = self.getJson(response)
 				else: #TODO: HANDLE CSV AND XML
-					response = self.getText() 
+					response = self.getText(response) 
 				#TODO: handle multiple selectors
 				response = self.getElement(response, self.schemaParser.selectors[0], self.schemaParser.contentType)
 				self.data = np.array(response)

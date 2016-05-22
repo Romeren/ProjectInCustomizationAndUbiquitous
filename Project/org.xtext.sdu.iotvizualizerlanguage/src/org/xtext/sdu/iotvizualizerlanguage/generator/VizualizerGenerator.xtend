@@ -125,10 +125,9 @@ class VizualizerGenerator extends AbstractGenerator {
 				    .scale(y)
 				    .orient("left");
 				
-				var area = d3.svg.area()
+				var line = d3.svg.line()
 				    .x(function(d) { return x(d.date); })
-				    .y0(height)
-				    .y1(function(d) { return y(d.close); });
+				    .y(function(d) { return y(d.value); });
 				
 				var svg = d3.select("#«graph.name»").append("svg")
 				    .attr("width", width + margin.left + margin.right)
@@ -137,40 +136,38 @@ class VizualizerGenerator extends AbstractGenerator {
 				    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 				
 				
-				csv = $("#«graph.name»").data().graphContent.split("'").join("").split(", ").join("\n").replace('[', '').replace(']','').split("\\n").join("");
+				data = $("#«graph.name»").data().graphContent.split("'").join('"');
+				jsonData = JSON.parse(data)
 				
-				//parse csv
-	  			var lines=csv.split("\n");
-	  			var result = [];
-	  			var headers=lines[0].split(",");
-	  			for(var i=1;i<lines.length;i++){
-	
-		  			var obj = {};
-		  			var currentline=lines[i].split(",");
-	
-		  			for(var j=0;j<headers.length;j++){
+				$.each(jsonData, function(key, value){
+
+				var result = [];
+				var headers= ["time", "value"];
+				for(var i=1;i<value.length;i++){
+					var obj = {};
+					var currentline=value[i];
+					for(var j=0;j<headers.length;j++){
 			  			obj[headers[j]] = currentline[j];
-		  			}
-	
-		  			result.push(obj);
-	  			}
-	  
-	  			data = result;
-	
-				data.forEach(function(d) {
-				  d.date = parseDate(d.date);
-				  d.close = +d.close;
+					}
+					result.push(obj);
+				}
+				
+				var max = null;
+				var min = null;
+				result.forEach(function(d) {
+				  d.date = 	new Date(d.time);
+				  if(max == null || max < d.value){max = d.value}
+				  if(min == null || min > d.value){min = d.value}
 				}
 				);
 				
-				
-				x.domain(d3.extent(data, function(d) { return d.date; }));
-				y.domain([0, d3.max(data, function(d) { return d.close; })]);
-				
+				x.domain(d3.extent(result, function(d) { return d.date; }));
+				y.domain([min, max]);
 				svg.append("path")
-				    .datum(data)
-				    .attr("class", "area")
-				    .attr("d", area);
+				    .datum(result)
+				    .attr("class", "line")
+				    .attr("d", line);
+				});
 				
 				svg.append("g")
 				    .attr("class", "x axis")
