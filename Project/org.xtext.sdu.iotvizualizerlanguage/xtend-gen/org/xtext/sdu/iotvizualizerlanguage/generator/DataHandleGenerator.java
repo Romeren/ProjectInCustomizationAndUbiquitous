@@ -183,7 +183,7 @@ public class DataHandleGenerator extends AbstractGenerator {
       _builder.append(_name, "");
       _builder.append("()[\'dimension_");
       _builder.append(dimension, "");
-      _builder.append("\'])");
+      _builder.append("\']");
       return _builder.toString();
     } else {
       if ((source instanceof GetEndPoint)) {

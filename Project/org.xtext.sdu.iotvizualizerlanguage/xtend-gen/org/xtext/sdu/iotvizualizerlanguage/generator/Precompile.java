@@ -582,6 +582,9 @@ public class Precompile {
     _builder.append("<script type=\"text/javascript\" src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("<title>Informatics</title>");
     _builder.newLine();
     _builder.append("</head>");

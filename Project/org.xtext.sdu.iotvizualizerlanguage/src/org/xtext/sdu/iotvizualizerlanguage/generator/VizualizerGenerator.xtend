@@ -13,6 +13,7 @@ import java.util.List
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph
 import java.util.Random
+import java.awt.GraphicsDevice.WindowTranslucency
 
 /**
  * Generates code from your model files on save.
@@ -36,6 +37,7 @@ class VizualizerGenerator extends AbstractGenerator {
 		
 		var List<String> pageNames = newArrayList	
 		
+		fsa.generateFile("templates/style.css", compileStylesheet)
 		for(p: resource.allContents.toIterable.filter(Page)) {
 			pageNames.add(p.name)
 			
@@ -50,12 +52,54 @@ class VizualizerGenerator extends AbstractGenerator {
     	postcompile.doGenerate(resource, fsa, context, pageNames)
 	}
 	
+	def compileStylesheet()
+	'''
+	path { 
+		stroke: steelblue;
+		stroke-width: 2;
+		fill: none;
+	}
+
+	.axis path,
+	.axis line {
+		fill: none;
+		stroke: grey;
+		stroke-width: 1;
+		shape-rendering: crispEdges;
+	}
+
+	.legend {
+		font-size: 16px;         
+		font-weight: bold;         
+		text-anchor: start;
+		}
+	'''
 	
 	def compileTemplateHTML(Page p)
 	'''
 	{% extends 'base.html' %}
 	{% block content %}
 	<div class="tile-area fg-white tile-area-scheme-dark">
+		<style>
+			path { 
+				stroke-width: 2;
+				fill: none;
+			}
+		
+			.axis path,
+			.axis line {
+				fill: none;
+				stroke: grey;
+				stroke-width: 1;
+				shape-rendering: crispEdges;
+			}
+		
+			.legend {
+				font-size: 16px;         
+				font-weight: bold;         
+				text-anchor: start;
+				}
+		</style>
 		<h1 class="tile-area-title">«p.name»</h1>
 		<div class="tile-area-controls">
 			«FOR l:p.getTiles()»
@@ -98,17 +142,36 @@ class VizualizerGenerator extends AbstractGenerator {
 		<span class="tile-label">«graph.name»<span>
 	</div>
 	<script type="text/javascript">
+	
 				function paint«graph.name»(){
 				console.log("chart script start");
 				var width = $("#«graph.name»").parent().width();
 				var height = $("#«graph.name»").parent().height();
-				var margin = {top: (height/100)*10, right: (width/100)*5, bottom: (height/100)*10, left: (width/100)*15};
+				var margin = {top: (height/100)*10, 
+					right: (width/100)*5, 
+					bottom: (height/100)*10, 
+					left: (width/100)*15};
 	
 				width +=- margin.left - margin.right;
 				height += - margin.top - margin.bottom;
 				
+				data = $("#«graph.name»").data().graphContent.split("'").join('"');
+				jsonData = JSON.parse(data)
 				
-				var parseDate = d3.time.format("%d-%b-%y").parse;
+				dates = []
+				data = []
+				$.each(jsonData, function(key, values) {
+					result = []
+					for( var i = 1; i < values.length; i++ ){
+						var currentline=values[i];
+						var obj = {date: new Date(currentline[0]), value: currentline[1]}
+						dates.push(obj.date);
+						result.push(obj);
+					}
+					data.push({
+						name: key,
+						values: result});
+				});
 				
 				var x = d3.time.scale()
 				    .range([0, width]);
@@ -116,16 +179,19 @@ class VizualizerGenerator extends AbstractGenerator {
 				var y = d3.scale.linear()
 				    .range([height, 0]);
 				
+				var color = d3.scale.category10();
 				
 				var xAxis = d3.svg.axis()
 				    .scale(x)
-				    .orient("bottom");
+				    .orient("bottom")
+				    .ticks(4);
 				
 				var yAxis = d3.svg.axis()
 				    .scale(y)
 				    .orient("left");
 				
 				var line = d3.svg.line()
+				    .interpolate("basis")
 				    .x(function(d) { return x(d.date); })
 				    .y(function(d) { return y(d.value); });
 				
@@ -135,54 +201,40 @@ class VizualizerGenerator extends AbstractGenerator {
 				  .append("g")
 				    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 				
+				color.domain(d3.keys(Object.keys(jsonData)))
 				
-				data = $("#«graph.name»").data().graphContent.split("'").join('"');
-				jsonData = JSON.parse(data)
+				x.domain(d3.extent(dates, function(d) { return d; }));
 				
-				$.each(jsonData, function(key, value){
-
-				var result = [];
-				var headers= ["time", "value"];
-				for(var i=1;i<value.length;i++){
-					var obj = {};
-					var currentline=value[i];
-					for(var j=0;j<headers.length;j++){
-			  			obj[headers[j]] = currentline[j];
-					}
-					result.push(obj);
-				}
-				
-				var max = null;
-				var min = null;
-				result.forEach(function(d) {
-				  d.date = 	new Date(d.time);
-				  if(max == null || max < d.value){max = d.value}
-				  if(min == null || min > d.value){min = d.value}
-				}
-				);
-				
-				x.domain(d3.extent(result, function(d) { return d.date; }));
-				y.domain([min, max]);
-				svg.append("path")
-				    .datum(result)
-				    .attr("class", "line")
-				    .attr("d", line);
-				});
+				y.domain([
+					d3.min(data, function(d) { return d3.min(d.values, function(v) { return v.value; }); }),
+					d3.max(data, function(d) { return d3.max(d.values, function(v) { return v.value; }); })
+				]);
 				
 				svg.append("g")
-				    .attr("class", "x axis")
-				    .attr("transform", "translate(0," + height + ")")
-				    .call(xAxis);
+				      .attr("class", "x axis")
+				      .attr("transform", "translate(0," + height + ")")
+				      .call(xAxis);
 				
 				svg.append("g")
-				    .attr("class", "y axis")
-				    .call(yAxis)
-				  .append("text")
-				    .attr("transform", "rotate(-90)")
-				    .attr("y", 6)
-				    .attr("dy", ".71em")
-				    .style("text-anchor", "end")
-				    .text("Price ($)");	
+						.attr("class", "y axis")
+						.call(yAxis)
+					.append("text")
+						.attr("transform", "rotate(-90)")
+						.attr("y", 6)
+						.attr("dy", ".71em")
+						.style("text-anchor", "end")
+						.text("Value");
+				
+				var lines = svg.selectAll(".valueLine")
+						.data(data)
+					.enter().append("g")
+						.attr("class", ".valueLine")
+				
+				lines.append("path")
+					.attr("class", "line")
+					.attr("d", function(d) { return line(d.values); })
+					.style("stroke", function(d) { return color(d.name); })
+				
 			}
 			
 			function repaint«graph.name»(){
@@ -194,7 +246,7 @@ class VizualizerGenerator extends AbstractGenerator {
 					className = className.replace("big", "large");
 				}
 				divObj.className = className;
-				$("#«graph.name»")[0].innerHTML ='';
+				$("#«graph.name»")[0].innerHTML = '';
 				paint«graph.name»();
 			}
 			

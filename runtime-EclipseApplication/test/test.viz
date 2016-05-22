@@ -16,13 +16,14 @@ Page pageOne
 
 Datasource a {
 	Dimensions:
-		Formula x(x, n) = x + x * 3 + 9 + n using lol[x] as x and using lol[k] as n,
+		Formula x(x, n) = x + x * 2 + 9 + n using lol[x] as x and using lol[k] as n,
+		Formula z(x, n) = x + x * 3 + n using lol[x] as x and using lol[k] as n,
 		Formula y(x) = x using foobar[x] as x
 }
 
 Datasource c {
 	Dimensions:
-		Formula g(z) = z * 6 / 9 using a[y] as z
+		Formula g(z) = z * 3 / 9 using a[y] as z
 }
 
 
@@ -42,7 +43,7 @@ GetPoint lol {
 }
 
 GetPoint foobar {
-	url "http://10.123.3.12:8079/api/data/uuid/b4cb304d-1425-5165-b83d-f3dc985858a6?endtime=1463909610000&limit=100"
+	url "http://10.123.3.12:8079/api/data/uuid/b4cb304d-1425-5165-b83d-f3dc985858a6?endtime=2463909610000&limit=100"
 	Headers {
 		"type" : "Best"
 	}
