@@ -237,7 +237,8 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EList<Tile> _tiles_1 = p.getTiles();
-      for(final Tile t : _tiles_1) {
+      Iterable<Graph> _filter = Iterables.<Graph>filter(_tiles_1, Graph.class);
+      for(final Graph t : _filter) {
         _builder.append("\t\t\t");
         IntStream _ints_1 = this.random.ints(0, 39);
         OptionalInt _findFirst_1 = _ints_1.findFirst();

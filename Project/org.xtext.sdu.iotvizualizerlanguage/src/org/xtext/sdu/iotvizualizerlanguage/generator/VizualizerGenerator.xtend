@@ -111,7 +111,7 @@ class VizualizerGenerator extends AbstractGenerator {
 		<div class="tile-group">
 			<span class="tile-group-title">General</span>
 			<div class="tile-container">
-				«FOR t:p.getTiles()»
+				«FOR t:p.getTiles().filter(Graph)»
 					«t.compile(colorClass.getColor(random.ints(0,39).findFirst().asInt))»			
 				«ENDFOR»
 			</div>

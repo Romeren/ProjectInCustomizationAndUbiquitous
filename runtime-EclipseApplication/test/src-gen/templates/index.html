@@ -23,17 +23,12 @@
 	</style>
 	<h1 class="tile-area-title">index</h1>
 	<div class="tile-area-controls">
-		<a class="image-button bg-violet fg-white bg-hover-dark no-border" href='/pageOne/'>toPageOne</a>
+		<a class="image-button bg-indigo fg-white bg-hover-dark no-border" href='/pageOne/'>toPageOne</a>
 	</div>
 	<div class="tile-group">
 		<span class="tile-group-title">General</span>
 		<div class="tile-container">
-			<div class="tile-small bg-taupe fg-white" onclick="document.location.href='/pageOne/'">
-				<div class="tile-content">
-					<span>toPageOne<span>
-				</div>
-			</div>
-			<div class="tile-large bg-teal fg-white">
+			<div class="tile-large bg-amber fg-white">
 				<div class="tile-content chart" id="testGraph" data-graph-content="{{graph_data_testGraph}}" onclick="repainttestGraph()">
 				</div>
 				<span class="tile-label">testGraph<span>
@@ -81,7 +76,7 @@
 						var xAxis = d3.svg.axis()
 						    .scale(x)
 						    .orient("bottom")
-							.ticks(4);
+						    .ticks(4);
 						
 						var yAxis = d3.svg.axis()
 						    .scale(y)
