@@ -293,6 +293,7 @@ class Precompile {
 		{% load static %}
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
 		<title>Informatics</title>
 	</head>
 	<body class="tile-area-scheme-dark">
