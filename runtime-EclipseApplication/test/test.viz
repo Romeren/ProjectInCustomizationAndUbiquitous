@@ -17,7 +17,7 @@ Page pageOne
 Datasource a {
 	Dimensions:
 		Formula x(x, n) = x + x * 3 + 9 + n using lol[x] as x and using lol[k] as n,
-		Formula y(x, y) = x + y * 5 using lol[y] as x and using lol[x] as y
+		Formula y(x) = x using foobar[x] as x
 }
 
 Datasource c {
@@ -35,6 +35,14 @@ Schema schemaA {
 
 GetPoint lol {
 	url "http://10.123.3.12:8079/api/data/uuid/bec6ad6b-753a-548d-bb8c-4e03f4d67b2e?endtime=1463909610000&limit=100"
+	Headers {
+		"type" : "Best"
+	}
+	use Schema schemaA
+}
+
+GetPoint foobar {
+	url "http://10.123.3.12:8079/api/data/uuid/b4cb304d-1425-5165-b83d-f3dc985858a6?endtime=1463909610000&limit=100"
 	Headers {
 		"type" : "Best"
 	}
