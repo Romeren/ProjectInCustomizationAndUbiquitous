@@ -419,7 +419,7 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.append("x.domain(d3.extent(data, function(d) { return d.date; }));");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("y.domain([min, max);");
+    _builder.append("y.domain([min, max]);");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("svg.append(\"path\")");

@@ -147,16 +147,15 @@ public class DataHandleGenerator extends AbstractGenerator {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("result.put(\"dimension_");
+            _builder.append("result[\'dimension_");
             Formula _name_7 = dimension.getName();
             String _name_8 = _name_7.getName();
             _builder.append(_name_8, "\t\t");
-            _builder.append("\" : input_");
+            _builder.append("\'] = input_");
             EList<DimensionSelector> _sourceSelectors_2 = dimension.getSourceSelectors();
             DimensionSelector _get_1 = _sourceSelectors_2.get(0);
             String _name_9 = _get_1.getName();
             _builder.append(_name_9, "\t\t");
-            _builder.append(")");
             _builder.newLineIfNotEmpty();
           }
         }
