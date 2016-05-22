@@ -351,11 +351,6 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.append("\t\t\t");
     _builder.append("$.each(jsonData, function(key, value){");
     _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("//parse csv");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("//var lines=csv.split(\"\\n\");");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("var result = [];");
@@ -416,7 +411,7 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.append("\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("x.domain(d3.extent(data, function(d) { return d.date; }));");
+    _builder.append("x.domain(d3.extent(result, function(d) { return d.date; }));");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("y.domain([min, max]);");
@@ -425,7 +420,7 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.append("svg.append(\"path\")");
     _builder.newLine();
     _builder.append("\t\t\t    ");
-    _builder.append(".datum(data)");
+    _builder.append(".datum(result)");
     _builder.newLine();
     _builder.append("\t\t\t    ");
     _builder.append(".attr(\"class\", \"line\")");

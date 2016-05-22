@@ -140,8 +140,7 @@ class VizualizerGenerator extends AbstractGenerator {
 				jsonData = JSON.parse(data)
 				
 				$.each(jsonData, function(key, value){
-				//parse csv
-				//var lines=csv.split("\n");
+
 				var result = [];
 				var headers= ["time", "value"];
 				for(var i=1;i<value.length;i++){
@@ -162,10 +161,10 @@ class VizualizerGenerator extends AbstractGenerator {
 				}
 				);
 				
-				x.domain(d3.extent(data, function(d) { return d.date; }));
+				x.domain(d3.extent(result, function(d) { return d.date; }));
 				y.domain([min, max]);
 				svg.append("path")
-				    .datum(data)
+				    .datum(result)
 				    .attr("class", "line")
 				    .attr("d", line);
 				});

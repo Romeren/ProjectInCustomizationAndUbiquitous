@@ -133,6 +133,7 @@ public class DataHandleGenerator extends AbstractGenerator {
                 _builder.newLineIfNotEmpty();
               }
             }
+            _builder.newLine();
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("input_");

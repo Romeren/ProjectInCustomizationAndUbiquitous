@@ -37,6 +37,27 @@ public class Postcompile {
     _builder.append("from DataHandle.Datasources.Controller import DatasourceController");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("import json");
+    _builder.newLine();
+    _builder.append("import numpy as np");
+    _builder.newLine();
+    _builder.append("class NumpyToJson(json.JSONEncoder):");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def default(self, obj):");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if isinstance(obj, np.ndarray):");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return obj.tolist()");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return json.JSONEncoder.default(self, obj)");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("converter = NumpyToJson()");
+    _builder.newLine();
     _builder.newLine();
     {
       TreeIterator<EObject> _allContents = input.getAllContents();
@@ -68,11 +89,11 @@ public class Postcompile {
             _builder.append("contentMap[\'graph_data_");
             String _name_2 = graph.getName();
             _builder.append(_name_2, "\t");
-            _builder.append("\'] = DatasourceController().datasource_");
+            _builder.append("\'] = {key : converter.default(value) for key, value in DatasourceController().datasource_");
             Datasource _source = graph.getSource();
             String _name_3 = _source.getName();
             _builder.append(_name_3, "\t");
-            _builder.append("()");
+            _builder.append("().items()}");
             _builder.newLineIfNotEmpty();
           }
         }
