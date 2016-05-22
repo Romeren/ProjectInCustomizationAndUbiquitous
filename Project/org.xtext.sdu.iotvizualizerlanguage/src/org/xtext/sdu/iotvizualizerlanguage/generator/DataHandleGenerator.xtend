@@ -1,5 +1,7 @@
 package org.xtext.sdu.iotvizualizerlanguage.generator
 
+import java.util.HashSet
+import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
@@ -7,6 +9,8 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import org.xtext.sdu.formularzlanguage.formular.Expression
 import org.xtext.sdu.formularzlanguage.formular.Factor
 import org.xtext.sdu.formularzlanguage.formular.Formula
+import org.xtext.sdu.formularzlanguage.formular.Number
+import org.xtext.sdu.formularzlanguage.formular.Variable
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.EndPoint
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint
@@ -14,9 +18,6 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.PostEndPoint
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.SchemaParser
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Selector
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source
-import org.xtext.sdu.formularzlanguage.formular.Variable
-import org.xtext.sdu.formularzlanguage.formular.Number
-
 
 class DataHandleGenerator extends AbstractGenerator {
 	
@@ -37,6 +38,20 @@ class DataHandleGenerator extends AbstractGenerator {
 		}
 	}
 	
+	def constructSourceMap(Datasource datasource) {
+		var Set<String> set = new HashSet<String>()
+		for (dimension : datasource.dimensions) {
+			for (source : dimension.sourceSelectors.map[dimensionalSelector | dimensionalSelector.source].filter(GetEndPoint)) {
+				set.add(source.name)
+			}
+		}
+		return '''
+		«FOR s : set»
+		endpoint_«s» = e_«s».EndPoint«s»()
+		«ENDFOR»
+		'''
+	}
+	
 	// 
 	def compileDatasourceController(Resource resource)
 	'''
@@ -46,20 +61,9 @@ class DataHandleGenerator extends AbstractGenerator {
 	«ENDFOR»
 	
 	class DatasourceController():
-		
 		«FOR datasource : resource.allContents.toIterable.filter(Datasource)»
 		def datasource_«datasource.name»(self):
-			«FOR dimension : datasource.dimensions»
-			«FOR selector : dimension.sourceSelectors»
-			«IF selector instanceof GetEndPoint»
-			endpoint_«selector.name» = e_«selector.name».EndPoint«selector.name»()
-			«ENDIF»
-			«ENDFOR»
-			«ENDFOR»
-			
-			«FOR end : datasource.eAllContents.toIterable.filter(GetEndPoint)»
-			endpoint_«end.name» = e_«end.name».EndPoint«end.name»()
-			«ENDFOR»
+			«datasource.constructSourceMap»
 		
 			result = {}
 			«FOR dimension : datasource.dimensions»
@@ -233,7 +237,7 @@ class DataHandleGenerator extends AbstractGenerator {
 			self.schemaParser = s.SchemaParser«endpoint.parser.name»()
 			self.url = "«endpoint.url»"
 			self.data = None
-			self.json = «endpoint.json.getJson»
+			self.json = «getJson(endpoint.json)»
 			
 	'''
 	

@@ -19,12 +19,12 @@ Page Temperatures
 	Link HomePage to index
 	Graph testGraph temperatureRaw
 	
-	Graph testGraph temperatureAvg
+	//Graph testGraph temperatureAvg
 }
 
 Datasource a {
 	Dimensions:
-		Formula x(x, n) = x + x * 1 + 9 + n using lol[x] as x and using lol[x] as n,
+		Formula x(x, n) = x + x * 2 + 9 + n using lol[x] as x and using lol[x] as n,
 		Formula z(x, n) = x + x * 3 + n using lol[x] as x and using lol[x] as n
 }
 
