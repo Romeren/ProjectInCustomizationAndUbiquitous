@@ -2,7 +2,6 @@ Page index
 {
 	Link toPageOne to pageOne
 	Graph testGraph a
-	
 }
 
 Page pageOne
@@ -12,17 +11,18 @@ Page pageOne
 	Graph testGraph2 a
 	Graph testGraph3 c
 	Graph testGraph4 c
+	
 }
 
 Datasource a {
 	Dimensions:
-		Formula x(x, n) = x + x * 3 + 9 + n using lol[x] as x and using lol[k] as n,
-		Formula y(x, y) = x + y * 5 using lol[y] as x and using lol[x] as y
+		Formula x(x, n) = x using lol[x] as x and using lol[k] as n,
+		Formula y(x, y) = y using lol[y] as x and using lol[x] as y
 }
 
 Datasource c {
 	Dimensions:
-		Formula g(z) = z * 6 / 9 using a[y] as z
+		Formula g(z) = z using a[y] as z
 }
 
 
