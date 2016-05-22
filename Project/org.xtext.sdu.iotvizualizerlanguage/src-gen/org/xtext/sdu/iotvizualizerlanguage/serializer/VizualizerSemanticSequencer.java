@@ -166,7 +166,14 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	 *     GetEndPoint returns GetEndPoint
 	 *
 	 * Constraint:
-	 *     (name=ID url=STRING headers+=Header headers+=Header* parser=[SchemaParser|ID])
+	 *     (
+	 *         name=ID 
+	 *         url=STRING 
+	 *         json=STRING? 
+	 *         headers+=Header 
+	 *         headers+=Header* 
+	 *         parser=[SchemaParser|ID]
+	 *     )
 	 */
 	protected void sequence_GetEndPoint(ISerializationContext context, GetEndPoint semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -179,19 +186,10 @@ public class VizualizerSemanticSequencer extends FormularSemanticSequencer {
 	 *     Graph returns Graph
 	 *
 	 * Constraint:
-	 *     (name=ID source=[Datasource|ID])
+	 *     (name=ID source=[Datasource|ID] lael=STRING?)
 	 */
 	protected void sequence_Graph(ISerializationContext context, Graph semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.TILE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.TILE__NAME));
-			if (transientValues.isValueTransient(semanticObject, VizualizerPackage.Literals.GRAPH__SOURCE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VizualizerPackage.Literals.GRAPH__SOURCE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGraphAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getGraphAccess().getSourceDatasourceIDTerminalRuleCall_2_0_1(), semanticObject.getSource());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

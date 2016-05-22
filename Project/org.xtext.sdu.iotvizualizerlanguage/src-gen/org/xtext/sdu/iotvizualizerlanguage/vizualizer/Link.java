@@ -11,10 +11,10 @@ package org.xtext.sdu.iotvizualizerlanguage.vizualizer;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link#getPage <em>Page</em>}</li>
  * </ul>
+ * </p>
  *
  * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getLink()
  * @model

@@ -5,6 +5,7 @@ package org.xtext.sdu.iotvizualizerlanguage.generator;
 
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.OptionalInt;
 import java.util.Random;
@@ -60,6 +61,7 @@ public class VizualizerGenerator extends AbstractGenerator {
     this.precompile.precompile(resource, fsa);
     this.dataHandleGenerator.doGenerate(resource, fsa, context);
     List<String> pageNames = CollectionLiterals.<String>newArrayList();
+    final HashMap<EObject, String> colorMap = CollectionLiterals.<EObject, String>newHashMap();
     TreeIterator<EObject> _allContents = resource.getAllContents();
     Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_allContents);
     Iterable<Page> _filter = Iterables.<Page>filter(_iterable, Page.class);
@@ -70,14 +72,14 @@ public class VizualizerGenerator extends AbstractGenerator {
         String _name_1 = p.getName();
         String _plus = ("templates/" + _name_1);
         String _plus_1 = (_plus + ".html");
-        CharSequence _compileTemplateHTML = this.compileTemplateHTML(p);
+        CharSequence _compileTemplateHTML = this.compileTemplateHTML(p, colorMap);
         fsa.generateFile(_plus_1, _compileTemplateHTML);
       }
     }
     this.postcompile.doGenerate(resource, fsa, context, pageNames);
   }
   
-  public CharSequence compileTemplateHTML(final Page p) {
+  public CharSequence compileTemplateHTML(final Page p, final HashMap<EObject, String> colorMap) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("{% extends \'base.html\' %}");
     _builder.newLine();
@@ -96,19 +98,29 @@ public class VizualizerGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EList<Tile> _tiles = p.getTiles();
-      for(final Tile l : _tiles) {
+      Iterable<Link> _filter = Iterables.<Link>filter(_tiles, Link.class);
+      for(final Link l : _filter) {
         {
-          if ((l instanceof Link)) {
+          boolean _containsKey = colorMap.containsKey(l);
+          boolean _not = (!_containsKey);
+          if (_not) {
             _builder.append("\t\t");
-            IntStream _ints = this.random.ints(0, 39);
+            int _length = this.colorClass.colors.length;
+            IntStream _ints = this.random.ints(0, _length);
             OptionalInt _findFirst = _ints.findFirst();
             int _asInt = _findFirst.getAsInt();
             CharSequence _color = this.colorClass.getColor(_asInt);
-            CharSequence _compileControlButton = this.compileControlButton(((Link)l), _color);
-            _builder.append(_compileControlButton, "\t\t");
+            String _string = _color.toString();
+            String _put = colorMap.put(l, _string);
+            _builder.append(_put, "\t\t");
             _builder.newLineIfNotEmpty();
           }
         }
+        _builder.append("\t\t");
+        String _get = colorMap.get(l);
+        CharSequence _compileControlButton = this.compileControlButton(l, _get);
+        _builder.append(_compileControlButton, "\t\t");
+        _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("\t");
@@ -126,12 +138,25 @@ public class VizualizerGenerator extends AbstractGenerator {
     {
       EList<Tile> _tiles_1 = p.getTiles();
       for(final Tile t : _tiles_1) {
+        {
+          boolean _containsKey_1 = colorMap.containsKey(t);
+          boolean _not_1 = (!_containsKey_1);
+          if (_not_1) {
+            _builder.append("\t\t\t");
+            int _length_1 = this.colorClass.colors.length;
+            IntStream _ints_1 = this.random.ints(0, _length_1);
+            OptionalInt _findFirst_1 = _ints_1.findFirst();
+            int _asInt_1 = _findFirst_1.getAsInt();
+            CharSequence _color_1 = this.colorClass.getColor(_asInt_1);
+            String _string_1 = _color_1.toString();
+            String _put_1 = colorMap.put(t, _string_1);
+            _builder.append(_put_1, "\t\t\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.append("\t\t\t");
-        IntStream _ints_1 = this.random.ints(0, 39);
-        OptionalInt _findFirst_1 = _ints_1.findFirst();
-        int _asInt_1 = _findFirst_1.getAsInt();
-        CharSequence _color_1 = this.colorClass.getColor(_asInt_1);
-        CharSequence _compile = this.compile(t, _color_1);
+        String _get_1 = colorMap.get(t);
+        CharSequence _compile = this.compile(t, _get_1);
         _builder.append(_compile, "\t\t\t");
         _builder.append("\t\t\t");
         _builder.newLineIfNotEmpty();

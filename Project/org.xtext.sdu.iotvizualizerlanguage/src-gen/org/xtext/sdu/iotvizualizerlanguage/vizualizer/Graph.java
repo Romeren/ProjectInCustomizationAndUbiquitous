@@ -11,10 +11,11 @@ package org.xtext.sdu.iotvizualizerlanguage.vizualizer;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getSource <em>Source</em>}</li>
+ *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getLael <em>Lael</em>}</li>
  * </ul>
+ * </p>
  *
  * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getGraph()
  * @model
@@ -47,5 +48,31 @@ public interface Graph extends Tile
    * @generated
    */
   void setSource(Datasource value);
+
+  /**
+   * Returns the value of the '<em><b>Lael</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Lael</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Lael</em>' attribute.
+   * @see #setLael(String)
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage#getGraph_Lael()
+   * @model
+   * @generated
+   */
+  String getLael();
+
+  /**
+   * Sets the value of the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getLael <em>Lael</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Lael</em>' attribute.
+   * @see #getLael()
+   * @generated
+   */
+  void setLael(String value);
 
 } // Graph

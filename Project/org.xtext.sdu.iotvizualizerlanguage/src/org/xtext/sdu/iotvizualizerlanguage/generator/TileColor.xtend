@@ -3,7 +3,7 @@ package org.xtext.sdu.iotvizualizerlanguage.generator
 
 class TileColor {
 	
-	val String[] colors = #[
+	public val String[] colors = #[
 'bg-lime',
 'bg-green',
 'bg-emerald',
@@ -24,20 +24,6 @@ class TileColor {
 'bg-olive',
 'bg-mauve',
 'bg-taupe',
-'bg-darkBrown',
-'bg-darkCrimson',
-'bg-darkMagenta',
-'bg-darkIndigo',
-'bg-darkCyan',
-'bg-darkCobalt',
-'bg-darkTeal',
-'bg-darkEmerald',
-'bg-darkGreen',
-'bg-darkOrange',
-'bg-darkRed',
-'bg-darkPink',
-'bg-darkViolet',
-'bg-darkBlue',
 'bg-lightBlue',
 'bg-lightRed',
 'bg-lightGreen',

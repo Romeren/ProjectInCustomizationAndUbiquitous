@@ -235,13 +235,22 @@ public interface VizualizerPackage extends EPackage
   int GRAPH__SOURCE = TILE_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Lael</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GRAPH__LAEL = TILE_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Graph</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GRAPH_FEATURE_COUNT = TILE_FEATURE_COUNT + 1;
+  int GRAPH_FEATURE_COUNT = TILE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SourceImpl <em>Source</em>}' class.
@@ -549,13 +558,22 @@ public interface VizualizerPackage extends EPackage
   int GET_END_POINT__PARSER = END_POINT__PARSER;
 
   /**
+   * The feature id for the '<em><b>Json</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_END_POINT__JSON = END_POINT_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Headers</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GET_END_POINT__HEADERS = END_POINT_FEATURE_COUNT + 0;
+  int GET_END_POINT__HEADERS = END_POINT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Get End Point</em>' class.
@@ -564,7 +582,7 @@ public interface VizualizerPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GET_END_POINT_FEATURE_COUNT = END_POINT_FEATURE_COUNT + 1;
+  int GET_END_POINT_FEATURE_COUNT = END_POINT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.HeaderImpl <em>Header</em>}' class.
@@ -836,6 +854,17 @@ public interface VizualizerPackage extends EPackage
   EReference getGraph_Source();
 
   /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getLael <em>Lael</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Lael</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph#getLael()
+   * @see #getGraph()
+   * @generated
+   */
+  EAttribute getGraph_Lael();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.Datasource <em>Datasource</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1024,6 +1053,17 @@ public interface VizualizerPackage extends EPackage
    * @generated
    */
   EClass getGetEndPoint();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint#getJson <em>Json</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Json</em>'.
+   * @see org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint#getJson()
+   * @see #getGetEndPoint()
+   * @generated
+   */
+  EAttribute getGetEndPoint_Json();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.GetEndPoint#getHeaders <em>Headers</em>}'.
@@ -1291,6 +1331,14 @@ public interface VizualizerPackage extends EPackage
     EReference GRAPH__SOURCE = eINSTANCE.getGraph_Source();
 
     /**
+     * The meta object literal for the '<em><b>Lael</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GRAPH__LAEL = eINSTANCE.getGraph_Lael();
+
+    /**
      * The meta object literal for the '{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.DatasourceImpl <em>Datasource</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1449,6 +1497,14 @@ public interface VizualizerPackage extends EPackage
      * @generated
      */
     EClass GET_END_POINT = eINSTANCE.getGetEndPoint();
+
+    /**
+     * The meta object literal for the '<em><b>Json</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GET_END_POINT__JSON = eINSTANCE.getGetEndPoint_Json();
 
     /**
      * The meta object literal for the '<em><b>Headers</b></em>' containment reference list feature.

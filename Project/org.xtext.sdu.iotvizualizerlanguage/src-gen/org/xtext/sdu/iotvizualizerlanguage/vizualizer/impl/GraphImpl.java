@@ -20,10 +20,11 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.GraphImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.GraphImpl#getLael <em>Lael</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */
@@ -38,6 +39,26 @@ public class GraphImpl extends TileImpl implements Graph
    * @ordered
    */
   protected Datasource source;
+
+  /**
+   * The default value of the '{@link #getLael() <em>Lael</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLael()
+   * @generated
+   * @ordered
+   */
+  protected static final String LAEL_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getLael() <em>Lael</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLael()
+   * @generated
+   * @ordered
+   */
+  protected String lael = LAEL_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -108,6 +129,29 @@ public class GraphImpl extends TileImpl implements Graph
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getLael()
+  {
+    return lael;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setLael(String newLael)
+  {
+    String oldLael = lael;
+    lael = newLael;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, VizualizerPackage.GRAPH__LAEL, oldLael, lael));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -116,6 +160,8 @@ public class GraphImpl extends TileImpl implements Graph
       case VizualizerPackage.GRAPH__SOURCE:
         if (resolve) return getSource();
         return basicGetSource();
+      case VizualizerPackage.GRAPH__LAEL:
+        return getLael();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -132,6 +178,9 @@ public class GraphImpl extends TileImpl implements Graph
     {
       case VizualizerPackage.GRAPH__SOURCE:
         setSource((Datasource)newValue);
+        return;
+      case VizualizerPackage.GRAPH__LAEL:
+        setLael((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -150,6 +199,9 @@ public class GraphImpl extends TileImpl implements Graph
       case VizualizerPackage.GRAPH__SOURCE:
         setSource((Datasource)null);
         return;
+      case VizualizerPackage.GRAPH__LAEL:
+        setLael(LAEL_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -166,8 +218,27 @@ public class GraphImpl extends TileImpl implements Graph
     {
       case VizualizerPackage.GRAPH__SOURCE:
         return source != null;
+      case VizualizerPackage.GRAPH__LAEL:
+        return LAEL_EDEFAULT == null ? lael != null : !LAEL_EDEFAULT.equals(lael);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (lael: ");
+    result.append(lael);
+    result.append(')');
+    return result.toString();
   }
 
 } //GraphImpl

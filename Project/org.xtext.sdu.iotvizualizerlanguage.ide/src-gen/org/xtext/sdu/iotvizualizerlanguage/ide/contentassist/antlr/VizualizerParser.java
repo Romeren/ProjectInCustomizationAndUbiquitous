@@ -46,6 +46,7 @@ public class VizualizerParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPageAccess().getGroup(), "rule__Page__Group__0");
 					put(grammarAccess.getLinkAccess().getGroup(), "rule__Link__Group__0");
 					put(grammarAccess.getGraphAccess().getGroup(), "rule__Graph__Group__0");
+					put(grammarAccess.getGraphAccess().getGroup_3(), "rule__Graph__Group_3__0");
 					put(grammarAccess.getDatasourceAccess().getGroup(), "rule__Datasource__Group__0");
 					put(grammarAccess.getDatasourceAccess().getGroup_6(), "rule__Datasource__Group_6__0");
 					put(grammarAccess.getDimensionAccess().getGroup(), "rule__Dimension__Group__0");
@@ -53,7 +54,8 @@ public class VizualizerParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDimensionSelectorAccess().getGroup(), "rule__DimensionSelector__Group__0");
 					put(grammarAccess.getPostEndPointAccess().getGroup(), "rule__PostEndPoint__Group__0");
 					put(grammarAccess.getGetEndPointAccess().getGroup(), "rule__GetEndPoint__Group__0");
-					put(grammarAccess.getGetEndPointAccess().getGroup_8(), "rule__GetEndPoint__Group_8__0");
+					put(grammarAccess.getGetEndPointAccess().getGroup_5(), "rule__GetEndPoint__Group_5__0");
+					put(grammarAccess.getGetEndPointAccess().getGroup_9(), "rule__GetEndPoint__Group_9__0");
 					put(grammarAccess.getHeaderAccess().getGroup(), "rule__Header__Group__0");
 					put(grammarAccess.getSchemaParserAccess().getGroup(), "rule__SchemaParser__Group__0");
 					put(grammarAccess.getSelectorAccess().getGroup(), "rule__Selector__Group__0");
@@ -75,6 +77,7 @@ public class VizualizerParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLinkAccess().getPageAssignment_3(), "rule__Link__PageAssignment_3");
 					put(grammarAccess.getGraphAccess().getNameAssignment_1(), "rule__Graph__NameAssignment_1");
 					put(grammarAccess.getGraphAccess().getSourceAssignment_2(), "rule__Graph__SourceAssignment_2");
+					put(grammarAccess.getGraphAccess().getLaelAssignment_3_1(), "rule__Graph__LaelAssignment_3_1");
 					put(grammarAccess.getDatasourceAccess().getNameAssignment_1(), "rule__Datasource__NameAssignment_1");
 					put(grammarAccess.getDatasourceAccess().getDimensionsAssignment_5(), "rule__Datasource__DimensionsAssignment_5");
 					put(grammarAccess.getDatasourceAccess().getDimensionsAssignment_6_1(), "rule__Datasource__DimensionsAssignment_6_1");
@@ -90,9 +93,10 @@ public class VizualizerParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPostEndPointAccess().getParserAssignment_6(), "rule__PostEndPoint__ParserAssignment_6");
 					put(grammarAccess.getGetEndPointAccess().getNameAssignment_1(), "rule__GetEndPoint__NameAssignment_1");
 					put(grammarAccess.getGetEndPointAccess().getUrlAssignment_4(), "rule__GetEndPoint__UrlAssignment_4");
-					put(grammarAccess.getGetEndPointAccess().getHeadersAssignment_7(), "rule__GetEndPoint__HeadersAssignment_7");
-					put(grammarAccess.getGetEndPointAccess().getHeadersAssignment_8_1(), "rule__GetEndPoint__HeadersAssignment_8_1");
-					put(grammarAccess.getGetEndPointAccess().getParserAssignment_11(), "rule__GetEndPoint__ParserAssignment_11");
+					put(grammarAccess.getGetEndPointAccess().getJsonAssignment_5_1(), "rule__GetEndPoint__JsonAssignment_5_1");
+					put(grammarAccess.getGetEndPointAccess().getHeadersAssignment_8(), "rule__GetEndPoint__HeadersAssignment_8");
+					put(grammarAccess.getGetEndPointAccess().getHeadersAssignment_9_1(), "rule__GetEndPoint__HeadersAssignment_9_1");
+					put(grammarAccess.getGetEndPointAccess().getParserAssignment_12(), "rule__GetEndPoint__ParserAssignment_12");
 					put(grammarAccess.getHeaderAccess().getKeywordAssignment_0(), "rule__Header__KeywordAssignment_0");
 					put(grammarAccess.getHeaderAccess().getValueAssignment_2(), "rule__Header__ValueAssignment_2");
 					put(grammarAccess.getSchemaParserAccess().getNameAssignment_1(), "rule__SchemaParser__NameAssignment_1");

@@ -23,6 +23,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Graph" eSuperTypes="#//Tile">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Datasource"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lael" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Datasource" eSuperTypes="#//Source">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" upperBound="-1"
@@ -52,6 +53,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PostEndPoint" eSuperTypes="#//EndPoint"/>
   <eClassifiers xsi:type="ecore:EClass" name="GetEndPoint" eSuperTypes="#//EndPoint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="json" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="headers" upperBound="-1"
         eType="#//Header" containment="true"/>
   </eClassifiers>

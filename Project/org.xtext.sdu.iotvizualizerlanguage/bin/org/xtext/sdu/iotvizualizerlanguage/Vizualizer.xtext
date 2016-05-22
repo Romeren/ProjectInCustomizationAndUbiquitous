@@ -22,8 +22,7 @@ Link:
 ;
 
 Graph:
-	'Graph' name=ID
-	source=[Datasource]
+	'Graph' name=ID	source=[Datasource] ('label=' lael=STRING)? 
 ;
 
 Datasource:
@@ -66,6 +65,7 @@ GetEndPoint:
 	'GetPoint' name=ID
 	'{'
 	'url' url=STRING
+	('json' json = STRING)?
 	'Headers' '{'
 		headers+=Header (',' headers+=Header)*
 	'}'

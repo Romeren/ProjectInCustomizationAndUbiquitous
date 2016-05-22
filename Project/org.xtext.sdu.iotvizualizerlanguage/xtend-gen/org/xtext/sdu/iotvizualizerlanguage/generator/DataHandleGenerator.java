@@ -194,7 +194,9 @@ public class DataHandleGenerator extends AbstractGenerator {
         _builder_1.append(".EndPoint");
         String _name_2 = ((GetEndPoint)source).getName();
         _builder_1.append(_name_2, "");
-        _builder_1.append("().getData()");
+        _builder_1.append("().getData()[\'");
+        _builder_1.append(dimension, "");
+        _builder_1.append("\']");
         return _builder_1.toString();
       }
     }
@@ -255,6 +257,8 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("import time");
     _builder.newLine();
+    _builder.append("import datetime");
+    _builder.newLine();
     _builder.append("import numpy as np");
     _builder.newLine();
     _builder.newLine();
@@ -264,11 +268,24 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("def fetchData(self, url):");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.append("if self.json == \"\":");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("response = requests.get(url)");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("\t\t\t");
     _builder.append("return response");
     _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("else:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("response = requests.post(url, self.json)");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return response");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def getJson(self, request):");
@@ -325,34 +342,39 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("def getData(self):");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("if(not self.data):");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("response = self.fetchData(self.url)");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("if self.schemaParser.contentType is \'JSON\':");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("response = self.getJson(response)");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("else: #TODO: HANDLE CSV AND XML");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("response = self.getText(response) ");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("#TODO: handle multiple selectors");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("response = self.getElement(response, self.schemaParser.selectors[0], self.schemaParser.contentType)");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("self.data = np.array(response)");
+    _builder.append("result = {}");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("return self.data");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("response = self.fetchData(self.url)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if self.schemaParser.contentType is \'JSON\':");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("response = self.getJson(response)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("else: #TODO: HANDLE CSV AND XML");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("response = self.getText(response) ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for selector in self.schemaParser.selectors:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("result[selector.name] = np.array(self.getElement(response, selector, self.schemaParser.contentType))");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return result");
     _builder.newLine();
     return _builder;
   }
@@ -366,6 +388,9 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("self.steps = []");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("self.name = None");
     _builder.newLine();
     return _builder;
   }
@@ -394,6 +419,14 @@ public class DataHandleGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("\t\t");
+    _builder.append("self.name = \"");
+    String _name_1 = select.getName();
+    _builder.append(_name_1, "\t\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.newLine();
     return _builder;
   }
   
@@ -482,6 +515,10 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append(_name, "");
     _builder.append("  as s");
     _builder.newLineIfNotEmpty();
+    _builder.append("import datetime");
+    _builder.newLine();
+    _builder.append("import time");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("class EndPoint");
     String _name_1 = endpoint.getName();
@@ -507,7 +544,32 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("\t\t");
     _builder.append("self.data = None");
     _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("self.json = ");
+    String _json = endpoint.getJson();
+    String _json_1 = this.getJson(_json);
+    _builder.append(_json_1, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.newLine();
     return _builder;
+  }
+  
+  public String getJson(final String json) {
+    boolean _or = false;
+    boolean _equals = Objects.equal(json, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _equals_1 = Objects.equal(json, "");
+      _or = _equals_1;
+    }
+    if (_or) {
+      return "\"\"";
+    }
+    final String result = json.replaceAll("\\{", "\" + ");
+    final String result2 = result.replaceAll("\\}", " + \"");
+    return (("\"" + result2) + "\"");
   }
   
   protected CharSequence _compile(final PostEndPoint endpoint) {

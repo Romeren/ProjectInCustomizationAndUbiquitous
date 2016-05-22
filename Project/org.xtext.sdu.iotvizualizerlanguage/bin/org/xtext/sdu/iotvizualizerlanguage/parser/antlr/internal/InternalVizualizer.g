@@ -352,6 +352,30 @@ ruleGraph returns [EObject current=null]
 				}
 			)
 		)
+		(
+			otherlv_3='label='
+			{
+				newLeafNode(otherlv_3, grammarAccess.getGraphAccess().getLabelKeyword_3_0());
+			}
+			(
+				(
+					lv_lael_4_0=RULE_STRING
+					{
+						newLeafNode(lv_lael_4_0, grammarAccess.getGraphAccess().getLaelSTRINGTerminalRuleCall_3_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getGraphRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"lael",
+							lv_lael_4_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)?
 	)
 ;
 
@@ -886,20 +910,44 @@ ruleGetEndPoint returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_5='Headers'
+		(
+			otherlv_5='json'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getGetEndPointAccess().getJsonKeyword_5_0());
+			}
+			(
+				(
+					lv_json_6_0=RULE_STRING
+					{
+						newLeafNode(lv_json_6_0, grammarAccess.getGetEndPointAccess().getJsonSTRINGTerminalRuleCall_5_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getGetEndPointRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"json",
+							lv_json_6_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)?
+		otherlv_7='Headers'
 		{
-			newLeafNode(otherlv_5, grammarAccess.getGetEndPointAccess().getHeadersKeyword_5());
+			newLeafNode(otherlv_7, grammarAccess.getGetEndPointAccess().getHeadersKeyword_6());
 		}
-		otherlv_6='{'
+		otherlv_8='{'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getGetEndPointAccess().getLeftCurlyBracketKeyword_6());
+			newLeafNode(otherlv_8, grammarAccess.getGetEndPointAccess().getLeftCurlyBracketKeyword_7());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getGetEndPointAccess().getHeadersHeaderParserRuleCall_7_0());
+					newCompositeNode(grammarAccess.getGetEndPointAccess().getHeadersHeaderParserRuleCall_8_0());
 				}
-				lv_headers_7_0=ruleHeader
+				lv_headers_9_0=ruleHeader
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getGetEndPointRule());
@@ -907,23 +955,23 @@ ruleGetEndPoint returns [EObject current=null]
 					add(
 						$current,
 						"headers",
-						lv_headers_7_0,
+						lv_headers_9_0,
 						"org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Header");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
-			otherlv_8=','
+			otherlv_10=','
 			{
-				newLeafNode(otherlv_8, grammarAccess.getGetEndPointAccess().getCommaKeyword_8_0());
+				newLeafNode(otherlv_10, grammarAccess.getGetEndPointAccess().getCommaKeyword_9_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getGetEndPointAccess().getHeadersHeaderParserRuleCall_8_1_0());
+						newCompositeNode(grammarAccess.getGetEndPointAccess().getHeadersHeaderParserRuleCall_9_1_0());
 					}
-					lv_headers_9_0=ruleHeader
+					lv_headers_11_0=ruleHeader
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getGetEndPointRule());
@@ -931,20 +979,20 @@ ruleGetEndPoint returns [EObject current=null]
 						add(
 							$current,
 							"headers",
-							lv_headers_9_0,
+							lv_headers_11_0,
 							"org.xtext.sdu.iotvizualizerlanguage.Vizualizer.Header");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)*
-		otherlv_10='}'
+		otherlv_12='}'
 		{
-			newLeafNode(otherlv_10, grammarAccess.getGetEndPointAccess().getRightCurlyBracketKeyword_9());
+			newLeafNode(otherlv_12, grammarAccess.getGetEndPointAccess().getRightCurlyBracketKeyword_10());
 		}
-		otherlv_11='use Schema'
+		otherlv_13='use Schema'
 		{
-			newLeafNode(otherlv_11, grammarAccess.getGetEndPointAccess().getUseSchemaKeyword_10());
+			newLeafNode(otherlv_13, grammarAccess.getGetEndPointAccess().getUseSchemaKeyword_11());
 		}
 		(
 			(
@@ -953,15 +1001,15 @@ ruleGetEndPoint returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getGetEndPointRule());
 					}
 				}
-				otherlv_12=RULE_ID
+				otherlv_14=RULE_ID
 				{
-					newLeafNode(otherlv_12, grammarAccess.getGetEndPointAccess().getParserSchemaParserCrossReference_11_0());
+					newLeafNode(otherlv_14, grammarAccess.getGetEndPointAccess().getParserSchemaParserCrossReference_12_0());
 				}
 			)
 		)
-		otherlv_13='}'
+		otherlv_15='}'
 		{
-			newLeafNode(otherlv_13, grammarAccess.getGetEndPointAccess().getRightCurlyBracketKeyword_12());
+			newLeafNode(otherlv_15, grammarAccess.getGetEndPointAccess().getRightCurlyBracketKeyword_13());
 		}
 	)
 ;

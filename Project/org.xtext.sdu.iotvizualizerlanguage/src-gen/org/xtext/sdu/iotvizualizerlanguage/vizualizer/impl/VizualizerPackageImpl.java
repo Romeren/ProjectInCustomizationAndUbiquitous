@@ -360,6 +360,16 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getGraph_Lael()
+  {
+    return (EAttribute)graphEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getDatasource()
   {
     return datasourceEClass;
@@ -540,9 +550,19 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getGetEndPoint_Json()
+  {
+    return (EAttribute)getEndPointEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getGetEndPoint_Headers()
   {
-    return (EReference)getEndPointEClass.getEStructuralFeatures().get(0);
+    return (EReference)getEndPointEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -702,6 +722,7 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
 
     graphEClass = createEClass(GRAPH);
     createEReference(graphEClass, GRAPH__SOURCE);
+    createEAttribute(graphEClass, GRAPH__LAEL);
 
     datasourceEClass = createEClass(DATASOURCE);
     createEReference(datasourceEClass, DATASOURCE__DIMENSIONS);
@@ -728,6 +749,7 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     postEndPointEClass = createEClass(POST_END_POINT);
 
     getEndPointEClass = createEClass(GET_END_POINT);
+    createEAttribute(getEndPointEClass, GET_END_POINT__JSON);
     createEReference(getEndPointEClass, GET_END_POINT__HEADERS);
 
     headerEClass = createEClass(HEADER);
@@ -804,6 +826,7 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
 
     initEClass(graphEClass, Graph.class, "Graph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGraph_Source(), this.getDatasource(), null, "source", null, 0, 1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGraph_Lael(), ecorePackage.getEString(), "lael", null, 0, 1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(datasourceEClass, Datasource.class, "Datasource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDatasource_Dimensions(), this.getDimension(), null, "dimensions", null, 0, -1, Datasource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -830,6 +853,7 @@ public class VizualizerPackageImpl extends EPackageImpl implements VizualizerPac
     initEClass(postEndPointEClass, PostEndPoint.class, "PostEndPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(getEndPointEClass, GetEndPoint.class, "GetEndPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getGetEndPoint_Json(), ecorePackage.getEString(), "json", null, 0, 1, GetEndPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGetEndPoint_Headers(), this.getHeader(), null, "headers", null, 0, -1, GetEndPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(headerEClass, Header.class, "Header", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

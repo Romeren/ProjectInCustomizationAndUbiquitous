@@ -67,7 +67,7 @@ class DataHandleGenerator extends AbstractGenerator {
 		if(source instanceof Datasource) {
 			return '''self.datasource_«source.name»()['dimension_«dimension»']'''
 		} else if(source instanceof GetEndPoint) {
-			return '''e_«source.name».EndPoint«source.name»().getData()'''
+			return '''e_«source.name».EndPoint«source.name»().getData()['«dimension»']'''
 		}
 	}
 	
@@ -105,13 +105,18 @@ class DataHandleGenerator extends AbstractGenerator {
 	'''
 	import requests
 	import time
+	import datetime
 	import numpy as np
 	
 	class AbstractEndpoint():
 		def fetchData(self, url):
-			response = requests.get(url)
-			return response
-	
+			if self.json == "":
+				response = requests.get(url)
+				return response
+			else:
+				response = requests.post(url, self.json)
+				return response
+		
 		def getJson(self, request):
 			return request.json()
 	
@@ -133,16 +138,19 @@ class DataHandleGenerator extends AbstractGenerator {
 			return data
 	
 		def getData(self):
-			if(not self.data):
-				response = self.fetchData(self.url)
-				if self.schemaParser.contentType is 'JSON':
-					response = self.getJson(response)
-				else: #TODO: HANDLE CSV AND XML
-					response = self.getText(response) 
-				#TODO: handle multiple selectors
-				response = self.getElement(response, self.schemaParser.selectors[0], self.schemaParser.contentType)
-				self.data = np.array(response)
-			return self.data
+			result = {}
+			
+			response = self.fetchData(self.url)
+			
+			if self.schemaParser.contentType is 'JSON':
+				response = self.getJson(response)
+			else: #TODO: HANDLE CSV AND XML
+				response = self.getText(response) 
+			
+			for selector in self.schemaParser.selectors:
+				result[selector.name] = np.array(self.getElement(response, selector, self.schemaParser.contentType))
+			
+			return result
 	'''
 	
 	def compileAbstractSelector()
@@ -150,6 +158,7 @@ class DataHandleGenerator extends AbstractGenerator {
 	class AbstractSelector():
 		def __init__(self):
 			self.steps = []
+			self.name = None
 	'''
 	
 	def compileSelector(Selector select)
@@ -161,6 +170,8 @@ class DataHandleGenerator extends AbstractGenerator {
 			«FOR step: select.steps»
 			«step.appendStep()»
 			«ENDFOR»
+			self.name = "«select.name»"
+			
 	'''
 	def appendStep(String step){
 		try{
@@ -198,13 +209,25 @@ class DataHandleGenerator extends AbstractGenerator {
 	'''
 	from DataHandle.EndPoints.AbstractEndpoint import AbstractEndpoint
 	import DataHandle.SchemaParsers.SchemaParser«endpoint.parser.name»  as s
+	import datetime
+	import time
 	
 	class EndPoint«endpoint.name»(AbstractEndpoint):
 		def __init__(self):
 			self.schemaParser = s.SchemaParser«endpoint.parser.name»()
 			self.url = "«endpoint.url»"
 			self.data = None
+			self.json = «endpoint.json.getJson»
+			
 	'''
+	
+	def getJson(String json){
+		if(json == null || json == "") return '""' 
+		val String result = json.replaceAll('\\{', '" + ')
+		val String result2 = result.replaceAll('\\}',' + "');
+		return '"' + result2 + '"';
+	}
+	
 	
 	def dispatch compile(PostEndPoint endpoint)
 	'''

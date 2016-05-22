@@ -13,6 +13,8 @@ import java.util.List
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Link
 import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph
 import java.util.Random
+import org.eclipse.emf.ecore.EObject
+import java.util.HashMap
 
 /**
  * Generates code from your model files on save.
@@ -35,14 +37,15 @@ class VizualizerGenerator extends AbstractGenerator {
 		dataHandleGenerator.doGenerate(resource, fsa, context);
 		
 		var List<String> pageNames = newArrayList	
-		
+		val colorMap = <EObject, String>newHashMap()
 		for(p: resource.allContents.toIterable.filter(Page)) {
+			
 			pageNames.add(p.name)
 			
 			//generate HTML template:
 			fsa.generateFile(
 				"templates/" + p.name + ".html",
-				p.compileTemplateHTML
+				p.compileTemplateHTML(colorMap)
 			)
 			
     	}
@@ -51,24 +54,28 @@ class VizualizerGenerator extends AbstractGenerator {
 	}
 	
 	
-	def compileTemplateHTML(Page p)
+	def compileTemplateHTML(Page p, HashMap<EObject, String>  colorMap)
 	'''
 	{% extends 'base.html' %}
 	{% block content %}
 	<div class="tile-area fg-white tile-area-scheme-dark">
 		<h1 class="tile-area-title">«p.name»</h1>
 		<div class="tile-area-controls">
-			«FOR l:p.getTiles()»
-				«IF l instanceof Link»
-					«compileControlButton(l, colorClass.getColor(random.ints(0,39).findFirst().asInt))»
+			«FOR l:p.getTiles().filter(Link)»
+				«IF !colorMap.containsKey(l)»
+				«colorMap.put(l, colorClass.getColor(random.ints(0, colorClass.colors.length()).findFirst.asInt).toString())»
 				«ENDIF»
+				«compileControlButton(l, colorMap.get(l))»
 			«ENDFOR»
 		</div>
 		<div class="tile-group">
 			<span class="tile-group-title">General</span>
 			<div class="tile-container">
 				«FOR t:p.getTiles()»
-					«t.compile(colorClass.getColor(random.ints(0,39).findFirst().asInt))»			
+					«IF !colorMap.containsKey(t)»
+					«colorMap.put(t, colorClass.getColor(random.ints(0,colorClass.colors.length()).findFirst.asInt).toString())»
+					«ENDIF»
+					«t.compile(colorMap.get(t))»			
 				«ENDFOR»
 			</div>
 		</div>
