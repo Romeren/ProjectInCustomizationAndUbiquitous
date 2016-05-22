@@ -108,26 +108,78 @@ public class DataHandleGenerator extends AbstractGenerator {
         _builder.append(_name_2, "\t");
         _builder.append("(self):");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("result = {}");
-        _builder.newLine();
         {
           EList<Dimension> _dimensions = datasource.getDimensions();
           for(final Dimension dimension : _dimensions) {
             {
               EList<DimensionSelector> _sourceSelectors = dimension.getSourceSelectors();
               for(final DimensionSelector selector : _sourceSelectors) {
+                {
+                  if ((selector instanceof GetEndPoint)) {
+                    _builder.append("\t");
+                    _builder.append("\t");
+                    _builder.append("endpoint_");
+                    String _name_3 = selector.getName();
+                    _builder.append(_name_3, "\t\t");
+                    _builder.append(" = e_");
+                    String _name_4 = selector.getName();
+                    _builder.append(_name_4, "\t\t");
+                    _builder.append(".EndPoint");
+                    String _name_5 = selector.getName();
+                    _builder.append(_name_5, "\t\t");
+                    _builder.append("()");
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+              }
+            }
+          }
+        }
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.newLine();
+        {
+          TreeIterator<EObject> _eAllContents = datasource.eAllContents();
+          Iterable<EObject> _iterable_2 = IteratorExtensions.<EObject>toIterable(_eAllContents);
+          Iterable<GetEndPoint> _filter_2 = Iterables.<GetEndPoint>filter(_iterable_2, GetEndPoint.class);
+          for(final GetEndPoint end : _filter_2) {
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("endpoint_");
+            String _name_6 = end.getName();
+            _builder.append(_name_6, "\t\t");
+            _builder.append(" = e_");
+            String _name_7 = end.getName();
+            _builder.append(_name_7, "\t\t");
+            _builder.append(".EndPoint");
+            String _name_8 = end.getName();
+            _builder.append(_name_8, "\t\t");
+            _builder.append("()");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("result = {}");
+        _builder.newLine();
+        {
+          EList<Dimension> _dimensions_1 = datasource.getDimensions();
+          for(final Dimension dimension_1 : _dimensions_1) {
+            {
+              EList<DimensionSelector> _sourceSelectors_1 = dimension_1.getSourceSelectors();
+              for(final DimensionSelector selector_1 : _sourceSelectors_1) {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("input_");
-                String _name_3 = selector.getName();
-                _builder.append(_name_3, "\t\t");
+                String _name_9 = selector_1.getName();
+                _builder.append(_name_9, "\t\t");
                 _builder.append(" = np.array(");
-                Source _source = selector.getSource();
-                NoQuotesString _selectVar = selector.getSelectVar();
-                String _name_4 = _selectVar.getName();
-                String _dimensionFromSource = this.getDimensionFromSource(_source, _name_4);
+                Source _source = selector_1.getSource();
+                NoQuotesString _selectVar = selector_1.getSelectVar();
+                String _name_10 = _selectVar.getName();
+                String _dimensionFromSource = this.getDimensionFromSource(_source, _name_10);
                 _builder.append(_dimensionFromSource, "\t\t");
                 _builder.append(")");
                 _builder.newLineIfNotEmpty();
@@ -137,26 +189,26 @@ public class DataHandleGenerator extends AbstractGenerator {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("input_");
-            EList<DimensionSelector> _sourceSelectors_1 = dimension.getSourceSelectors();
-            DimensionSelector _get = _sourceSelectors_1.get(0);
-            String _name_5 = _get.getName();
-            _builder.append(_name_5, "\t\t");
+            EList<DimensionSelector> _sourceSelectors_2 = dimension_1.getSourceSelectors();
+            DimensionSelector _get = _sourceSelectors_2.get(0);
+            String _name_11 = _get.getName();
+            _builder.append(_name_11, "\t\t");
             _builder.append("[::, 1] = ");
-            Formula _name_6 = dimension.getName();
-            String _pythonFormula = this.getPythonFormula(_name_6);
+            Formula _name_12 = dimension_1.getName();
+            String _pythonFormula = this.getPythonFormula(_name_12);
             _builder.append(_pythonFormula, "\t\t");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("result[\'dimension_");
-            Formula _name_7 = dimension.getName();
-            String _name_8 = _name_7.getName();
-            _builder.append(_name_8, "\t\t");
+            Formula _name_13 = dimension_1.getName();
+            String _name_14 = _name_13.getName();
+            _builder.append(_name_14, "\t\t");
             _builder.append("\'] = input_");
-            EList<DimensionSelector> _sourceSelectors_2 = dimension.getSourceSelectors();
-            DimensionSelector _get_1 = _sourceSelectors_2.get(0);
-            String _name_9 = _get_1.getName();
-            _builder.append(_name_9, "\t\t");
+            EList<DimensionSelector> _sourceSelectors_3 = dimension_1.getSourceSelectors();
+            DimensionSelector _get_1 = _sourceSelectors_3.get(0);
+            String _name_15 = _get_1.getName();
+            _builder.append(_name_15, "\t\t");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -188,13 +240,10 @@ public class DataHandleGenerator extends AbstractGenerator {
     } else {
       if ((source instanceof GetEndPoint)) {
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("e_");
+        _builder_1.append("endpoint_");
         String _name_1 = ((GetEndPoint)source).getName();
         _builder_1.append(_name_1, "");
-        _builder_1.append(".EndPoint");
-        String _name_2 = ((GetEndPoint)source).getName();
-        _builder_1.append(_name_2, "");
-        _builder_1.append("().getData()[\'");
+        _builder_1.append(".getData()[\'");
         _builder_1.append(dimension, "");
         _builder_1.append("\']");
         return _builder_1.toString();
@@ -342,6 +391,12 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("def getData(self):");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.append("if self.data:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return self.data");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("result = {}");
     _builder.newLine();
     _builder.append("\t\t");
@@ -372,6 +427,9 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("result[selector.name] = np.array(self.getElement(response, selector, self.schemaParser.contentType))");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("self.data = result");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return result");

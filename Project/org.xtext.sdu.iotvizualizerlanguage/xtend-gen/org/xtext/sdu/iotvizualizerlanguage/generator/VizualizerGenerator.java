@@ -272,16 +272,6 @@ public class VizualizerGenerator extends AbstractGenerator {
         CharSequence _compile = this.compile(t, _get_1);
         _builder.append(_compile, "\t\t\t");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t\t");
-        int _length_2 = this.colorClass.colors.length;
-        IntStream _ints_2 = this.random.ints(0, _length_2);
-        OptionalInt _findFirst_2 = _ints_2.findFirst();
-        int _asInt_2 = _findFirst_2.getAsInt();
-        CharSequence _color_2 = this.colorClass.getColor(_asInt_2);
-        CharSequence _compile_1 = this.compile(t, _color_2);
-        _builder.append(_compile_1, "\t\t\t");
-        _builder.append("\t\t\t");
-        _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("\t\t");

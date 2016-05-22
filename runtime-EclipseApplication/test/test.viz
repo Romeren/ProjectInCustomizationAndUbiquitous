@@ -10,7 +10,7 @@ Page pageOne
 {
 	Link toHomePage to index
 	Graph testGraph a
-	Graph testGraph c
+	Graph testGraph1 c
 	
 }
 
@@ -18,19 +18,20 @@ Page Temperatures
 {
 	Link HomePage to index
 	Graph testGraph temperatureRaw
-	//Graph testGraph temperatureAvg
+	
+	Graph testGraph temperatureAvg
 }
 
 Datasource a {
 	Dimensions:
-		Formula x(x) = x using lol[x] as x,
-		Formula y(y) = y using lol[x] as y
+		Formula x(x, n) = x + x * 1 + 9 + n using lol[x] as x and using lol[x] as n,
+		Formula z(x, n) = x + x * 3 + n using lol[x] as x and using lol[x] as n
 }
 
 Datasource c {
 	
 	Dimensions:
-		Formula g(z) = z using a[y] as z
+		Formula g(z) = z * 3 / 9 using foobar[x] as z
 }
 
 
@@ -123,5 +124,10 @@ Datasource temperatureAvg {
 }
 
 
-
-
+GetPoint foobar {
+	url "http://10.123.3.12:8079/api/data/uuid/b4cb304d-1425-5165-b83d-f3dc985858a6?endtime=2463909610000&limit=100"
+	Headers {
+		"type" : "Best"
+	}
+	use Schema schemaA
+}

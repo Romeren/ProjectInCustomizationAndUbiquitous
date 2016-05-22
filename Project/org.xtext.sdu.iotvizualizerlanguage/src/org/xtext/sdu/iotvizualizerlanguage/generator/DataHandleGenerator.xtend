@@ -17,6 +17,7 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Source
 import org.xtext.sdu.formularzlanguage.formular.Variable
 import org.xtext.sdu.formularzlanguage.formular.Number
 
+
 class DataHandleGenerator extends AbstractGenerator {
 	
 	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
@@ -48,6 +49,18 @@ class DataHandleGenerator extends AbstractGenerator {
 		
 		«FOR datasource : resource.allContents.toIterable.filter(Datasource)»
 		def datasource_«datasource.name»(self):
+			«FOR dimension : datasource.dimensions»
+			«FOR selector : dimension.sourceSelectors»
+			«IF selector instanceof GetEndPoint»
+			endpoint_«selector.name» = e_«selector.name».EndPoint«selector.name»()
+			«ENDIF»
+			«ENDFOR»
+			«ENDFOR»
+			
+			«FOR end : datasource.eAllContents.toIterable.filter(GetEndPoint)»
+			endpoint_«end.name» = e_«end.name».EndPoint«end.name»()
+			«ENDFOR»
+		
 			result = {}
 			«FOR dimension : datasource.dimensions»
 			«FOR selector : dimension.sourceSelectors»
@@ -67,7 +80,7 @@ class DataHandleGenerator extends AbstractGenerator {
 		if(source instanceof Datasource) {
 			return '''self.datasource_«source.name»()['dimension_«dimension»']'''
 		} else if(source instanceof GetEndPoint) {
-			return '''e_«source.name».EndPoint«source.name»().getData()['«dimension»']'''
+			return '''endpoint_«source.name».getData()['«dimension»']'''
 		}
 	}
 	
@@ -138,6 +151,8 @@ class DataHandleGenerator extends AbstractGenerator {
 			return data
 	
 		def getData(self):
+			if self.data:
+				return self.data
 			result = {}
 			
 			response = self.fetchData(self.url)
@@ -150,6 +165,7 @@ class DataHandleGenerator extends AbstractGenerator {
 			for selector in self.schemaParser.selectors:
 				result[selector.name] = np.array(self.getElement(response, selector, self.schemaParser.contentType))
 			
+			self.data = result
 			return result
 	'''
 	

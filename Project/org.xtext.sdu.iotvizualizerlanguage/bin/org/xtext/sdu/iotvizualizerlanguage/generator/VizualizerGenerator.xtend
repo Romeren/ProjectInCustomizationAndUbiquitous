@@ -15,7 +15,6 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.Graph
 import java.util.Random
 import org.eclipse.emf.ecore.EObject
 import java.util.HashMap
-
 /**
  * Generates code from your model files on save.
  * 
@@ -40,7 +39,6 @@ class VizualizerGenerator extends AbstractGenerator {
 		val colorMap = <EObject, String>newHashMap()
 		
 		fsa.generateFile("templates/style.css", compileStylesheet)
-
 		for(p: resource.allContents.toIterable.filter(Page)) {
 			
 			pageNames.add(p.name)
@@ -121,7 +119,6 @@ class VizualizerGenerator extends AbstractGenerator {
 				«colorMap.put(t, colorClass.getColor(random.ints(0,colorClass.colors.length()).findFirst.asInt).toString())»
 				«ENDIF»
 				«t.compile(colorMap.get(t))»
-				«t.compile(colorClass.getColor(random.ints(0,colorClass.colors.length()).findFirst().asInt))»			
 				«ENDFOR»
 			</div>
 		</div>
