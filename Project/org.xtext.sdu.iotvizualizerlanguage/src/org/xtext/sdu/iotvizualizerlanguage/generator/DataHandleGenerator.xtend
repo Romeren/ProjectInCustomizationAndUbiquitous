@@ -41,7 +41,7 @@ class DataHandleGenerator extends AbstractGenerator {
 	'''
 	import numpy as np
 	«FOR endPoint : resource.allContents.toIterable.filter(EndPoint)»
-	import DataHandle.EndPoints.EndPoint«endPoint.name»
+	import DataHandle.EndPoints.EndPoint«endPoint.name» as e_«endPoint.name»
 	«ENDFOR»
 	
 	class DatasourceController():
@@ -66,7 +66,7 @@ class DataHandleGenerator extends AbstractGenerator {
 		if(source instanceof Datasource) {
 			return '''datasource_«source.name»().get("dimension_«dimension»")'''
 		} else if(source instanceof GetEndPoint) {
-			return '''EndPoint«source.name».EndPoint«source.name»().getData()'''
+			return '''e_«source.name».EndPoint«source.name»().getData()'''
 		}
 	}
 	
@@ -190,7 +190,7 @@ class DataHandleGenerator extends AbstractGenerator {
 			«FOR select : parser.selectors»
 			self.selectors.append(Selector«select.name»())		
 			«ENDFOR»
-			self.contentType = «parser.schemaType»
+			self.contentType = '«parser.schemaType»'
 	'''
 	
 	def dispatch compile(GetEndPoint endpoint)

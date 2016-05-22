@@ -27,17 +27,14 @@ Datasource c {
 
 
 Schema schemaA {
-	SchemaType = CSV
+	SchemaType = JSON
 	Selector as x {
-		"name" -> "dog" -> "age"
-	}
-	Selector as y {
-		"name" -> "dog" -> "weight" -> "values"
+		"0" -> "Readings" 
 	}
 }
 
 GetPoint lol {
-	url "http://example.com/lol"
+	url "http://10.123.3.12:8079/api/data/uuid/bec6ad6b-753a-548d-bb8c-4e03f4d67b2e?endtime=1463909610000&limit=100"
 	Headers {
 		"type" : "Best"
 	}
