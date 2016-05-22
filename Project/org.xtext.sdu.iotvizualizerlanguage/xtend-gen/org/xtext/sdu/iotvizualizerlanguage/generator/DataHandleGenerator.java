@@ -140,7 +140,7 @@ public class DataHandleGenerator extends AbstractGenerator {
             DimensionSelector _get = _sourceSelectors_1.get(0);
             String _name_5 = _get.getName();
             _builder.append(_name_5, "\t\t");
-            _builder.append("[1, ] = ");
+            _builder.append("[::, 1] = ");
             Formula _name_6 = dimension.getName();
             String _pythonFormula = this.getPythonFormula(_name_6);
             _builder.append(_pythonFormula, "\t\t");
@@ -241,7 +241,7 @@ public class DataHandleGenerator extends AbstractGenerator {
   protected String _leftResursiveTraversal(final Variable variable, final String string) {
     String _name = variable.getName();
     String _plus = ((string + "input_") + _name);
-    return (_plus + "[1, ]");
+    return (_plus + "[::, 1]");
   }
   
   protected String _leftResursiveTraversal(final org.xtext.sdu.formularzlanguage.formular.Number number, final String string) {
@@ -340,7 +340,7 @@ public class DataHandleGenerator extends AbstractGenerator {
     _builder.append("else: #TODO: HANDLE CSV AND XML");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("response = self.getText() ");
+    _builder.append("response = self.getText(response) ");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("#TODO: handle multiple selectors");

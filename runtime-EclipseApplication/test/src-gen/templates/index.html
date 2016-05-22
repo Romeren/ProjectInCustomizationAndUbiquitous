@@ -57,17 +57,18 @@
 						  .append("g")
 						    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 						
-						
-						csv = $("#testGraph").data().graphContent.split("'").join("").split(", ").join("\n").replace('[', '').replace(']','').split("\\n").join("");
-						
+						data = $("#testGraph").data().graphContent.split("'").join('"');
+						jsonData = JSON(data)
+						 
+
+						 $.each(jsonData, function(key, value){
 						//parse csv
-			  			var lines=csv.split("\n");
+			  			//var lines=csv.split("\n");
 			  			var result = [];
-			  			var headers=lines[0].split(",");
-			  			for(var i=1;i<lines.length;i++){
-			
+			  			var headers= ["Time", "Value"];
+			  			for(var i=1;i<value.length;i++){
 				  			var obj = {};
-				  			var currentline=lines[i].split(",");
+				  			var currentline=value[i];
 			
 				  			for(var j=0;j<headers.length;j++){
 					  			obj[headers[j]] = currentline[j];
@@ -92,7 +93,7 @@
 						    .datum(data)
 						    .attr("class", "area")
 						    .attr("d", area);
-						
+						});
 						svg.append("g")
 						    .attr("class", "x axis")
 						    .attr("transform", "translate(0," + height + ")")
