@@ -1,0 +1,114 @@
+\begin{thebibliography}{}
+
+\bibitem[0xData, 2015]{H2O}
+0xData (2015).
+\newblock H20.
+\newblock \url{http://h2o.ai/}.
+\newblock Accessed: 2015-12-02.
+
+\bibitem[Andrzej~Oles, 2015]{EBI}
+Andrzej~Oles, G.~P. (2015).
+\newblock Image processing and analysis toolbox for r.
+\newblock
+  \url{https://www.bioconductor.org/packages/3.3/bioc/manuals/EBImage/man/EBImage.pdf}.
+\newblock Accessed: 2015-12-02.
+
+\bibitem[Aquarium, 2015a]{neaq:whale-identity-markings}
+Aquarium, N.~E. (2015a).
+\newblock Other identifying marks.
+\newblock
+  \url{http://www.neaq.org/conservation_and_research/projects/endangered_species_habitats/right_whale_research/right_whale_projects/monitoring_individuals_and_family_trees/identifying_with_photographs/how_it_works/other_identifying_marks.php}.
+\newblock Accessed: 2015-12-16.
+
+\bibitem[Aquarium, 2015b]{neaq:whale-identity}
+Aquarium, N.~E. (2015b).
+\newblock Right whale callosity pattern identification.
+\newblock
+  \url{http://www.neaq.org/conservation_and_research/projects/endangered_species_habitats/right_whale_research/right_whale_projects/monitoring_individuals_and_family_trees/identifying_with_photographs/how_it_works/callosity_patterns.php}.
+\newblock Accessed: 2015-12-16.
+
+\bibitem[Belle et~al., 2008]{lit:rn2}
+Belle, V., Deselaers, T., and Schiffer, S. (2008).
+\newblock Randomized trees for real-time one-step face detection and
+  recognition.
+\newblock In {\em Pattern Recognition, 2008. ICPR 2008. 19th International
+  Conference on}, pages 1--4.
+
+\bibitem[Cristy, 2015]{ImgMag}
+Cristy (2015).
+\newblock Imagemagick.
+\newblock \url{http://www.imagemagick.org/script/index.php}.
+\newblock Accessed: 2015-12-02.
+
+\bibitem[Evgenia~Dimitriadou, 2015]{cclust}
+Evgenia~Dimitriadou, K.~H. (2015).
+\newblock Image processing and analysis toolbox for r.
+\newblock \url{https://cran.r-project.org/web/packages/cclust/cclust.pdf}.
+\newblock Accessed: 2015-12-02.
+
+\bibitem[Gentleman and Ihaka, 2015]{RLanguage}
+Gentleman, R. and Ihaka, R. (2015).
+\newblock R website.
+\newblock \url{https://www.r-project.org/}.
+\newblock Accessed: 2015-12-02.
+
+\bibitem[Ghosal, 2009]{lit:rn1}
+Ghosal, V. (2009).
+\newblock Efficient face recognition system using random forest.
+\newblock
+  http://www.security.iitk.ac.in/contents/publications/mtech/VidyutGhosal.pdf.
+\newblock Accessed: 2015-12-17.
+
+\bibitem[Heisele et~al., 2001]{lit:svm1}
+Heisele, B., Ho, P., and Poggio, T. (2001).
+\newblock Face recognition with support vector machines: global versus
+  component-based approach.
+\newblock In {\em Computer Vision, 2001. ICCV 2001. Proceedings. Eighth IEEE
+  International Conference on}, volume~2, pages 688--694 vol.2.
+
+\bibitem[Kaggle, 2015]{kaggle:competition}
+Kaggle (2015).
+\newblock Identify endangered right whales in aerial photographs.
+\newblock \url{https://www.kaggle.com/c/noaa-right-whale-recognition}.
+\newblock Accessed: 2015-12-17.
+
+\bibitem[Kheng, 2015]{backgroundRemoval}
+Kheng, L.~W. (2015).
+\newblock Background removal.
+\newblock \url{https://www.comp.nus.edu.sg/~cs4243/lecture/removebg.pdf}.
+\newblock Accessed: 2015-12-10, CS4243 Computer Vision and Pattern Recognition.
+
+\bibitem[Lawrence et~al., 1997]{lit:nn2}
+Lawrence, S., Giles, C., Tsoi, A.~C., and Back, A. (1997).
+\newblock Face recognition: a convolutional neural-network approach.
+\newblock {\em Neural Networks, IEEE Transactions on}, 8(1):98--113.
+
+\bibitem[Mitchell, 2015]{lit:nn1}
+Mitchell, T. (2015).
+\newblock Neural networks for face recognition.
+\newblock http://www.cs.cmu.edu/~tom/faces.html.
+\newblock Accessed: 2015-12-17.
+
+\bibitem[NOAA, 2015]{NOAA}
+NOAA (2015).
+\newblock {NOAA Fisheries}, national oceanic and atmospheric administration.
+\newblock
+  \url{http://www.nmfs.noaa.gov/pr/species/mammals/whales/north-atlantic-right-whale.html}.
+\newblock Accessed: 2015-12-02.
+
+\bibitem[of~Protected Resources National Marine Fisheries~Service,
+  2015]{NOAARecovery}
+of~Protected Resources National Marine Fisheries~Service, T.~O. (2015).
+\newblock Recovery plan for the north atlantic right whale.
+\newblock
+  \url{http://www.fisheries.noaa.gov/pr/pdfs/recovery/whale_right_northatlantic.pdf}.
+\newblock Accessed: 2015-12-02.
+
+\bibitem[Phillips, 2015]{lit:svm2}
+Phillips, P.~J. (2015).
+\newblock Support vector machines applied to face recognition.
+\newblock
+  \url{http://papers.nips.cc/paper/1609-support-vector-machines-applied-to-face-recognition.pdf}.
+\newblock Accessed: 2015-12-17.
+
+\end{thebibliography}

@@ -20,10 +20,10 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.LinkImpl#getPage <em>Page</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */

@@ -20,11 +20,11 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.GraphImpl#getSource <em>Source</em>}</li>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.GraphImpl#getLael <em>Lael</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */

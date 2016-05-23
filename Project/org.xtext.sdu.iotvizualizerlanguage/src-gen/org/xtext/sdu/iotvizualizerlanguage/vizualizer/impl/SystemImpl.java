@@ -28,12 +28,12 @@ import org.xtext.sdu.iotvizualizerlanguage.vizualizer.VizualizerPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SystemImpl#getPages <em>Pages</em>}</li>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SystemImpl#getSources <em>Sources</em>}</li>
  *   <li>{@link org.xtext.sdu.iotvizualizerlanguage.vizualizer.impl.SystemImpl#getSchemas <em>Schemas</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */

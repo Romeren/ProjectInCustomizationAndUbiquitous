@@ -3,6 +3,8 @@ Page index
 	
 	Link toPageOne to pageOne
 	Link Temperatures to Temperatures
+	Link CO2 to CO2
+	Link PIR to PIR
 	Graph testGraph a
 }
 
@@ -17,7 +19,23 @@ Page pageOne
 Page Temperatures
 {
 	Link HomePage to index
-	Graph testGraph temperatureRaw
+	Graph tempGraph temperatureRaw
+	Graph co2Graph co2Raw
+	Graph pirGraph pirRaw
+}
+
+Page CO2
+{
+	Link HomePage to index
+	Graph co2Graph co2Raw
+	
+	//Graph testGraph temperatureAvg
+}
+
+Page PIR
+{
+	Link HomePage to index
+	Graph pirGraph pirRaw
 	
 	//Graph testGraph temperatureAvg
 }
@@ -131,3 +149,57 @@ GetPoint foobar {
 	}
 	use Schema schemaA
 }
+
+
+GetPoint co2 {		
+	url "http://10.123.3.12:8079/api/query"	
+	json "select data in('{(datetime.datetime.fromtimestamp(time.time()) - datetime.timedelta(1)).strftime('%m/%d/%Y')}', '{datetime.datetime.fromtimestamp(time.time()).strftime('%m/%d/%Y')}') where Path like '/1 - Ground/%/CO2'"
+	Headers {
+		"type" : "application/json"
+	}
+	use Schema schemaB
+}
+
+Datasource co2Raw {
+	Dimensions:
+		Formula x20508a1(x) = x using co2[x20508a1] as x,
+		Formula x205101(x) = x using co2[x205101 ] as x,
+		Formula x205111(x) = x using co2[x205111 ] as x,
+		Formula x20601b1(x) = x using co2[x20601b1] as x ,
+		Formula x206031(x) = x using co2[x206031 ] as x,
+		Formula x20604b1(x) = x using co2[x20604b1] as x ,
+		Formula x225081(x) = x using co2[x225081 ] as x,
+		Formula x225101(x) = x using co2[x225101 ] as x,
+		Formula x225111(x) = x using co2[x225111 ] as x,
+		Formula x22601b1(x) = x using co2[x22601b1] as x ,
+		Formula x226031(x) = x using co2[x226031 ] as x,
+		Formula x226041(x) = x using co2[x226041 ] as x
+}
+
+GetPoint pir {		
+	url "http://10.123.3.12:8079/api/query"	
+	json "select data in('{(datetime.datetime.fromtimestamp(time.time()) - datetime.timedelta(1)).strftime('%m/%d/%Y')}', '{datetime.datetime.fromtimestamp(time.time()).strftime('%m/%d/%Y')}') where Path like '/1 - Ground/%/PIR'"
+	Headers {
+		"type" : "application/json"
+	}
+	use Schema schemaB
+}
+
+Datasource pirRaw {
+	Dimensions:
+		Formula x20508a1(x) = x using pir[x20508a1] as x,
+		Formula x205101(x) = x using pir[x205101 ] as x,
+		Formula x205111(x) = x using pir[x205111 ] as x,
+		Formula x20601b1(x) = x using pir[x20601b1] as x ,
+		Formula x206031(x) = x using pir[x206031 ] as x,
+		Formula x20604b1(x) = x using pir[x20604b1] as x ,
+		Formula x225081(x) = x using pir[x225081 ] as x,
+		Formula x225101(x) = x using pir[x225101 ] as x,
+		Formula x225111(x) = x using pir[x225111 ] as x,
+		Formula x22601b1(x) = x using pir[x22601b1] as x ,
+		Formula x226031(x) = x using pir[x226031 ] as x,
+		Formula x226041(x) = x using pir[x226041 ] as x
+}
+
+
+
