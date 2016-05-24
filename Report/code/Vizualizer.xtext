@@ -63,7 +63,7 @@ GetEndPoint:
 	'GetPoint' name=ID
 	'{'
 	'url' url=STRING
-	('json' json = STRING)?
+	('data' json = STRING)?
 	'Headers' '{'
 		headers+=Header (',' headers+=Header)*
 	'}'
