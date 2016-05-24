@@ -249,8 +249,12 @@ The individual template file contains only the structure of the specific links a
 \subparagraph{Generation}
 The code generation have been done through the [XTend] language.
 This language provides some additional coding features for the plain Java language.
-One of the highly used features is the multi dispatching.
+One of the highly used features is the multi dispatching also known as the polymorphic method invocation.
+When multi dispatching the method selected for invocation is best matching method parameters. 
+Meaning if many extension methods are created for classes in a extension hierarchy the multi dispatching will invoke the method based on the sub class type and not the super class.
 Figure \ref{fig:multidispatching} how formulas are generated using multi dispatching in a nested loop.
+The snippet shows four dispatch methods with same name taking different parameters.
+Calling the traversal algorithm with a expression from a formula will cause the algorithm to traverse through the entire tree of expressions, factors, variables and numbers and treat every different sub type of the "primitive" type differently.
 
 \begin{figure}
 \begin{center}
