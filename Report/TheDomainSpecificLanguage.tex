@@ -1,18 +1,20 @@
 \subsection{Overview}
-The DSL is divided into three components, a arithmetic expressions language, a language for specifying a web site and a language for specifying input sources for the system. 
-The expression language is a utility language which is included by the two others. 
-This language defines how a user can create arithmetic expressions in either of the other two languages. 
-The Web visualizer is a language to create dynamic web sites, like the sample page shown on the front page. 
-This language lets the user create pages on a site, link different pages to each other and visualize information through the use of graphs. 
-The Datasources language, which is still to be developed, will be used to specify different data sources, like for instance a external databases or APIs. 
-In addition this language will also be used to specify internal persistence and a API for other systems to use for posting data to the Dashk system.
+The DSL is divided into two components, a arithmetic expression language(Formula Expression
+Language) and language specifying a web site and additionally specifying input sources for
+the system. 
+The expression language is a utility language which is included by the other language. 
+The arithmetic expression language defines how a user can create arithmetic expressions in
+either of the other two languages. 
+The Web visualizer is a language to create dynamic web sites, like the sample page shown on
+the front page.  
 
 \subsection{The Formula Expression Language}
-The Formula Expressions DSL is responsible for understanding mathematical formulas, which will be applied to tables of data.
+The Formula Expressions language is responsible for understanding mathematical formulas,
+which will be applied to single arrays of data.
 \paragraph{Meta model}
 
-The formula metamodel consist of multiple elements for an overview seen in Figure
-\ref{fig:formulaModel}. The types include in the elements included in the model are:
+The formula metamodel consist of multiple elements, an overview is seen in Figure
+\ref{fig:formulaModel}. The types included in the elements in the model are is explained as below:
 \begin{enumerate}
 \item Formula: The overall Structure Element
 \item Variable: The variable names included in the formula, appears both left and right side of the equation
@@ -86,18 +88,19 @@ collection containing the declared variables on the left was matches against all
 on the right fetched using recursion with depth first search.
 
 \subsection{The Web visualizer Language}
-For generating dashboards custom language have been created.
-This language specify:
+For generating dashboards a custom language have been created.
+The language specify:
 \begin{itemize}
-\item Which pages the web-interface consist of
+\item Which pages the web-interface contains
 \item The navigation between pages
-\item Which data to display and where
+\item Which data to display and which page displays which data
 \item Where and how to obtain the data
 \subitem Internal data streams
 \subitem External data streams
-\item How to manipulate the data streams
+\item How to manipulate the data streams using formulas
 \end{itemize}
-The following subsection will look into detail of how the language is structured and the syntax and grammar of the language.
+The following subsection will look into detail of how the language is structured and the
+syntax and grammar of the language.
 
 \subparagraph{The Grammar}
 \begin{figure}
@@ -115,12 +118,13 @@ This model shows that the language defines of a system containing three parts:
 \item Schemas
 \end{itemize}
 
-\textbf{The Pages,} is what the language in turns will use to create web pages in a system defined in the language.
+\textbf{The Pages,} is what the language in turns will use to create web pages in a system
+defined in the language.
 A page is a collection of tiles. 
 Each tile is an extendible definition of a visual object on a page.
 In the current version, there are two types of Tiles, Links and Graphs.
 A Link definition contains a pointer to a page. 
-A Graph however, has a reference data \textit{source} from witch it needs to fetch data from.
+A Graph however, has a reference data \textit{source} from which it fetches data from.
 \begin{figure}
 \begin{center}
 \lstinputlisting[language=Java, frame=single, breaklines=true,tabsize=3]{code/GrammaDefinition.xtext}
@@ -131,7 +135,8 @@ A Graph however, has a reference data \textit{source} from witch it needs to fet
 Figure \ref{fig:grammadefinition} shows a sample code snippet from the grammar definition.
 The Figure shows how the grammar is defined for the Pages, Tiles, Links and Graphs.
 Similar does Figure \ref{fig:examplePages} show and example use of this grammar. 
-This example creates a system object with two pages inter connected by links and with a number of graphs.
+This example creates a system object with two pages interconnected by links and with a number
+of graphs.
 \begin{figure}
 \begin{center}
 \lstinputlisting[language=Java, frame=single, breaklines=true,tabsize=3]{code/ExampleUsePages.vis}
@@ -141,15 +146,21 @@ This example creates a system object with two pages inter connected by links and
 \end{figure}
 
 \textbf{The Sources, } can be of two different types, an \textit{EndPoint} or a \textit{DataSource}.
-An EndPoint is intended to function as interface towards external systems or data sources. 
-Whereas a Datasource is an internal definition intended for filtering, data manipulation or data grouping.\\
-This Source, Endpoint, Datasource-Dimension structure have been defined as a compositional pattern, with source as the component, the Endpoint as a leaf and the Datasource as the composite.
-This pattern makes the it possible to compose any number of different structures.
+An EndPoint is intended to function as interface between external systems and data sources. 
+Where as a Datasource is an internal definition intended for filtering, data manipulation or
+data grouping.\\
+These Source, Endpoint, Datasource-Dimension structure have been defined as a compositional
+pattern, with source as the component, the Endpoint functions as a leaf and
+the Datasource as the composite.
+This pattern makes it possible to compose any number of different sources.
 In addition every defined dimension comes with a formula, which will be applied to the data.
-Since Source can have multiple dimensions (data streams) when specifying a how a Source an additional dimension selector can be specified to select a subset of the dimensions.
-Figure \ref{fig:exampleDatasources} shows and example of a Datasource created through the language. 
-The first line creates a Datasource and the declares a list of dimensions. 
-Each declaration of a dimension starts by declaring a formula. After the formula follows a declaration of Sources to use in the formula. 
+A Source can have multiple dimensions (data streams). When specifying how a Source,
+Dimension-selectors can be specified to select subset of the dimensions from a refering source.
+Figure \ref{fig:exampleDatasources} shows and example of a Datasource created through the
+language. 
+The first line creates a Datasource and when declares a list of dimensions. 
+Each declaration of a dimension starts by declaring a formula. After the formula follows a
+declaration of Sources used in the formula. 
 
 \begin{figure}
 \begin{center}
@@ -160,8 +171,10 @@ Each declaration of a dimension starts by declaring a formula. After the formula
 \end{figure}
 
 Figure \ref{fig:exampleEndpoints} is an example of the use of Endpoints.
-In this, a GetEndPoint is created. This Endpoint type contains a url, a header and a schema parser.
-In addition this can contain a data field used when for POST request returning data, like for instance the query language of the SMap system.
+In the example, a GetEndPoint is created. This Endpoint type contains a url, a list of headers
+and a schema parser.
+In addition this can contain a payload field used for POST request returning data, like for
+instance the query language of the SMap system.
 \begin{figure}
 \begin{center}
 \lstinputlisting[language=Java, frame=single, breaklines=true,tabsize=3]{code/ExampleUseEndPoint.vis}
@@ -170,24 +183,33 @@ In addition this can contain a data field used when for POST request returning d
 \label{fig:exampleEndpoints}
 \end{figure}
 
-\textbf{The Schemas,} or SchemaParsers are a global way of defining how to parse date from an external source.
-This is both needed when defining an source to request data from and when external sources posts data to the system.
+\textbf{The Schemas,} or SchemaParsers are a global way of defining how to parse date from an
+EndPoint.
+This is both needed when defining an source to request data from and when external sources posts
+data to the system.
 
 \paragraph{Meta model}
 The language compiles a dynamic website using the Django framework.
-This framework uses an MVC architektur which is extended with a template pattern with HTML documents. 
-In order to make the output easy readable and customizable for a user the output needs to be mapped into a model that follows this pattern with more explicit information.
+This framework uses an MVC architektur which is extended with a template pattern with
+HTML documents. 
+In order to make the output easy readable and customizable for a user the output needs to be
+mapped into a model that follows this pattern with more explicit information.
 
-In order to do so, a meta model of the a website using this framework have been created which incorporates the functionality of the desired dashboard system.  
+In order to do so, a meta model of the a website using this framework have been created which
+incorporates the functionality of the desired dashboard system.  
 Figure \ref{fig:websitemodel} shows this meta model.
 This meta model differs in a number of ways from the model created by the language.
 This is due to the high complexity of the Django framework.
-In order to keep the language simple the group decided to create a simpler model for the language (see Figure \ref{fig:languagemodel}) and map this model to the created meta model of the system.
-The meta model however have adopted some aspects of the language model, like for instance the part concerning Datasources, Endpoints, parsers and selectors.
-The Django framework uses a MVC pattern. 
-Which means that the constructed pages and content needs to be mapped into this form.
-The Django way, is to define a controller in form of a urls fils containing the mapping of urls to either views of the system or other urls files.
-The views can then either use a model and/or a HTML template file to build up the responses for a request with the use of a number of serializes.
+In order to keep the language simple it was decided to create a simpler model for the language
+(see Figure \ref{fig:languagemodel}) and map this model to the created meta model of the system.
+The meta model however have adopted some aspects of the language model, like for instance
+the part concerning Datasources, Endpoints, parsers and selectors.
+ 
+To follow the convention of MVC pattern in django framework the constructed pages and
+content needs to be mapped properly. First define a controller in form of url files containing
+the mapping of urls to either views of the system or other urls files.
+The views can either use a model and/or a HTML template file to build up the responses for a
+request with the use of a number of serializables.
 
 \begin{figure}
 \begin{center}
@@ -226,7 +248,8 @@ declared variables on the left side of a formula was supported by a declared var
 a DimensionSelector. 
 
 \paragraph{Code generation}
-To maintain a clean code structure all generated code are put into a number of different packages, see Figure \ref{fig:packagediagram}.
+To maintain a somewhat clean code structure all generated code are put into a number of different
+packages, see Figure \ref{fig:packagediagram}.
 This diagram shows the structure of the generated code.
 \begin{figure}
 \begin{center}
@@ -235,14 +258,16 @@ This diagram shows the structure of the generated code.
 \caption{Package diagram of generated sources}
 \label{fig:packagediagram}
 \end{figure}
-The data handle package contains all code for handling obtaining data from external systems. 
-Into here the data sources, endpoints selectors and schema parsers are generated.
+The ``DataHandle'' package contains all code for handling the obtaining of data from external
+systems. 
+Inside the ``DataHandle'' package the data sources, endpoints selectors and schema parsers are
+generated.
 The api package contains the code generated for creating a API for external sources to post data.
-This package will contain  models, views, serializes and a controller for the API.
+The package contain models, views, serializes and a controller for the API.
 A page object from the language model is split into a number of fractions.
 A page needs to be divided into a model a view, a controller and a HTML template document.
-Better keep things apart the template documents have been gathered in a package by itself (the template package).
-The model views and controllers are generated into the pages package.
+To better keep things apart the template documents have been gathered in a package by itself (the template package).
+The model, views and controllers are generated into the pages package.
 Each page gets it own template file extending a base template file making them easy customizable.
 The individual template file contains only the structure of the specific links and graphs (without data) of that page.
 
@@ -254,23 +279,35 @@ Figure \ref{fig:codegen} shows the work flow of this code generation.
 \caption{The work flow of the code generation}
 \label{fig:codegen}
 \end{figure}
-The code generation starts with pre-compiling all the web-server files and settings, including the settings.py file and the base urls.py file.
-Both the settings and the base urls file are generated to include the web dashboard application generated by the rest of the code generation sequence.
-Nextly the api generation sequence is started. When fully implemented it will generate the model, views, serializes and controller needed.
-After this, is the data handling sequence initiated. In this sequence are all endpoints and data sources build and configured.
-The third sequence is the template html file generation initiated. Here all template documents are build and configured to use the base template theme and visualization.
-After building all elements regarding system configuration, data handling and visualization the final sequence (post generation) is initiated.
+The code generation starts with pre-compiling all the web-server files and settings,
+including the settings.py file and the base urls.py file.
+Both the settings and the base urls file are generated to include the web dashboard application
+generated by the rest of the code generation sequence.
+Next the api generation sequence is started. When fully implemented it will generate the model,
+views, serializables and controllers needed.
+After this, is the data handling sequence is initiated. In this sequence all the endpoints and
+data sources are build and configured.
+The third sequence is the template html file generation initiated. Here all template documents
+are build and configured to use the base template theme and visualization.
+After building all elements regarding system configuration, data handling and visualization the
+final sequence (post generation) is initiated.
 This sequence builds the views and urls that binds everything to the web-server.
 
 \subparagraph{Generation}
 The code generation have been done through the [XTend] language.
-This language provides some additional coding features for the plain Java language.
-One of the highly used features is the multi dispatching also known as the polymorphic method invocation.
-When multi dispatching the method selected for invocation is best matching method parameters. 
-Meaning if many extension methods are created for classes in a extension hierarchy the multi dispatching will invoke the method based on the sub class type and not the super class.
-Figure \ref{fig:multidispatching} how formulas are generated using multi dispatching in a nested loop.
+This language provides some additional coding features not avaialble in plain Java.
+One of the highly used features is the multi dispatching also known as the polymorphic
+method invocation.
+When multi dispatching the method selected for invocation is the method with the most
+specialized parameter for a given type. 
+Meaning if many extension methods are created for classes in a extension hierarchy the multi
+dispatching will invoke the method based on the sub class type and not the super class.
+Figure \ref{fig:multidispatching} how formulas are generated using multi dispatching in a
+nested loop.
 The snippet shows four dispatch methods with same name taking different parameters.
-Calling the traversal algorithm with a expression from a formula will cause the algorithm to traverse through the entire tree of expressions, factors, variables and numbers and treat every different sub type of the "primitive" type differently.
+Calling the traversal algorithm with a expression from a formula will cause the algorithm to
+traverse through the entire tree of expressions, factors, variables and numbers where it will
+treat every different sub type of the "primitive" type differently.
 
 \begin{figure}
 \begin{center}
