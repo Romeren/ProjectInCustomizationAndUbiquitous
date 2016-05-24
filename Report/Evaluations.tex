@@ -3,15 +3,3 @@ This section will try to evaluate the developed language and how well it solves 
 Firstly it will evaluate the language and some of its difficulties and come up with recommendation for improvements. 
 Secondly will it look into how well it solves the problem.
 
-\paragraph{Pros and cons of the language}
-The created language successfully allows the user to setup a dynamic web-page in a fast manner. 
-Further does enable the to integrate external data sources both through rest apis and more advanced quires.
-In addition does the language support grouping and manipulation of these data sources before displaying. 
-However, the language is not expressive enough to handle of multiple sources of data without duplication of code. 
-Examples of this problem have been provided in Appendix \ref{laguagedificulties}.
-For instance, the systems handles making advanced queries to external sources which may response with multiple data streams in an array. 
-But to specify how to parse the response to the system, it is necessary to specify a data selector for each entry in the array, which generates a lot of duplicated code and is annoying of the user.
-However a solution for this problem have already been thought of, but due to time limitation it have not yet been implemented. Instead it will now be described.
-The problem starts at the selectors in the SchemaParser, but by adding a key word, for instance "asArray", to the language when specifying a step would be enough to solve the problem.
-For the dimension, the problem may be solved by allowing users to specify a for-each loop, and making it possible to iterate over dimensions.
-Lastly in the individual function specification can be solved by implementing some of the functionality found in subsection \ref{gnuplot}, Comparing Formula and GNU-Plot. 
