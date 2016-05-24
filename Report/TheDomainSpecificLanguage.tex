@@ -16,21 +16,48 @@ The Formula Expressions DSL is responsible for understanding mathematical formul
 
 
 \subsection{The Web visualizer Language}
-Below table shows the grammar for the web visualizer language to the left and an example of use on the right. 
-As seen from the left side the system consist of a number of pages which again consists of a number of tiles. 
-One tile can, in current implementation be either a link to another page or a definition of a graph. 
-Since the datasource language have not yet been implemented the web visualizer language currently work with a hard-coded testset. 
-Further are only one graph type implemented (a line chart), however the system makes use of D3 framework meaning that extending the system with other graph types is a smaller task.
+For generating dashboards custom language have been created.
+This language specify:
+\begin{itemize}
+\item Which pages the web-interface consist of
+\item The navigation between pages
+\item Which data to display and where
+\item Where and how to obtain the data
+\subitem Internal data streams
+\subitem External data streams
+\item How to manipulate the data streams
+\end{itemize}
+The following subsection will look into detail of how the language is structured and the syntax and grammar of the language.
 
-%Some table
+\subparagraph{The Grammar}
 
-The example on the right site creates a System instance with three pages, each page with a number of Links and Graphs.
-
-\paragraph{Meta model}
-Below is the first meta model of the system. 
-This model matches the language specification one to one. 
-The System once again is a collection of pages, which again consists of a number of tiles which can be of the two previous described types. 
-
+Figure \ref{fig:languagemodel} shows the structure of the language.
+This model shows that the language defines of a system containing three parts:
+\begin{itemize}
+\item Pages
+\item Sources
+\item Schemas
+\end{itemize}
+\textbf{The Pages,} is what the language in turns will use to create web pages in a system defined in the language.
+A page is a collection of tiles. 
+Each tile is an extendible definition of a visual object on a page.
+In the current version, there are two types of Tiles, Links and Graphs.
+A Link definition contains a pointer to a page. 
+A Graph however, has a reference data \textit{source} from witch it needs to fetch data from.
+\begin{figure}
+\begin{center}
+\includegraphics[width=\linewidth]{images/GrammaDefinition}
+\end{center}
+\caption{Sample grammar definition}
+\label{fig:grammadefinition}
+\end{figure}
+Figure \ref{fig:grammadefinition} shows how this grammar was specified.
+\textbf{The Sources, } can be of two different types, an \textit{EndPoint} or a \textit{DataSource}.
+An EndPoint is intended to function as interface towards external systems or data sources. 
+Whereas a Datasource is an internal definition intended for filtering, data manipulation or data grouping.\\
+This Source, Endpoint, Datasource structure have been defined as a compositional pattern, with source as the component, the Endpoint as a leaf and the Datasource as the composite.
+This pattern makes the it possible to compose any number of different structures.
+\textbf{Schemas}
 \begin{figure}
 \begin{center}
 \includegraphics[width=\linewidth]{images/languagemodel}
@@ -38,6 +65,45 @@ The System once again is a collection of pages, which again consists of a number
 \caption{Model of the language}
 \label{fig:languagemodel}
 \end{figure}
+
+
+
+Below table shows the grammar for the web visualizer language to the left and an example of use on the right. 
+As seen from the left side the system consist of a number of pages which again consists of a number of tiles. 
+One tile can, in current implementation be either a link to another page or a definition of a graph. 
+Since the datasource language have not yet been implemented the web visualizer language currently work with a hard-coded testset. 
+Further are only one graph type implemented (a line chart), however the system makes use of D3 framework meaning that extending the system with other graph types is a smaller task.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\linewidth]{images/ExampleUsePages}
+\end{center}
+\caption{Example language use, defining pages}
+\label{fig:examplePages}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\linewidth]{images/ExampleUseDataSources}
+\end{center}
+\caption{Example language use, defining data sources}
+\label{fig:exampleDatasources}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\linewidth]{images/ExampleUseEndPoint}
+\end{center}
+\caption{Example language use, defining endpoints}
+\label{fig:exampleEndpoints}
+\end{figure}
+
+The example on the right site creates a System instance with three pages, each page with a number of Links and Graphs.
+
+\paragraph{Meta model}
+Below is the first meta model of the system. 
+This model matches the language specification one to one. 
+The System once again is a collection of pages, which again consists of a number of tiles which can be of the two previous described types. 
 
 \paragraph{Language Validation}
 
