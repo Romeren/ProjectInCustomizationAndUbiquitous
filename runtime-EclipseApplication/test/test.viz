@@ -1,26 +1,35 @@
 Page index 
 {
-	Link toPageOne to pageOne
-	Link Temperatures to Temperatures
-	Link CO2 to CO2
-	Link PIR to PIR
-	Graph testGraph a
+	Link toPageOne to Temperatures
 }
 
 Page pageOne
 {
-	Link toHomePage to index
-	Graph testGraph a
-	Graph testGraph1 c
+	Link HomePage to index
+	Link Room1 to index
+	Link Room2 to index
+	Link Room3 to index
+	Link Room4 to index
+	Link Room5 to index
+	Link CO2 to index
+	Link PIR to index
+	//Graph testGraph a
+	//Graph testGraph1 c
 	
 }
 
 Page Temperatures
 {
 	Link HomePage to index
+	Link Room1 to index
+	Link Room2 to index
+	Link Room3 to index
+	Link Room4 to index
+	Link CO2 to index
+	Link PIR to index
 	Graph tempGraph temperatureRaw
 	Graph co2Graph co2Raw
-	Graph pirGraph pirRaw
+	//Graph pirGraph pirRaw
 }
 
 Page CO2
@@ -133,13 +142,13 @@ Datasource temperatureRaw {
 		Formula x226041(x) = x using temperature[x226041 ] as x
 
 }
-
+/*
 
 Datasource temperatureAvg {
 	Dimensions:
 		Formula average(x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12) = (x1 +x2+x3+x4+x5+x6+x7+x8+x9+x10+x11+x12)/12 using temperatureRaw[x20508a1] as x1 and using temperatureRaw[x205101] as x2 and using temperatureRaw[x205111] as x3 and using temperatureRaw[x20601b1] as x4 and using temperatureRaw[x206031] as x5 and using temperatureRaw[x20604b1] as x6 and using temperatureRaw[x225081] as x7 and using temperatureRaw[x225101] as x8 and using temperatureRaw[x225111] as x9 and using temperatureRaw[x22601b1] as x10 and using temperatureRaw[x226031] as x11 and using temperatureRaw[x226041] as x12
 }
-
+*/
 
 GetPoint foobar {
 	url "http://10.123.3.12:8079/api/data/uuid/b4cb304d-1425-5165-b83d-f3dc985858a6?endtime=2463909610000&limit=100"
