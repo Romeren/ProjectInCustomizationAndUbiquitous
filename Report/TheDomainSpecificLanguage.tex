@@ -74,11 +74,11 @@ Figure \ref{fig:formulaInstance}
   \label{fig:formulaModel}
 \end{figure}
 \paragraph{Language Validation}
-has been archieved partly by the BNF(PUT REF TO WHAT BNF IS HERE) using xtext, but also
-using xtend to write additional validation code, where the xtext language was not sufficient
+has been archieved partly by the BNF\footnote{\cite{BNF}} using Xtext, but also
+using Xtend to write additional validation code, where the Xtext language was not sufficient
 to validate that the structure did indeed not violate any rules.
 
-xtext could only validate the general structure of the model.
+Xtext could only validate the general structure of the model.
 what xtext was not archieved was to have xtext validate that the only variables used
 on the right side og the equation sign was declared on the left side.
 In order to validate that the variables on the right was declared on the left a
@@ -185,6 +185,32 @@ This model matches the language specification one to one.
 The System once again is a collection of pages, which again consists of a number of tiles which can be of the two previous described types. 
 
 \paragraph{Language Validation}
+of the entire vizualizer project containing validating the following items:
+\begin{enumerate}
+\item \textbf{[XText]} The page linked to from one page to another existed
+\item \textbf{[XText]} Graphs contains an existing reference to a Datasource
+\item \textbf{[XText]} GetEndPoints contains a Schema
+\item \textbf{[XText]} Schemas contain at least 1 Selector
+\item \textbf{[XText]} Datasources contains at least one Dimension
+\item \textbf{[XText]} Dimension contains at least one reference to a Source
+\item \textbf{[XTend]} Datasources have no cyclic dependencies
+\item \textbf{[XTend]} All the variables declared on the left side of a formula is also declared under one of the DimensionSelectors listed for that Dimension.
+\item \textbf{[XTend]} All Datasources is directly or indirectly connected to an EndPoint
+\end{enumerate}
+
+It was not archieved to validate all the rules in the grammar strictly using XText and a few
+of the rules had to be checked in the syntax tree. XText can make checks like that a reference is
+existing and that the overall grammar structure is correct.
+The things that XTend can do is that after the initial grammar, the instance of the grammar is
+built and that gives some additional possibilities to validate the program from XTend. Here
+only the full validation should be possible, given that the language is not turing
+complete\footnote{make ref to turing completeness}. As listed previously cyclic dependencies
+can be checked a long with more advanced type checking. Maybe a language would contain an odd
+rule that the number 5 would not be allowed. This could be put into the XText document,
+but would be much easier to validate using XTend. Here we could also extend the Formula projects
+language validation rules within the Vizualizer language futher using XTend by checking that
+declared variables on the left side of a formula was supported by a declared variable from
+a DimensionSelector. 
 
 \paragraph{Code generation}
 To create the website the project uses the Django framework. 
