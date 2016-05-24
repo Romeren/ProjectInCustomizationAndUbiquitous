@@ -1,6 +1,6 @@
 GetEndPoint temperature {
 	url "http://10.123.3.12:8079/api/query"	
-	json "select data in('{(datetime.datetime.fromtimestamp(time.time()) - datetime.timedelta(1)).strftime('%m/%d/%Y')}', '{datetime.datetime.fromtimestamp(time.time()).strftime('%m/%d/%Y')}') where Path like '/1 - Ground/%/Temperature'"
+	data "select data in('{(datetime.datetime.fromtimestamp(time.time()) - datetime.timedelta(1)).strftime('%m/%d/%Y')}', '{datetime.datetime.fromtimestamp(time.time()).strftime('%m/%d/%Y')}') where Path like '/1 - Ground/%/Temperature'"
 	Headers {
 		"type" : "application/json"
 	}
