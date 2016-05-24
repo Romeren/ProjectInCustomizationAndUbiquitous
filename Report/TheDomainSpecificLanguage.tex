@@ -10,6 +10,7 @@ In addition this language will also be used to specify internal persistence and 
 \subsection{The Formula Expression Language}
 The Formula Expressions DSL is responsible for understanding mathematical formulas, which will be applied to tables of data.
 \paragraph{Meta model}
+
 The formula metamodel consist of multiple elements.
 The types include in the elements included in the model are:
 \begin{enumerate}
@@ -59,7 +60,10 @@ a nested expression for the overall expression.
   \caption{Model of the formula module}
   \label{fig:formulaModel}
 \end{figure}
+\paragraph{Language Validation}
+
 \paragraph{Code Generation}
+
 
 \subsection{The Web visualizer Language}
 Below table shows the grammar for the web visualizer language to the left and an example of use on the right. 
@@ -79,11 +83,13 @@ The System once again is a collection of pages, which again consists of a number
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\linewidth]{images/websitelanguagemodel}
+\includegraphics[width=\linewidth]{images/languagemodel}
 \end{center}
 \caption{Model of the language}
-\label{fig:websitelangmodel}
+\label{fig:languagemodel}
 \end{figure}
+
+\paragraph{Language Validation}
 
 \paragraph{Code generation}
 To create the website the project uses the Django framework. 
@@ -99,7 +105,6 @@ This second model can be seen in below diagram.
 \label{fig:websitemodel}
 \end{figure}
 
-
 The first step of mapping the previous model into the second meta model, is to create a system with a configuration. 
 Secondly a default controller is added with the default Django Admin configuration pages. 
 This controller gets a number of URLs and default views. 
@@ -109,3 +114,14 @@ The HTML file holds a easy customizable structure of the content added to the pa
 In addition will the view of a page be responsible of rendering the template with context and data from a datasource. 
 After this model have been created each entry in the model is looped through and generated into a file.
 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\linewidth]{images/PackageDiagram}
+\end{center}
+\caption{Package diagram of generated sources}
+\label{fig:packagediagram}
+\end{figure}
+\subparagraph{Pages}
+\subparagraph{Data sources}
+\subparagraph{Api}
