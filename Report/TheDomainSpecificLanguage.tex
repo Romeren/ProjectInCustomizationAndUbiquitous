@@ -19,7 +19,7 @@ The types include in the elements included in the model are:
 \item Expression: The right side of the equal sign in $f(x) = x \cdot x$. The Expression collects the parts which is connected with plus($+$) and minus($-$). 
 \item Factor: A semi-structure of the expression, Factors collects the parts connected with multiplication($\cdot$) and division($/$).
 \item Op1: Identifies a addition or substraction operation
-\item Op2 Identifies a multiplication or divison a operation
+\item Op2: Identifies a multiplication or divison a operation
 \item Primitiv: Identifies as either a number or a Variable
 \end{enumerate}
 
@@ -30,28 +30,41 @@ The types include in the elements included in the model are:
   \caption{Instance of Formula}
   \label{fig:formulaInstance}
 \end{figure}
-    
 
 Given the following the example: $$f(x, y) = 5 + x \cdot 3 - y$$
-The rules for the grammar is explained as below also referring to Figure \ref{fig:formulaInstance}:
+The rules for the grammar is explained as below also referring to
+Figure \ref{fig:formulaInstance}:
 \\
-A Formula Contains a name which is defined a the letter/word in front of the paranthesis
+A Formula Contains a name which is defined as the letter/word in front of the paranthesis
 also underlined in the following formula: $\underline{f}(x, y) = 5 + x \cdot 3 - y$.
+In Figure \ref{fig:formulaInstance} ``f'' is defined as ``name'' seen as an attribute
+for the overall Formula.
 It also contains a list of variables, defined within the paranthesis seperated
-by ``,'' as underlined: $f\underline{(x, y)} = 5 + x \cdot 3 - y$. Finally the expression
-of the formula is everything on the right side of the equal-sign(``=''), here follows
-the rule that every variable used in the expression has to appear inside the paranthesis
-of the formula as well, as it works as a function, the expression part underlined:
-$f(x, y) = \underline{5 + x \cdot 3 - y}$.
+by ``,'' as underlined: $f\underline{(x, y)} = 5 + x \cdot 3 - y$. The variables is saved
+as a list under formula as ``vars'' seen at List of Variables.
+Finally the expression of the formula is everything on the right side of the equal-sign(``=''),
+here follows the rule that every variable used in the expression has to appear inside
+the paranthesis of the formula as well, as it works as a function, the expression part underlined:
+$f(x, y) = \underline{5 + x \cdot 3 - y}$ also saved as ``exp'' and seen as ``expression1''
+in Figure \ref{fig:formulaInstance}. 
 
-Looking at the expression: $5 + x \cdot 3 - y$ it is broken down by taking continouisly
-working from the left to the right, from the expression perspective by taking one factor
-at a time. For the Expression the factors for the expression is $5$, $x \cdot 3$ and $y$
-as underlined: $\underline{5} + \underline{x \cdot 3} - \underline{y}$. Once a factor
-is found. the rest of the expression is defined as a new expression which is the right
-side to the Expression.
-At first the expression would contain the factor $5$ and the of the expression would be
-a nested expression for the overall expression.
+Looking at the expression(``expression1''): $5 + x \cdot 3 - y$ it is broken down by continouisly
+working from the left to the right. the left part of the expression is defined as a factor until
+it meets an addition or substraction sign. For the formula example this would put only the number
+``5'' into the left side factor as ``factor1'' in Figure \ref{fig:formulaInstance},
+futher containing ``5'' in the Number object ``n1''.
+Expression2 is then the rest of the equation after $5 +$. The new expression
+contains again one factor which is the left side($x \cdot 3$) seperated by the substraction sign
+The factor ``factor2'' contains on the left ``var1'' which is x, and on the right another factor
+is spawned seen as ``factor3'' in Figure \ref{fig:formulaInstance}, only containing a left
+side being the number seen in ``n2'' as 3.
+Coming back up to the expression. it contains the last part of y as ``expression3''
+which only a left side being a factor(factor4) and that factor also only contains a left side
+which is the variable ``var2'' being the y.
+
+For the variables ``var1'' and ``var2'', both is included in the List of Variables in as seen in
+Figure \ref{fig:formulaInstance}
+
 
 \begin{figure}
   \begin{center}
