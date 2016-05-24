@@ -1,0 +1,6 @@
+Datasource temperatureRaw {
+	Dimensions:
+		Formula x20508a1(x) = x using temperature[x20508a1] as x,
+		Formula x205101(x) = x using temperature[x205101 ] as x,
+		Formula x205111(x) = x using temperature[x205111 ] as x
+}

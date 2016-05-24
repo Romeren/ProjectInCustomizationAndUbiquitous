@@ -1,0 +1,18 @@
+System:
+	(pages += Page | sources += Source | schemas += SchemaParser)*
+;
+Page:
+	'Page' name=ID
+	'{'
+	(tiles += Tile)*
+	'}'
+;
+Tile:
+	Link | Graph
+;
+Link:
+	'Link' name=ID 'to' page=[Page]
+;
+Graph:
+	'Graph' name=ID	source=[Datasource] ('label=' label=STRING)? 
+;

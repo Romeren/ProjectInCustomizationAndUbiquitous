@@ -1,6 +1,8 @@
-grammar org.xtext.sdu.iotvizualizerlanguage.Vizualizer with org.xtext.sdu.formularzlanguage.Formular
+grammar org.xtext.sdu.iotvizualizerlanguage.Vizualizer 
+	with org.xtext.sdu.formularzlanguage.Formular
 
-generate vizualizer "http://www.xtext.org/sdu/iotvizualizerlanguage/Vizualizer"
+generate vizualizer 
+	"http://www.xtext.org/sdu/iotvizualizerlanguage/Vizualizer"
 
 System:
 	(pages += Page | sources += Source | schemas += SchemaParser)*

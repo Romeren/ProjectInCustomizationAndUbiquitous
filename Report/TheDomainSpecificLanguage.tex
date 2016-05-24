@@ -80,7 +80,13 @@ This language specify:
 The following subsection will look into detail of how the language is structured and the syntax and grammar of the language.
 
 \subparagraph{The Grammar}
-
+\begin{figure}
+\begin{center}
+\includegraphics[width=\linewidth]{images/languagemodel}
+\end{center}
+\caption{Model of the language}
+\label{fig:languagemodel}
+\end{figure}
 Figure \ref{fig:languagemodel} shows the structure of the language.
 This model shows that the language defines of a system containing three parts:
 \begin{itemize}
@@ -88,6 +94,7 @@ This model shows that the language defines of a system containing three parts:
 \item Sources
 \item Schemas
 \end{itemize}
+
 \textbf{The Pages,} is what the language in turns will use to create web pages in a system defined in the language.
 A page is a collection of tiles. 
 Each tile is an extendible definition of a visual object on a page.
@@ -96,59 +103,61 @@ A Link definition contains a pointer to a page.
 A Graph however, has a reference data \textit{source} from witch it needs to fetch data from.
 \begin{figure}
 \begin{center}
-\includegraphics[width=\linewidth]{images/GrammaDefinition}
+\lstinputlisting[language=Java, frame=single, breaklines=true,tabsize=3]{code/GrammaDefinition.xtext}
 \end{center}
-\caption{Sample grammar definition}
+\caption{Sample grammar definition, For a complete view of the grammar, see Appendix }
 \label{fig:grammadefinition}
 \end{figure}
-Figure \ref{fig:grammadefinition} shows how this grammar was specified.
-\textbf{The Sources, } can be of two different types, an \textit{EndPoint} or a \textit{DataSource}.
-An EndPoint is intended to function as interface towards external systems or data sources. 
-Whereas a Datasource is an internal definition intended for filtering, data manipulation or data grouping.\\
-This Source, Endpoint, Datasource structure have been defined as a compositional pattern, with source as the component, the Endpoint as a leaf and the Datasource as the composite.
-This pattern makes the it possible to compose any number of different structures.
-\textbf{Schemas}
+Figure \ref{fig:grammadefinition} shows a sample code snippet from the grammar definition.
+The Figure shows how the grammar is defined for the Pages, Tiles, Links and Graphs.
+Similar does Figure \ref{fig:examplePages} show and example use of this grammar. 
+This example creates a system object with two pages inter connected by links and with a number of graphs.
 \begin{figure}
 \begin{center}
-\includegraphics[width=\linewidth]{images/languagemodel}
-\end{center}
-\caption{Model of the language}
-\label{fig:languagemodel}
-\end{figure}
-
-
-
-Below table shows the grammar for the web visualizer language to the left and an example of use on the right. 
-As seen from the left side the system consist of a number of pages which again consists of a number of tiles. 
-One tile can, in current implementation be either a link to another page or a definition of a graph. 
-Since the datasource language have not yet been implemented the web visualizer language currently work with a hard-coded testset. 
-Further are only one graph type implemented (a line chart), however the system makes use of D3 framework meaning that extending the system with other graph types is a smaller task.
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=\linewidth]{images/ExampleUsePages}
+\lstinputlisting[language=Java, frame=single, breaklines=true,tabsize=3]{code/ExampleUsePages.vis}
 \end{center}
 \caption{Example language use, defining pages}
 \label{fig:examplePages}
 \end{figure}
 
+\textbf{The Sources, } can be of two different types, an \textit{EndPoint} or a \textit{DataSource}.
+An EndPoint is intended to function as interface towards external systems or data sources. 
+Whereas a Datasource is an internal definition intended for filtering, data manipulation or data grouping.\\
+This Source, Endpoint, Datasource-Dimension structure have been defined as a compositional pattern, with source as the component, the Endpoint as a leaf and the Datasource as the composite.
+This pattern makes the it possible to compose any number of different structures.
+In addition every defined dimension comes with a formula, which will be applied to the data.
+Since Source can have multiple dimensions (data streams) when specifying a how a Source an additional dimension selector can be specified to select a subset of the dimensions.
+Figure \ref{fig:exampleDatasources} shows and example of a Datasource created through the language. 
+The first line creates a Datasource and the declares a list of dimensions. 
+Each declaration of a dimension starts by declaring a formula. After the formula follows a declaration of Sources to use in the formula. 
+
 \begin{figure}
 \begin{center}
-\includegraphics[width=\linewidth]{images/ExampleUseDataSources}
+\lstinputlisting[language=Java, frame=single, breaklines=true,tabsize=3]{code/ExampleUseDataSources.vis}
 \end{center}
 \caption{Example language use, defining data sources}
 \label{fig:exampleDatasources}
 \end{figure}
 
+Figure \ref{fig:exampleEndpoints} is an example of the use of Endpoints.
+In this, a GetEndPoint is created. This Endpoint type contains a url, a header and a schema parser.
+In addition
+
+
 \begin{figure}
 \begin{center}
-\includegraphics[width=\linewidth]{images/ExampleUseEndPoint}
+\lstinputlisting[language=Java, frame=single, breaklines=true,tabsize=3]{code/ExampleUseEndPoint.vis}
 \end{center}
 \caption{Example language use, defining endpoints}
 \label{fig:exampleEndpoints}
 \end{figure}
 
-The example on the right site creates a System instance with three pages, each page with a number of Links and Graphs.
+
+\textbf{The Schemas,} or SchemaParsers are a global way of defining how to parse date from an external source.
+This is both needed when defining an source to request data from and when external sources posts data to the system.
+
+
+
 
 \paragraph{Meta model}
 Below is the first meta model of the system. 
