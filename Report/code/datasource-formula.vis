@@ -1,0 +1,4 @@
+Datasource power2 {
+	Dimensions:
+		Formula power2(x) = x * x using getData[x] as x
+}
