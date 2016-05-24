@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (MiKTeX 2.9 64-bit) (preloaded format=xelatex 2015.10.14)  23 MAY 2016 17:04
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (MiKTeX 2.9 64-bit) (preloaded format=xelatex 2015.10.14)  24 MAY 2016 11:31
 entering extended mode
 **report_template.tex
 
@@ -637,26 +637,30 @@ Underfull \hbox (badness 1466) in paragraph at lines 11--11
  []
 
 Requested font "rm-lmbx10" at 10.0pt
-File: images/websitelanguagemodel.png Graphic file (type QTm)
-<use  "images/websitelanguagemodel.png" >
-Underfull \hbox (badness 1132) in paragraph at lines 41--45
+File: images/languagemodel.png Graphic file (type QTm)
+<use  "images/languagemodel.png" >
+Underfull \hbox (badness 1132) in paragraph at lines 45--49
  \OT1/lmr/bx/n/10 Code gen-er-a-tion[] \OT1/lmr/m/n/10 To cre-ate the web-site 
 the
  []
 
 File: images/websitemodel.png Graphic file (type QTm)
-<use  "images/websitemodel.png" >)
+<use  "images/websitemodel.png" >
+File: images/PackageDiagram.png Graphic file (type QTm)
+ <use  "images/PackageDiagram.png" >)
 (C:\Users\EmilSebastian\git\ProjectInCustomizationAndUbiquitous\Report\conclusi
-on.tex) [2]
+on.tex) [2] [3
+
+]
 (C:\Users\EmilSebastian\git\ProjectInCustomizationAndUbiquitous\Report\report_t
 emplate.aux) ) 
 Here is how much of TeX's memory you used:
- 5535 strings out of 429025
- 75076 string characters out of 3170805
- 153283 words of memory out of 3000000
- 8682 multiletter control sequences out of 15000+200000
+ 5538 strings out of 429025
+ 75122 string characters out of 3170805
+ 153291 words of memory out of 3000000
+ 8684 multiletter control sequences out of 15000+200000
  32174 words of font info for 41 fonts, out of 3000000 for 9000
  912 hyphenation exceptions out of 8191
  42i,8n,40p,330b,290s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on report_template.pdf (2 pages).
+Output written on report_template.pdf (3 pages).
