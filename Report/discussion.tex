@@ -1,80 +1,85 @@
-DashThinks has become a language which let you easily setup a Webpage with graphs and a network
+\label{discussion}
+DashThinks has become a language which let you easily setup a Web-page with graphs and a network
 of pages linking back and forth to each other.
 In DashThinks it is possible to define where the data is coming from and select data from that
-endpoint. Combining different data is possible using standard mathematical formulas,
-but only if currently only if the different datas has the same amount of entries.
+endpoint. 
+Combining different data is possible using standard mathematical formulas%, but currently only if the different data has the same amount of entries
+.
 
 Given more time to work on the language additional features would be added to the language.
 These features would make the language even more convenient and add more value to the language.
 
-\subsection{Inbound Datastream} is the concept of having external devices post data to the
-server and save that data either with a date stamp from the server run from the DashThinks
-program or with a date stamp already given by the posting device. This would allow the a program
-from DashThinks to work as a datacenter where sensors could post and the users could easily see
-the data coming in using the pages defined.
+\subsection{Inbound Data stream} 
+The concept of having external devices post data to the
+server and save that data with a date stamp on the server, would allow DashThinks to work as a datacenter where sensors can post and the users could easily see
+the data coming in using the pages defined. 
+Further more, would it also allow apps on smart phones as sources for data collection.
 
-\subsection{Event Handlers} which could be defined on the datasources defined in a DashThinks
-program. These Event Handlers would be able to contain executeable code that would allow the
+\subsection{Event Handlers} 
+Allowing definitions of Events on the data sources could make it possible to build context aware systems from DashThinks. 
+These Event Handlers could be able to contain executable code that would allow the
 server to warn or inform users of any irregularities or just give out common reports to
-a mailing list. Not that a mailing list would be the only option, it could also be that it
-should trigger an external url which could then do additional work with whatever that external
-server would do.
+a mailing list.
+In addition, it could also be triggering an actuator and controlling a buildings environment.
 
-\subsection{Live Updated Graphs} on the webpages. Current implementation contains a static
+\subsection{Live Updated Graphs}
+Current implementation contains a static
 graph which is only updated once the site is refreshed, and at that point it calls the
-external data sources for data at every refresh, which is not super efficient. This feature
-would require that the server kept a cache available for each EndPoint and that dynamic
-update of the graphs would happen on the webpage. Additional work with web sockets and
+external data sources for data at every refresh, which is not efficient. 
+This feature would require that the server kept a cache available for each EndPoint and that dynamic
+update of the graphs would happen on the webpage. 
+Additional work with web sockets and
 rewritting of the webpage template would be required. 
 
-\subsection{Easy Multidata handling} Currently there is some issues with how highly dimensional data is handled, where a lot of reperative typing has to be done.
-For this some kind of looping or a ``catch all iterater'' would increase the ease of use and
-reduction to the amount of code required for a program to run. The issue at hand is seen in the
-definition of dimensions on datasources and for selectors on GetEndPoints, where for some examples
-12 data arrays from one url are handled in the exact same way. Instead a prefix or foreach loop
-could be declared for these scenarios to chop it into 1 line for those specific cases, rather
-than using 1 line for each data array in source.
-
-\subsection{Automatic Datasource Display on Webpages} Currently it is required to define
-which data sources is displayed on a page, this approach is argueable suitable as you always
-know what each page contains. But it might be more interesting to show content in a more
-intelligent way. For the OU44 data it might be interesting to make a functionality which could
-map graphs to pages based on keywords like the room number. Also using this method define a
-template page in the DSL and when give it a list of id's which would be mapped to seperate pages
-containing the same types of data defined in the template, but given the id would have different
-data shown on each page.
-
-\subsection{Metadata multicall}
-
-\subsection{Comparing Formula and GNUPlot} where GNUPlot is a language used to define
-plot having its own DSL to define these graphs. GNUPlot has some simularities to how DashThings's
+\subsection{Comparing Formula and GNUPlot} 
+\label{gnuplot}
+Where GNUPlot is a language used to define
+plot having its own DSL to define these graphs. GNUPlot has some similarities to how DashThings's
 DSL is defined, but it also contains a lot of further features, some of these are configurations
 for defining the color of a line, which in DashThings are chosen by random. It contains a way
 to define and use formulas like possible in DashThings, but it has the basic functions like
 Sin, Cos and the like. GNUPlot was first discovered once the actual development of the language
 was done and therefore no inspiration from it was added to the language, which could possible have
-made the language more customizeable and smarter than it's current state.
+made the language more customizable and smarter than it's current state.
 \\
 \\
-Some of the functionalities which could be inheritated from GNUPlot would be the possibilities to
+Some of the functionalities which could be inherited from GNUPlot would be the possibilities to
 define color of lines, define legend names for each line for easy distinguishing which line
 correspond to what type of value and where that value comes from. Additional options for GNUPlot
-include their soffisticated formula system for defining formulas for use in plotting an array,
-this can somewhat be archieved in DashThings as well, but is concealed by the datasources, where
-a datasource actually works as a function. To give an example as seen in Listing
+include their sophisticated formula system for defining formulas for use in plotting an array,
+this can somewhat be archived in DashThings as well, but is concealed by the data sources, where
+a data source actually works as a function. To give an example as seen in Listing
 \ref{lst:datasource-formula} but as spotted only very simple functions can be applied using
 this method. A means to make this better would be to include more options within the formula
 language, to implement some of the methods also available in GNUPlot like sin and cos, but also
 include functions which just evaluate to a single number that is applied to the entire array
 like SUM and AVERAGE.
 
+\subsection{Easy Multi data handling} 
+Currently there is some issues with how highly dimensional data is handled, where a lot of duplication of code has to be done.
+Examples of this problem have been provided in Appendix \ref{laguagedificulties}.
+For instance, the systems handles making advanced queries to external sources which may response with multiple data streams in an array. 
+But to specify how to parse the response to the system, it is necessary to specify a data selector for each entry in the array, which generates a lot of duplicated code and is annoying of the user.
+However a solution for this problem have already been thought of, but due to time limitation it have not yet been implemented. Instead it will now be described.
+The problem starts at the selectors in the SchemaParser, but by adding a key word, for instance "asArray", to the language when specifying a step would be enough to solve the problem.
+For the dimension, the problem may be solved by allowing users to specify a for-each loop, and making it possible to iterate over dimensions.
+Lastly in the individual function specification can be solved by implementing some of the functionality found in subsection \ref{gnuplot}, Comparing Formula and GNU-Plot. 
+
+\subsection{Automatic Data source Display on Web-pages} 
+Currently it is required to define
+which data sources is displayed on a page, this approach is arguable suitable as you always
+know what each page contains. But it might be more interesting to show content in a more
+intelligent way. For the OU44 data it might be interesting to make a functionality which could
+map graphs to pages based on keywords like the room number. Also using this method define a
+template page in the DSL and when give it a list of id's which would be mapped to separate pages
+containing the same types of data defined in the template, but given the id would have different
+data shown on each page.
+
 \begin{figure}
-  \caption{datasource showing usage of a formula}
+  \caption{Datasource showing usage of a formula}
   \label{lst:datasource-formula}
   \lstinputlisting[language=Java, frame=single, breaklines=true,tabsize=2]{code/datasource-formula.vis}
 \end{figure}
-
-\subsection{Data Cleaning}
 
 \subsection{Internal vs External DSL} The current solution chosen for the DSL DashThings has
 been an External DSL using XText and Xtend. But a lot of the code which is generated by the DSL
