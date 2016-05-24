@@ -1,0 +1,60 @@
+HERE GOES DISCUSSION !!! !
+
+DashThinks has become a language which let you easily setup a Webpage with graphs and a network
+of pages linking back and forth to each other.
+In DashThinks it is possible to define where the data is coming from and select data from that
+endpoint. Combining different data is possible using standard mathematical formulas,
+but only if currently only if the different datas has the same amount of entries.
+
+Given more time to work on the language additional features would be added to the language.
+These features would make the language even more convenient and add more value to the language.
+
+\subsection{Inbound Datastream} is the concept of having external devices post data to the
+server and save that data either with a date stamp from the server run from the DashThinks
+program or with a date stamp already given by the posting device. This would allow the a program
+from DashThinks to work as a datacenter where sensors could post and the users could easily see
+the data coming in using the pages defined.
+
+\subsection{Event Handlers} which could be defined on the datasources defined in a DashThinks
+program. These Event Handlers would be able to contain executeable code that would allow the
+server to warn or inform users of any irregularities or just give out common reports to
+a mailing list. Not that a mailing list would be the only option, it could also be that it
+should trigger an external url which could then do additional work with whatever that external
+server would do.
+
+\subsection{Live Updated Graphs} on the webpages. Current implementation contains a static
+graph which is only updated once the site is refreshed, and at that point it calls the
+external data sources for data at every refresh, which is not super efficient. This feature
+would require that the server kept a cache available for each EndPoint and that dynamic
+update of the graphs would happen on the webpage. Additional work with web sockets and
+rewritting of the webpage template would be required.
+
+\subsection{Easy Multidata handling} Currently there is some issues with how highly dimensional data is handled, where a lot of reperative typing has to be done.
+For this some kind of looping or a ``catch all iterater'' would increase the ease of use and
+reduction to the amount of code required for a program to run. The issue at hand is seen in the
+definition of dimensions on datasources and for selectors on GetEndPoints, where for some examples
+12 data arrays from one url are handled in the exact same way. Instead a prefix or foreach loop
+could be declared for these scenarios to chop it into 1 line for those specific cases, rather
+than using 1 line for each data array in source.
+
+\subsection{Automatic Datasource Display on Webpages} Currently it is required to define
+which data sources is displayed on a page, this approach is argueable suitable as you always
+know what each page contains. But it might be more interesting to show content in a more
+intelligent way. For the OU44 data it might be interesting to make a functionality which could
+map graphs to pages based on keywords like the room number. Also using this method define a
+template page in the DSL and when give it a list of id's which would be mapped to seperate pages
+containing the same types of data defined in the template, but given the id would have different
+data shown on each page.
+
+\subsection{Metadata multicall}
+
+\subsection{Comparing Formula and GNUPlot} where GNUPlot is a language used to define
+plot having its own DSL to define these graphs. GNUPlot has some simularities to how DashThings's
+DSL is defined, but it also contains a lot of further features, some of these are configurations
+for defining the color of a line, which in DashThings are chosen by random. It contains a way
+to define and use formulas like possible in DashThings, but it has the basic functions like
+Sin, Cos and the like. GNUPlot was first discovered once the actual development of the language
+was done and therefore no inspiration from it was added to the language, which could possible have
+made the language more customizeable and smarter than it's current state.
+
+\subsection{Data Cleaning}
