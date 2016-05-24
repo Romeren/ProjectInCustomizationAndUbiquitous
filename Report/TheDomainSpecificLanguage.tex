@@ -175,8 +175,10 @@ This is both needed when defining an source to request data from and when extern
 
 \paragraph{Meta model}
 The language compiles a dynamic website using the Django framework.
-In order to do so, a meta model of the a website using this framework
-have been created which incorporates the functionality of the desired dashboard system.  
+This framework uses an MVC architektur which is extended with a template pattern with HTML documents. 
+In order to make the output easy readable and customizable for a user the output needs to be mapped into a model that follows this pattern with more explicit information.
+
+In order to do so, a meta model of the a website using this framework have been created which incorporates the functionality of the desired dashboard system.  
 Figure \ref{fig:websitemodel} shows this meta model.
 This meta model differs in a number of ways from the model created by the language.
 This is due to the high complexity of the Django framework.
@@ -186,7 +188,6 @@ The Django framework uses a MVC pattern.
 Which means that the constructed pages and content needs to be mapped into this form.
 The Django way, is to define a controller in form of a urls fils containing the mapping of urls to either views of the system or other urls files.
 The views can then either use a model and/or a HTML template file to build up the responses for a request with the use of a number of serializes.
-
 
 \begin{figure}
 \begin{center}
@@ -199,23 +200,8 @@ The views can then either use a model and/or a HTML template file to build up th
 \paragraph{Language Validation}
 
 \paragraph{Code generation}
-To create the website the project uses the Django framework. 
-This framework uses an MVC architektur which is extended with a template pattern with HTML documents. 
-In order to make the output easy readable and customizable for a user, the first meta model needs to be mapped to a second meta model with more explicit information which matches the MVC architecture better.
-This second model can be seen in below diagram. 
-
-
-
-The first step of mapping the previous model into the second meta model, is to create a system with a configuration. 
-Secondly a default controller is added with the default Django Admin configuration pages. 
-This controller gets a number of URLs and default views. 
-After this a second controller gets added, this controller is used for the pages defined in the language. 
-Each page gets transformed into a url entity, view entity, model and a template HTML-file.
-The HTML file holds a easy customizable structure of the content added to the page. The view and model will in time be connected to the Data sources from the previous specified language. 
-In addition will the view of a page be responsible of rendering the template with context and data from a datasource. 
-After this model have been created each entry in the model is looped through and generated into a file.
-
-
+To maintain a clean code structure all generated code are put into a number of different packages, see Figure \ref{fig:packagediagram}.
+This diagram shows the structure of the generated code.
 \begin{figure}
 \begin{center}
 \includegraphics[width=\linewidth]{images/PackageDiagram}
@@ -223,6 +209,12 @@ After this model have been created each entry in the model is looped through and
 \caption{Package diagram of generated sources}
 \label{fig:packagediagram}
 \end{figure}
-\subparagraph{Pages}
-\subparagraph{Data sources}
-\subparagraph{Api}
+Data handle package contains all code for handling.
+
+A page object from the language model is split into a number of fractions.
+A page needs to be divided into a model a view, a controller and a HTML template document.
+Better keep things apart the template documents have been gathered in a package by itself (the template package).
+The model views and controllers are generated into the pages package.
+Each page gets it own template file extending a base template file making them easy customizable.
+The individual template file contains only the structure of the specific links and graphs (without data) of that page.
+
