@@ -10,31 +10,30 @@ Given more time to work on the language additional features would be added to th
 These features would make the language even more convenient and add more value to the language.
 
 \subsection{Inbound Data stream} 
-The concept of having external devices post data to the
-server and save that data with a date stamp on the server, would allow DashThinks to work as a datacenter where sensors can post and the users could easily see
-the data coming in using the pages defined. 
+The concept of having external devices post data to the server and save that data with a
+date stamp on the server, would allow DashThinks to work as a datacenter where sensors can
+post and the users could easily see the data coming in using the pages defined. 
 Further more, would it also allow apps on smart phones as sources for data collection.
 
 \subsection{Event Handlers} 
-Allowing definitions of Events on the data sources could make it possible to build context aware systems from DashThinks. 
+Allowing definitions of Events on the data sources could make it possible to build context
+aware systems from DashThinks. 
 These Event Handlers could be able to contain executable code that would allow the
 server to warn or inform users of any irregularities or just give out common reports to
 a mailing list.
 In addition, it could also be triggering an actuator and controlling a buildings environment.
 
 \subsection{Live Updated Graphs}
-Current implementation contains a static
-graph which is only updated once the site is refreshed, and at that point it calls the
-external data sources for data at every refresh, which is not efficient. 
-This feature would require that the server kept a cache available for each EndPoint and that dynamic
-update of the graphs would happen on the webpage. 
-Additional work with web sockets and
-rewritting of the webpage template would be required. 
+Current implementation contains a static graph which is only updated once the site is
+refreshed, and at that point it calls the external data sources for data at every refresh,
+which is not efficient. Live updated graphs would require that the server kept a cache available
+for each EndPoint and that it would dynamiccally update the graphs on the webpage. 
+Additional work with web sockets and refactoring the webpage template would be required. 
 
 \subsection{Comparing Formula and GNUPlot} 
 \label{gnuplot}
-Where GNUPlot is a language used to define
-plot having its own DSL to define these graphs. GNUPlot has some similarities to how DashThings's
+Where GNUPlot\footnote{see \cite{GNUPlot}} is a language used to define
+plots, having its own DSL to define these graphs. GNUPlot has some similarities to how DashThings's
 DSL is defined, but it also contains a lot of further features, some of these are configurations
 for defining the color of a line, which in DashThings are chosen by random. It contains a way
 to define and use formulas like possible in DashThings, but it has the basic functions like
@@ -56,14 +55,22 @@ include functions which just evaluate to a single number that is applied to the 
 like SUM and AVERAGE.
 
 \subsection{Easy Multi data handling} 
-Currently there is some issues with how highly dimensional data is handled, where a lot of duplication of code has to be done.
+Currently there is some issues with how highly dimensional data is handled, where a lot of
+duplication code is made.
 Examples of this problem have been provided in Appendix \ref{laguagedificulties}.
-For instance, the systems handles making advanced queries to external sources which may response with multiple data streams in an array. 
-But to specify how to parse the response to the system, it is necessary to specify a data selector for each entry in the array, which generates a lot of duplicated code and is annoying of the user.
-However a solution for this problem have already been thought of, but due to time limitation it have not yet been implemented. Instead it will now be described.
-The problem starts at the selectors in the SchemaParser, but by adding a key word, for instance "asArray", to the language when specifying a step would be enough to solve the problem.
-For the dimension, the problem may be solved by allowing users to specify a for-each loop, and making it possible to iterate over dimensions.
-Lastly in the individual function specification can be solved by implementing some of the functionality found in subsection \ref{gnuplot}, Comparing Formula and GNU-Plot. 
+For instance, the systems handles making advanced queries to external sources which may response
+with multiple data streams in an array. 
+But to specify how to parse the response to the system, it is necessary to specify a data
+selector for each entry in the array, which generates a lot of duplicated code and is annoying
+for the user using the language.
+However a solution for this problem have already been thought of, but due to time limitation
+it have not yet been implemented. Instead it will now be described.
+The problem starts at the selectors in the SchemaParser, but by adding a key word, for instance
+"asArray", to the language when specifying a step would be enough to solve the problem.
+For the dimension, the problem may be solved by allowing users to specify a for-each loop, and
+making it possible to iterate over dimensions.
+Lastly in the individual function specification can be solved by implementing some of the
+functionality found in subsection \ref{gnuplot}, Comparing Formula and GNU-Plot. 
 
 \subsection{Automatic Data source Display on Web-pages} 
 Currently it is required to define
@@ -84,5 +91,5 @@ data shown on each page.
 \subsection{Internal vs External DSL} The current solution chosen for the DSL DashThings has
 been an External DSL using XText and Xtend. But a lot of the code which is generated by the DSL
 could easily have been archieved by using an internal python DSL instead, and that might in a lot
-of the cases be easier than implementing the current external DSL.<
+of the cases be easier than implementing the current external DSL.
  
