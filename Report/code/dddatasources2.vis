@@ -1,0 +1,4 @@
+Datasource temperatureAvg {
+	Dimensions:
+		Formula average() = Suminput/12 using temperatureRaw[x20508a1] as x1 and using temperatureRaw[x205101] as x2 and using temperatureRaw[x205111] as x3 and using temperatureRaw[x20601b1] as x4 and using temperatureRaw[x206031] as x5 and using temperatureRaw[x20604b1] as x6 and using temperatureRaw[x225081] as x7 and using temperatureRaw[x225101] as x8 and using temperatureRaw[x225111] as x9 and using temperatureRaw[x22601b1] as x10 and using temperatureRaw[x226031] as x11 and using temperatureRaw[x226041] as x12
+}

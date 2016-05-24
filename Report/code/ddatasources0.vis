@@ -1,0 +1,39 @@
+Schema schemaB {
+	SchemaType = JSON
+	Selector as x20508a1 {
+		"0" -> "Readings" 
+	}
+	Selector as x205101 {
+		"1" -> "Readings" 
+	}
+	Selector as x205111 {
+		"2" -> "Readings" 
+	}
+	Selector as x20601b1 {
+		"3" -> "Readings" 
+	}
+	Selector as x206031 {
+		"4" -> "Readings" 
+	}
+	Selector as x20604b1 {
+		"5" -> "Readings" 
+	}
+	Selector as x225081 {
+		"6" -> "Readings" 
+	}
+	Selector as x225101 {
+		"7" -> "Readings" 
+	}
+	Selector as x225111 {
+		"8" -> "Readings" 
+	}
+	Selector as x22601b1 {
+		"9" -> "Readings" 
+	}
+	Selector as x226031 {
+		"10" -> "Readings" 
+	}
+	Selector as x226041 {
+		"11" -> "Readings" 
+	}
+}
