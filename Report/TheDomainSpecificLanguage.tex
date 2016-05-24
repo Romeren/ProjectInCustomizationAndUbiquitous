@@ -11,12 +11,12 @@ In addition this language will also be used to specify internal persistence and 
 The Formula Expressions DSL is responsible for understanding mathematical formulas, which will be applied to tables of data.
 \paragraph{Meta model}
 
-The formula metamodel consist of multiple elements.
-The types include in the elements included in the model are:
+The formula metamodel consist of multiple elements for an overview seen in Figure
+\ref{fig:formulaModel}. The types include in the elements included in the model are:
 \begin{enumerate}
 \item Formula: The overall Structure Element
-\item Variable: The varaible names included in the formula
-\item Expression: The right side of the equal sign in $f(x) = x \cdot x$. The Expression collects the parts which is connected with plus($+$) and minus($-$). 
+\item Variable: The variable names included in the formula, appears both left and right side of the equation
+\item Expression: The right side of the equal sign in a formula. The Expression collects the parts which is connected with plus($+$) and minus($-$). 
 \item Factor: A semi-structure of the expression, Factors collects the parts connected with multiplication($\cdot$) and division($/$).
 \item Op1: Identifies a addition or substraction operation
 \item Op2: Identifies a multiplication or divison a operation
@@ -44,9 +44,9 @@ by ``,'' as underlined: $f\underline{(x, y)} = 5 + x \cdot 3 - y$. The variables
 as a list under formula as ``vars'' seen at List of Variables.
 Finally the expression of the formula is everything on the right side of the equal-sign(``=''),
 here follows the rule that every variable used in the expression has to appear inside
-the paranthesis of the formula as well, as it works as a function, the expression part underlined:
-$f(x, y) = \underline{5 + x \cdot 3 - y}$ also saved as ``exp'' and seen as ``expression1''
-in Figure \ref{fig:formulaInstance}. 
+the paranthesis on the left side of the formula as well, as it works as a function,
+the expression part underlined: $f(x, y) = \underline{5 + x \cdot 3 - y}$ refered to
+as ``exp'' and seen as ``expression1'' in Figure \ref{fig:formulaInstance}. 
 
 Looking at the expression(``expression1''): $5 + x \cdot 3 - y$ it is broken down by continouisly
 working from the left to the right. the left part of the expression is defined as a factor until
@@ -74,9 +74,16 @@ Figure \ref{fig:formulaInstance}
   \label{fig:formulaModel}
 \end{figure}
 \paragraph{Language Validation}
+has been archieved partly by the BNF(PUT REF TO WHAT BNF IS HERE) using xtext, but also
+using xtend to write additional validation code, where the xtext language was not sufficient
+to validate that the structure did indeed not violate any rules.
 
-\paragraph{Code Generation}
-
+xtext could only validate the general structure of the model.
+what xtext was not archieved was to have xtext validate that the only variables used
+on the right side og the equation sign was declared on the left side.
+In order to validate that the variables on the right was declared on the left a
+collection containing the declared variables on the left was matches against all the variables
+on the right fetched using recursion with depth first search.
 
 \subsection{The Web visualizer Language}
 For generating dashboards custom language have been created.
