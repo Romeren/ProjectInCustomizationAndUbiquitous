@@ -1,7 +1,6 @@
-
 \subsection{Overview}
 The DSL is divided into three components, a arithmetic expressions language, a language for specifying a web site and a language for specifying input sources for the system. 
-The expression language is a utility language which is included by the to others. 
+The expression language is a utility language which is included by the two others. 
 This language defines how a user can create arithmetic expressions in either of the other two languages. 
 The Web visualizer is a language to create dynamic web sites, like the sample page shown on the front page. 
 This language lets the user create pages on a site, link different pages to each other and visualize information through the use of graphs. 
@@ -11,7 +10,58 @@ In addition this language will also be used to specify internal persistence and 
 \subsection{The Formula Expression Language}
 The Formula Expressions DSL is responsible for understanding mathematical formulas, which will be applied to tables of data.
 \paragraph{Meta model}
+
+The formula metamodel consist of multiple elements.
+The types include in the elements included in the model are:
+\begin{enumerate}
+\item Formula: The overall Structure Element
+\item Variable: The varaible names included in the formula
+\item Expression: The right side of the equal sign in $f(x) = x \cdot x$. The Expression collects the parts which is connected with plus($+$) and minus($-$). 
+\item Factor: A semi-structure of the expression, Factors collects the parts connected with multiplication($\cdot$) and division($/$).
+\item Op1: Identifies a addition or substraction operation
+\item Op2 Identifies a multiplication or divison a operation
+\item Primitiv: Identifies as either a number or a Variable
+\end{enumerate}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\linewidth]{images/formulaInstance}
+  \end{center}
+  \caption{Instance of Formula}
+  \label{fig:formulaInstance}
+\end{figure}
+    
+
+Given the following the example: $$f(x, y) = 5 + x \cdot 3 - y$$
+The rules for the grammar is explained as below also referring to Figure \ref{fig:formulaInstance}:
+\\
+A Formula Contains a name which is defined a the letter/word in front of the paranthesis
+also underlined in the following formula: $\underline{f}(x, y) = 5 + x \cdot 3 - y$.
+It also contains a list of variables, defined within the paranthesis seperated
+by ``,'' as underlined: $f\underline{(x, y)} = 5 + x \cdot 3 - y$. Finally the expression
+of the formula is everything on the right side of the equal-sign(``=''), here follows
+the rule that every variable used in the expression has to appear inside the paranthesis
+of the formula as well, as it works as a function, the expression part underlined:
+$f(x, y) = \underline{5 + x \cdot 3 - y}$.
+
+Looking at the expression: $5 + x \cdot 3 - y$ it is broken down by taking continouisly
+working from the left to the right, from the expression perspective by taking one factor
+at a time. For the Expression the factors for the expression is $5$, $x \cdot 3$ and $y$
+as underlined: $\underline{5} + \underline{x \cdot 3} - \underline{y}$. Once a factor
+is found. the rest of the expression is defined as a new expression which is the right
+side to the Expression.
+At first the expression would contain the factor $5$ and the of the expression would be
+a nested expression for the overall expression.
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[width=\linewidth]{images/MetaFormula}
+  \end{center}
+  \caption{Model of the formula module}
+  \label{fig:formulaModel}
+\end{figure}
 \paragraph{Language Validation}
+
 \paragraph{Code Generation}
 
 
